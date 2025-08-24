@@ -1,3 +1,5 @@
 <template>
-  <Button label="Verify" />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
