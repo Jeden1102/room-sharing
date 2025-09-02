@@ -30,6 +30,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@primevue/nuxt-module",
     "@pinia/nuxt",
+    "@nuxtjs/i18n",
   ],
   fonts: {
     defaults: {
@@ -53,5 +54,12 @@ export default defineNuxtConfig({
         },
       },
     },
+  },
+  i18n: {
+    defaultLocale: "en",
+    locales: [
+      { code: "en", name: "English", file: "en.json" },
+      { code: "pl", name: "Polish", file: "pl.json" },
+    ],
   },
 });

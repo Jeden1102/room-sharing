@@ -24,8 +24,10 @@
         "
       >
         <div class="flex flex-col gap-3 lg:flex-row lg:gap-6 xl:gap-12">
-          <NuxtLink class="nav-link" to="/">Home</NuxtLink>
-          <NuxtLink class="nav-link" to="/properties">Properties</NuxtLink>
+          <NuxtLink class="nav-link" :to="$localePath('index')">Home</NuxtLink>
+          <NuxtLink class="nav-link" :to="$localePath('properties')"
+            >Properties</NuxtLink
+          >
           <NuxtLink class="nav-link" to="/users">Users</NuxtLink>
           <NuxtLink class="nav-link" to="/users">Product</NuxtLink>
           <NuxtLink class="nav-link" to="/contact">Contact</NuxtLink>
@@ -51,6 +53,8 @@
               <span class="pi pi-heart"></span>
             </RouterLink>
           </Button>
+
+          <AppLanguageSwitcher />
         </div>
       </div>
     </div>
