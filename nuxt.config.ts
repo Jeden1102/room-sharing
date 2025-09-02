@@ -7,20 +7,21 @@ import { definePreset } from "@primeuix/themes";
 const MyPreset = definePreset(Aura, {
   semantic: {
     primary: {
-      50: "#00509d",
-      100: "#00509d",
-      200: "#00509d",
-      300: "00509d}",
+      50: "#f0f6fc",
+      100: "#d9e8f9",
+      200: "#b3d1f2",
+      300: "#80afe6",
       400: "#00509d",
-      500: "#00509d",
-      600: "#00509d",
-      700: "#00509d",
-      800: "#00509d",
-      900: "#00509d",
-      950: "#00509d",
+      500: "#00478c",
+      600: "#003e7a",
+      700: "#003568",
+      800: "#002b55",
+      900: "#001a36",
+      950: "#000d1b",
     },
   },
 });
+
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",

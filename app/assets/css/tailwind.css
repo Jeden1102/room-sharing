@@ -3,7 +3,17 @@
 @theme {
   --font-roboto: "Roboto Flex", "sans-serif";
 
-  --color-primary: #00509d;
+  --color-primary-50:  #f0f6fc;
+  --color-primary-100: #d9e8f9;
+  --color-primary-200: #b3d1f2;
+  --color-primary-300: #80afe6;
+  --color-primary-400: #00509d;
+  --color-primary-500: #00478c;
+  --color-primary-600: #003e7a;
+  --color-primary-700: #003568;
+  --color-primary-800: #002b55;
+  --color-primary-900: #001a36;
+  --color-primary-950: #000d1b;
 }
 
 @layer {
@@ -12,7 +22,7 @@
   }
   body {
     * {
-      @apply font-roboto;
+      @apply font-roboto bg-gray-800 min-h-screen;
     }
   }
 }
