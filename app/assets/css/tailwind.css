@@ -1,9 +1,10 @@
 @import "tailwindcss";
+@import "primeicons/primeicons.css";
 
 @theme {
-  --font-roboto: "Roboto Flex", "sans-serif";
+  --font-inter: "Inter", "sans-serif";
 
-  --color-primary-50:  #f0f6fc;
+  --color-primary-50: #f0f6fc;
   --color-primary-100: #d9e8f9;
   --color-primary-200: #b3d1f2;
   --color-primary-300: #80afe6;
@@ -21,8 +22,21 @@
     @apply scroll-smooth;
   }
   body {
+    @apply min-h-screen bg-gray-800;
     * {
-      @apply font-roboto bg-gray-800 min-h-screen;
+      @apply font-inter;
     }
+  }
+}
+
+@utility container {
+  @apply mx-auto;
+}
+
+@utility nav-link {
+  @apply hover:text-primary-500 text-4xl font-medium lg:text-base;
+
+  &.router-link-active {
+    @apply text-primary-400 font-semibold;
   }
 }

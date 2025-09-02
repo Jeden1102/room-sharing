@@ -22,7 +22,6 @@ const MyPreset = definePreset(Aura, {
   },
 });
 
-
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
@@ -33,7 +32,11 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
   ],
   fonts: {
-    families: [{ name: "Roboto Flex", provider: "google" }],
+    defaults: {
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+      styles: ["normal", "italic"],
+    },
+    families: [{ name: "Inter", provider: "google" }],
   },
   css: ["~/assets/css/tailwind.css"],
   vite: {
