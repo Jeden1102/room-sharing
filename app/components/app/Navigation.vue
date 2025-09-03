@@ -19,11 +19,13 @@
         :class="
           clsx(
             { 'translate-y-0 opacity-100': isMenuOpened },
-            'absolute top-16 left-0 flex size-full w-full -translate-y-4 flex-col justify-between bg-white p-4 opacity-0 transition-all duration-300 lg:static lg:translate-y-0 lg:flex-row lg:items-center lg:p-0 lg:opacity-100',
+            'absolute top-16 left-0 z-10 flex size-full w-full -translate-y-4 flex-col justify-between bg-white p-4 opacity-0 transition-all duration-300 lg:static lg:translate-y-0 lg:flex-row lg:items-center lg:p-0 lg:opacity-100',
           )
         "
       >
-        <div class="flex flex-col gap-3 lg:flex-row lg:gap-6 xl:gap-12">
+        <div
+          class="flex h-[calc(100%-6rem)] flex-col gap-3 lg:h-auto lg:flex-row lg:gap-6 xl:gap-12"
+        >
           <NuxtLink class="nav-link" :to="$localePath('index')">Home</NuxtLink>
           <NuxtLink class="nav-link" :to="$localePath('properties')"
             >Properties</NuxtLink
@@ -31,10 +33,15 @@
           <NuxtLink class="nav-link" to="/users">Users</NuxtLink>
           <NuxtLink class="nav-link" to="/users">Product</NuxtLink>
           <NuxtLink class="nav-link" to="/contact">Contact</NuxtLink>
+          <AppLanguageSwitcher class="mt-auto lg:hidden" />
         </div>
 
         <div class="hidden items-center gap-6 lg:flex">
-          <NuxtLink class="nav-link" to="/login">Login</NuxtLink>
+          <Button asChild v-slot="slotProps" severity="secondary">
+            <RouterLink to="/user/login" :class="slotProps.class"
+              >Login</RouterLink
+            >
+          </Button>
 
           <Button asChild v-slot="slotProps">
             <RouterLink to="/new-publication" :class="slotProps.class"
