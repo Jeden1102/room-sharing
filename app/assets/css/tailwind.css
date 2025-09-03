@@ -22,7 +22,7 @@
     @apply scroll-smooth;
   }
   body {
-    @apply min-h-screen bg-gray-800;
+    @apply min-h-screen;
     * {
       @apply font-inter;
     }
@@ -30,7 +30,7 @@
 }
 
 @utility container {
-  @apply mx-auto;
+  @apply mx-auto px-4;
 }
 
 @utility nav-link {

@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white py-4 lg:px-4">
     <div class="container flex items-center lg:gap-12 xl:gap-24">
-      <div class="flex w-full justify-between px-4 lg:w-fit lg:px-0">
+      <div class="flex w-full justify-between lg:w-fit">
         <NuxtLink to="/">
           <NuxtImg src="/logo.svg" alt="logo" width="162" height="32" />
         </NuxtLink>
@@ -18,8 +18,8 @@
       <div
         :class="
           clsx(
-            { 'translate-y-0 opacity-100': isMenuOpened },
-            'absolute top-16 left-0 z-10 flex size-full w-full -translate-y-4 flex-col justify-between bg-white p-4 opacity-0 transition-all duration-300 lg:static lg:translate-y-0 lg:flex-row lg:items-center lg:p-0 lg:opacity-100',
+            { 'pointer-events-auto translate-y-0 opacity-100': isMenuOpened },
+            'pointer-events-none absolute top-16 left-0 z-10 flex size-full w-full -translate-y-4 flex-col justify-between bg-white p-4 opacity-0 transition-all duration-300 lg:static lg:translate-y-0 lg:flex-row lg:items-center lg:p-0 lg:opacity-100',
           )
         "
       >

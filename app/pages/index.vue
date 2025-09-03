@@ -1,8 +1,7 @@
 <template>
-  <div>
-    Home
-    <h1>{{ $t("welcome") }}</h1>
-  </div>
+  <main>
+    <HomeHero />
+  </main>
 </template>
 
 <script setup lang="ts"></script>
