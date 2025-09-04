@@ -62,4 +62,7 @@ export default defineNuxtConfig({
       { code: "pl", name: "Polish", file: "pl.json" },
     ],
   },
+  image: {
+    format: ["webp"],
+  },
 });

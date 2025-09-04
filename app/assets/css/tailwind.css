@@ -30,7 +30,7 @@
 }
 
 @utility container {
-  @apply mx-auto px-4;
+  @apply mx-auto max-w-325 px-4;
 }
 
 @utility nav-link {

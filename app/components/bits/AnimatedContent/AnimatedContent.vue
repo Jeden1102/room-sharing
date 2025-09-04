@@ -134,7 +134,9 @@ onUnmounted(() => {
 
 <template>
   <div ref="containerRef" :class="`animated-content ${props.className}`">
-    <slot />
+    <ClientOnly>
+      <slot />
+    </ClientOnly>
   </div>
 </template>
 

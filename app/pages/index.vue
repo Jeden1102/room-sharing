@@ -1,6 +1,7 @@
 <template>
   <main>
     <HomeHero />
+    <HomeLatestProperties />
   </main>
 </template>
 

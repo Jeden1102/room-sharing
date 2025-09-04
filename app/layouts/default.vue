@@ -1,5 +1,5 @@
 <template>
-  <div class="default">
+  <div class="default pb-20">
     <AppHeader />
     <slot />
     <AppBottomNavigation />
