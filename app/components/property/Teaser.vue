@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-hidden rounded-2xl shadow-lg">
+  <div class="overflow-hidden rounded-2xl shadow-md">
     <div class="relative">
       <Carousel
         :value="images"
@@ -42,22 +42,33 @@
         </p>
       </div>
 
-      <div class="mb-6 flex items-center justify-between text-sm text-gray-600">
+      <div class="mb-6 flex items-center gap-6 text-sm text-gray-600">
         <span class="flex items-center gap-1">
-          <i class="pi pi-home"></i> {{ area }} m²
+          <i class="pi pi-window-minimize"></i> {{ area }} m²
         </span>
-        <span class="flex items-center gap-1">
+        <span class="flex items-center gap-1" v-if="occupants">
           <i class="pi pi-users"></i> {{ occupants }} lokatorów
         </span>
-        <span class="flex items-center gap-1">
-          <i class="pi pi-bed"></i> {{ rooms }} os. pokój
+        <span class="flex items-center gap-1" v-if="rooms">
+          <i class="pi pi-box"></i> {{ rooms }} pokoje
+        </span>
+        <span class="flex items-center gap-1" v-if="floor">
+          <i class="pi pi-home"></i> {{ floor }} piętro
         </span>
       </div>
       <Divider />
       <div class="mt-6 flex items-center justify-between gap-4">
-        <div class="text-primary-400 text-2xl font-semibold">
-          $ {{ price }}
-          <span class="text-xs text-gray-500">/ month</span>
+        <div class="text-primary-400 text-2xl font-semibold" v-if="price">
+          ${{ formatPrice(price) }}
+          <span class="text-xs text-gray-500">
+            <span v-if="period">/ month</span></span
+          >
+          <span class="text-xs font-light text-gray-500" v-if="!period && price"
+            >({{ (price / area).toFixed() }} zł/m²)</span
+          >
+        </div>
+        <div class="text-primary-400 text-2xl font-semibold" v-else>
+          Ask for price
         </div>
         <Button asChild v-slot="slotProps">
           <RouterLink to="/" :class="slotProps.class">View details</RouterLink>
@@ -69,6 +80,8 @@
 
 <script setup lang="ts">
 import type { Teaser } from "./types";
+
+const { formatPrice } = useFormatPrice();
 
 const props = defineProps<Teaser>();
 </script>

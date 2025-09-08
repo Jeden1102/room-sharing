@@ -1,10 +1,34 @@
 <template>
   <main>
     <HomeHero />
-    <HomeLatestProperties />
+    <HomeLatestProperties
+      title="Properties for rent"
+      subtitle="Discover our latest properties"
+      type="rent"
+      :properties="rentProperties"
+    />
+
+    <HomeLatestProperties
+      title="Properties for sale"
+      subtitle="Discover our latest properties"
+      type="sale"
+      :properties="sellProperties"
+    />
+
+    <HomeLatestProperties
+      title="Properties for share"
+      subtitle="Discover our latest properties"
+      type="sale"
+      :properties="rentProperties"
+    />
+
+    <HomeServices />
   </main>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { HomeServices } from "#components";
+import { rentProperties, sellProperties } from "~/data/properties";
+</script>
 
 <style scoped></style>

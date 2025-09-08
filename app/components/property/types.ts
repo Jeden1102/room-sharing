@@ -9,8 +9,10 @@ export type Teaser = {
   badge1Value: string;
   badge2Value: string;
   location: string;
-  area: string;
-  occupants: string;
+  area: number;
+  occupants?: string;
   rooms: string;
-  price: string;
+  price?: number;
+  floor?: string;
+  period?: string;
 };

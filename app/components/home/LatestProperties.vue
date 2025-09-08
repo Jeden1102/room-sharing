@@ -1,11 +1,8 @@
 <template>
-  <section class="container">
-    <AppSectionTitle
-      title="Latest Properties"
-      subtitle="Discover our latest properties"
-    />
+  <section class="container mb-30">
+    <AppSectionTitle :title :subtitle />
     <Carousel
-      :value="products"
+      :value="properties"
       :numVisible="3"
       :numScroll="1"
       :gap="20"
@@ -14,6 +11,7 @@
     >
       <template #item="slotProps">
         <PropertyTeaser
+          :type="type"
           :images="slotProps.data.images"
           :imageAlt="slotProps.data.name"
           :badge1Value="slotProps.data.badge1Value"
@@ -24,6 +22,8 @@
           :occupants="slotProps.data.occupants"
           :rooms="slotProps.data.rooms"
           :price="slotProps.data.price"
+          :period="slotProps.data.period"
+          :floor="slotProps.data.floor"
           class="mx-2"
         />
       </template>
@@ -33,9 +33,13 @@
 
 <script setup lang="ts">
 import type { Teaser } from "~/components/property/types";
-import { properties } from "~/data/properties";
 
-const products = ref<Teaser[]>(properties);
+defineProps<{
+  title: string;
+  subtitle: string;
+  type: string;
+  properties: Teaser[];
+}>();
 
 const responsiveOptions = ref([
   {
