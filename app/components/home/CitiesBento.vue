@@ -10,6 +10,7 @@
         :key="city.name"
         :to="city.link"
         :class="city.class"
+        class="flex h-56 w-full md:h-72 lg:h-90"
       >
         <BitsFadeContent
           :blur="true"
@@ -18,8 +19,7 @@
           :threshold="0.1"
           :initial-opacity="0"
           easing="ease-out"
-          class="group relative block h-56 w-full overflow-hidden rounded-xl shadow-md md:h-72 lg:h-90"
-          class-name="my-fade-content"
+          class-name="group relative block size-full overflow-hidden rounded-xl shadow-md"
         >
           <NuxtImg
             :src="city.image"
