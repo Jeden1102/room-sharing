@@ -40,3 +40,7 @@
     @apply text-primary-400 font-semibold;
   }
 }
+
+@utility footer-link {
+  @apply text-gray-800;
+}

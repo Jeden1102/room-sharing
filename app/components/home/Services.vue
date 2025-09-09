@@ -34,7 +34,7 @@
               v-slot="slotProps"
               :severity="idx === 0 ? 'primary' : 'secondary'"
             >
-              <BitsAnimatedContent :delay="0.4 + idx * 0.2">
+              <BitsAnimatedContent :delay="0.4 + idx * 0.2" class="md:w-full">
                 <RouterLink
                   :to="action.link"
                   :class="slotProps.class"
