@@ -4,33 +4,44 @@
       title="What city will you live in?"
       subtitle="Discover our cities"
     />
-
     <div class="mt-10 flex flex-wrap gap-6">
       <RouterLink
         v-for="city in cities"
         :key="city.name"
         :to="city.link"
-        class="group relative block h-56 w-full overflow-hidden rounded-xl shadow-md md:h-72 lg:h-90"
         :class="city.class"
       >
-        <NuxtImg
-          :src="city.image"
-          :alt="city.name"
-          class="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-110"
-          loading="lazy"
-        />
-        <div
-          class="absolute inset-0 bg-black/40 transition-colors group-hover:bg-black/50"
-        ></div>
-        <h3 class="absolute bottom-4 left-4 text-lg text-white">
-          {{ city.name }}
-        </h3>
+        <BitsFadeContent
+          :blur="true"
+          :duration="1000"
+          :delay="200"
+          :threshold="0.1"
+          :initial-opacity="0"
+          easing="ease-out"
+          class="group relative block h-56 w-full overflow-hidden rounded-xl shadow-md md:h-72 lg:h-90"
+          class-name="my-fade-content"
+        >
+          <NuxtImg
+            :src="city.image"
+            :alt="city.name"
+            class="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-110"
+            loading="lazy"
+          />
+          <div
+            class="absolute inset-0 bg-black/40 transition-colors group-hover:bg-black/50"
+          ></div>
+          <h3 class="absolute bottom-4 left-4 text-lg text-white">
+            {{ city.name }}
+          </h3>
+        </BitsFadeContent>
       </RouterLink>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+import { ClientOnly } from "#components";
+
 const cities = [
   {
     name: "Warsaw",
