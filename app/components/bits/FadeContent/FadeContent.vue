@@ -12,7 +12,9 @@
       filter: blur ? (inView ? 'blur(0px)' : 'blur(10px)') : 'none',
     }"
   >
-    <slot />
+    <ClientOnly>
+      <slot />
+    </ClientOnly>
   </div>
 </template>
 
