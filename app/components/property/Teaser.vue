@@ -71,7 +71,11 @@
           Ask for price
         </div>
         <Button asChild v-slot="slotProps">
-          <RouterLink to="/" :class="slotProps.class">View details</RouterLink>
+          <RouterLink
+            :to="$localePath({ name: 'properties-id', params: { id: 123 } })"
+            :class="slotProps.class"
+            >View details</RouterLink
+          >
         </Button>
       </div>
     </div>

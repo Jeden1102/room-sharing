@@ -1,1 +1,3 @@
-2. footer
+1. login page
+2. register page
+3. auth init
