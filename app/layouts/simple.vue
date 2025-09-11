@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="pb-20 lg:pb-0 min-h-screen flex flex-col">
+  <div class="flex min-h-screen flex-col pb-20 lg:pb-0">
     <AppHeaderSimple />
     <slot />
   </div>
