@@ -38,7 +38,7 @@
 
         <div class="hidden items-center gap-6 lg:flex">
           <Button asChild v-slot="slotProps" severity="secondary">
-            <RouterLink to="/user/login" :class="slotProps.class"
+            <RouterLink :to="$localePath('/user/login')" :class="slotProps.class"
               >Login</RouterLink
             >
           </Button>
