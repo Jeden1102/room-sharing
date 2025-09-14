@@ -13,7 +13,7 @@
       :class="link.featured ? 'mb-4' : ''"
       size="large"
     >
-      <RouterLink :to="link.to" :class="slotProps.class">
+      <RouterLink :to="$localePath(link.to)" :class="slotProps.class">
         <span :class="link.icon"></span>
       </RouterLink>
     </Button>
@@ -41,7 +41,7 @@ const links = [
   },
   {
     icon: "pi pi-user",
-    to: "/user",
+    to: "/user/login",
   },
 ];
 </script>
