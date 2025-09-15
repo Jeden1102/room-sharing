@@ -18,7 +18,10 @@
       <div
         :class="
           clsx(
-            { 'pointer-events-auto translate-y-0 opacity-100': isMenuOpened },
+            {
+              '!pointer-events-auto z-10 translate-y-0 opacity-100':
+                isMenuOpened,
+            },
             'pointer-events-none absolute top-16 left-0 z-10 flex size-full w-full -translate-y-4 flex-col justify-between bg-white p-4 opacity-0 transition-all duration-300 md:pointer-events-auto lg:static lg:translate-y-0 lg:flex-row lg:items-center lg:p-0 lg:opacity-100',
           )
         "
@@ -37,16 +40,35 @@
         </div>
 
         <div class="hidden items-center gap-6 lg:flex">
-          <Button asChild v-slot="slotProps" severity="secondary">
-            <RouterLink :to="$localePath('/user/login')" :class="slotProps.class"
-              >Login</RouterLink
+          <!-- jeśli user NIE jest zalogowany -->
+          <template v-if="!data?.user">
+            <Button asChild v-slot="slotProps" severity="secondary">
+              <RouterLink
+                :to="$localePath('/user/login')"
+                :class="slotProps.class"
+              >
+                Login
+              </RouterLink>
+            </Button>
+          </template>
+
+          <template v-else>
+            <Button
+              severity="secondary"
+              rounded
+              icon="pi pi-user"
+              @click="toggleUserMenu"
+              ref="userButton"
             >
-          </Button>
+            </Button>
+
+            <Menu ref="userMenu" :model="userMenuItems" :popup="true" />
+          </template>
 
           <Button asChild v-slot="slotProps">
-            <RouterLink to="/new-publication" :class="slotProps.class"
-              >Add new publication</RouterLink
-            >
+            <RouterLink to="/new-publication" :class="slotProps.class">
+              Add new publication
+            </RouterLink>
           </Button>
 
           <Button
@@ -70,6 +92,28 @@
 
 <script setup lang="ts">
 import { clsx } from "clsx";
+import { ref } from "vue";
 
+const { data, signOut } = useAuth();
 const isMenuOpened = ref(false);
+const localePath = useLocalePath();
+const userMenu = ref();
+const userButton = ref();
+
+const toggleUserMenu = (event: Event) => {
+  userMenu.value.toggle(event);
+};
+
+const userMenuItems = ref([
+  {
+    label: "Profile",
+    icon: "pi pi-user",
+    command: () => navigateTo(localePath("/user/profile")),
+  },
+  {
+    label: "Logout",
+    icon: "pi pi-sign-out",
+    command: () => signOut(),
+  },
+]);
 </script>

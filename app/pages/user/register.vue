@@ -4,12 +4,13 @@
     <p class="mt-2 mb-6 font-light">
       Hi! Create an account and start your journey
     </p>
-    <AuthLogin />
+    <AuthRegister />
   </div>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
   layout: "login",
+  unauthenticatedOnly: true,
 });
 </script>

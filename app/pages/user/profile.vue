@@ -1,11 +1,11 @@
 <template>
-  <div>Single property</div>
+  <div>Profile {{ data }}</div>
 </template>
 
 <script setup lang="ts">
+const { data } = useAuth();
+
 definePageMeta({
-  auth: false,
+  auth: true,
 });
 </script>
-
-<style scoped></style>

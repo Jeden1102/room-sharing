@@ -31,6 +31,10 @@
 
 <script setup lang="ts">
 import { rentProperties, sellProperties } from "~/data/properties";
+
+definePageMeta({
+  auth: false,
+});
 </script>
 
 <style scoped></style>

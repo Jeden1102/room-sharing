@@ -25,12 +25,23 @@ const MyPreset = definePreset(Aura, {
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
+  runtimeConfig: {
+    authSecret: process.env.AUTH_SECRET,
+    auth: {
+      google: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      },
+    },
+  },
   modules: [
     "@nuxt/fonts",
     "@nuxt/image",
     "@primevue/nuxt-module",
     "@pinia/nuxt",
     "@nuxtjs/i18n",
+    "@sidebase/nuxt-auth",
+    "@prisma/nuxt",
   ],
   fonts: {
     defaults: {
@@ -64,5 +75,21 @@ export default defineNuxtConfig({
   },
   image: {
     format: ["webp"],
+  },
+  auth: {
+    isEnabled: true,
+    disableServerSideAuth: false,
+    originEnvKey: "AUTH_ORIGIN",
+    baseURL: process.env.BASE_URL,
+    provider: {
+      type: "authjs",
+      trustHost: false,
+      defaultProvider: "github",
+      addDefaultCallbackUrl: true,
+    },
+    sessionRefresh: {
+      enablePeriodically: true,
+      enableOnWindowFocus: true,
+    },
   },
 });

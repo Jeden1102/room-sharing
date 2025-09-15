@@ -21,27 +21,31 @@
 </template>
 
 <script setup lang="ts">
+const { data } = useAuth();
+
+const localePath = useLocalePath();
+
 const links = [
   {
     icon: "pi pi-home",
-    to: "/",
+    to: localePath("/"),
   },
   {
     icon: "pi pi-plus",
-    to: "/new-publication",
+    to: localePath("/new-publication"),
   },
   {
     icon: "pi pi-search",
-    to: "/properties",
+    to: localePath("/properties"),
     featured: true,
   },
   {
     icon: "pi pi-comment",
-    to: "/chat",
+    to: localePath("/chat"),
   },
   {
     icon: "pi pi-user",
-    to: "/user/login",
+    to: localePath(data.value?.user ? "/user/profile" : "/user/login"),
   },
 ];
 </script>

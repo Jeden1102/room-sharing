@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { NuxtError } from "#app";
 
+definePageMeta({
+  auth: false,
+});
+
 const props = defineProps({ error: Object as () => NuxtError });
 
 const handleError = () => clearError({ redirect: "/" });

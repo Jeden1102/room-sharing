@@ -11,5 +11,6 @@
 <script setup lang="ts">
 definePageMeta({
   layout: "login",
+  unauthenticatedOnly: true,
 });
 </script>

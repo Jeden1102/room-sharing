@@ -1,0 +1,159 @@
+// schema.prisma
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  provider              String?
+  providerAccountId     String?
+  emailVerified         Boolean  @default(true)
+  emailVerificationCode String   @unique
+
+  email        String   @unique
+  password     String?
+  firstName    String?
+  lastName     String?
+  displayName  String?
+  age          Int?
+  gender       String? // male, female, other
+  bio          String?
+  profileImage String?
+  interests    String[] // np. ["sport", "music", "travel"]
+
+  lifestyle  String? // morning, night, neutral
+  smoker     Boolean?
+  pets       Boolean?
+  occupation String? // student, remote, office
+  budgetMax  Int?
+
+  // Relationships
+  properties           Property[]
+  preferences          RoommatePreference? @relation(fields: [roommatePreferenceId], references: [id])
+  reviewsWritten       Review[]            @relation("ReviewsWritten")
+  reviewsReceived      Review[]            @relation("ReviewsReceived")
+  messagesSent         Message[]           @relation("MessagesSent")
+  messagesReceived     Message[]           @relation("MessagesReceived")
+  roommatePreferenceId String?
+  propertyId           String?
+  roommateInProperties Property[]          @relation("PropertyRoommates")
+}
+
+model Property {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  type   PropertyType
+  status PropertyStatus @default(ACTIVE)
+
+  title       String
+  description String?
+  price       Int
+  currency    String // EUR, USD, PLN etc.
+  deposit     Int?
+  utilities   Int? // extra costs
+
+  // location
+  city       String
+  district   String?
+  street     String?
+  postalCode String?
+  latitude   Float?
+  longitude  Float?
+
+  // details
+  sizeM2    Int?
+  rooms     Int?
+  bathrooms Int?
+  floor     Int?
+  yearBuilt Int?
+  furnished Boolean?
+  condition String? // new, renovated, needsRenovation
+
+  // amenities
+  balcony         Boolean?
+  elevator        Boolean?
+  parking         Boolean?
+  petsAllowed     Boolean?
+  smokingAllowed  Boolean?
+  internet        Boolean?
+  washingMachine  Boolean?
+  dishwasher      Boolean?
+  airConditioning Boolean?
+
+  // flatsharing
+  isShared  Boolean? @default(false)
+  roomType  String? // single, double, shared-bed
+  roommates User[]   @relation("PropertyRoommates")
+
+  // media
+  images       String[] // array of URLs
+  videoUrl     String?
+  floorPlanUrl String?
+
+  // relations
+  ownerId     String
+  owner       User                @relation(fields: [ownerId], references: [id])
+  preferences RoommatePreference?
+}
+
+model RoommatePreference {
+  id        String   @id @default(uuid())
+  minAge    Int?
+  maxAge    Int?
+  gender    String? // male, female, any
+  lifestyle String? // morning, night, neutral
+  isStudent Boolean?
+  isWorker  Boolean?
+
+  propertyId String   @unique
+  property   Property @relation(fields: [propertyId], references: [id])
+  User       User[]
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  rating    Int // 1-5 stars
+  comment   String?
+
+  authorId String
+  author   User   @relation("ReviewsWritten", fields: [authorId], references: [id])
+
+  recipientId String
+  recipient   User   @relation("ReviewsReceived", fields: [recipientId], references: [id])
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  content   String
+
+  senderId String
+  sender   User   @relation("MessagesSent", fields: [senderId], references: [id])
+
+  receiverId String
+  receiver   User   @relation("MessagesReceived", fields: [receiverId], references: [id])
+}
+
+enum PropertyType {
+  RENT
+  SALE
+  FLATSHARE
+}
+
+enum PropertyStatus {
+  ACTIVE
+  RESERVED
+  RENTED
+  SOLD
+}

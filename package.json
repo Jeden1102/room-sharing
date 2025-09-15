@@ -16,11 +16,15 @@
     "@pinia/nuxt": "^0.11.2",
     "@primeuix/themes": "^1.2.3",
     "@primevue/forms": "^4.3.9",
+    "@prisma/nuxt": "^0.3.0",
+    "@sidebase/nuxt-auth": "^1.0.2",
     "@tailwindcss/vite": "^4.1.12",
     "@types/three": "^0.180.0",
+    "bcrypt": "^6.0.0",
     "clsx": "^2.1.1",
     "gsap": "^3.13.0",
     "motion-v": "^1.7.1",
+    "next-auth": "~4.21.1",
     "nuxt": "^4.0.3",
     "ogl": "^1.0.11",
     "primeicons": "^7.0.0",
@@ -33,6 +37,7 @@
   },
   "devDependencies": {
     "@primevue/nuxt-module": "^4.3.8",
+    "@types/bcrypt": "^6.0.0",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14"
   }

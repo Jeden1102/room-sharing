@@ -32,30 +32,40 @@
           >{{ $form.password.error.message }}</Message
         >
       </div>
-      <NuxtLink
-        :to="$localePath('/user/forgot-password')"
-        class="text-primary-600 text-sm font-semibold"
-      >
-        Forgot Password?
-      </NuxtLink>
-      <Button type="submit" label="Login" />
+      <div class="flex flex-col gap-1">
+        <InputText
+          name="passwordRepeat"
+          type="password"
+          placeholder="Repeat password"
+          fluid
+        />
+        <Message
+          v-if="$form.passwordRepeat?.invalid"
+          severity="error"
+          size="small"
+          variant="simple"
+          >{{ $form.passwordRepeat.error.message }}</Message
+        >
+      </div>
+      <Button type="submit" label="Register" />
       <Message
-        class="w-full"
         :severity="formStatus.success ? 'success' : 'error'"
         v-if="formStatus.message"
         >{{ formStatus.message }}</Message
       >
       <div class="mt-4 flex flex-col gap-4">
-        <Button severity="secondary" @click="signIn('google')">
-          <i class="pi pi-google"></i> Login with Google
+        <Button asChild v-slot="slotProps" severity="secondary">
+          <a :class="slotProps.class" @click="handleGoogleLogin">
+            <i class="pi pi-google"></i> Register with Google
+          </a>
         </Button>
         <span>
-          Don't have an account?
+          Already have an account?
           <NuxtLink
-            :to="$localePath('/user/register')"
+            :to="$localePath('/user/login')"
             class="text-primary-600 font-semibold"
           >
-            Register
+            Login
           </NuxtLink>
         </span>
       </div>
@@ -67,16 +77,19 @@
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { z } from "zod";
 
-const { signIn } = useAuth();
-
-const formStatus = ref<{ success: boolean | null; message: string }>({
-  success: null,
-  message: "",
+definePageMeta({
+  unauthenticatedOnly: true,
 });
 
 const initialValues = ref({
   email: "",
   password: "",
+  passwordRepeat: "",
+});
+
+const formStatus = ref<{ success: boolean | null; message: string }>({
+  success: null,
+  message: "",
 });
 
 const resolver = ref(
@@ -84,6 +97,9 @@ const resolver = ref(
     z.object({
       email: z.string().email({ message: "Invalid email address" }),
       password: z
+        .string()
+        .min(8, { message: "Password must be at least 8 characters" }),
+      passwordRepeat: z
         .string()
         .min(8, { message: "Password must be at least 8 characters" }),
     }),
@@ -97,17 +113,23 @@ const onFormSubmit = async ({
   valid: boolean;
   values: any;
 }) => {
-  if (!valid) return;
-  const result = await signIn("credentials", {
-    ...values,
-    redirect: false,
-  });
-
-  if (result?.error) {
+  if (!valid) {
+    return;
+  }
+  try {
+    const res: { statusMessage: string } = await $fetch("/api/register", {
+      method: "POST",
+      body: {
+        email: values.email,
+        password: values.password,
+        passwordRepeat: values.passwordRepeat,
+      },
+    });
+    formStatus.value.success = true;
+    formStatus.value.message = res.statusMessage;
+  } catch (error: any) {
     formStatus.value.success = false;
-    formStatus.value.message = result.error;
-  } else {
-    useRouter().push("/user/profile");
+    formStatus.value.message = error.data.statusMessage;
   }
 };
 
