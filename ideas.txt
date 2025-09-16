@@ -1,3 +1,3 @@
-1. login page
-2. register page
-3. auth init
+1. user confirmation mails + nice template
+2. user pwd reset
+3. user resend confirmation mail

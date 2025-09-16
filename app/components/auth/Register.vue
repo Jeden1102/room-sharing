@@ -51,14 +51,10 @@
       <Message
         :severity="formStatus.success ? 'success' : 'error'"
         v-if="formStatus.message"
+        class="max-w-100"
         >{{ formStatus.message }}</Message
       >
       <div class="mt-4 flex flex-col gap-4">
-        <Button asChild v-slot="slotProps" severity="secondary">
-          <a :class="slotProps.class" @click="handleGoogleLogin">
-            <i class="pi pi-google"></i> Register with Google
-          </a>
-        </Button>
         <span>
           Already have an account?
           <NuxtLink

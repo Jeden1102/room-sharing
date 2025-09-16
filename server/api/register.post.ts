@@ -1,5 +1,7 @@
 import bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
+import { render } from "@vue-email/render";
+import AccountConfirmation from "~/components/email/AccountConfirmation.vue";
 
 const prisma = new PrismaClient();
 
@@ -18,12 +20,14 @@ export default defineEventHandler(async (event) => {
       const hashedPassword = await bcrypt.hash(body.password, 10);
 
       try {
+        const code = await sendVerificationEmail(body.email);
+
         const updatedUser = await prisma.user.update({
           where: { email: body.email },
           data: {
             password: hashedPassword,
             emailVerified: true,
-            emailVerificationCode: new Date().toISOString(),
+            emailVerificationCode: code,
           },
         });
 
@@ -43,12 +47,14 @@ export default defineEventHandler(async (event) => {
   const hashedPassword = await bcrypt.hash(body.password, 10);
 
   try {
+    const code = await sendVerificationEmail(body.email);
+
     const newUser = await prisma.user.create({
       data: {
         email: body.email,
         password: hashedPassword,
         emailVerified: true,
-        emailVerificationCode: new Date().toISOString(),
+        emailVerificationCode: code,
       },
     });
     return {
@@ -63,3 +69,40 @@ export default defineEventHandler(async (event) => {
     });
   }
 });
+
+const sendVerificationEmail = async (email: string) => {
+  try {
+    const { sendMail } = useNodeMailer();
+    const config = useRuntimeConfig();
+
+    const emailVerificationCode = await bcrypt.hash(Date.now().toString(), 10);
+
+    const confirmationUrl = `${config.public.APP_BASE_URI}/profile/confirm-email?code=${emailVerificationCode}`;
+    const htmlContent = `
+      <p>Your confirmation link: <a href="${confirmationUrl}">Click here to confirm your account</a></p>
+    `;
+
+    const html = await render(
+      AccountConfirmation,
+      {
+        title: "some title",
+      },
+      {
+        pretty: true,
+      },
+    );
+
+    await sendMail({
+      subject: "Account confirmation",
+      to: email,
+      html: html,
+    });
+
+    return emailVerificationCode;
+  } catch (error) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: "apiResponses.failedToSendVerificationEmail",
+    });
+  }
+};

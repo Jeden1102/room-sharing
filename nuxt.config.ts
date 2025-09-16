@@ -1,6 +1,7 @@
 import Aura from "@primeuix/themes/aura";
 
 import tailwindcss from "@tailwindcss/vite";
+import vue from "@vitejs/plugin-vue";
 
 import { definePreset } from "@primeuix/themes";
 
@@ -33,6 +34,10 @@ export default defineNuxtConfig({
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       },
     },
+    public: {
+      APP_BASE_URI: process.env.NUXT_PUBLIC_APP_BASE_URI,
+      APP_PROD_URI: process.env.NUXT_PUBLIC_APP_PROD_URI,
+    },
   },
   modules: [
     "@nuxt/fonts",
@@ -41,7 +46,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/i18n",
     "@sidebase/nuxt-auth",
-    "@prisma/nuxt",
+    "nuxt-nodemailer",
   ],
   fonts: {
     defaults: {
@@ -90,6 +95,21 @@ export default defineNuxtConfig({
     sessionRefresh: {
       enablePeriodically: true,
       enableOnWindowFocus: true,
+    },
+  },
+  nodemailer: {
+    from: '"Rooms" <dev@dominikraducki.pl>',
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    secure: true,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  },
+  nitro: {
+    rollupConfig: {
+      plugins: [vue()],
     },
   },
 });

@@ -7,7 +7,7 @@
     <div
       class="flex flex-col gap-10 pt-10 lg:container lg:flex-1 lg:flex-row lg:items-center"
     >
-      <div class="mx:px-0 px-4">
+      <div class="mx:px-0 px-4 md:w-110">
         <slot />
       </div>
 
