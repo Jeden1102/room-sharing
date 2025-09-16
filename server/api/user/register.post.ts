@@ -22,11 +22,11 @@ export default defineEventHandler(async (event) => {
       try {
         const code = await sendVerificationEmail(body.email);
 
-        const updatedUser = await prisma.user.update({
+        await prisma.user.update({
           where: { email: body.email },
           data: {
             password: hashedPassword,
-            emailVerified: true,
+            emailVerified: false,
             emailVerificationCode: code,
           },
         });
@@ -53,7 +53,7 @@ export default defineEventHandler(async (event) => {
       data: {
         email: body.email,
         password: hashedPassword,
-        emailVerified: true,
+        emailVerified: false,
         emailVerificationCode: code,
       },
     });

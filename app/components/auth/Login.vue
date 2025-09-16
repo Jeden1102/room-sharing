@@ -38,7 +38,7 @@
       >
         Forgot Password?
       </NuxtLink>
-      <Button type="submit" label="Login" />
+      <Button type="submit" label="Login" :loading="formStatus.isLoading" />
       <Message
         class="w-full"
         :severity="formStatus.success ? 'success' : 'error'"
@@ -69,9 +69,14 @@ import { z } from "zod";
 
 const { signIn } = useAuth();
 
-const formStatus = ref<{ success: boolean | null; message: string }>({
+const formStatus = ref<{
+  success: boolean | null;
+  message: string;
+  isLoading: boolean;
+}>({
   success: null,
   message: "",
+  isLoading: false,
 });
 
 const initialValues = ref({
@@ -98,10 +103,12 @@ const onFormSubmit = async ({
   values: any;
 }) => {
   if (!valid) return;
+  formStatus.value.isLoading = true;
   const result = await signIn("credentials", {
     ...values,
     redirect: false,
   });
+  formStatus.value.isLoading = false;
 
   if (result?.error) {
     formStatus.value.success = false;
@@ -109,9 +116,5 @@ const onFormSubmit = async ({
   } else {
     useRouter().push("/user/profile");
   }
-};
-
-const handleGoogleLogin = () => {
-  // Add your Google login logic here
 };
 </script>

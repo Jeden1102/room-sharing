@@ -47,7 +47,7 @@
           >{{ $form.passwordRepeat.error.message }}</Message
         >
       </div>
-      <Button type="submit" label="Register" />
+      <Button type="submit" label="Register" :loading="formStatus.isLoading" />
       <Message
         :severity="formStatus.success ? 'success' : 'error'"
         v-if="formStatus.message"
@@ -83,8 +83,13 @@ const initialValues = ref({
   passwordRepeat: "",
 });
 
-const formStatus = ref<{ success: boolean | null; message: string }>({
+const formStatus = ref<{
+  success: boolean | null;
+  isLoading: boolean;
+  message: string;
+}>({
   success: null,
+  isLoading: false,
   message: "",
 });
 
@@ -113,7 +118,8 @@ const onFormSubmit = async ({
     return;
   }
   try {
-    const res: { statusMessage: string } = await $fetch("/api/register", {
+    formStatus.value.isLoading = true;
+    const res: { statusMessage: string } = await $fetch("/api/user/register", {
       method: "POST",
       body: {
         email: values.email,
@@ -126,6 +132,8 @@ const onFormSubmit = async ({
   } catch (error: any) {
     formStatus.value.success = false;
     formStatus.value.message = error.data.statusMessage;
+  } finally {
+    formStatus.value.isLoading = false;
   }
 };
 
