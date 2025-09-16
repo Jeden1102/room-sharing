@@ -1,7 +1,10 @@
-<!-- emails/ActionEmail.vue -->
 <script setup lang="ts">
 import { Button, Text } from "@vue-email/components";
 import Layout from "./Layout.vue";
+
+defineProps({
+  confirmationUrl: String,
+});
 </script>
 
 <template>
@@ -10,7 +13,7 @@ import Layout from "./Layout.vue";
       Hej, kliknij w przycisk poniżej aby aktywować konto:
     </Text>
     <Button
-      href="https://example.com/activate"
+      :href="confirmationUrl"
       class="bg-brand rounded px-3 py-2 font-medium text-white"
     >
       Aktywuj konto

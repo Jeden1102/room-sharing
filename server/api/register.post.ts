@@ -77,15 +77,12 @@ const sendVerificationEmail = async (email: string) => {
 
     const emailVerificationCode = await bcrypt.hash(Date.now().toString(), 10);
 
-    const confirmationUrl = `${config.public.APP_BASE_URI}/profile/confirm-email?code=${emailVerificationCode}`;
-    const htmlContent = `
-      <p>Your confirmation link: <a href="${confirmationUrl}">Click here to confirm your account</a></p>
-    `;
+    const confirmationUrl = `${config.public.APP_BASE_URI}/user/confirm-email?code=${emailVerificationCode}`;
 
     const html = await render(
       AccountConfirmation,
       {
-        title: "some title",
+        confirmationUrl,
       },
       {
         pretty: true,
@@ -95,7 +92,7 @@ const sendVerificationEmail = async (email: string) => {
     await sendMail({
       subject: "Account confirmation",
       to: email,
-      html: html,
+      html,
     });
 
     return emailVerificationCode;

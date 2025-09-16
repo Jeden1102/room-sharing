@@ -19,10 +19,10 @@ const config = useRuntimeConfig();
         <Container class="mx-auto max-w-xl rounded bg-white p-6 shadow-sm">
           <div class="mb-4 border-b border-gray-200 pb-2">
             <Img
-              :src="config.public.APP_BASE_URI + '/email/logo.png'"
-              alt="Cat"
-              width="300"
-              height="300"
+              :src="config.public.APP_PROD_URI + '/email/logo.png'"
+              alt="Page logo"
+              width="162"
+              height="32"
             />
           </div>
 
@@ -31,7 +31,7 @@ const config = useRuntimeConfig();
           <div
             class="mt-6 border-t border-gray-200 pt-2 text-center text-xs text-gray-500"
           >
-            © 2025 My App. All rights reserved.
+            © 2025 Rooms. All rights reserved.
           </div>
         </Container>
       </Body>
