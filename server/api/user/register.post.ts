@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 import { render } from "@vue-email/render";
-import AccountConfirmation from "~/components/email/AccountConfirmation.vue";
+import SimpleAction from "~/components/email/SimpleAction.vue";
 
 const prisma = new PrismaClient();
 
@@ -80,9 +80,11 @@ const sendVerificationEmail = async (email: string) => {
     const confirmationUrl = `${config.public.APP_BASE_URI}/user/confirm-email?code=${emailVerificationCode}`;
 
     const html = await render(
-      AccountConfirmation,
+      SimpleAction,
       {
-        confirmationUrl,
+        actionUrl: confirmationUrl,
+        actionText: "Confirm email",
+        title: "To confirm your email, click the button below.",
       },
       {
         pretty: true,

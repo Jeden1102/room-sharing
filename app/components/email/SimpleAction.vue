@@ -3,20 +3,22 @@ import { Button, Text } from "@vue-email/components";
 import Layout from "./Layout.vue";
 
 defineProps({
-  confirmationUrl: String,
+  actionUrl: String,
+  title: String,
+  actionText: String,
 });
 </script>
 
 <template>
   <Layout>
     <Text class="mb-4">
-      Hej, kliknij w przycisk poniżej aby aktywować konto:
+      {{ title }}
     </Text>
     <Button
-      :href="confirmationUrl"
+      :href="actionUrl"
       class="bg-brand rounded px-3 py-2 font-medium text-white"
     >
-      Aktywuj konto
+      {{ actionText }}
     </Button>
   </Layout>
 </template>

@@ -10,13 +10,14 @@ generator client {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                    String   @id @default(uuid())
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
   provider              String?
   providerAccountId     String?
   emailVerified         Boolean  @default(true)
   emailVerificationCode String   @unique
+  passwordResetCode     String?  @unique
 
   email        String   @unique
   password     String?

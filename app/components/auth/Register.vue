@@ -136,8 +136,4 @@ const onFormSubmit = async ({
     formStatus.value.isLoading = false;
   }
 };
-
-const handleGoogleLogin = () => {
-  // Add your Google login logic here
-};
 </script>

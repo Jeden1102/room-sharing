@@ -1,3 +1,4 @@
-1. user confirmation mails + nice template
 2. user pwd reset
 3. user resend confirmation mail
+4. basic user profile
+REFACTOR - linki, error/loading handling
