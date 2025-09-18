@@ -16,7 +16,6 @@ if (!code) {
 }
 
 const confirmEmail = async () => {
-  console.log("teraz");
   try {
     const response: { message: string } = await $fetch(
       "/api/user/confirm-email",

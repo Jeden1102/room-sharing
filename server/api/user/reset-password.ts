@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
@@ -14,31 +15,33 @@ export default defineEventHandler(async (event) => {
 
   try {
     const user = await prisma.user.findUnique({
-      where: { emailVerificationCode: body.code, emailVerified: true },
+      where: { passwordResetCode: body.code },
     });
 
-    if (user) {
-      return {
-        success: true,
-        message: "Email already confirmed",
-      };
+    if (!user) {
+      throw createError({
+        statusCode: 500,
+        statusMessage: "Failed to set new password",
+      });
     }
-
+    const hashedPassword = await bcrypt.hash(body.password, 10);
     await prisma.user.update({
-      where: { emailVerificationCode: body.code },
+      where: { passwordResetCode: body.code },
       data: {
-        emailVerified: true,
+        password: hashedPassword,
+        passwordResetCode: null,
       },
     });
 
     return {
       success: true,
-      message: "Email confirmed successfully",
+      message: "New password set successfully",
     };
   } catch (error) {
+    console.log(error);
     throw createError({
       statusCode: 500,
-      statusMessage: "Failed to confirm email",
+      statusMessage: "Failed to set new password",
     });
   }
 });

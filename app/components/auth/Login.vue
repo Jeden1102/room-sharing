@@ -41,7 +41,7 @@
       <Button type="submit" label="Login" :loading="formStatus.isLoading" />
       <Message
         class="w-full"
-        :severity="formStatus.success ? 'success' : 'error'"
+        :severity="formStatus.success ? 'info' : 'error'"
         v-if="formStatus.message"
         >{{ formStatus.message }}</Message
       >

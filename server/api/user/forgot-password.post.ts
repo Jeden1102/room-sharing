@@ -21,7 +21,6 @@ export default defineEventHandler(async (event) => {
 
   try {
     const code = await sendVerificationEmail(body.email);
-    console.log(code);
     await prisma.user.update({
       where: { email: body.email },
       data: {
@@ -63,7 +62,7 @@ const sendVerificationEmail = async (email: string) => {
     );
 
     await sendMail({
-      subject: "Account confirmation",
+      subject: "Password reset",
       to: email,
       html,
     });

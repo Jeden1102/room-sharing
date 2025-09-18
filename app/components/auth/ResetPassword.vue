@@ -8,20 +8,10 @@
       class="flex w-full flex-col gap-4"
     >
       <div class="flex flex-col gap-1">
-        <InputText name="email" type="email" placeholder="Email" fluid />
-        <Message
-          v-if="$form.email?.invalid"
-          severity="error"
-          size="small"
-          variant="simple"
-          >{{ $form.email.error.message }}</Message
-        >
-      </div>
-      <div class="flex flex-col gap-1">
         <InputText
           name="password"
           type="password"
-          placeholder="Password"
+          placeholder="New password"
           fluid
         />
         <Message
@@ -36,7 +26,7 @@
         <InputText
           name="passwordRepeat"
           type="password"
-          placeholder="Repeat password"
+          placeholder="Repeat new password"
           fluid
         />
         <Message
@@ -47,24 +37,18 @@
           >{{ $form.passwordRepeat.error.message }}</Message
         >
       </div>
-      <Button type="submit" label="Register" :loading="formStatus.isLoading" />
+      <Button
+        type="submit"
+        label="Reset password"
+        :loading="formStatus.isLoading"
+        class="w-fit"
+      />
       <Message
         :severity="formStatus.success ? 'info' : 'error'"
         v-if="formStatus.message"
         class="max-w-100"
         >{{ formStatus.message }}</Message
       >
-      <div class="mt-4 flex flex-col gap-4">
-        <span>
-          Already have an account?
-          <NuxtLink
-            :to="$localePath('/user/login')"
-            class="text-primary-600 font-semibold"
-          >
-            Login
-          </NuxtLink>
-        </span>
-      </div>
     </Form>
   </div>
 </template>
@@ -73,12 +57,9 @@
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { z } from "zod";
 
-definePageMeta({
-  unauthenticatedOnly: true,
-});
+const { code } = defineProps<{ code: string }>();
 
 const initialValues = ref({
-  email: "",
   password: "",
   passwordRepeat: "",
 });
@@ -97,7 +78,6 @@ const resolver = ref(
   zodResolver(
     z
       .object({
-        email: z.string().email({ message: "Invalid email address" }),
         password: z
           .string()
           .min(8, { message: "Password must be at least 8 characters" }),
@@ -124,19 +104,19 @@ const onFormSubmit = async ({
   }
   try {
     formStatus.value.isLoading = true;
-    const res: { statusMessage: string } = await $fetch("/api/user/register", {
+    const res: { message: string } = await $fetch("/api/user/reset-password", {
       method: "POST",
       body: {
-        email: values.email,
         password: values.password,
         passwordRepeat: values.passwordRepeat,
+        code,
       },
     });
     formStatus.value.success = true;
-    formStatus.value.message = res.statusMessage;
+    formStatus.value.message = res.message;
   } catch (error: any) {
     formStatus.value.success = false;
-    formStatus.value.message = error.data.statusMessage;
+    formStatus.value.message = error.data.message;
   } finally {
     formStatus.value.isLoading = false;
   }

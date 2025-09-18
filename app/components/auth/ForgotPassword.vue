@@ -25,7 +25,7 @@
       />
       <Message
         class="w-full"
-        :severity="formStatus.success ? 'success' : 'error'"
+        :severity="formStatus.success ? 'info' : 'error'"
         v-if="formStatus.message"
         >{{ formStatus.message }}</Message
       >
@@ -36,8 +36,6 @@
 <script setup lang="ts">
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { z } from "zod";
-
-const { signIn } = useAuth();
 
 const formStatus = ref<{
   success: boolean | null;
