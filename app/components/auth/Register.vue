@@ -58,7 +58,7 @@
         <span>
           Already have an account?
           <NuxtLink
-            :to="$localePath('/user/login')"
+            :to="$localePath('/auth/login')"
             class="text-primary-600 font-semibold"
           >
             Login
@@ -124,7 +124,7 @@ const onFormSubmit = async ({
   }
   try {
     formStatus.value.isLoading = true;
-    const res: { statusMessage: string } = await $fetch("/api/user/register", {
+    const res: { statusMessage: string } = await $fetch("/api/auth/register", {
       method: "POST",
       body: {
         email: values.email,

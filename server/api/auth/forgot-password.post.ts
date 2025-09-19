@@ -47,7 +47,7 @@ const sendVerificationEmail = async (email: string) => {
 
     const emailVerificationCode = await bcrypt.hash(Date.now().toString(), 10);
 
-    const resetUrl = `${config.public.APP_BASE_URI}/user/reset-password?code=${emailVerificationCode}`;
+    const resetUrl = `${config.public.APP_BASE_URI}/auth/reset-password?code=${emailVerificationCode}`;
 
     const html = await render(
       SimpleAction,

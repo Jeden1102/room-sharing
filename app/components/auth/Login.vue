@@ -33,7 +33,7 @@
         >
       </div>
       <NuxtLink
-        :to="$localePath('/user/forgot-password')"
+        :to="$localePath('/auth/forgot-password')"
         class="text-primary-600 text-sm font-semibold"
       >
         Forgot Password?
@@ -52,7 +52,7 @@
         <span>
           Don't have an account?
           <NuxtLink
-            :to="$localePath('/user/register')"
+            :to="$localePath('/auth/register')"
             class="text-primary-600 font-semibold"
           >
             Register

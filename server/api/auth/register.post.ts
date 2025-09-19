@@ -77,7 +77,7 @@ const sendVerificationEmail = async (email: string) => {
 
     const emailVerificationCode = await bcrypt.hash(Date.now().toString(), 10);
 
-    const confirmationUrl = `${config.public.APP_BASE_URI}/user/confirm-email?code=${emailVerificationCode}`;
+    const confirmationUrl = `${config.public.APP_BASE_URI}/auth/confirm-email?code=${emailVerificationCode}`;
 
     const html = await render(
       SimpleAction,

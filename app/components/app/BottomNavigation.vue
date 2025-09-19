@@ -45,7 +45,7 @@ const links = [
   },
   {
     icon: "pi pi-user",
-    to: localePath(data.value?.user ? "/user/profile" : "/user/login"),
+    to: localePath(data.value?.user ? "/user/profile" : "/auth/login"),
   },
 ];
 </script>

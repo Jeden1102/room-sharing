@@ -104,7 +104,7 @@ const onFormSubmit = async ({
   }
   try {
     formStatus.value.isLoading = true;
-    const res: { message: string } = await $fetch("/api/user/reset-password", {
+    const res: { message: string } = await $fetch("/api/auth/reset-password", {
       method: "POST",
       body: {
         password: values.password,

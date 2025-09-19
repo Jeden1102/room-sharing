@@ -18,7 +18,7 @@ if (!code) {
 const confirmEmail = async () => {
   try {
     const response: { message: string } = await $fetch(
-      "/api/user/confirm-email",
+      "/api/auth/confirm-email",
       {
         method: "POST",
         body: {
@@ -49,7 +49,7 @@ onMounted(() => {
     {{ responseMessage }}
   </p>
   <Button asChild v-slot="slotProps" v-if="!isError">
-    <RouterLink to="/user/login" :class="slotProps.class"
+    <RouterLink to="/auth/login" :class="slotProps.class"
       >Go to login</RouterLink
     >
   </Button>

@@ -44,7 +44,7 @@
           <template v-if="!data?.user">
             <Button asChild v-slot="slotProps" severity="secondary">
               <RouterLink
-                :to="$localePath('/user/login')"
+                :to="$localePath('/auth/login')"
                 :class="slotProps.class"
               >
                 Login
