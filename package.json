@@ -17,7 +17,6 @@
         "@primeuix/themes": "^1.2.3",
         "@primevue/forms": "^4.3.9",
         "@prisma/client": "^5.22.0",
-        "prisma": "^5.22.0",
         "@sidebase/nuxt-auth": "^1.0.2",
         "@tailwindcss/vite": "^4.1.12",
         "@types/three": "^0.180.0",
@@ -34,6 +33,7 @@
         "ogl": "^1.0.11",
         "primeicons": "^7.0.0",
         "primevue": "^4.3.8",
+        "prisma": "^5.22.0",
         "sharp": "^0.34.3",
         "three": "^0.178.0",
         "vue": "^3.5.18",
@@ -44,6 +44,7 @@
         "@primevue/nuxt-module": "^4.3.8",
         "@types/bcrypt": "^6.0.0",
         "nodemailer": "^6.10.1",
+        "nuxt-file-storage": "^0.3.0",
         "nuxt-nodemailer": "^1.1.2",
         "prettier": "^3.6.2",
         "prettier-plugin-tailwindcss": "^0.6.14"

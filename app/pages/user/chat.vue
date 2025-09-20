@@ -3,8 +3,6 @@
 </template>
 
 <script setup lang="ts">
-const { data } = useAuth();
-
 definePageMeta({
   auth: true,
 });

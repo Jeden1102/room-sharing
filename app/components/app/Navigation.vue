@@ -40,7 +40,6 @@
         </div>
 
         <div class="hidden items-center gap-6 lg:flex">
-          <!-- jeśli user NIE jest zalogowany -->
           <template v-if="!data?.user">
             <Button asChild v-slot="slotProps" severity="secondary">
               <RouterLink

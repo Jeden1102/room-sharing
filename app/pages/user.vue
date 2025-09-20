@@ -1,20 +1,52 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div>
-    <nav class="flex gap-4 bg-gray-200 p-4">
-      <NuxtLink to="/user/profile" active-class="font-bold text-blue-600"
-        >Profile</NuxtLink
+  <div class="container flex max-w-screen-lg flex-col py-6 md:flex-row">
+    <nav class="flex gap-2 p-4 md:flex-col md:py-0">
+      <Button
+        v-for="item in userMenuItems"
+        asChild
+        v-slot="slotProps"
+        :severity="item.command === route.path ? 'primary' : 'secondary'"
       >
-      <NuxtLink to="/user/chat" active-class="font-bold text-blue-600"
-        >Chat</NuxtLink
-      >
-      <NuxtLink to="/user/settings" active-class="font-bold text-blue-600"
-        >Settings</NuxtLink
-      >
+        <RouterLink
+          :to="item.command"
+          :class="slotProps.class"
+          class="w-full"
+          :title="item.label"
+        >
+          <span :class="item.icon"></span>
+        </RouterLink>
+      </Button>
     </nav>
-    <div class="p-4">
+    <div class="flex-1">
       <NuxtPage />
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+const route = useRoute();
+const localePath = useLocalePath();
+
+const userMenuItems = ref([
+  {
+    label: "Profile",
+    icon: "pi pi-user",
+    command: localePath("/user/profile"),
+  },
+  {
+    label: "Favorites",
+    icon: "pi pi-heart",
+    command: localePath("/user/favorites"),
+  },
+  {
+    label: "Chat",
+    icon: "pi pi-comment",
+    command: localePath("/user/chat"),
+  },
+  {
+    label: "Settings",
+    icon: "pi pi-cog",
+    command: localePath("/user/settings"),
+  },
+]);
+</script>

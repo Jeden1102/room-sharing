@@ -1,86 +1,78 @@
-// schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 model User {
   id                    String   @id @default(uuid())
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
+  email                 String   @unique
+  password              String?
+  firstName             String?
+  lastName              String?
+  age                   Int?
+  profileImage          String?
+  smoker                Boolean?
+  pets                  Boolean?
+  budgetMax             Int?
+  roommatePreferenceId  String?
+  propertyId            String?
+  emailVerificationCode String   @unique
+  emailVerified         Boolean  @default(true)
   provider              String?
   providerAccountId     String?
-  emailVerified         Boolean  @default(true)
-  emailVerificationCode String   @unique
   passwordResetCode     String?  @unique
+  bgImage               String?
+  description           String?
+  lifestyleId           String?
+  gender                String?
+  moodboardImages       String[]
 
-  email        String   @unique
-  password     String?
-  firstName    String?
-  lastName     String?
-  displayName  String?
-  age          Int?
-  gender       String? // male, female, other
-  bio          String?
-  profileImage String?
-  interests    String[] // np. ["sport", "music", "travel"]
+  // Relations
+  messagesReceived Message[]           @relation("MessagesReceived")
+  messagesSent     Message[]           @relation("MessagesSent")
+  properties       Property[]
+  reviewsWritten   Review[]            @relation("ReviewsWritten")
+  reviewsReceived  Review[]            @relation("ReviewsReceived")
+  Lifestyle        Lifestyle?          @relation(fields: [lifestyleId], references: [id])
+  preferences      RoommatePreference? @relation(fields: [roommatePreferenceId], references: [id])
 
-  lifestyle  String? // morning, night, neutral
-  smoker     Boolean?
-  pets       Boolean?
-  occupation String? // student, remote, office
-  budgetMax  Int?
+  // PROSTSZA RELACJA - implicit many-to-many
+  interests Interest[] // Bez junction table!
 
-  // Relationships
-  properties           Property[]
-  preferences          RoommatePreference? @relation(fields: [roommatePreferenceId], references: [id])
-  reviewsWritten       Review[]            @relation("ReviewsWritten")
-  reviewsReceived      Review[]            @relation("ReviewsReceived")
-  messagesSent         Message[]           @relation("MessagesSent")
-  messagesReceived     Message[]           @relation("MessagesReceived")
-  roommatePreferenceId String?
-  propertyId           String?
-  roommateInProperties Property[]          @relation("PropertyRoommates")
+  roommateInProperties Property[] @relation("PropertyRoommates")
 }
 
 model Property {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  type   PropertyType
-  status PropertyStatus @default(ACTIVE)
-
-  title       String
-  description String?
-  price       Int
-  currency    String // EUR, USD, PLN etc.
-  deposit     Int?
-  utilities   Int? // extra costs
-
-  // location
-  city       String
-  district   String?
-  street     String?
-  postalCode String?
-  latitude   Float?
-  longitude  Float?
-
-  // details
-  sizeM2    Int?
-  rooms     Int?
-  bathrooms Int?
-  floor     Int?
-  yearBuilt Int?
-  furnished Boolean?
-  condition String? // new, renovated, needsRenovation
-
-  // amenities
+  id              String              @id @default(uuid())
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  type            PropertyType
+  status          PropertyStatus      @default(ACTIVE)
+  title           String
+  description     String?
+  price           Int
+  currency        String
+  deposit         Int?
+  utilities       Int?
+  city            String
+  district        String?
+  street          String?
+  postalCode      String?
+  latitude        Float?
+  longitude       Float?
+  sizeM2          Int?
+  rooms           Int?
+  bathrooms       Int?
+  floor           Int?
+  yearBuilt       Int?
+  furnished       Boolean?
+  condition       String?
   balcony         Boolean?
   elevator        Boolean?
   parking         Boolean?
@@ -90,60 +82,61 @@ model Property {
   washingMachine  Boolean?
   dishwasher      Boolean?
   airConditioning Boolean?
-
-  // flatsharing
-  isShared  Boolean? @default(false)
-  roomType  String? // single, double, shared-bed
-  roommates User[]   @relation("PropertyRoommates")
-
-  // media
-  images       String[] // array of URLs
-  videoUrl     String?
-  floorPlanUrl String?
-
-  // relations
-  ownerId     String
-  owner       User                @relation(fields: [ownerId], references: [id])
-  preferences RoommatePreference?
+  isShared        Boolean?            @default(false)
+  roomType        String?
+  images          String[]
+  videoUrl        String?
+  floorPlanUrl    String?
+  ownerId         String
+  owner           User                @relation(fields: [ownerId], references: [id])
+  preferences     RoommatePreference?
+  roommates       User[]              @relation("PropertyRoommates")
 }
 
 model RoommatePreference {
-  id        String   @id @default(uuid())
-  minAge    Int?
-  maxAge    Int?
-  gender    String? // male, female, any
-  lifestyle String? // morning, night, neutral
-  isStudent Boolean?
-  isWorker  Boolean?
-
+  id         String   @id @default(uuid())
+  minAge     Int?
+  maxAge     Int?
+  gender     String?
+  lifestyle  String?
+  isStudent  Boolean?
+  isWorker   Boolean?
   propertyId String   @unique
   property   Property @relation(fields: [propertyId], references: [id])
   User       User[]
 }
 
 model Review {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  rating    Int // 1-5 stars
-  comment   String?
-
-  authorId String
-  author   User   @relation("ReviewsWritten", fields: [authorId], references: [id])
-
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  rating      Int
+  comment     String?
+  authorId    String
   recipientId String
-  recipient   User   @relation("ReviewsReceived", fields: [recipientId], references: [id])
+  author      User     @relation("ReviewsWritten", fields: [authorId], references: [id])
+  recipient   User     @relation("ReviewsReceived", fields: [recipientId], references: [id])
 }
 
 model Message {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  content   String
-
-  senderId String
-  sender   User   @relation("MessagesSent", fields: [senderId], references: [id])
-
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  content    String
+  senderId   String
   receiverId String
-  receiver   User   @relation("MessagesReceived", fields: [receiverId], references: [id])
+  receiver   User     @relation("MessagesReceived", fields: [receiverId], references: [id])
+  sender     User     @relation("MessagesSent", fields: [senderId], references: [id])
+}
+
+model Interest {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+}
+
+model Lifestyle {
+  id   String @id
+  name String
+  User User[]
 }
 
 enum PropertyType {

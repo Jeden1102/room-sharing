@@ -47,7 +47,11 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@sidebase/nuxt-auth",
     "nuxt-nodemailer",
+    "nuxt-file-storage",
   ],
+  fileStorage: {
+    mount: "/public/uploads",
+  },
   fonts: {
     defaults: {
       weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
@@ -91,6 +95,11 @@ export default defineNuxtConfig({
       trustHost: false,
       defaultProvider: "github",
       addDefaultCallbackUrl: true,
+      session: {
+        dataType: {
+          id: "string | number",
+        },
+      },
     },
     sessionRefresh: {
       enablePeriodically: true,

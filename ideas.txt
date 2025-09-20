@@ -1,4 +1,7 @@
-2. user pwd reset
-3. user resend confirmation mail
 4. basic user profile
+    1. finish moodboard images
+    2. add image/bg image fields to form
+    3. add fields: location, phone, email (seperate to groups)
+5. user profile front
+
 REFACTOR - linki, error/loading handling
