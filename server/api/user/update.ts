@@ -19,6 +19,7 @@ export default defineEventHandler(async (event) => {
         age: body.age,
         description: body.description,
         smoker: body.smoker,
+        phone: body.phone,
         pets: body.pets,
         budgetMax: body.budgetMax,
         moodboardImages: body.moodboardImages,

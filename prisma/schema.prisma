@@ -32,6 +32,8 @@ model User {
   lifestyleId           String?
   gender                String?
   moodboardImages       String[]
+  phone                 String?
+  searchCity            String?
 
   // Relations
   messagesReceived Message[]           @relation("MessagesReceived")
@@ -42,8 +44,7 @@ model User {
   Lifestyle        Lifestyle?          @relation(fields: [lifestyleId], references: [id])
   preferences      RoommatePreference? @relation(fields: [roommatePreferenceId], references: [id])
 
-  // PROSTSZA RELACJA - implicit many-to-many
-  interests Interest[] // Bez junction table!
+  interests Interest[]
 
   roommateInProperties Property[] @relation("PropertyRoommates")
 }

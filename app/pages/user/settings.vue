@@ -173,6 +173,23 @@
         </div>
       </div>
 
+      <div class="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+        <div>
+          <FloatLabel variant="on">
+            <InputText id="phone" name="phone" fluid />
+            <label for="phone">Phone Number</label>
+          </FloatLabel>
+          <Message
+            v-if="$form.phone?.invalid"
+            severity="error"
+            size="small"
+            variant="simple"
+          >
+            {{ $form.phone.error.message }}
+          </Message>
+        </div>
+      </div>
+
       <Button
         type="submit"
         label="Save Changes"
@@ -204,19 +221,15 @@ const genderOptions = ref([
 ]);
 const interestOptions = ref<any[]>([]);
 
-const fillData = async () => {
-  const { data: i } = await useFetch("/api/taxonomy_term/interests");
-  interestOptions.value = i.value || [];
+const { data: i } = await useFetch("/api/taxonomy_term/interests");
+interestOptions.value = i.value || [];
 
-  const { data: j } = await useFetch("/api/user/me");
+const { data: j } = await useFetch("/api/user/me");
 
-  if (!j.value?.user) return;
-
+if (j.value?.user) {
   j.value.user.interests = j.value.user.interests.map((i: any) => i.id || i);
-  initialValues.value = j.value?.user;
-};
-
-fillData();
+  initialValues.value = j.value.user;
+}
 
 const resolver = ref(
   zodResolver(
@@ -225,8 +238,9 @@ const resolver = ref(
       lastName: z.string().min(1, { message: "Last name is required" }),
       age: z.number().min(1).max(130),
       gender: z.string().nullable(),
+      phone: z.string().min(5).max(20).optional(),
       description: z.string().max(500).optional(),
-      interestIds: z.array(z.string()).optional(),
+      interests: z.array(z.string()).optional(),
       smoker: z.boolean().nullable(),
       pets: z.boolean().nullable(),
       budgetMax: z.number().nullable(),
@@ -234,7 +248,6 @@ const resolver = ref(
     }),
   ),
 );
-
 const previewImages = ref<string[]>([]);
 
 const onFileUpload = async ({ files }: any) => {
