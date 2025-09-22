@@ -1,4 +1,5 @@
 4. basic user profile
+    1.1 integrate with aws images?
     1. finish moodboard images
     2. add image/bg image fields to form
     3. add fields: location, phone, email (seperate to groups)
