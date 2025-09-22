@@ -150,14 +150,20 @@
           multiple
           accept="image/*"
           customUpload
-          @uploader="onFileUpload"
+          @input="handleFileInput"
+          :showUploadButton="false"
+          :showCancelButton="false"
         />
-        <div v-if="previewImages.length" class="mt-3 grid grid-cols-3 gap-2">
+        <div
+          v-if="initialValues.moodboardImages.length"
+          class="mt-3 flex flex-wrap gap-6"
+        >
           <img
-            v-for="(img, idx) in previewImages"
+            v-for="(img, idx) in initialValues.moodboardImages"
             :key="idx"
-            :src="img"
-            class="rounded-lg object-cover"
+            :src="`/uploads/moodboard-images/${img}`"
+            class="size-40 rounded-lg object-cover"
+            @click="deleteImage(img)"
           />
         </div>
       </div>
@@ -210,6 +216,7 @@
 <script setup lang="ts">
 import { z } from "zod";
 import { zodResolver } from "@primevue/forms/resolvers/zod";
+const { handleFileInput, files } = useFileStorage();
 
 const formStatus = ref({ success: false, message: "", isLoading: false });
 
@@ -248,22 +255,21 @@ const resolver = ref(
     }),
   ),
 );
-const previewImages = ref<string[]>([]);
-
-const onFileUpload = async ({ files }: any) => {
-  const storage = useFileStorage();
-  const uploaded: string[] = [];
-  for (const f of files) {
-    const res = await storage.upload(f);
-    uploaded.push(res.url);
-  }
-  initialValues.value.moodboardImages = uploaded;
-  previewImages.value = uploaded;
-};
 
 const onFormSubmit = async ({ valid, values }: any) => {
   if (!valid) return;
   formStatus.value.isLoading = true;
+
+  if (files.value && files.value.length) {
+    const response = await $fetch("/api/files", {
+      method: "POST",
+      body: {
+        files: files.value,
+      },
+    });
+
+    values.moodboardImages = response;
+  }
 
   try {
     const { data, error } = await useFetch("/api/user/update", {
@@ -280,6 +286,24 @@ const onFormSubmit = async ({ valid, values }: any) => {
     formStatus.value.message = e.message || "Update failed.";
   } finally {
     formStatus.value.isLoading = false;
+  }
+};
+
+const deleteImage = async (img: string) => {
+  const index = initialValues.value.moodboardImages.indexOf(img);
+  initialValues.value.moodboardImages.splice(index, 1);
+
+  try {
+    // @todo paths on db
+    const response = await $fetch("/api/files/delete", {
+      method: "POST",
+      body: {
+        fileName: img,
+        path: "/moodboard-images",
+      },
+    });
+  } catch (e) {
+    console.error(e);
   }
 };
 </script>

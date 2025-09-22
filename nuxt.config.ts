@@ -50,7 +50,7 @@ export default defineNuxtConfig({
     "nuxt-file-storage",
   ],
   fileStorage: {
-    mount: "/public/uploads",
+    mount: process.cwd() + "/public/uploads",
   },
   fonts: {
     defaults: {
