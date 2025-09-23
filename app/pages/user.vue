@@ -30,6 +30,10 @@
 const route = useRoute();
 const localePath = useLocalePath();
 
+definePageMeta({
+  auth: true,
+});
+
 const userMenuItems = ref([
   {
     label: "Profile",

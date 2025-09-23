@@ -11,6 +11,7 @@
       :showUploadButton="false"
       :showCancelButton="false"
       @select="onFileSelect"
+      :fileLimit="maxFiles"
     />
 
     <div v-if="modelValue?.length" class="mt-3 flex flex-wrap gap-6">
@@ -48,12 +49,13 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  id: { type: String, required: true },
-  name: { type: String, default: "files" },
-  label: { type: String, default: "Upload files" },
-  modelValue: { type: Array as PropType<string[]>, default: () => [] },
-});
+const props = defineProps<{
+  id: string;
+  name: string;
+  label: string;
+  modelValue: string[];
+  maxFiles: number;
+}>();
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: string[]): void;
