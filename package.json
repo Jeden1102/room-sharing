@@ -20,6 +20,7 @@
         "@sidebase/nuxt-auth": "^1.0.2",
         "@tailwindcss/vite": "^4.1.12",
         "@types/three": "^0.180.0",
+        "@vercel/blob": "^2.0.0",
         "@vue-email/components": "^0.0.21",
         "@vue-email/img": "^0.0.3",
         "@vue-email/render": "^0.0.9",

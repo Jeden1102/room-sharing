@@ -1,11 +1,14 @@
 <template>
-  <div class="container flex max-w-screen-lg flex-col py-6 md:flex-row">
+  <div
+    class="container flex max-w-screen-lg flex-col py-6 md:flex-row lg:gap-6"
+  >
     <nav class="flex gap-2 p-4 md:flex-col md:py-0">
       <Button
         v-for="item in userMenuItems"
         asChild
         v-slot="slotProps"
         :severity="item.command === route.path ? 'primary' : 'secondary'"
+        size="large"
       >
         <RouterLink
           :to="item.command"

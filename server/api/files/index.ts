@@ -1,14 +1,24 @@
-import { ServerFile } from "nuxt-file-storage";
+import { put } from "@vercel/blob";
 
 export default defineEventHandler(async (event) => {
-  const { files } = await readBody<{ files: ServerFile[] }>(event);
+  const files = await readMultipartFormData(event);
 
-  const fileNames = [];
-  for (const file of files) {
-    const res = await storeFileLocally(file, 8, "/moodboard-images");
-
-    fileNames.push(res);
+  if (!files) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "No files has been found",
+    });
   }
 
-  return fileNames;
+  const uris = [];
+  for (const file of files) {
+    const blob = await put(file.filename || "image", file.data, {
+      access: "public",
+      addRandomSuffix: true,
+    });
+
+    uris.push(blob.url);
+  }
+
+  return uris;
 });

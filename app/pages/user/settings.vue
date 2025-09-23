@@ -142,31 +142,13 @@
         </Message>
       </div>
 
-      <div class="w-full">
-        <label class="mb-2 block font-medium">Moodboard Images</label>
-        <FileUpload
-          id="moodboardImages"
-          name="moodboardImages"
-          multiple
-          accept="image/*"
-          customUpload
-          @input="handleFileInput"
-          :showUploadButton="false"
-          :showCancelButton="false"
-        />
-        <div
-          v-if="initialValues.moodboardImages.length"
-          class="mt-3 flex flex-wrap gap-6"
-        >
-          <img
-            v-for="(img, idx) in initialValues.moodboardImages"
-            :key="idx"
-            :src="`/uploads/moodboard-images/${img}`"
-            class="size-40 rounded-lg object-cover"
-            @click="deleteImage(img)"
-          />
-        </div>
-      </div>
+      <FormFileUploader
+        id="moodboardImages"
+        label="Moodboard Images"
+        v-model="initialValues.moodboardImages"
+        @filesSelected="(newFiles) => (files = newFiles)"
+        @delete="deleteImage"
+      />
 
       <div class="flex gap-6">
         <div class="flex flex-row items-center gap-2">
@@ -216,11 +198,12 @@
 <script setup lang="ts">
 import { z } from "zod";
 import { zodResolver } from "@primevue/forms/resolvers/zod";
-const { handleFileInput, files } = useFileStorage();
 
 const formStatus = ref({ success: false, message: "", isLoading: false });
 
 const initialValues = ref<any>(null);
+
+const files = ref<File[]>([]);
 
 const genderOptions = ref([
   { name: "Male", id: "male" },
@@ -261,14 +244,20 @@ const onFormSubmit = async ({ valid, values }: any) => {
   formStatus.value.isLoading = true;
 
   if (files.value && files.value.length) {
-    const response = await $fetch("/api/files", {
-      method: "POST",
-      body: {
-        files: files.value,
-      },
+    const formData = new FormData();
+    files.value.forEach((file) => {
+      formData.append("moodboardImages", file);
     });
 
-    values.moodboardImages = response;
+    const response = await $fetch("/api/files", {
+      method: "POST",
+      body: formData,
+    });
+
+    values.moodboardImages = [
+      ...response,
+      ...initialValues.value.moodboardImages,
+    ];
   }
 
   try {
@@ -290,18 +279,21 @@ const onFormSubmit = async ({ valid, values }: any) => {
 };
 
 const deleteImage = async (img: string) => {
-  const index = initialValues.value.moodboardImages.indexOf(img);
-  initialValues.value.moodboardImages.splice(index, 1);
+  const newImages = initialValues.value.moodboardImages.filter(
+    (i: string) => i !== img,
+  );
 
   try {
-    // @todo paths on db
-    const response = await $fetch("/api/files/delete", {
+    await $fetch("/api/files/delete", {
       method: "POST",
       body: {
-        fileName: img,
-        path: "/moodboard-images",
+        uri: img,
+        entity: "user",
+        field: "moodboardImages",
+        images: newImages,
       },
     });
+    initialValues.value.moodboardImages = newImages;
   } catch (e) {
     console.error(e);
   }
