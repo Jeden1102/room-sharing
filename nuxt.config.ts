@@ -48,6 +48,7 @@ export default defineNuxtConfig({
     "@sidebase/nuxt-auth",
     "nuxt-nodemailer",
     "nuxt-file-storage",
+    "@nuxt/icon",
   ],
   fileStorage: {
     mount: process.cwd() + "/public/uploads",

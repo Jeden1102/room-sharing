@@ -24,9 +24,9 @@ export default defineEventHandler(async (event) => {
         budgetMax: body.budgetMax,
         moodboardImages: body.moodboardImages,
         gender: body.gender,
-        interests: body.interestIds?.length
+        interests: body.interests?.length
           ? {
-              set: body.interestIds.map((id: string) => ({ id })),
+              set: body.interests.map((id: string) => ({ id })),
             }
           : { set: [] },
       },

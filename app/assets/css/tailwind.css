@@ -44,3 +44,7 @@
 @utility footer-link {
   @apply text-gray-800;
 }
+
+@utility card-base {
+  @apply rounded bg-white p-3 shadow-sm;
+}
