@@ -9,7 +9,14 @@ export default requireAuth(
 
     const user = await prisma.user.findUnique({
       where: { id: userId },
-      include: { interests: true },
+      include: {
+        interests: true,
+        occupation: true,
+        searchPreferences: true,
+        searchPropertyType: true,
+        noiseCompatibility: true,
+        petsCompatibility: true,
+      },
     });
 
     return { success: true, user };

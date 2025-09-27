@@ -11,6 +11,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
+    console.log(body);
     const updatedUser = await prisma.user.update({
       where: { id: session.user?.id },
       data: {
@@ -29,8 +30,39 @@ export default defineEventHandler(async (event) => {
               set: body.interests.map((id: string) => ({ id })),
             }
           : { set: [] },
+        occupation: body.occupation?.length
+          ? {
+              set: body.occupation.map((id: string) => ({ id })),
+            }
+          : { set: [] },
+        searchPreferences: body.searchPreferences?.length
+          ? {
+              set: body.searchPreferences.map((id: string) => ({ id })),
+            }
+          : { set: [] },
+        searchPropertyType: body.searchPropertyType?.length
+          ? {
+              set: body.searchPropertyType.map((id: string) => ({ id })),
+            }
+          : { set: [] },
+        noiseCompatibility: body.noiseCompatibility?.length
+          ? {
+              set: body.noiseCompatibility.map((id: string) => ({ id })),
+            }
+          : { set: [] },
+        petsCompatibility: body.petsCompatibility?.length
+          ? {
+              set: body.petsCompatibility.map((id: string) => ({ id })),
+            }
+          : { set: [] },
       },
-      include: { interests: true },
+      include: {
+        interests: true,
+        occupation: true,
+        searchPreferences: true,
+        searchPropertyType: true,
+        petsCompatibility: true,
+      },
     });
 
     return { success: true, user: updatedUser };

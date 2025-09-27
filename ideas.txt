@@ -1,7 +1,6 @@
 4. basic user profile
-    1. add all @todo fields for user + field for "im' looking for a room"
-    2. add image/bg image fields to form
-    3. add fields: location, phone, email (seperate to groups)
-5. user profile front
+    2. add image/bg image fields as modals
+    3. add location field
+5. user profile front finish
 
 REFACTOR - linki, error/loading handling

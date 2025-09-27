@@ -47,7 +47,7 @@ model User {
   searchPropertyType PropertyOption[]
 
   noiseCompatibility NoiseCompatibility[]
-  petsCompatiblity  PetsCompatibility[]
+  petsCompatibility  PetsCompatibility[]
 
   roommateInProperties Property[]          @relation("PropertyRoommates")
 }

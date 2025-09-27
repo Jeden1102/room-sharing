@@ -62,7 +62,7 @@
               <i class="pi pi-briefcase text-primary-500 text-xl"></i>
               <div>
                 <div class="text-xs text-gray-500">Zawód</div>
-                <div class="font-medium">Student@todo</div>
+                <div class="font-medium">{{ usr.occupation }}</div>
               </div>
             </div>
 
