@@ -20,7 +20,6 @@ model User {
   smoker                Boolean?
   pets                  Boolean?
   budgetMax             Int?
-  roommatePreferenceId  String?
   propertyId            String?
   emailVerificationCode String   @unique
   emailVerified         Boolean  @default(true)
@@ -29,24 +28,28 @@ model User {
   passwordResetCode     String?  @unique
   bgImage               String?
   description           String?
-  lifestyleId           String?
   gender                String?
   moodboardImages       String[]
   phone                 String?
   searchCity            String?
+  searchAmount          String?
 
   // Relations
-  messagesReceived Message[]           @relation("MessagesReceived")
-  messagesSent     Message[]           @relation("MessagesSent")
+  messagesReceived Message[]  @relation("MessagesReceived")
+  messagesSent     Message[]  @relation("MessagesSent")
   properties       Property[]
-  reviewsWritten   Review[]            @relation("ReviewsWritten")
-  reviewsReceived  Review[]            @relation("ReviewsReceived")
-  Lifestyle        Lifestyle?          @relation(fields: [lifestyleId], references: [id])
-  preferences      RoommatePreference? @relation(fields: [roommatePreferenceId], references: [id])
+  reviewsWritten   Review[]   @relation("ReviewsWritten")
+  reviewsReceived  Review[]   @relation("ReviewsReceived")
 
-  interests Interest[]
+  interests         Interest[]
+  occupation        Occupation[]
+  searchPreferences SearchPreference[]
+  searchPropertyType PropertyOption[]
 
-  roommateInProperties Property[] @relation("PropertyRoommates")
+  noiseCompatibility NoiseCompatibility[]
+  petsCompatiblity  PetsCompatibility[]
+
+  roommateInProperties Property[]          @relation("PropertyRoommates")
 }
 
 model Property {
@@ -90,21 +93,7 @@ model Property {
   floorPlanUrl    String?
   ownerId         String
   owner           User                @relation(fields: [ownerId], references: [id])
-  preferences     RoommatePreference?
   roommates       User[]              @relation("PropertyRoommates")
-}
-
-model RoommatePreference {
-  id         String   @id @default(uuid())
-  minAge     Int?
-  maxAge     Int?
-  gender     String?
-  lifestyle  String?
-  isStudent  Boolean?
-  isWorker   Boolean?
-  propertyId String   @unique
-  property   Property @relation(fields: [propertyId], references: [id])
-  User       User[]
 }
 
 model Review {
@@ -134,11 +123,36 @@ model Interest {
   users User[]
 }
 
-model Lifestyle {
-  id   String @id
-  name String
-  User User[]
+model Occupation {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
 }
+
+model SearchPreference {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+}
+
+model PropertyOption {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+}
+
+model NoiseCompatibility {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+}
+
+model PetsCompatibility {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+}
+
 
 enum PropertyType {
   RENT

@@ -211,7 +211,7 @@ const genderOptions = ref([
 ]);
 const interestOptions = ref<any[]>([]);
 
-const { data: i } = await useFetch("/api/taxonomy_term/interests");
+const { data: i } = await useFetch("/api/taxonomy_term/interest");
 interestOptions.value = i.value || [];
 
 const { data: j } = await useFetch("/api/user/me");

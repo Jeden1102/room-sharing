@@ -148,7 +148,7 @@
                 <strong>Preferencje dotyczące ciszy:</strong>
                 niski poziom hałasu preferowany @todo
               </p>
-              <p><strong>Zwierzęta:</strong> {{ compatibility.pets }}</p>
+              <p><strong>Zwierzęta:</strong> {{ compatibility.pets }} @todo</p>
             </div>
           </div>
         </div>
