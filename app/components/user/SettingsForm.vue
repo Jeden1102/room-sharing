@@ -388,7 +388,6 @@ if (j.value?.user) {
   j.value.user.noiseCompatibility = j.value.user.noiseCompatibility.map((i: any) => i.id || i);
   j.value.user.petsCompatibility = j.value.user.petsCompatibility.map((i: any) => i.id || i);
   initialValues.value = j.value.user;
-  console.log(j.value.user)
 }
 
 const resolver = ref(

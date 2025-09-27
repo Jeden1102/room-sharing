@@ -206,7 +206,6 @@ definePageMeta({
 const usr = ref<User | null>(null);
 const res = await useFetch("/api/user/me");
 usr.value = res.data.value.user;
-console.log(usr.value);
 
 const user = {
   id: "123e4567-e89b-12d3-a456-426614174000",

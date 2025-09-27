@@ -11,7 +11,6 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    console.log(body);
     const updatedUser = await prisma.user.update({
       where: { id: session.user?.id },
       data: {

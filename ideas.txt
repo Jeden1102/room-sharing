@@ -2,5 +2,6 @@
     2. add image/bg image fields as modals
     3. add location field
 5. user profile front finish
+6. User settings loading page refactor.
 
 REFACTOR - linki, error/loading handling
