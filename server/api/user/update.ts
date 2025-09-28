@@ -23,6 +23,8 @@ export default defineEventHandler(async (event) => {
         pets: body.pets,
         budgetMax: body.budgetMax,
         moodboardImages: body.moodboardImages,
+        bgImage: body.bgImage,
+        profileImage: body.profileImage,
         gender: body.gender,
         interests: body.interests?.length
           ? {

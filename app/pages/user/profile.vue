@@ -2,20 +2,48 @@
   <div class="min-h-screen" v-if="usr">
     <!-- Cover / Header -->
     <div class="relative">
-      <img
-        class="h-40 w-full rounded-md object-cover md:h-52"
-        :src="user.coverImage"
-        alt="cover"
-      />
+      <div class="relative">
+        <NuxtImg
+          class="h-40 w-full rounded-md object-cover md:h-52"
+          :src="usr.bgImage || '/images/user/bg-placeholder.webp'"
+          alt="cover"
+        />
+        <FormFileUploaderDialog
+          v-model="usr.bgImage"
+          id="bgImage"
+          name="bgImage"
+          title="Background Image"
+          entity="user"
+          field="bgImage"
+          class="absolute top-4 right-4"
+          @upload="(res) => onUploadImg(res, 'bgImage')"
+          @delete="() => (usr.bgImage = null)"
+        />
+      </div>
+
       <div
         class="absolute bottom-0 left-4 flex w-[calc(100%-2rem)] translate-y-1/2 transform items-end gap-6"
       >
         <div class="relative flex w-full justify-between gap-2">
-          <NuxtImg
-            :src="user.profileImage"
-            alt="profile"
-            class="h-32 w-32 rounded-full border-4 border-white object-cover shadow-lg"
-          />
+          <div class="relative">
+            <NuxtImg
+              :src="usr.profileImage || '/images/user/avatar-placeholder.webp'"
+              alt="profile"
+              class="h-32 w-32 rounded-full border-4 border-white object-cover shadow-lg"
+            />
+
+            <FormFileUploaderDialog
+              v-model="usr.profileImage"
+              id="profileImage"
+              name="profileImage"
+              title="Profile Image"
+              entity="user"
+              field="profileImage"
+              class="absolute right-0 bottom-4"
+              @upload="(res) => onUploadImg(res, 'profileImage')"
+              @delete="() => (usr.bgImage = null)"
+            />
+          </div>
 
           <div class="mt-auto flex gap-2">
             <Button label="Wiadomość" icon="pi pi-comment" />
@@ -205,7 +233,20 @@ definePageMeta({
 
 const usr = ref<User | null>(null);
 const res = await useFetch("/api/user/me");
+
 usr.value = res.data.value.user;
+
+const onUploadImg = async (res: any, field: keyof User) => {
+  if (!usr.value) return;
+
+  usr.value[field] = res[0];
+  await useFetch("/api/user/update", {
+    method: "POST",
+    body: {
+      [field]: res[0],
+    },
+  });
+};
 
 const user = {
   id: "123e4567-e89b-12d3-a456-426614174000",

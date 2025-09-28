@@ -13,10 +13,10 @@ export default requireAuth(
       entity?: "user" | "property";
       field?: string;
       id?: string;
-      images?: string[];
+      images?: string[] | null;
     }>(event);
 
-    if (!uri || !entity || !field || !images) {
+    if (!uri || !entity || !field) {
       throw createError({ statusCode: 400, statusMessage: "Missing params" });
     }
 
