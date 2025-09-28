@@ -315,19 +315,23 @@
       </div>
     </Fieldset>
 
-    <Button
-      type="submit"
-      label="Save Changes"
-      :loading="formStatus.isLoading"
-      class="mt-4 w-fit"
-    />
-    <Message
-      class="w-full"
-      :severity="formStatus.success ? 'info' : 'error'"
-      v-if="formStatus.message"
+    <div
+      class="sticky bottom-17 left-0 z-10 flex flex-col gap-2 bg-white py-2 lg:bottom-0"
     >
-      {{ formStatus.message }}
-    </Message>
+      <Button
+        type="submit"
+        label="Save Changes"
+        :loading="formStatus.isLoading"
+        class="mt-4 w-fit"
+      />
+      <Message
+        class="w-full"
+        :severity="formStatus.success ? 'info' : 'error'"
+        v-if="formStatus.message"
+      >
+        {{ formStatus.message }}
+      </Message>
+    </div>
   </Form>
 </template>
 
@@ -383,10 +387,18 @@ const { data: j } = await useFetch("/api/user/me");
 if (j.value?.user) {
   j.value.user.interests = j.value.user.interests.map((i: any) => i.id || i);
   j.value.user.occupation = j.value.user.occupation.map((i: any) => i.id || i);
-  j.value.user.searchPreferences = j.value.user.searchPreferences.map((i: any) => i.id || i);
-  j.value.user.searchPropertyType = j.value.user.searchPropertyType.map((i: any) => i.id || i);
-  j.value.user.noiseCompatibility = j.value.user.noiseCompatibility.map((i: any) => i.id || i);
-  j.value.user.petsCompatibility = j.value.user.petsCompatibility.map((i: any) => i.id || i);
+  j.value.user.searchPreferences = j.value.user.searchPreferences.map(
+    (i: any) => i.id || i,
+  );
+  j.value.user.searchPropertyType = j.value.user.searchPropertyType.map(
+    (i: any) => i.id || i,
+  );
+  j.value.user.noiseCompatibility = j.value.user.noiseCompatibility.map(
+    (i: any) => i.id || i,
+  );
+  j.value.user.petsCompatibility = j.value.user.petsCompatibility.map(
+    (i: any) => i.id || i,
+  );
   initialValues.value = j.value.user;
 }
 
@@ -398,7 +410,7 @@ const resolver = ref(
       age: z.number().min(1).max(130),
       gender: z.string().nullable(),
       phone: z.string().min(5).max(20).optional(),
-      description: z.string().max(500).optional(),
+      description: z.string().max(2048).optional(),
       interests: z.array(z.string()).optional(),
       occupation: z.array(z.string()).optional(),
       searchPreferences: z.array(z.string()).optional(),

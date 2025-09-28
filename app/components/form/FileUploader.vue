@@ -14,11 +14,14 @@
       :fileLimit="maxFiles"
     />
 
-    <div v-if="modelValue?.length" class="mt-3 flex flex-wrap gap-6">
+    <div
+      v-if="modelValue?.length"
+      class="mt-3 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4"
+    >
       <div
         v-for="(img, idx) in modelValue"
         :key="idx"
-        class="relative size-40 overflow-hidden rounded-lg shadow"
+        class="max-size-40 relative overflow-hidden rounded-lg shadow"
       >
         <img :src="img" class="h-full w-full object-cover" />
         <Button

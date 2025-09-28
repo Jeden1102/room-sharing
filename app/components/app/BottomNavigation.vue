@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed bottom-0 left-0 flex w-full items-center justify-between bg-white px-4 py-3 lg:hidden lg:px-4"
+    class="fixed bottom-0 left-0 z-10 flex w-full items-center justify-between bg-white px-4 py-3 lg:hidden lg:px-4"
   >
     <Button
       v-for="link in links"

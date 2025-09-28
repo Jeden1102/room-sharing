@@ -1,7 +1,8 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="default pb-20 lg:pb-0 min-h-screen flex flex-col">
+  <div class="default flex min-h-screen flex-col pb-20 lg:pb-0">
+    <NuxtLoadingIndicator :height="4" color="#00509d" />
     <AppHeader />
     <slot />
     <AppBottomNavigation />
