@@ -252,25 +252,12 @@
 
 <script setup lang="ts">
 import type { User } from "@prisma/client";
-import { Prisma } from "@prisma/client";
-
-type FullUser = Prisma.UserGetPayload<{
-  include: {
-    searchPreferences: true;
-    searchPropertyType: true;
-    interests: true;
-    occupation: true;
-    properties: true;
-    noiseCompatibility: true;
-    petsCompatibility: true;
-  };
-}>;
 
 definePageMeta({
   auth: true,
 });
 
-const usr = ref<FullUser | null>(null);
+const usr = ref<User | null>(null);
 const res = await useFetch("/api/user/me");
 
 usr.value = res.data.value.user;
