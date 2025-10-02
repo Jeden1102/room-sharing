@@ -1,7 +1,6 @@
 4. basic user profile
-    1. fix issue with description line breaks
-    2. settings form - validation check + for plain account fields check.
     3. settings form possible refactors?
+    3.1 web core vitals front page
     4. add location field
 5. user profile front finish
 6. User settings loading page refactor.

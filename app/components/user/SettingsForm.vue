@@ -405,9 +405,9 @@ if (j.value?.user) {
 const resolver = ref(
   zodResolver(
     z.object({
-      firstName: z.string().min(1, { message: "First name is required" }),
-      lastName: z.string().min(1, { message: "Last name is required" }),
-      age: z.number().min(1).max(130),
+      firstName: z.string().optional(),
+      lastName: z.string().optional(),
+      age: z.number().min(1).max(130).optional().nullable(),
       gender: z.string().nullable(),
       phone: z.string().min(5).max(20).optional(),
       description: z.string().max(2048).optional(),
@@ -419,7 +419,7 @@ const resolver = ref(
       petsCompatibility: z.array(z.string()).optional(),
       smoker: z.boolean().nullable(),
       pets: z.boolean().nullable(),
-      budgetMax: z.number().nullable(),
+      budgetMax: z.number().min(1).max(99999999).nullable(),
       moodboardImages: z.array(z.string()).optional(),
     }),
   ),
