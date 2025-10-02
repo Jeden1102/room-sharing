@@ -142,7 +142,7 @@
             </div>
           </div>
 
-          <p class="mt-2 text-sm text-gray-700">{{ usr.description }}</p>
+          <div class="mt-2 text-sm text-gray-700" v-html="usr.description?.replaceAll('\n', '<br />')"></div>
 
           <div class="mt-4">
             <div class="flex flex-wrap gap-2">
@@ -271,8 +271,9 @@ definePageMeta({
 
 const usr = ref<FullUser | null>(null);
 const res = await useFetch("/api/user/me");
-
 usr.value = res.data.value.user;
+
+console.log(usr.value)
 
 const onUploadImg = async (res: any, field: keyof User) => {
   if (!usr.value) return;
