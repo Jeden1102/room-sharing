@@ -24,7 +24,7 @@
         />
         <NuxtImg
           src="images/login.png"
-          class="relative z-10 w-full pl-6 md:w-150 lg:size-fit lg:-translate-x-20 lg:rounded-xl lg:p-0"
+          class="relative z-10 w-full pl-6 md:w-120 md:min-w-120 lg:size-fit lg:-translate-x-20 lg:rounded-xl lg:p-0"
           width="709"
           height="767"
         />
