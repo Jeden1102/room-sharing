@@ -12,6 +12,7 @@
           severity="secondary"
           :icon="isMenuOpened ? 'pi pi-times' : 'pi pi-bars'"
           @click="isMenuOpened = !isMenuOpened"
+          title="Toggle menu"
         />
       </div>
 

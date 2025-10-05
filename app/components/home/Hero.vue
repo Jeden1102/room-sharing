@@ -40,6 +40,9 @@
         class="rounded-lg"
         width="516"
         height="530"
+        format="webp"
+        sizes="100vw sm:516px"
+        fetchpriority="high"
       />
     </BitsAnimatedContent>
   </section>

@@ -13,4 +13,9 @@ definePageMeta({
   layout: "login",
   unauthenticatedOnly: true,
 });
+
+usePageSeo({
+  title: "Login",
+  description: "Login to your account",
+});
 </script>

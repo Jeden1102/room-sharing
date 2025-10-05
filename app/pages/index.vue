@@ -35,6 +35,9 @@ import { rentProperties, sellProperties } from "~/data/properties";
 definePageMeta({
   auth: false,
 });
-</script>
 
-<style scoped></style>
+usePageSeo({
+  title: "Home",
+  description: "Find your next home",
+});
+</script>

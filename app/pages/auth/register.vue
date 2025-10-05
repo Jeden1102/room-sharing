@@ -13,4 +13,9 @@ definePageMeta({
   layout: "login",
   unauthenticatedOnly: true,
 });
+
+usePageSeo({
+  title: "Register",
+  description: "Register to your account",
+});
 </script>

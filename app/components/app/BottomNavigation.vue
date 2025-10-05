@@ -13,7 +13,11 @@
       :class="link.featured ? 'mb-4' : ''"
       size="large"
     >
-      <RouterLink :to="$localePath(link.to)" :class="slotProps.class">
+      <RouterLink
+        :to="$localePath(link.to)"
+        :class="slotProps.class"
+        :title="link.title"
+      >
         <span :class="link.icon"></span>
       </RouterLink>
     </Button>
@@ -21,6 +25,8 @@
 </template>
 
 <script setup lang="ts">
+import { Title } from "#components";
+
 const { data } = useAuth();
 
 const localePath = useLocalePath();
@@ -29,23 +35,28 @@ const links = [
   {
     icon: "pi pi-home",
     to: localePath("/"),
+    title: "Home",
   },
   {
     icon: "pi pi-plus",
     to: localePath("/new-publication"),
+    title: "Add new publication",
   },
   {
     icon: "pi pi-search",
     to: localePath("/properties"),
     featured: true,
+    title: "Properties",
   },
   {
     icon: "pi pi-comment",
     to: localePath("/chat"),
+    title: "Chat",
   },
   {
     icon: "pi pi-user",
     to: localePath(data.value?.user ? "/user/profile" : "/auth/login"),
+    title: "Profile",
   },
 ];
 </script>

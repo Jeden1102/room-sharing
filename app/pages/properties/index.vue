@@ -6,6 +6,11 @@
 definePageMeta({
   auth: false,
 });
+
+usePageSeo({
+  title: "Property list",
+  description: "Discover our properties",
+});
 </script>
 
 <style scoped></style>

@@ -49,6 +49,7 @@ export default defineNuxtConfig({
     "nuxt-nodemailer",
     "nuxt-file-storage",
     "@nuxt/icon",
+    "@nuxtjs/seo",
   ],
   fileStorage: {
     mount: process.cwd() + "/public/uploads",

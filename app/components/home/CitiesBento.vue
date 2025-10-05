@@ -23,9 +23,11 @@
         >
           <NuxtImg
             :src="city.image"
-            :alt="city.name"
+            :alt="city.name + ' landscape'"
+            format="webp"
             class="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-110"
             loading="lazy"
+            sizes="100vw md:875px"
           />
           <div
             class="absolute inset-0 bg-black/40 transition-colors group-hover:bg-black/50"
@@ -40,8 +42,6 @@
 </template>
 
 <script setup lang="ts">
-import { ClientOnly } from "#components";
-
 const cities = [
   {
     name: "Warsaw",

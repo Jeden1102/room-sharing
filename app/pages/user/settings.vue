@@ -4,4 +4,9 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+usePageSeo({
+  title: "Settings",
+  description: "User settings",
+});
+</script>

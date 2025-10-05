@@ -34,6 +34,11 @@ definePageMeta({
   auth: true,
 });
 
+usePageSeo({
+  title: "User",
+  description: "User profile",
+});
+
 const userMenuItems = ref([
   {
     label: "Profile",
