@@ -28,6 +28,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
     authSecret: process.env.AUTH_SECRET,
+    adminEmail: process.env.ADMIN_EMAIL,
     auth: {
       google: {
         clientId: process.env.GOOGLE_CLIENT_ID,
