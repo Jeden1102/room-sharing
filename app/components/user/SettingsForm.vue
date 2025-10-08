@@ -47,7 +47,6 @@
               <InputNumber id="age" name="age" fluid />
               <label for="age">Age</label>
             </FloatLabel>
-
             <Message
               v-if="$form.age?.invalid"
               severity="error"
@@ -165,6 +164,41 @@
       </div>
     </Fieldset>
 
+    <Fieldset legend="Location">
+      <div class="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+        <div>
+          <FloatLabel variant="on">
+            <AutoComplete
+              id="city"
+              name="city"
+              v-model="city"
+              optionLabel="name"
+              :suggestions="filteredCities"
+              @complete="searchCity"
+              placeholder="Wpisz miasto"
+              fluid
+            />
+            <label for="city">City</label>
+          </FloatLabel>
+        </div>
+        <div>
+          <FloatLabel variant="on">
+            <MultiSelect
+              v-if="city && districts?.length > 0"
+              id="district"
+              name="district"
+              v-model="selectedDistrict"
+              optionLabel="name"
+              :options="districts"
+              display="chip"
+              placeholder="Wybierz dzielnicę"
+              fluid
+            />
+          </FloatLabel>
+        </div>
+      </div>
+    </Fieldset>
+
     <Fieldset legend="Search preferences">
       <div class="my-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
         <div>
@@ -205,14 +239,6 @@
             />
             <label for="searchPropertyType">Search property type</label>
           </FloatLabel>
-          <Message
-            v-if="$form.searchPropertyType?.invalid"
-            severity="error"
-            size="small"
-            variant="simple"
-          >
-            {{ $form.searchPropertyType.error.message }}
-          </Message>
         </div>
 
         <div>
@@ -220,19 +246,11 @@
             <InputNumber id="budgetMax" name="budgetMax" fluid />
             <label for="budgetMax">Max Budget</label>
           </FloatLabel>
-          <Message
-            v-if="$form.budgetMax?.invalid"
-            severity="error"
-            size="small"
-            variant="simple"
-          >
-            {{ $form.budgetMax.error.message }}
-          </Message>
         </div>
       </div>
     </Fieldset>
 
-    <Fieldset legend="Compatiblity">
+    <Fieldset legend="Compatibility">
       <div class="my-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
         <div>
           <FloatLabel variant="on">
@@ -248,14 +266,6 @@
             />
             <label for="noiseCompatibility">Noise compatibility</label>
           </FloatLabel>
-          <Message
-            v-if="$form.noiseCompatibility?.invalid"
-            severity="error"
-            size="small"
-            variant="simple"
-          >
-            {{ $form.noiseCompatibility.error.message }}
-          </Message>
         </div>
 
         <div>
@@ -272,14 +282,6 @@
             />
             <label for="petsCompatibility">Pets compatibility</label>
           </FloatLabel>
-          <Message
-            v-if="$form.petsCompatibility?.invalid"
-            severity="error"
-            size="small"
-            variant="simple"
-          >
-            {{ $form.petsCompatibility.error.message }}
-          </Message>
         </div>
       </div>
     </Fieldset>
@@ -303,14 +305,6 @@
             <InputText id="phone" name="phone" fluid />
             <label for="phone">Phone Number</label>
           </FloatLabel>
-          <Message
-            v-if="$form.phone?.invalid"
-            severity="error"
-            size="small"
-            variant="simple"
-          >
-            {{ $form.phone.error.message }}
-          </Message>
         </div>
       </div>
     </Fieldset>
@@ -340,10 +334,13 @@ import { z } from "zod";
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 
 const formStatus = ref({ success: false, message: "", isLoading: false });
-
 const initialValues = ref<any>(null);
-
 const files = ref<File[]>([]);
+
+const city = ref<any>(null);
+const filteredCities = ref<any[]>([]);
+const districts = ref<any[]>();
+const selectedDistrict = ref<any>(null);
 
 const genderOptions = ref([
   { name: "Male", id: "male" },
@@ -383,24 +380,54 @@ const { data: petsCompatibility } = await useFetch(
 petsCompatibilityOptions.value = petsCompatibility.value || [];
 
 const { data: j } = await useFetch("/api/user/me");
-
 if (j.value?.user) {
-  j.value.user.interests = j.value.user.interests.map((i: any) => i.id || i);
-  j.value.user.occupation = j.value.user.occupation.map((i: any) => i.id || i);
-  j.value.user.searchPreferences = j.value.user.searchPreferences.map(
-    (i: any) => i.id || i,
-  );
-  j.value.user.searchPropertyType = j.value.user.searchPropertyType.map(
-    (i: any) => i.id || i,
-  );
-  j.value.user.noiseCompatibility = j.value.user.noiseCompatibility.map(
-    (i: any) => i.id || i,
-  );
-  j.value.user.petsCompatibility = j.value.user.petsCompatibility.map(
-    (i: any) => i.id || i,
-  );
-  initialValues.value = j.value.user;
+  const u = j.value.user;
+  u.interests = u.interests.map((i: any) => i.id || i);
+  u.occupation = u.occupation.map((i: any) => i.id || i);
+  u.searchPreferences = u.searchPreferences.map((i: any) => i.id || i);
+  u.searchPropertyType = u.searchPropertyType.map((i: any) => i.id || i);
+  u.noiseCompatibility = u.noiseCompatibility.map((i: any) => i.id || i);
+  u.petsCompatibility = u.petsCompatibility.map((i: any) => i.id || i);
+  initialValues.value = u;
 }
+
+const searchCity = async (event: any) => {
+  const query = event.query?.trim();
+  if (!query) return (filteredCities.value = []);
+
+  try {
+    const res = await $fetch(
+      `/api/geo/autocomplete?q=${encodeURIComponent(query)}`,
+    );
+    filteredCities.value =
+      res?.predictions?.map((p: any) => ({
+        name: p.description,
+        placeId: p.place_id,
+      })) || [];
+  } catch (err) {
+    console.error("Error loading cities:", err);
+  }
+};
+
+watch(city, async (newCity) => {
+  if (!newCity?.name) return;
+  const cityName = newCity.name.split(",")[0];
+  try {
+    districts.value = [];
+    selectedDistrict.value = null;
+    const districtRes = await $fetch(
+      `/api/geo/districts?city=${encodeURIComponent(cityName)}`,
+    );
+
+    districts.value =
+      districtRes.districts?.map((d: any) => ({
+        id: d.id,
+        name: d.tags?.name || d.name,
+      })) || [];
+  } catch (err) {
+    console.error("Error loading location data:", err);
+  }
+});
 
 const resolver = ref(
   zodResolver(
@@ -421,6 +448,16 @@ const resolver = ref(
       pets: z.boolean().nullable(),
       budgetMax: z.number().min(1).max(99999999).nullable(),
       moodboardImages: z.array(z.string()).optional(),
+      city: z.object({
+        placeId: z.string(),
+        name: z.string(),
+      }),
+      district: z.array(
+        z.object({
+          id: z.number(),
+          name: z.string(),
+        }),
+      ),
     }),
   ),
 );

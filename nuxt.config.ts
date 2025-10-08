@@ -29,6 +29,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     authSecret: process.env.AUTH_SECRET,
     adminEmail: process.env.ADMIN_EMAIL,
+    blobUrl: process.env.BLOB_URL,
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
     auth: {
       google: {
         clientId: process.env.GOOGLE_CLIENT_ID,

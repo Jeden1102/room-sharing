@@ -1,29 +1,35 @@
-import { promises as fs } from "fs";
-import path from "path";
+import { put } from "@vercel/blob";
 
-export default eventHandler(async (event) => {
+export default defineEventHandler(async (event) => {
   const { city, refresh }: { city: string; refresh: string } = getQuery(event);
 
   if (!city) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Brak parametru 'city'.",
+      statusMessage: "City parameter is required.",
     });
   }
 
   const fileName = `ulice_${city.toLowerCase().replace(/\s+/g, "_")}.json`;
-  const filePath = path.resolve("./data", fileName);
+  const blobPath = `streets/${fileName}`;
+  const blobUrlBase = useRuntimeConfig().blobUrl;
 
   if (refresh !== "true") {
     try {
-      const cached = await fs.readFile(filePath, "utf8");
-      const json = JSON.parse(cached);
-      return {
-        source: "cache",
-        city,
-        ...json,
-      };
-    } catch (e) {}
+      const blobUrl = `${blobUrlBase}/${blobPath}`;
+      const res = await fetch(blobUrl);
+
+      if (res.ok) {
+        const json = await res.json();
+        return {
+          source: "cache",
+          city,
+          ...json,
+        };
+      }
+    } catch (err) {
+      console.warn(`No cache for ${city}:`, err);
+    }
   }
 
   const query = `
@@ -34,7 +40,7 @@ export default eventHandler(async (event) => {
   `;
 
   try {
-    const response: { elements: object[] } = await $fetch(
+    const response: { elements: any[] } = await $fetch(
       "https://overpass-api.de/api/interpreter",
       {
         method: "POST",
@@ -42,10 +48,28 @@ export default eventHandler(async (event) => {
       },
     );
 
-    const result = { streets: response.elements };
+    const streetsRaw = response.elements
+      .map((el) => ({
+        id: el.id,
+        name: el.tags?.name?.trim(),
+      }))
+      .filter((s) => s.name);
 
-    await fs.mkdir(path.dirname(filePath), { recursive: true });
-    await fs.writeFile(filePath, JSON.stringify(result, null, 2), "utf8");
+    const seen = new Set<string>();
+    const streets = streetsRaw.filter((s) => {
+      const key = s.name.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
+    const result = { streets };
+
+    const blob = await put(blobPath, JSON.stringify(result, null, 2), {
+      access: "public",
+      addRandomSuffix: false,
+      contentType: "application/json",
+    });
 
     return {
       source: "api",
@@ -53,10 +77,10 @@ export default eventHandler(async (event) => {
       ...result,
     };
   } catch (error) {
-    console.error("❌ Błąd pobierania ulic z Overpass API:", error);
+    console.error("There was an issue downloading the data.", error);
     throw createError({
       statusCode: 500,
-      statusMessage: "Nie udało się pobrać danych o ulicach.",
+      statusMessage: "There was an issue downloading the data.",
     });
   }
 });

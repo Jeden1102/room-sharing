@@ -4,11 +4,9 @@ export default eventHandler(async (event) => {
   if (!q) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Brak parametru 'q'.",
+      statusMessage: "Q parameter is required",
     });
   }
-
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
 
   const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json`;
 
@@ -17,17 +15,19 @@ export default eventHandler(async (event) => {
     types: "(cities)",
     language: "pl",
     components: "country:PL",
-    key: apiKey,
+    key: useRuntimeConfig().googleMapsApiKey,
   };
+
+  console.log(useRuntimeConfig().googleMapsApiKey);
 
   try {
     const response = await $fetch(url, { params });
     return response;
   } catch (error) {
-    console.error("❌ Błąd Google Autocomplete:", error);
+    console.error("Error fetching autocomplete:", error);
     throw createError({
       statusCode: 500,
-      statusMessage: "Nie udało się pobrać podpowiedzi miast z Google.",
+      statusMessage: "Error fetching autocomplete",
     });
   }
 });

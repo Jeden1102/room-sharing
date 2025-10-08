@@ -1,6 +1,3 @@
-4. basic user profile
-    3. settings form possible refactors?
-    3.1 web core vitals front page
-    4. add location field
+1. location save to db (w bazie pola: city/district/street/json location(Cos takeigo))
+2. User settings form refactor.
 5. user profile front finish
-6. User settings loading page refactor.
