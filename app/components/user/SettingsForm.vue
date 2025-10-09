@@ -163,7 +163,6 @@
         </div>
       </div>
     </Fieldset>
-
     <Fieldset legend="Search location">
       <div class="mt-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
         <div>
@@ -171,7 +170,7 @@
             <AutoComplete
               id="city"
               name="city"
-              v-model="city"
+              v-model="initialValues.city"
               :suggestions="filteredCities"
               @complete="searchCity"
               placeholder="Wpisz miasto"
@@ -180,12 +179,16 @@
             <label for="city">City</label>
           </FloatLabel>
         </div>
-        <div v-if="availableDistricts?.length > 0 || selectedDistrict">
+        <div
+          v-if="
+            (availableDistricts?.length > 0 || districts) && initialValues.city
+          "
+        >
           <FloatLabel variant="on">
             <MultiSelect
               id="districts"
               name="districts"
-              v-model="selectedDistrict"
+              v-model="districts"
               :options="availableDistricts"
               display="chip"
               placeholder="Wybierz dzielnicę"
@@ -333,10 +336,8 @@ import { zodResolver } from "@primevue/forms/resolvers/zod";
 const formStatus = ref({ success: false, message: "", isLoading: false });
 const initialValues = ref<any>(null);
 const files = ref<File[]>([]);
-const city = ref<any>(null);
 const filteredCities = ref<any[]>([]);
 const availableDistricts = ref<any[]>();
-const selectedDistrict = ref<any>(null);
 
 const genderOptions = ref([
   { name: "Male", id: "male" },
@@ -406,7 +407,6 @@ const fetchDistricts = async (city: string) => {
   if (!city) return;
   try {
     availableDistricts.value = [];
-    selectedDistrict.value = null;
     const districtRes = await $fetch(
       `/api/geo/districts?city=${encodeURIComponent(city)}`,
     );
@@ -421,11 +421,14 @@ if (initialValues.value) {
   fetchDistricts(initialValues.value.city);
 }
 
-watch(city, async (newCity) => {
-  if (!newCity) return;
-  initialValues.value.districts = [];
-  fetchDistricts(newCity);
-});
+watch(
+  () => initialValues.value?.city,
+  async (newCity) => {
+    if (!newCity) return;
+    initialValues.value.districts = [];
+    await fetchDistricts(newCity);
+  },
+);
 
 const resolver = ref(
   zodResolver(
