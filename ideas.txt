@@ -1,3 +1,2 @@
-1. location save to db (w bazie pola: city/district/street/json location(Cos takeigo))
 2. User settings form refactor.
 5. user profile front finish

@@ -1,6 +1,18 @@
 <template>
   <main>
     <HomeHero />
+    <AppCta
+      title="We connect people searching for their dream apartments"
+      subtitle="With the use of RealPro you can create searcher proflie or upload your
+      apartment to seek for tenants."
+      image="/images/home-cta.jpg"
+    >
+      <Button asChild v-slot="slotProps" severity="secondary">
+        <RouterLink :to="$localePath('/auth/login')" :class="slotProps.class">
+          Start now!
+        </RouterLink>
+      </Button>
+    </AppCta>
 
     <HomeLatestProperties
       title="Properties for rent"
