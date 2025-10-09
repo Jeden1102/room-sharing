@@ -31,7 +31,8 @@ model User {
   gender                String?
   moodboardImages       String[]
   phone                 String?
-  searchCity            String?
+  city                  String?
+  districts             String[]
   searchAmount          String?
 
   // Relations
@@ -41,23 +42,23 @@ model User {
   reviewsWritten   Review[]   @relation("ReviewsWritten")
   reviewsReceived  Review[]   @relation("ReviewsReceived")
 
-  interests         Interest[]
-  occupation        Occupation[]
-  searchPreferences SearchPreference[]
+  interests          Interest[]
+  occupation         Occupation[]
+  searchPreferences  SearchPreference[]
   searchPropertyType PropertyOption[]
 
   noiseCompatibility NoiseCompatibility[]
   petsCompatibility  PetsCompatibility[]
 
-  roommateInProperties Property[]          @relation("PropertyRoommates")
+  roommateInProperties Property[] @relation("PropertyRoommates")
 }
 
 model Property {
-  id              String              @id @default(uuid())
-  createdAt       DateTime            @default(now())
-  updatedAt       DateTime            @updatedAt
+  id              String         @id @default(uuid())
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
   type            PropertyType
-  status          PropertyStatus      @default(ACTIVE)
+  status          PropertyStatus @default(ACTIVE)
   title           String
   description     String?
   price           Int
@@ -86,14 +87,14 @@ model Property {
   washingMachine  Boolean?
   dishwasher      Boolean?
   airConditioning Boolean?
-  isShared        Boolean?            @default(false)
+  isShared        Boolean?       @default(false)
   roomType        String?
   images          String[]
   videoUrl        String?
   floorPlanUrl    String?
   ownerId         String
-  owner           User                @relation(fields: [ownerId], references: [id])
-  roommates       User[]              @relation("PropertyRoommates")
+  owner           User           @relation(fields: [ownerId], references: [id])
+  roommates       User[]         @relation("PropertyRoommates")
 }
 
 model Review {
@@ -152,7 +153,6 @@ model PetsCompatibility {
   name  String @unique
   users User[]
 }
-
 
 enum PropertyType {
   RENT

@@ -1,14 +1,14 @@
 <template>
-  <div class="min-h-screen" v-if="usr">
+  <div class="min-h-screen" v-if="user">
     <div class="relative">
       <div class="relative">
         <NuxtImg
           class="h-40 w-full rounded-md object-cover md:h-52"
-          :src="usr.bgImage || '/images/user/bg-placeholder.webp'"
+          :src="user.bgImage || '/images/user/bg-placeholder.webp'"
           alt="cover"
         />
         <FormFileUploaderDialog
-          v-model="usr.bgImage"
+          v-model="user.bgImage"
           id="bgImage"
           name="bgImage"
           title="Background Image"
@@ -16,7 +16,7 @@
           field="bgImage"
           class="absolute top-4 right-4"
           @upload="(res) => onUploadImg(res, 'bgImage')"
-          @delete="() => (usr.bgImage = null)"
+          @delete="() => (user.bgImage = null)"
         />
       </div>
 
@@ -26,13 +26,13 @@
         <div class="relative flex w-full justify-between gap-2">
           <div class="relative">
             <NuxtImg
-              :src="usr.profileImage || '/images/user/avatar-placeholder.webp'"
+              :src="user.profileImage || '/images/user/avatar-placeholder.webp'"
               alt="profile"
               class="h-32 w-32 rounded-full border-4 border-white object-cover shadow-lg"
             />
 
             <FormFileUploaderDialog
-              v-model="usr.profileImage"
+              v-model="user.profileImage"
               id="profileImage"
               name="profileImage"
               title="Profile Image"
@@ -40,7 +40,7 @@
               field="profileImage"
               class="absolute right-0 bottom-4"
               @upload="(res) => onUploadImg(res, 'profileImage')"
-              @delete="() => (usr.bgImage = null)"
+              @delete="() => (user.bgImage = null)"
             />
           </div>
 
@@ -67,10 +67,13 @@
         <div class="space-y-6">
           <div>
             <p class="text-lg font-semibold text-gray-600">
-              {{ usr.firstName }} {{ usr.lastName }}
+              {{ user.firstName }} {{ user.lastName }}
             </p>
             <p class="mt-2 text-sm text-gray-700">
-              {{ usr.age }} lat • Warszawa, Mokotów @Todo
+              {{ user.age }} lat • {{ user.city }}
+              <template v-if="user.districts">
+                | {{ user.districts.join(", ") }}
+              </template>
             </p>
           </div>
 
@@ -80,7 +83,7 @@
               <div>
                 <div class="text-xs text-gray-500">Imię</div>
                 <div class="font-medium">
-                  {{ usr.firstName }} {{ usr.lastName }}
+                  {{ user.firstName }} {{ user.lastName }}
                 </div>
               </div>
             </div>
@@ -91,8 +94,8 @@
                 <div class="text-xs text-gray-500">Zawód</div>
                 <div class="font-medium">
                   <span
-                    v-if="usr.occupation"
-                    v-for="i in usr.occupation"
+                    v-if="user.occupation"
+                    v-for="i in user.occupation"
                     :key="i.id"
                     >{{ i.name }}</span
                   >
@@ -106,8 +109,8 @@
               <div>
                 <div class="text-xs text-gray-500">Budżet maks.</div>
                 <div class="font-medium">
-                  <span v-if="usr.budgetMax">
-                    {{ formatCurrency(usr.budgetMax) }}
+                  <span v-if="user.budgetMax">
+                    {{ formatCurrency(user.budgetMax) }}
                   </span>
                   <span v-else>No data</span>
                 </div>
@@ -117,8 +120,13 @@
             <div class="card-base flex items-center gap-3">
               <i class="pi pi-map-marker text-primary-500 text-xl"></i>
               <div>
-                <div class="text-xs text-gray-500">Lokalizacja</div>
-                <div class="font-medium">Warszwa, Mokotów@todo</div>
+                <div class="text-xs text-gray-500">Poszukiwana lokalizacja</div>
+                <div class="font-medium">
+                  {{ user.city }}
+                  <template v-if="user.districts">
+                    | {{ user.districts.join(", ") }}
+                  </template>
+                </div>
               </div>
             </div>
 
@@ -126,7 +134,7 @@
               <Icon name="cil:smoke" class="text-primary-500 text-xl" />
               <div>
                 <div class="text-xs text-gray-500">Osoba paląca</div>
-                <div class="font-medium">{{ usr.smoker ? "Tak" : "Nie" }}</div>
+                <div class="font-medium">{{ user.smoker ? "Tak" : "Nie" }}</div>
               </div>
             </div>
 
@@ -137,20 +145,20 @@
               />
               <div>
                 <div class="text-xs text-gray-500">Posiada zwierzęta</div>
-                <div class="font-medium">{{ usr.pets ? "Tak" : "Nie" }}</div>
+                <div class="font-medium">{{ user.pets ? "Tak" : "Nie" }}</div>
               </div>
             </div>
           </div>
 
           <div
             class="mt-2 text-sm text-gray-700"
-            v-html="usr.description?.replaceAll('\n', '<br />')"
+            v-html="user.description?.replaceAll('\n', '<br />')"
           ></div>
 
           <div class="mt-4">
             <div class="flex flex-wrap gap-2">
               <Tag
-                v-for="i in usr.interests"
+                v-for="i in user.interests"
                 :key="i.id"
                 class="capitalize"
                 :value="i.name"
@@ -166,8 +174,8 @@
             <div class="mt-4 space-y-3 text-sm text-gray-700">
               <div>
                 <strong>Preferencje:</strong>
-                <ul class="list-inside list-disc" v-if="usr.searchPreferences">
-                  <li v-for="i in usr.searchPreferences" :key="i.id">
+                <ul class="list-inside list-disc" v-if="user.searchPreferences">
+                  <li v-for="i in user.searchPreferences" :key="i.id">
                     {{ i.name }}
                   </li>
                 </ul>
@@ -175,14 +183,16 @@
               </div>
               <div>
                 <strong>Typ mieszkania:</strong>
-                <ul class="list-inside list-disc" v-if="usr.searchPropertyType">
-                  <li v-for="i in usr.searchPropertyType" :key="i.id">
+                <ul
+                  class="list-inside list-disc"
+                  v-if="user.searchPropertyType"
+                >
+                  <li v-for="i in user.searchPropertyType" :key="i.id">
                     {{ i.name }}
                   </li>
                 </ul>
                 <span v-else>No data</span>
               </div>
-              <p><strong>Dzielnica:</strong> Mokotów, Ursus @todo</p>
             </div>
           </div>
 
@@ -191,8 +201,11 @@
             <div class="mt-3 flex flex-col gap-4 text-sm text-gray-600">
               <div>
                 <strong>Preferencje dotyczące ciszy:</strong>
-                <ul class="list-inside list-disc" v-if="usr.noiseCompatibility">
-                  <li v-for="i in usr.noiseCompatibility" :key="i.id">
+                <ul
+                  class="list-inside list-disc"
+                  v-if="user.noiseCompatibility"
+                >
+                  <li v-for="i in user.noiseCompatibility" :key="i.id">
                     {{ i.name }}
                   </li>
                 </ul>
@@ -200,8 +213,8 @@
               </div>
               <div>
                 <strong>Zwierzęta:</strong>
-                <ul class="list-inside list-disc" v-if="usr.petsCompatibility">
-                  <li v-for="i in usr.petsCompatibility" :key="i.id">
+                <ul class="list-inside list-disc" v-if="user.petsCompatibility">
+                  <li v-for="i in user.petsCompatibility" :key="i.id">
                     {{ i.name }}
                   </li>
                 </ul>
@@ -212,7 +225,7 @@
 
         <div class="grid grid-cols-2 gap-2 md:grid-cols-3">
           <NuxtImg
-            v-for="(img, idx) in usr.moodboardImages"
+            v-for="(img, idx) in user.moodboardImages"
             :key="idx"
             :src="img"
             class="h-40 w-full rounded object-cover md:h-52"
@@ -222,8 +235,8 @@
         <div class="card-base p-6">
           <h3 class="text-md mb-3 font-semibold">Kontakt</h3>
           <div class="text-sm text-gray-700">
-            <p><strong>Email:</strong> {{ usr.email }}</p>
-            <p><strong>Telefon:</strong> {{ usr.phone }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Telefon:</strong> {{ user.phone }}</p>
           </div>
 
           <div class="mt-4 flex flex-col gap-3 md:flex-row">
@@ -234,7 +247,7 @@
               label="Wyślij e-mail"
               icon="pi pi-envelope"
             >
-              <a :href="`mailto:${usr.email}`" :class="slotProps.class">
+              <a :href="`mailto:${user.email}`" :class="slotProps.class">
                 Wyślij e-mail
               </a>
             </Button>
@@ -244,7 +257,9 @@
               label="Wyślij e-mail"
               icon="pi pi-envelope"
             >
-              <a :href="`tel:${usr.phone}`" :class="slotProps.class">Zadzwoń</a>
+              <a :href="`tel:${user.phone}`" :class="slotProps.class"
+                >Zadzwoń</a
+              >
             </Button>
           </div>
         </div>
@@ -277,16 +292,14 @@ usePageSeo({
   description: "User profile",
 });
 
-const usr = ref<FullUser | null>(null);
+const user = ref<FullUser | null>(null);
 const res = await useFetch("/api/user/me");
-usr.value = res.data.value.user;
-
-console.log(usr.value);
+user.value = res.data.value.user;
 
 const onUploadImg = async (res: any, field: keyof User) => {
-  if (!usr.value) return;
+  if (!user.value) return;
 
-  usr.value[field] = res[0];
+  user.value[field] = res[0];
   await useFetch("/api/user/update", {
     method: "POST",
     body: {

@@ -49,10 +49,7 @@ export default defineEventHandler(async (event) => {
     );
 
     const streetsRaw = response.elements
-      .map((el) => ({
-        id: el.id,
-        name: el.tags?.name?.trim(),
-      }))
+      .map((el) => el.tags?.name?.trim())
       .filter((s) => s.name);
 
     const seen = new Set<string>();

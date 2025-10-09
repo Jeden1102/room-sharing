@@ -164,15 +164,14 @@
       </div>
     </Fieldset>
 
-    <Fieldset legend="Location">
-      <div class="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+    <Fieldset legend="Search location">
+      <div class="mt-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
         <div>
           <FloatLabel variant="on">
             <AutoComplete
               id="city"
               name="city"
               v-model="city"
-              optionLabel="name"
               :suggestions="filteredCities"
               @complete="searchCity"
               placeholder="Wpisz miasto"
@@ -181,15 +180,13 @@
             <label for="city">City</label>
           </FloatLabel>
         </div>
-        <div>
+        <div v-if="availableDistricts?.length > 0 || selectedDistrict">
           <FloatLabel variant="on">
             <MultiSelect
-              v-if="city && districts?.length > 0"
-              id="district"
-              name="district"
+              id="districts"
+              name="districts"
               v-model="selectedDistrict"
-              optionLabel="name"
-              :options="districts"
+              :options="availableDistricts"
               display="chip"
               placeholder="Wybierz dzielnicę"
               fluid
@@ -336,10 +333,9 @@ import { zodResolver } from "@primevue/forms/resolvers/zod";
 const formStatus = ref({ success: false, message: "", isLoading: false });
 const initialValues = ref<any>(null);
 const files = ref<File[]>([]);
-
 const city = ref<any>(null);
 const filteredCities = ref<any[]>([]);
-const districts = ref<any[]>();
+const availableDistricts = ref<any[]>();
 const selectedDistrict = ref<any>(null);
 
 const genderOptions = ref([
@@ -400,33 +396,35 @@ const searchCity = async (event: any) => {
       `/api/geo/autocomplete?q=${encodeURIComponent(query)}`,
     );
     filteredCities.value =
-      res?.predictions?.map((p: any) => ({
-        name: p.description,
-        placeId: p.place_id,
-      })) || [];
+      res?.predictions?.map((p: any) => p.description.split(",")[0]) || [];
   } catch (err) {
     console.error("Error loading cities:", err);
   }
 };
 
-watch(city, async (newCity) => {
-  if (!newCity?.name) return;
-  const cityName = newCity.name.split(",")[0];
+const fetchDistricts = async (city: string) => {
+  if (!city) return;
   try {
-    districts.value = [];
+    availableDistricts.value = [];
     selectedDistrict.value = null;
     const districtRes = await $fetch(
-      `/api/geo/districts?city=${encodeURIComponent(cityName)}`,
+      `/api/geo/districts?city=${encodeURIComponent(city)}`,
     );
 
-    districts.value =
-      districtRes.districts?.map((d: any) => ({
-        id: d.id,
-        name: d.tags?.name || d.name,
-      })) || [];
+    availableDistricts.value = districtRes.districts;
   } catch (err) {
     console.error("Error loading location data:", err);
   }
+};
+
+if (initialValues.value) {
+  fetchDistricts(initialValues.value.city);
+}
+
+watch(city, async (newCity) => {
+  if (!newCity) return;
+  initialValues.value.districts = [];
+  fetchDistricts(newCity);
 });
 
 const resolver = ref(
@@ -448,16 +446,8 @@ const resolver = ref(
       pets: z.boolean().nullable(),
       budgetMax: z.number().min(1).max(99999999).nullable(),
       moodboardImages: z.array(z.string()).optional(),
-      city: z.object({
-        placeId: z.string(),
-        name: z.string(),
-      }),
-      district: z.array(
-        z.object({
-          id: z.number(),
-          name: z.string(),
-        }),
-      ),
+      city: z.string(),
+      districts: z.array(z.string()).optional(),
     }),
   ),
 );

@@ -26,6 +26,8 @@ export default defineEventHandler(async (event) => {
         bgImage: body.bgImage,
         profileImage: body.profileImage,
         gender: body.gender,
+        city: body.city,
+        districts: body.districts,
         interests: body.interests?.length
           ? {
               set: body.interests.map((id: string) => ({ id })),

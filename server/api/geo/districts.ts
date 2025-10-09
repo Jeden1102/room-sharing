@@ -48,22 +48,21 @@ export default defineEventHandler(async (event) => {
       },
     );
 
-    const districtsRaw = response.elements.map((el) => ({
-      id: el.id,
-      name: el.tags?.name ?? null,
-    }));
+    const namesRaw = response.elements
+      .map((el) => el.tags?.name?.trim())
+      .filter(Boolean);
 
-    const seen = new Set();
-    const districts = districtsRaw.filter((d) => {
-      const key = d.name?.toLowerCase() || d.id;
-      if (seen.has(key) || !d.name) return false;
+    const seen = new Set<string>();
+    const districts = namesRaw.filter((name) => {
+      const key = name.toLowerCase();
+      if (seen.has(key)) return false;
       seen.add(key);
       return true;
     });
 
     const result = { districts };
 
-    const blob = await put(blobPath, JSON.stringify(result, null, 2), {
+    await put(blobPath, JSON.stringify(result, null, 2), {
       access: "public",
       addRandomSuffix: false,
       contentType: "application/json",
