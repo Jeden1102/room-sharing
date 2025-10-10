@@ -207,35 +207,33 @@ const searchPropertyTypeOptions = ref<any[]>([]);
 const noiseCompatibilityOptions = ref<any[]>([]);
 const petsCompatibilityOptions = ref<any[]>([]);
 
-const { data: i } = await useFetch("/api/taxonomy_term/interest");
-interestOptions.value = i.value || [];
+const [
+  { data: interestData },
+  { data: occupationData },
+  { data: searchPreferencesData },
+  { data: searchPropertyTypeData },
+  { data: noiseCompatibilityData },
+  { data: petsCompatibilityData },
+  { data: userData },
+] = await Promise.all([
+  useFetch("/api/taxonomy_term/interest"),
+  useFetch("/api/taxonomy_term/occupation"),
+  useFetch("/api/taxonomy_term/searchPreference"),
+  useFetch("/api/taxonomy_term/propertyOption"),
+  useFetch("/api/taxonomy_term/noiseCompatibility"),
+  useFetch("/api/taxonomy_term/PetsCompatibility"),
+  useFetch("/api/user/me"),
+]);
 
-const { data: occupation } = await useFetch("/api/taxonomy_term/occupation");
-occupationOptions.value = occupation.value || [];
+interestOptions.value = interestData.value || [];
+occupationOptions.value = occupationData.value || [];
+searchPreferencesOptions.value = searchPreferencesData.value || [];
+searchPropertyTypeOptions.value = searchPropertyTypeData.value || [];
+noiseCompatibilityOptions.value = noiseCompatibilityData.value || [];
+petsCompatibilityOptions.value = petsCompatibilityData.value || [];
 
-const { data: searchPreferences } = await useFetch(
-  "/api/taxonomy_term/searchPreference",
-);
-searchPreferencesOptions.value = searchPreferences.value || [];
-
-const { data: searchPropertyType } = await useFetch(
-  "/api/taxonomy_term/propertyOption",
-);
-searchPropertyTypeOptions.value = searchPropertyType.value || [];
-
-const { data: noiseCompatibility } = await useFetch(
-  "/api/taxonomy_term/noiseCompatibility",
-);
-noiseCompatibilityOptions.value = noiseCompatibility.value || [];
-
-const { data: petsCompatibility } = await useFetch(
-  "/api/taxonomy_term/PetsCompatibility",
-);
-petsCompatibilityOptions.value = petsCompatibility.value || [];
-
-const { data: j } = await useFetch("/api/user/me");
-if (j.value?.user) {
-  const u = j.value.user;
+if (userData.value?.user) {
+  const u = userData.value.user;
   u.interests = u.interests.map((i: any) => i.id || i);
   u.occupation = u.occupation.map((i: any) => i.id || i);
   u.searchPreferences = u.searchPreferences.map((i: any) => i.id || i);
