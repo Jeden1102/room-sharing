@@ -1,10 +1,20 @@
 <template>
+  <div v-if="isLoading" class="grid w-full gap-2.5 md:grid-cols-2">
+    <Skeleton height="3rem" />
+    <Skeleton height="3rem" />
+    <Skeleton height="3rem" />
+    <Skeleton height="3rem" />
+    <Skeleton height="3rem" />
+    <Skeleton height="3rem" />
+    <Skeleton height="13rem" class="col-span-2" />
+  </div>
+
   <Form
+    v-else-if="initialValues"
     v-slot="$form"
     :initialValues="initialValues"
     :resolver="resolver"
     @submit="onFormSubmit"
-    v-if="initialValues"
     class="flex w-full flex-col gap-6"
   >
     <Fieldset legend="General">
@@ -196,10 +206,11 @@ const files = ref<File[]>([]);
 const filteredCities = ref<any[]>([]);
 const availableDistricts = ref<any[]>();
 
-const genderOptions = ref([
+const genderOptions = [
   { name: "Male", id: "male" },
   { name: "Female", id: "female" },
-]);
+];
+
 const interestOptions = ref<any[]>([]);
 const occupationOptions = ref<any[]>([]);
 const searchPreferencesOptions = ref<any[]>([]);
@@ -207,41 +218,50 @@ const searchPropertyTypeOptions = ref<any[]>([]);
 const noiseCompatibilityOptions = ref<any[]>([]);
 const petsCompatibilityOptions = ref<any[]>([]);
 
-const [
-  { data: interestData },
-  { data: occupationData },
-  { data: searchPreferencesData },
-  { data: searchPropertyTypeData },
-  { data: noiseCompatibilityData },
-  { data: petsCompatibilityData },
-  { data: userData },
-] = await Promise.all([
-  useFetch("/api/taxonomy_term/interest"),
-  useFetch("/api/taxonomy_term/occupation"),
-  useFetch("/api/taxonomy_term/searchPreference"),
-  useFetch("/api/taxonomy_term/propertyOption"),
-  useFetch("/api/taxonomy_term/noiseCompatibility"),
-  useFetch("/api/taxonomy_term/PetsCompatibility"),
-  useFetch("/api/user/me"),
-]);
+const { status: taxonomyStatus, data: taxonomies } = await useFetch(
+  "/api/user/taxonomies",
+  { lazy: true },
+);
 
-interestOptions.value = interestData.value || [];
-occupationOptions.value = occupationData.value || [];
-searchPreferencesOptions.value = searchPreferencesData.value || [];
-searchPropertyTypeOptions.value = searchPropertyTypeData.value || [];
-noiseCompatibilityOptions.value = noiseCompatibilityData.value || [];
-petsCompatibilityOptions.value = petsCompatibilityData.value || [];
+const { status: userStatus, data: userData } = await useFetch("/api/user/me", {
+  lazy: true,
+});
 
-if (userData.value?.user) {
-  const u = userData.value.user;
-  u.interests = u.interests.map((i: any) => i.id || i);
-  u.occupation = u.occupation.map((i: any) => i.id || i);
-  u.searchPreferences = u.searchPreferences.map((i: any) => i.id || i);
-  u.searchPropertyType = u.searchPropertyType.map((i: any) => i.id || i);
-  u.noiseCompatibility = u.noiseCompatibility.map((i: any) => i.id || i);
-  u.petsCompatibility = u.petsCompatibility.map((i: any) => i.id || i);
-  initialValues.value = u;
-}
+const isLoading = computed(
+  () => taxonomyStatus.value === "pending" || userStatus.value === "pending",
+);
+
+const initializeForm = () => {
+  if (taxonomies.value) {
+    interestOptions.value = taxonomies.value.interests || [];
+    occupationOptions.value = taxonomies.value.occupations || [];
+    searchPreferencesOptions.value = taxonomies.value.searchPreferences || [];
+    searchPropertyTypeOptions.value = taxonomies.value.propertyTypes || [];
+    noiseCompatibilityOptions.value = taxonomies.value.noiseCompatibility || [];
+    petsCompatibilityOptions.value = taxonomies.value.petsCompatibility || [];
+  }
+
+  if (userData.value?.user) {
+    const u = userData.value.user;
+    u.interests = u.interests.map((i: any) => i.id || i);
+    u.occupation = u.occupation.map((i: any) => i.id || i);
+    u.searchPreferences = u.searchPreferences.map((i: any) => i.id || i);
+    u.searchPropertyType = u.searchPropertyType.map((i: any) => i.id || i);
+    u.noiseCompatibility = u.noiseCompatibility.map((i: any) => i.id || i);
+    u.petsCompatibility = u.petsCompatibility.map((i: any) => i.id || i);
+    initialValues.value = u;
+  }
+};
+
+watch(
+  [taxonomyStatus, userStatus],
+  ([taxStatus, userStat]) => {
+    if (taxStatus === "success" && userStat === "success") {
+      initializeForm();
+    }
+  },
+  { immediate: true },
+);
 
 const searchCity = async (event: any) => {
   const query = event.query?.trim();
@@ -265,16 +285,11 @@ const fetchDistricts = async (city: string) => {
     const districtRes = await $fetch(
       `/api/geo/districts?city=${encodeURIComponent(city)}`,
     );
-
     availableDistricts.value = districtRes.districts;
   } catch (err) {
     console.error("Error loading location data:", err);
   }
 };
-
-if (initialValues.value) {
-  fetchDistricts(initialValues.value.city);
-}
 
 watch(
   () => initialValues.value?.city,
@@ -292,14 +307,14 @@ const onFormSubmit = async ({ valid, values }: any) => {
   formStatus.value.isLoading = true;
 
   if (files.value && files.value.length) {
-    const formData = new FormData();
+    const formDataObj = new FormData();
     files.value.forEach((file) => {
-      formData.append("moodboardImages", file);
+      formDataObj.append("moodboardImages", file);
     });
 
     const response = await $fetch("/api/files", {
       method: "POST",
-      body: formData,
+      body: formDataObj,
     });
 
     values.moodboardImages = [
