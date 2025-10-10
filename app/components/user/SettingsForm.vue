@@ -10,18 +10,19 @@
     <Fieldset legend="General">
       <div class="flex flex-col gap-6">
         <div class="mt-4 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-          <AtomsInput name="firstName" label="First Name" />
-          <AtomsInput name="lastName" label="Last Name" />
+          <AtomsInput name="firstName" label="First Name" :form="$form" />
+          <AtomsInput name="lastName" label="Last Name" :form="$form" />
         </div>
 
         <div class="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-          <AtomsNumber name="age" label="Age" />
+          <AtomsNumber name="age" label="Age" :form="$form" />
           <AtomsDropdown
             name="gender"
             label="Gender"
             :options="genderOptions"
             optionLabel="name"
             optionValue="id"
+            :form="$form"
           />
         </div>
 
@@ -33,6 +34,7 @@
             optionLabel="name"
             optionValue="id"
             placeholder="Select interests"
+            :form="$form"
           />
 
           <AtomsMultiselect
@@ -42,15 +44,21 @@
             optionLabel="name"
             optionValue="id"
             placeholder="Select occupation options"
+            :form="$form"
           />
         </div>
 
         <div class="flex gap-6">
-          <AtomsCheckbox name="smoker" label="Smoker" />
-          <AtomsCheckbox name="pets" label="Has pets" />
+          <AtomsCheckbox name="smoker" label="Smoker" :form="$form" />
+          <AtomsCheckbox name="pets" label="Has pets" :form="$form" />
         </div>
 
-        <AtomsTextarea name="description" label="Description" :rows="4" />
+        <AtomsTextarea
+          name="description"
+          label="Description"
+          :rows="4"
+          :form="$form"
+        />
       </div>
     </Fieldset>
 
@@ -63,6 +71,7 @@
           :suggestions="filteredCities"
           @complete="searchCity"
           placeholder="Wpisz miasto"
+          :form="$form"
         />
 
         <div
@@ -80,6 +89,7 @@
               display="chip"
               placeholder="Wybierz dzielnicę"
               label="Dzielnica"
+              :form="$form"
               fluid
             />
           </FloatLabel>
@@ -96,6 +106,7 @@
           optionLabel="name"
           optionValue="id"
           placeholder="Select search preferences"
+          :form="$form"
         />
 
         <AtomsMultiselect
@@ -105,9 +116,10 @@
           optionLabel="name"
           optionValue="id"
           placeholder="Select property type"
+          :form="$form"
         />
 
-        <AtomsNumber name="budgetMax" label="Max Budget" />
+        <AtomsNumber name="budgetMax" label="Max Budget" :form="$form" />
       </div>
     </Fieldset>
 
@@ -120,6 +132,7 @@
           optionLabel="name"
           optionValue="id"
           placeholder="Select noise compatibility"
+          :form="$form"
         />
 
         <AtomsMultiselect
@@ -129,6 +142,7 @@
           optionLabel="name"
           optionValue="id"
           placeholder="Select pets compatibility"
+          :form="$form"
         />
       </div>
     </Fieldset>
@@ -142,12 +156,13 @@
         @filesSelected="(newFiles) => (files = newFiles)"
         @delete="deleteImage"
         :maxFiles="5 - initialValues.moodboardImages.length"
+        :form="$form"
       />
     </Fieldset>
 
     <Fieldset legend="Contact">
       <div class="my-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-        <AtomsInput name="phone" label="Phone Number" />
+        <AtomsInput name="phone" label="Phone Number" :form="$form" />
       </div>
     </Fieldset>
 
@@ -333,8 +348,4 @@ const deleteImage = async (img: string) => {
     console.error(e);
   }
 };
-
-const props = defineProps<{ form: any }>();
-
-provide("formContext", props.form);
 </script>

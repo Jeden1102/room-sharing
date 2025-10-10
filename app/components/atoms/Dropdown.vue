@@ -30,6 +30,7 @@ const props = defineProps<{
   options: any[];
   optionLabel?: string;
   optionValue?: string;
+  form: any;
 }>();
 
 const form = inject<any>("formContext");

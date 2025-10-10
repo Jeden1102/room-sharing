@@ -10,7 +10,4 @@ const props = defineProps<{
   name: string;
   label: string;
 }>();
-
-const form = inject<any>("formContext");
-const fieldState = computed(() => form?.[props.name]);
 </script>

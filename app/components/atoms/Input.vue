@@ -19,8 +19,8 @@
 const props = defineProps<{
   name: string;
   label: string;
+  form: any;
 }>();
 
-const form = inject<any>("formContext");
-const fieldState = computed(() => form?.[props.name]);
+const fieldState = computed(() => props.form?.[props.name]);
 </script>

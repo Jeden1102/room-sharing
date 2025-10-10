@@ -32,8 +32,8 @@ const props = defineProps<{
   optionLabel?: string;
   optionValue?: string;
   placeholder?: string;
+  form: any;
 }>();
 
-const form = inject<any>("formContext");
-const fieldState = computed(() => form?.[props.name]);
+const fieldState = computed(() => props.form?.[props.name]);
 </script>

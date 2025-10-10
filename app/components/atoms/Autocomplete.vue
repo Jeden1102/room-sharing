@@ -31,6 +31,7 @@ const props = defineProps<{
   modelValue?: any;
   suggestions?: any[];
   placeholder?: string;
+  form: any;
 }>();
 
 const emit = defineEmits<{
@@ -38,6 +39,5 @@ const emit = defineEmits<{
   "update:modelValue": [value: any];
 }>();
 
-const form = inject<any>("formContext");
-const fieldState = computed(() => form?.[props.name]);
+const fieldState = computed(() => props.form?.[props.name]);
 </script>

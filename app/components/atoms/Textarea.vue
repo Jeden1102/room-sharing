@@ -21,12 +21,12 @@ const props = withDefaults(
     name: string;
     label: string;
     rows?: number;
+    form: any;
   }>(),
   {
     rows: 4,
   },
 );
 
-const form = inject<any>("formContext");
-const fieldState = computed(() => form?.[props.name]);
+const fieldState = computed(() => props.form?.[props.name]);
 </script>
