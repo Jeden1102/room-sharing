@@ -68,6 +68,10 @@ export default defineEventHandler(async (event) => {
       },
     });
 
+    console.log(session.user?.id);
+    await useStorage("cache").removeItem(
+      `nitro:handlers:user:${session.user?.id}.json`,
+    );
     return { success: true, user: updatedUser };
   } catch (error) {
     console.error(error);
