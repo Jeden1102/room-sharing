@@ -10,188 +10,76 @@
     <Fieldset legend="General">
       <div class="flex flex-col gap-6">
         <div class="mt-4 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-          <div>
-            <FloatLabel variant="on">
-              <InputText id="firstName" name="firstName" fluid />
-              <label for="firstName">First Name</label>
-            </FloatLabel>
-            <Message
-              v-if="$form.firstName?.invalid"
-              severity="error"
-              size="small"
-              variant="simple"
-            >
-              {{ $form.firstName.error.message }}
-            </Message>
-          </div>
-
-          <div>
-            <FloatLabel variant="on">
-              <InputText id="lastName" name="lastName" fluid />
-              <label for="lastName">Last Name</label>
-            </FloatLabel>
-            <Message
-              v-if="$form.lastName?.invalid"
-              severity="error"
-              size="small"
-              variant="simple"
-            >
-              {{ $form.lastName.error.message }}
-            </Message>
-          </div>
+          <AtomsInput name="firstName" label="First Name" />
+          <AtomsInput name="lastName" label="Last Name" />
         </div>
 
         <div class="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-          <div>
-            <FloatLabel variant="on">
-              <InputNumber id="age" name="age" fluid />
-              <label for="age">Age</label>
-            </FloatLabel>
-            <Message
-              v-if="$form.age?.invalid"
-              severity="error"
-              size="small"
-              variant="simple"
-            >
-              {{ $form.age.error.message }}
-            </Message>
-          </div>
-
-          <div>
-            <FloatLabel variant="on">
-              <Dropdown
-                id="gender"
-                name="gender"
-                :options="genderOptions"
-                optionLabel="name"
-                optionValue="id"
-                fluid
-              />
-              <label for="gender">Gender</label>
-            </FloatLabel>
-            <Message
-              v-if="$form.gender?.invalid"
-              severity="error"
-              size="small"
-              variant="simple"
-            >
-              {{ $form.gender.error.message }}
-            </Message>
-          </div>
+          <AtomsNumber name="age" label="Age" />
+          <AtomsDropdown
+            name="gender"
+            label="Gender"
+            :options="genderOptions"
+            optionLabel="name"
+            optionValue="id"
+          />
         </div>
 
         <div class="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-          <div>
-            <FloatLabel variant="on">
-              <MultiSelect
-                id="interests"
-                name="interests"
-                :options="interestOptions"
-                optionLabel="name"
-                optionValue="id"
-                display="chip"
-                placeholder="Select interests"
-                fluid
-              />
-              <label for="interests">Interests</label>
-            </FloatLabel>
-            <Message
-              v-if="$form.interests?.invalid"
-              severity="error"
-              size="small"
-              variant="simple"
-            >
-              {{ $form.interests.error.message }}
-            </Message>
-          </div>
+          <AtomsMultiselect
+            name="interests"
+            label="Interests"
+            :options="interestOptions"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Select interests"
+          />
 
-          <div>
-            <FloatLabel variant="on">
-              <MultiSelect
-                id="occupation"
-                name="occupation"
-                :options="occupationOptions"
-                optionLabel="name"
-                optionValue="id"
-                display="chip"
-                placeholder="Select occupation options"
-                fluid
-              />
-              <label for="occupation">Occupation</label>
-            </FloatLabel>
-            <Message
-              v-if="$form.occupation?.invalid"
-              severity="error"
-              size="small"
-              variant="simple"
-            >
-              {{ $form.occupation.error.message }}
-            </Message>
-          </div>
+          <AtomsMultiselect
+            name="occupation"
+            label="Occupation"
+            :options="occupationOptions"
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Select occupation options"
+          />
         </div>
 
         <div class="flex gap-6">
-          <div class="flex flex-row items-center gap-2">
-            <Checkbox id="smoker" name="smoker" binary />
-            <label for="smoker">Smoker</label>
-          </div>
-          <div class="flex flex-row items-center gap-2">
-            <Checkbox id="pets" name="pets" binary />
-            <label for="pets">Has pets</label>
-          </div>
+          <AtomsCheckbox name="smoker" label="Smoker" />
+          <AtomsCheckbox name="pets" label="Has pets" />
         </div>
 
-        <div>
-          <FloatLabel variant="on" class="w-full">
-            <Textarea
-              id="description"
-              name="description"
-              autoResize
-              rows="4"
-              fluid
-            />
-            <label for="description">Description</label>
-          </FloatLabel>
-          <Message
-            v-if="$form.description?.invalid"
-            severity="error"
-            size="small"
-            variant="simple"
-          >
-            {{ $form.description.error.message }}
-          </Message>
-        </div>
+        <AtomsTextarea name="description" label="Description" :rows="4" />
       </div>
     </Fieldset>
+
     <Fieldset legend="Search location">
       <div class="mt-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-        <div>
-          <FloatLabel variant="on">
-            <AutoComplete
-              id="city"
-              name="city"
-              v-model="initialValues.city"
-              :suggestions="filteredCities"
-              @complete="searchCity"
-              placeholder="Wpisz miasto"
-              fluid
-            />
-            <label for="city">City</label>
-          </FloatLabel>
-        </div>
+        <AtomsAutocomplete
+          name="city"
+          label="City"
+          v-model="initialValues.city"
+          :suggestions="filteredCities"
+          @complete="searchCity"
+          placeholder="Wpisz miasto"
+        />
+
         <div
           v-if="
-            (availableDistricts?.length > 0 || districts) && initialValues.city
+            (availableDistricts?.length > 0 || initialValues.districts) &&
+            initialValues.city
           "
         >
           <FloatLabel variant="on">
-            <MultiSelect
+            <AtomsMultiselect
               id="districts"
               name="districts"
-              v-model="districts"
+              v-model="initialValues.districts"
               :options="availableDistricts"
               display="chip"
               placeholder="Wybierz dzielnicę"
+              label="Dzielnica"
               fluid
             />
           </FloatLabel>
@@ -201,88 +89,47 @@
 
     <Fieldset legend="Search preferences">
       <div class="my-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-        <div>
-          <FloatLabel variant="on">
-            <MultiSelect
-              id="searchPreferences"
-              name="searchPreferences"
-              :options="searchPreferencesOptions"
-              optionLabel="name"
-              optionValue="id"
-              display="chip"
-              placeholder="Select search preferences"
-              fluid
-            />
-            <label for="searchPreferences">Search preferences</label>
-          </FloatLabel>
-          <Message
-            v-if="$form.searchPreferences?.invalid"
-            severity="error"
-            size="small"
-            variant="simple"
-          >
-            {{ $form.searchPreferences.error.message }}
-          </Message>
-        </div>
+        <AtomsMultiselect
+          name="searchPreferences"
+          label="Search preferences"
+          :options="searchPreferencesOptions"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Select search preferences"
+        />
 
-        <div>
-          <FloatLabel variant="on">
-            <MultiSelect
-              id="searchPropertyType"
-              name="searchPropertyType"
-              :options="searchPropertyTypeOptions"
-              optionLabel="name"
-              optionValue="id"
-              display="chip"
-              placeholder="Select property type"
-              fluid
-            />
-            <label for="searchPropertyType">Search property type</label>
-          </FloatLabel>
-        </div>
+        <AtomsMultiselect
+          name="searchPropertyType"
+          label="Search property type"
+          :options="searchPropertyTypeOptions"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Select property type"
+        />
 
-        <div>
-          <FloatLabel variant="on" class="w-full">
-            <InputNumber id="budgetMax" name="budgetMax" fluid />
-            <label for="budgetMax">Max Budget</label>
-          </FloatLabel>
-        </div>
+        <AtomsNumber name="budgetMax" label="Max Budget" />
       </div>
     </Fieldset>
 
     <Fieldset legend="Compatibility">
       <div class="my-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-        <div>
-          <FloatLabel variant="on">
-            <MultiSelect
-              id="noiseCompatibility"
-              name="noiseCompatibility"
-              :options="noiseCompatibilityOptions"
-              optionLabel="name"
-              optionValue="id"
-              display="chip"
-              placeholder="Select noise compatibility"
-              fluid
-            />
-            <label for="noiseCompatibility">Noise compatibility</label>
-          </FloatLabel>
-        </div>
+        <AtomsMultiselect
+          name="noiseCompatibility"
+          label="Noise compatibility"
+          :options="noiseCompatibilityOptions"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Select noise compatibility"
+        />
 
-        <div>
-          <FloatLabel variant="on">
-            <MultiSelect
-              id="petsCompatibility"
-              name="petsCompatibility"
-              :options="petsCompatibilityOptions"
-              optionLabel="name"
-              optionValue="id"
-              display="chip"
-              placeholder="Select pets compatibility"
-              fluid
-            />
-            <label for="petsCompatibility">Pets compatibility</label>
-          </FloatLabel>
-        </div>
+        <AtomsMultiselect
+          name="petsCompatibility"
+          label="Pets compatibility"
+          :options="petsCompatibilityOptions"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Select pets compatibility"
+        />
       </div>
     </Fieldset>
 
@@ -300,12 +147,7 @@
 
     <Fieldset legend="Contact">
       <div class="my-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-        <div>
-          <FloatLabel variant="on">
-            <InputText id="phone" name="phone" fluid />
-            <label for="phone">Phone Number</label>
-          </FloatLabel>
-        </div>
+        <AtomsInput name="phone" label="Phone Number" />
       </div>
     </Fieldset>
 
@@ -330,8 +172,8 @@
 </template>
 
 <script setup lang="ts">
-import { z } from "zod";
 import { zodResolver } from "@primevue/forms/resolvers/zod";
+import { userProfileSchema } from "~/schemas/userProfileSchema";
 
 const formStatus = ref({ success: false, message: "", isLoading: false });
 const initialValues = ref<any>(null);
@@ -430,30 +272,7 @@ watch(
   },
 );
 
-const resolver = ref(
-  zodResolver(
-    z.object({
-      firstName: z.string().optional(),
-      lastName: z.string().optional(),
-      age: z.number().min(1).max(130).optional().nullable(),
-      gender: z.string().nullable(),
-      phone: z.string().min(5).max(20).optional(),
-      description: z.string().max(2048).optional(),
-      interests: z.array(z.string()).optional(),
-      occupation: z.array(z.string()).optional(),
-      searchPreferences: z.array(z.string()).optional(),
-      searchPropertyType: z.array(z.string()).optional(),
-      noiseCompatibility: z.array(z.string()).optional(),
-      petsCompatibility: z.array(z.string()).optional(),
-      smoker: z.boolean().nullable(),
-      pets: z.boolean().nullable(),
-      budgetMax: z.number().min(1).max(99999999).nullable(),
-      moodboardImages: z.array(z.string()).optional(),
-      city: z.string(),
-      districts: z.array(z.string()).optional(),
-    }),
-  ),
-);
+const resolver = ref(zodResolver(userProfileSchema));
 
 const onFormSubmit = async ({ valid, values }: any) => {
   if (!valid) return;
@@ -514,4 +333,8 @@ const deleteImage = async (img: string) => {
     console.error(e);
   }
 };
+
+const props = defineProps<{ form: any }>();
+
+provide("formContext", props.form);
 </script>
