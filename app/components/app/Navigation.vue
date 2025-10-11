@@ -107,6 +107,13 @@ watch(
   },
 );
 
+watch(
+  () => isMenuOpened.value,
+  () => {
+    document.body.classList.toggle("overflow-y-hidden");
+  },
+);
+
 const toggleUserMenu = (event: Event) => {
   userMenu.value.toggle(event);
 };
