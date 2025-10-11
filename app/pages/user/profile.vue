@@ -293,8 +293,21 @@ usePageSeo({
 });
 
 const user = ref<FullUser | null>(null);
-const res = await useFetch("/api/user/me");
-user.value = res.data.value.user;
+
+const { status: userStatus, data: userData } = await useFetch("/api/user/me", {
+  lazy: true,
+  cache: "no-cache",
+});
+
+watch(
+  [userStatus],
+  ([userStat]) => {
+    if (userStat === "success") {
+      user.value = userData.value.user;
+    }
+  },
+  { immediate: true },
+);
 
 const onUploadImg = async (res: any, field: keyof User) => {
   if (!user.value) return;

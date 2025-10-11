@@ -25,6 +25,7 @@ export default requireAuth(
     },
     {
       maxAge: 60 * 60,
+      group: "users",
       name: "user",
       getKey: (event) => event.context.user.id,
     },

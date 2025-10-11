@@ -225,6 +225,7 @@ const { status: taxonomyStatus, data: taxonomies } = await useFetch(
 
 const { status: userStatus, data: userData } = await useFetch("/api/user/me", {
   lazy: true,
+  cache: "no-cache",
 });
 
 const isLoading = computed(
