@@ -292,21 +292,13 @@ usePageSeo({
   description: "User profile",
 });
 
-const user = ref<FullUser | null>(null);
-
-const { status: userStatus, data: userData } = await useFetch("/api/user/me", {
+const { data: userData } = await useFetch("/api/user/me", {
   lazy: true,
   cache: "no-cache",
 });
 
-watch(
-  [userStatus],
-  ([userStat]) => {
-    if (userStat === "success") {
-      user.value = userData.value.user;
-    }
-  },
-  { immediate: true },
+const user: ComputedRef<FullUser | null> = computed(
+  () => userData.value?.user || null,
 );
 
 const onUploadImg = async (res: any, field: keyof User) => {

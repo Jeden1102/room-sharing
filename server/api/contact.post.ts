@@ -27,7 +27,6 @@ const sendContactMail = async (body: {
   reason: string;
 }) => {
   try {
-    console.log("body", body);
     const { sendMail } = useNodeMailer();
 
     const contactHtml = await render(

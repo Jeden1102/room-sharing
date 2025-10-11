@@ -7,7 +7,6 @@ export default requireAuth(
   defineCachedEventHandler(
     async (event) => {
       const userId = event.context.user.id;
-      console.log(event.context.user.id);
 
       const user = await prisma.user.findUnique({
         where: { id: userId },

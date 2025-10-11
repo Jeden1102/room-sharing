@@ -18,8 +18,6 @@ export default eventHandler(async (event) => {
     key: useRuntimeConfig().googleMapsApiKey,
   };
 
-  console.log(useRuntimeConfig().googleMapsApiKey);
-
   try {
     const response = await $fetch(url, { params });
     return response;
