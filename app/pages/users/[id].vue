@@ -1,6 +1,6 @@
 <template>
   <main class="container flex max-w-5xl flex-col gap-6 py-6">
-    <UserProfile v-if="user" :user="user" />
+    <UserProfile v-if="user" :user="user" :editable="false" />
   </main>
 </template>
 

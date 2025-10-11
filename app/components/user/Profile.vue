@@ -8,6 +8,7 @@
           alt="cover"
         />
         <FormFileUploaderDialog
+          v-if="editable"
           v-model="user.bgImage"
           id="bgImage"
           name="bgImage"
@@ -32,6 +33,7 @@
             />
 
             <FormFileUploaderDialog
+              v-if="editable"
               v-model="user.profileImage"
               id="profileImage"
               name="profileImage"
@@ -283,10 +285,10 @@ type FullUser = Prisma.UserGetPayload<{
   };
 }>;
 
-const { user } = defineProps<{ user: FullUser }>();
+const { user, editable } = defineProps<{ user: FullUser; editable: boolean }>();
 
 const onUploadImg = async (res: any, field: keyof User) => {
-  if (!user) return;
+  if (!user || !editable) return;
 
   user[field] = res[0];
   await useFetch("/api/user/update", {

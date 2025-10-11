@@ -1,5 +1,5 @@
 <template>
-  <UserProfile v-if="user" :user="user" />
+  <UserProfile v-if="user" :user="user" :editable="true" />
 </template>
 
 <script setup lang="ts">
