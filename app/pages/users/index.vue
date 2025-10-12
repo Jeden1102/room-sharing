@@ -16,9 +16,7 @@ usePageSeo({
   description: "User profile",
 });
 
-const { data: usersData } = await useFetch(`/api/users`, {
-  cache: "no-cache",
-});
+const { data: usersData } = await useFetch(`/api/users`);
 
 const users = computed(() => usersData.value || null);
 </script>
