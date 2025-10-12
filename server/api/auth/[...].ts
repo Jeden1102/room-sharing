@@ -79,7 +79,7 @@ export default NuxtAuthHandler({
             email: user.email || "",
             provider: account?.provider,
             providerAccountId: account?.providerAccountId,
-            emailVerificationCode: "",
+            emailVerificationCode: await bcrypt.hash(Date.now().toString(), 10),
           },
         });
       }
@@ -89,6 +89,10 @@ export default NuxtAuthHandler({
       const dbUser = await prisma.user.findUnique({
         where: { email: session.user?.email || "" },
       });
+
+      if (!dbUser) {
+        return null;
+      }
 
       if (dbUser && session.user) {
         session.user.provider = dbUser.provider || "";

@@ -1,12 +1,12 @@
 import { z } from "zod";
 
 export const userProfileSchema = z.object({
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
+  firstName: z.string().optional().nullable(),
+  lastName: z.string().optional().nullable(),
   age: z.number().min(1).max(130).optional().nullable(),
   gender: z.string().nullable(),
-  phone: z.string().min(5).max(20).optional(),
-  description: z.string().max(2048).optional(),
+  phone: z.string().min(5).max(20).optional().nullable(),
+  description: z.string().max(2048).optional().nullable(),
   interests: z.array(z.string()).optional(),
   occupation: z.array(z.string()).optional(),
   searchPreferences: z.array(z.string()).optional(),
@@ -17,6 +17,6 @@ export const userProfileSchema = z.object({
   pets: z.boolean().nullable(),
   budgetMax: z.number().min(1).max(99999999).nullable(),
   moodboardImages: z.array(z.string()).optional(),
-  city: z.string(),
+  city: z.string().nullable(),
   districts: z.array(z.string()).optional(),
 });

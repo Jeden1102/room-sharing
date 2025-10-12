@@ -17,7 +17,7 @@
           field="bgImage"
           class="absolute top-4 right-4"
           @upload="(res) => onUploadImg(res, 'bgImage')"
-          @delete="() => (user.bgImage = null)"
+          @delete="() => onDeleteImg('bgImage')"
         />
       </div>
 
@@ -42,7 +42,7 @@
               field="profileImage"
               class="absolute right-0 bottom-4"
               @upload="(res) => onUploadImg(res, 'profileImage')"
-              @delete="() => (user.bgImage = null)"
+              @delete="() => onDeleteImg('profileImage')"
             />
           </div>
 
@@ -285,18 +285,31 @@ type FullUser = Prisma.UserGetPayload<{
   };
 }>;
 
-const { user, editable } = defineProps<{ user: FullUser; editable: boolean }>();
+const { user: userProp, editable } = defineProps<{
+  user: FullUser;
+  editable: boolean;
+}>();
+
+const user = ref(userProp);
 
 const onUploadImg = async (res: any, field: keyof User) => {
-  if (!user || !editable) return;
+  if (!user.value || !editable) return;
 
-  user[field] = res[0];
+  user.value[field] = res[0];
+
   await useFetch("/api/user/update", {
     method: "POST",
     body: {
+      ...user,
       [field]: res[0],
     },
   });
+};
+
+const onDeleteImg = async (field: keyof User) => {
+  if (!user.value || !editable) return;
+
+  user.value[field] = null;
 };
 
 function formatCurrency(v: number) {

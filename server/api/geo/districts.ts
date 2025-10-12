@@ -66,6 +66,7 @@ export default defineEventHandler(async (event) => {
       access: "public",
       addRandomSuffix: false,
       contentType: "application/json",
+      allowOverwrite: true,
     });
 
     return {

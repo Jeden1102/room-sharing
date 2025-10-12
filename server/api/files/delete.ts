@@ -30,6 +30,9 @@ export default requireAuth(
             [field]: images,
           },
         });
+
+        const cacheStorage = useStorage("cache:users:user");
+        await cacheStorage.removeItem(`${userId}.json`.replaceAll("-", ""));
       }
 
       if (entity === "property" && id) {
