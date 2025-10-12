@@ -83,10 +83,10 @@
           placeholder="Wpisz miasto"
           :form="$form"
         />
-
         <div
           v-if="
-            (availableDistricts?.length > 0 || initialValues.districts) &&
+            (availableDistricts?.length > 0 ||
+              initialValues.districts.length > 0) &&
             initialValues.city
           "
         >
@@ -94,7 +94,6 @@
             <AtomsMultiselect
               id="districts"
               name="districts"
-              v-model="initialValues.districts"
               :options="availableDistricts"
               display="chip"
               placeholder="Wybierz dzielnicę"
@@ -294,11 +293,18 @@ const fetchDistricts = async (city: string) => {
 
 watch(
   () => initialValues.value?.city,
-  async (newCity) => {
+  async (newCity, oldCity) => {
     if (!newCity) return;
+
+    if (oldCity === undefined) {
+      await fetchDistricts(newCity);
+      return;
+    }
+
     initialValues.value.districts = [];
     await fetchDistricts(newCity);
   },
+  { immediate: true },
 );
 
 const resolver = ref(zodResolver(userProfileSchema));
@@ -322,6 +328,10 @@ const onFormSubmit = async ({ valid, values }: any) => {
       ...response,
       ...initialValues.value.moodboardImages,
     ];
+  }
+
+  if (availableDistricts.value?.length === 0) {
+    values.districts = [];
   }
 
   try {
