@@ -1,9 +1,7 @@
 import bcrypt from "bcrypt";
-import { PrismaClient } from "@prisma/client";
 import { render } from "@vue-email/render";
 import SimpleAction from "~/components/email/SimpleAction.vue";
-
-const prisma = new PrismaClient();
+import prisma from "~~/lib/prisma";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);

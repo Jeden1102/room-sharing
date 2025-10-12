@@ -71,7 +71,7 @@
 
 <script setup lang="ts">
 import { zodResolver } from "@primevue/forms/resolvers/zod";
-import { z } from "zod";
+import { registerSchema } from "~/schemas/auth";
 
 definePageMeta({
   unauthenticatedOnly: true,
@@ -93,24 +93,7 @@ const formStatus = ref<{
   message: "",
 });
 
-const resolver = ref(
-  zodResolver(
-    z
-      .object({
-        email: z.string().email({ message: "Invalid email address" }),
-        password: z
-          .string()
-          .min(8, { message: "Password must be at least 8 characters" }),
-        passwordRepeat: z
-          .string()
-          .min(8, { message: "Password must be at least 8 characters" }),
-      })
-      .refine((data) => data.password === data.passwordRepeat, {
-        message: "Passwords must match",
-        path: ["passwordRepeat"],
-      }),
-  ),
-);
+const resolver = ref(zodResolver(registerSchema));
 
 const onFormSubmit = async ({
   valid,

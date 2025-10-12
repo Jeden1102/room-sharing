@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "~~/lib/prisma";
 import { requireAuth } from "../middleware/auth";
-
-const prisma = new PrismaClient();
 
 export default requireAuth(
   defineCachedEventHandler(

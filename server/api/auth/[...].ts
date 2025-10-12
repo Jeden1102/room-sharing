@@ -1,12 +1,9 @@
 import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcrypt";
-
 import { NuxtAuthHandler } from "#auth";
 import Credentials from "next-auth/providers/credentials";
-
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "~~/lib/prisma";
+import { loginSchema } from "~/schemas/auth";
 
 type TCredentials = {
   email: string;
@@ -23,11 +20,20 @@ export default NuxtAuthHandler({
     Credentials.default({
       name: "Credentials",
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials: TCredentials, req: any) {
         try {
+          const validation = loginSchema.safeParse(credentials);
+
+          if (!validation.success) {
+            throw createError({
+              statusCode: 400,
+              statusMessage: "Validation failed",
+            });
+          }
+
           const user = await prisma.user.findUnique({
             where: { email: credentials?.email },
           });
