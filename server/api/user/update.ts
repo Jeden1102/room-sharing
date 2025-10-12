@@ -10,59 +10,57 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
+    const directFields = [
+      "firstName",
+      "lastName",
+      "age",
+      "description",
+      "smoker",
+      "phone",
+      "pets",
+      "budgetMax",
+      "moodboardImages",
+      "bgImage",
+      "profileImage",
+      "gender",
+      "city",
+      "districts",
+    ];
+
+    const relationFields = [
+      "interests",
+      "occupation",
+      "searchPreferences",
+      "searchPropertyType",
+      "noiseCompatibility",
+      "petsCompatibility",
+    ];
+
+    const data: any = {};
+
+    for (const field of directFields) {
+      if (field in body) {
+        data[field] = body[field];
+      }
+    }
+
+    for (const field of relationFields) {
+      if (field in body) {
+        data[field] = {
+          set: body[field].map((id: string) => ({ id })),
+        };
+      }
+    }
+
     const updatedUser = await prisma.user.update({
       where: { id: session.user?.id },
-      data: {
-        firstName: body.firstName,
-        lastName: body.lastName,
-        age: body.age,
-        description: body.description,
-        smoker: body.smoker,
-        phone: body.phone,
-        pets: body.pets,
-        budgetMax: body.budgetMax,
-        moodboardImages: body.moodboardImages,
-        bgImage: body.bgImage,
-        profileImage: body.profileImage,
-        gender: body.gender,
-        city: body.city,
-        districts: body.districts,
-        interests: body.interests?.length
-          ? {
-              set: body.interests.map((id: string) => ({ id })),
-            }
-          : { set: [] },
-        occupation: body.occupation?.length
-          ? {
-              set: body.occupation.map((id: string) => ({ id })),
-            }
-          : { set: [] },
-        searchPreferences: body.searchPreferences?.length
-          ? {
-              set: body.searchPreferences.map((id: string) => ({ id })),
-            }
-          : { set: [] },
-        searchPropertyType: body.searchPropertyType?.length
-          ? {
-              set: body.searchPropertyType.map((id: string) => ({ id })),
-            }
-          : { set: [] },
-        noiseCompatibility: body.noiseCompatibility?.length
-          ? {
-              set: body.noiseCompatibility.map((id: string) => ({ id })),
-            }
-          : { set: [] },
-        petsCompatibility: body.petsCompatibility?.length
-          ? {
-              set: body.petsCompatibility.map((id: string) => ({ id })),
-            }
-          : { set: [] },
-      },
+      data,
       include: {
         interests: true,
         occupation: true,
         searchPreferences: true,
         searchPropertyType: true,
+        noiseCompatibility: true,
         petsCompatibility: true,
       },
     });
@@ -71,6 +69,7 @@ export default defineEventHandler(async (event) => {
     await cacheStorage.removeItem(
       `${session.user?.id}.json`.replaceAll("-", ""),
     );
+
     return { success: true, user: updatedUser };
   } catch (error) {
     console.error(error);

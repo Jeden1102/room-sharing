@@ -300,7 +300,6 @@ const onUploadImg = async (res: any, field: keyof User) => {
   await useFetch("/api/user/update", {
     method: "POST",
     body: {
-      ...user,
       [field]: res[0],
     },
   });
