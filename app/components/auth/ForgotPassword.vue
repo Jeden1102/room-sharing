@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { zodResolver } from "@primevue/forms/resolvers/zod";
-import { z } from "zod";
+import { forgotPasswordSchema } from "~/schemas/auth";
 
 const formStatus = ref<{
   success: boolean | null;
@@ -51,13 +51,7 @@ const initialValues = ref({
   email: "",
 });
 
-const resolver = ref(
-  zodResolver(
-    z.object({
-      email: z.string().email({ message: "Invalid email address" }),
-    }),
-  ),
-);
+const resolver = ref(zodResolver(forgotPasswordSchema));
 
 const onFormSubmit = async ({
   valid,

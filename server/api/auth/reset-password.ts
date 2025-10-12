@@ -1,5 +1,6 @@
 import prisma from "~~/lib/prisma";
 import bcrypt from "bcrypt";
+import { passwordResetSchema } from "~/schemas/auth";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -8,6 +9,15 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       statusMessage: "Missing code",
+    });
+  }
+
+  const validation = passwordResetSchema.safeParse(body);
+
+  if (!validation.success) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Validation failed",
     });
   }
 

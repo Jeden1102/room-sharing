@@ -1,9 +1,19 @@
 import { render } from "@vue-email/render";
 import Contact from "~/components/email/Contact.vue";
 import ContactConfirmation from "~/components/email/ContactConfirmation.vue";
+import { contactSchema } from "~/schemas/contact";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
+
+  const validation = contactSchema.safeParse(body);
+
+  if (!validation.success) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Validation failed",
+    });
+  }
 
   try {
     await sendContactMail(body);

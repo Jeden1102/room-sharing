@@ -55,7 +55,7 @@
 
 <script setup lang="ts">
 import { zodResolver } from "@primevue/forms/resolvers/zod";
-import { z } from "zod";
+import { passwordResetSchema } from "~/schemas/auth";
 
 const { code } = defineProps<{ code: string }>();
 
@@ -74,23 +74,7 @@ const formStatus = ref<{
   message: "",
 });
 
-const resolver = ref(
-  zodResolver(
-    z
-      .object({
-        password: z
-          .string()
-          .min(8, { message: "Password must be at least 8 characters" }),
-        passwordRepeat: z
-          .string()
-          .min(8, { message: "Password must be at least 8 characters" }),
-      })
-      .refine((data) => data.password === data.passwordRepeat, {
-        message: "Passwords must match",
-        path: ["passwordRepeat"],
-      }),
-  ),
-);
+const resolver = ref(zodResolver(passwordResetSchema));
 
 const onFormSubmit = async ({
   valid,

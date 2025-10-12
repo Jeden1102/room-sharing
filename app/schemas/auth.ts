@@ -21,3 +21,21 @@ export const loginSchema = z.object({
     .string()
     .min(8, { message: "Password must be at least 8 characters" }),
 });
+
+export const passwordResetSchema = z
+  .object({
+    password: z
+      .string()
+      .min(8, { message: "Password must be at least 8 characters" }),
+    passwordRepeat: z
+      .string()
+      .min(8, { message: "Password must be at least 8 characters" }),
+  })
+  .refine((data) => data.password === data.passwordRepeat, {
+    message: "Passwords must match",
+    path: ["passwordRepeat"],
+  });
+
+export const forgotPasswordSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }),
+});

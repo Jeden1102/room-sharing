@@ -2,9 +2,19 @@ import bcrypt from "bcrypt";
 import { render } from "@vue-email/render";
 import SimpleAction from "~/components/email/SimpleAction.vue";
 import prisma from "~~/lib/prisma";
+import { forgotPasswordSchema } from "~/schemas/auth";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
+
+  const validation = forgotPasswordSchema.safeParse(body);
+
+  if (!validation.success) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Validation failed",
+    });
+  }
 
   const user = await prisma.user.findUnique({
     where: { email: body.email },

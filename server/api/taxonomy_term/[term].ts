@@ -5,6 +5,13 @@ export default defineCachedEventHandler(
     try {
       const { term } = event.context.params as { term: string };
 
+      if (!term) {
+        throw createError({
+          statusCode: 400,
+          statusMessage: "Missing term",
+        });
+      }
+
       const data = await (prisma as any)[term].findMany({
         orderBy: { name: "asc" },
       });

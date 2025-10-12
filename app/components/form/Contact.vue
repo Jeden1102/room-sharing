@@ -115,8 +115,8 @@
 </template>
 
 <script setup lang="ts">
-import { z } from "zod";
 import { zodResolver } from "@primevue/forms/resolvers/zod";
+import { contactSchema } from "~/schemas/contact";
 
 const formStatus = ref({ success: false, message: "", isLoading: false });
 
@@ -125,21 +125,9 @@ const reasonOptions = ref([
   { name: "Female", id: "female" },
 ]);
 
-const resolver = ref(
-  zodResolver(
-    z.object({
-      name: z.string({ message: "Name is required" }),
-      email: z
-        .string({ message: "E-mail address is required" })
-        .email({ message: "Invalid email address" }),
-      reason: z.string({ message: "Contact reason is required" }),
-      description: z.string({ message: "Description is required" }).max(2048),
-      terms: z.boolean(),
-    }),
-  ),
-);
+const resolver = ref(zodResolver(contactSchema));
 
-const onFormSubmit = async ({ valid, values }: any) => {
+const onFormSubmit = async ({ valid, values, reset }: any) => {
   if (!valid) return;
   formStatus.value.isLoading = true;
 
@@ -158,6 +146,7 @@ const onFormSubmit = async ({ valid, values }: any) => {
     formStatus.value.message = e.message || "There was an error.";
   } finally {
     formStatus.value.isLoading = false;
+    reset();
   }
 };
 </script>
