@@ -1,5 +1,7 @@
 <template>
-  <main class="container flex max-w-5xl flex-col gap-6 py-6">{{ users }}</main>
+  <main class="container flex max-w-5xl flex-col gap-6 py-6">
+    <UserTeaser v-for="user in users" :user />
+  </main>
 </template>
 
 <script setup lang="ts">
