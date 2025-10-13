@@ -17,16 +17,15 @@
     @submit="onFormSubmit"
     class="flex w-full flex-col gap-6"
   >
-    <Message severity="secondary" class="[&>div]:flex">
-      <p>Profile visibility:</p>
-      <Badge
-        class="flex gap-1"
-        v-tooltip.bottom="{
-          value:
-            'Your profile is visible only if fields: First Name, Last Name, Age and Gender are filled',
-        }"
-        >Visible <Icon name="material-symbols:info-rounded" class="text-xl" />
-      </Badge>
+    <Message severity="secondary" class="py-2">
+      <div class="flex gap-2">
+        <p>Profile visibility:</p>
+        <Badge>Visible </Badge>
+      </div>
+      <p class="mt-1.5 text-sm font-light">
+        Your profile is visible only if fields: First Name, Last Name, Age and
+        Gender are filled.
+      </p>
     </Message>
     <Fieldset legend="General">
       <div class="flex flex-col gap-6">

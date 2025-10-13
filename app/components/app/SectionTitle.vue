@@ -1,6 +1,6 @@
 <template>
   <div class="mb-4 flex flex-col gap-2 md:gap-3 md:text-center">
-    <BitsAnimatedContent :delay="0.2">
+    <BitsAnimatedContent :delay="0.2" v-if="subtitle">
       <p class="text-sm text-gray-600 uppercase md:text-base">{{ subtitle }}</p>
     </BitsAnimatedContent>
     <BitsAnimatedContent :delay="0.4">
@@ -12,7 +12,7 @@
 <script setup lang="ts">
 type SectionTitleProps = {
   title: string;
-  subtitle: string;
+  subtitle?: string;
 };
 
 withDefaults(defineProps<SectionTitleProps>(), {
