@@ -1,6 +1,13 @@
-1. Refactor/research - all api routes
-2. All error handling for api response refactor.
 3. Skeleton loaders.
+4. Users list
+5. Faq/help page
+6. Bookmark persons - heart -> bookmark (for properties as well)
+7. Bookmark listing - tab for persons/properties
+8. Properties add form
+9. properites full view
+10. properties listing
+10.1 Pricing page
+11. Chat
 
 TO FIX:
 1. confirmt email - first logout if logged in user
