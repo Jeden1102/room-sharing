@@ -1,19 +1,19 @@
 <template>
   <aside>
-    <button @click="filtersOpened = !filtersOpened">
+    <button @click="filtersOpened = !filtersOpened" class="md:hidden">
       <Icon name="mage:filter" class="text-2xl" />
     </button>
     <div
       :class="
         clsx(
-          'fixed top-0 left-full z-20 flex size-full w-full flex-col gap-4 bg-white p-4 transition-all duration-300 lg:static',
+          'fixed top-0 left-full z-20 flex size-full w-full flex-col gap-4 bg-white p-4 transition-all duration-300 md:static md:flex-row md:p-0 md:[&>div]:w-full',
           {
             '!left-0': filtersOpened,
           },
         )
       "
     >
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between md:hidden">
         <h2 class="mb-4 text-lg font-semibold">Filtry</h2>
         <button @click="filtersOpened = !filtersOpened">
           <Icon name="mage:filter" class="text-2xl" />
@@ -47,7 +47,7 @@
       />
 
       <!-- Smoker / Pets -->
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-2 md:flex-row md:gap-4">
         <AtomsCheckbox
           label="Nie pali"
           v-model="filters.nonSmoker"
@@ -60,7 +60,7 @@
         />
       </div>
 
-      <Divider />
+      <Divider class="md:!hidden" />
       <!-- Sorting -->
       <AtomsDropdown
         label="Sortuj według"
@@ -69,10 +69,11 @@
         optionValue="value"
         v-model="filters.sortBy"
         name="sortBy"
+        class="md:hidden"
       />
 
       <Button
-        class="mt-4 md:hidden"
+        class="mt-4 md:!hidden"
         :label="`Wyświetl wyniki (${total})`"
         :loading="pending"
         @click="filtersOpened = false"
