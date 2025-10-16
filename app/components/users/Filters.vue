@@ -72,7 +72,7 @@
       />
 
       <Button
-        class="mt-4"
+        class="mt-4 md:hidden"
         :label="`Wyświetl wyniki (${total})`"
         :loading="pending"
         @click="filtersOpened = false"
@@ -85,7 +85,7 @@
 import clsx from "clsx";
 
 const props = defineProps<{
-  total: number;
+  total?: number;
   pending: boolean;
 }>();
 

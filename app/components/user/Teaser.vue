@@ -1,12 +1,12 @@
 <template>
   <div
-    class="card-base group relative overflow-hidden rounded-2xl px-0 shadow-md transition"
+    class="card-base group relative overflow-hidden rounded-xl px-0 shadow-md transition"
   >
     <div class="relative h-40 w-full">
       <img
         :src="user.bgImage || '/images/user/bg-placeholder.webp'"
         alt="user background"
-        class="h-full w-full object-cover"
+        class="h-full w-full rounded-t-xl object-cover"
       />
       <div
         class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"
@@ -29,7 +29,7 @@
             }}</span>
           </h3>
           <p class="mt-2 flex items-center gap-1 text-xs text-gray-500">
-            <i class="pi pi-map-marker text-gray-400"></i>
+            <i class="pi pi-map-marker text-gray-600"></i>
             {{ user.city
             }}<span v-if="user.districts?.length">
               – {{ user.districts[0] }}</span
@@ -41,7 +41,7 @@
 
       <div class="flex flex-wrap gap-2 text-xs text-gray-600">
         <div class="flex items-center gap-2" v-if="user.budgetMax">
-          <i class="pi pi-wallet text-blue-600"></i> do {{ user.budgetMax }} zł
+          <i class="pi pi-wallet text-gray-600"></i> do {{ user.budgetMax }} zł
         </div>
       </div>
 
@@ -69,7 +69,7 @@
           </RouterLink>
         </Button>
 
-        <Button icon="pi pi-comments" severity="secondary" rounded text />
+        <Button icon="pi pi-comments" severity="secondary" rounded />
       </div>
     </div>
   </div>
