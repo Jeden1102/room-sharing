@@ -1,7 +1,7 @@
 <template>
   <div>
     <FloatLabel variant="on">
-      <InputNumber :id="name" :name fluid />
+      <InputNumber :id="name" :name fluid v-model="model" />
       <label :for="name">{{ label }}</label>
     </FloatLabel>
     <Message
@@ -19,8 +19,9 @@
 const props = defineProps<{
   name: string;
   label: string;
-  form: any;
+  form?: any;
 }>();
+const model = defineModel();
 
 const fieldState = computed(() => props.form?.[props.name]);
 </script>

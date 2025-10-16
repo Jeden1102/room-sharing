@@ -31,7 +31,7 @@ const props = defineProps<{
   modelValue?: any;
   suggestions?: any[];
   placeholder?: string;
-  form: any;
+  form?: any;
 }>();
 
 const emit = defineEmits<{

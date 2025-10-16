@@ -1,4 +1,3 @@
-3. Skeleton loaders.
 4. Users list
 5. Faq/help page
 6. Bookmark persons - heart -> bookmark (for properties as well)

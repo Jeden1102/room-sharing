@@ -9,6 +9,7 @@
         :optionValue
         :label
         fluid
+        v-model="model"
       />
       <label :for="name">{{ label }}</label>
     </FloatLabel>
@@ -30,8 +31,10 @@ const props = defineProps<{
   options: any[];
   optionLabel?: string;
   optionValue?: string;
-  form: any;
+  form?: any;
 }>();
+
+const model = defineModel();
 
 const form = inject<any>("formContext");
 const fieldState = computed(() => form?.[props.name]);

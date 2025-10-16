@@ -1,5 +1,6 @@
 <template>
   <UserProfile v-if="user" :user="user" :editable="true" />
+  <UserProfileLoader v-if="pending" />
 </template>
 
 <script setup lang="ts">
@@ -12,7 +13,7 @@ usePageSeo({
   description: "User profile",
 });
 
-const { data: userData } = await useFetch("/api/user/me", {
+const { data: userData, pending } = await useFetch("/api/user/me", {
   lazy: true,
   cache: "no-cache",
 });
