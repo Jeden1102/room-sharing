@@ -3,13 +3,12 @@
     <button @click="filtersOpened = !filtersOpened" class="md:hidden">
       <Icon name="mage:filter" class="text-2xl" />
     </button>
+
     <div
       :class="
         clsx(
           'fixed top-0 left-full z-20 flex size-full w-full flex-col gap-4 bg-white p-4 transition-all duration-300 md:static md:flex-row md:p-0 md:[&>div]:w-full',
-          {
-            '!left-0': filtersOpened,
-          },
+          { '!left-0': filtersOpened },
         )
       "
     >
@@ -20,6 +19,7 @@
         </button>
       </div>
 
+      <!-- City -->
       <AtomsAutocomplete
         label="Miasto"
         v-model="filters.city"
@@ -61,7 +61,8 @@
       </div>
 
       <Divider class="md:!hidden" />
-      <!-- Sorting -->
+
+      <!-- Sorting (mobile only) -->
       <AtomsDropdown
         label="Sortuj według"
         :options="sortOptions"
@@ -72,12 +73,22 @@
         class="md:hidden"
       />
 
+      <!-- Apply (mobile only) -->
       <Button
         class="mt-4 md:!hidden"
         :label="`Wyświetl wyniki (${total})`"
         :loading="pending"
         @click="filtersOpened = false"
       />
+
+      <Button
+        severity="secondary"
+        class="flex items-center gap-2 md:!hidden"
+        @click="clearFilters"
+      >
+        <Icon name="fa7-solid:undo" class="text-sm" />
+        Wyczyść filtry
+      </Button>
     </div>
   </aside>
 </template>
@@ -90,7 +101,21 @@ const props = defineProps<{
   pending: boolean;
 }>();
 
+const emit = defineEmits(["update"]);
+
 const filtersOpened = ref(false);
+const debounceTimeout = ref<NodeJS.Timeout>();
+
+const defaultFilters = {
+  gender: null,
+  city: "",
+  nonSmoker: false,
+  noPets: false,
+  budgetMax: null,
+  sortBy: "newest",
+};
+
+const filters = reactive({ ...defaultFilters });
 
 watch(
   () => filtersOpened.value,
@@ -99,16 +124,32 @@ watch(
   },
 );
 
-const emit = defineEmits(["update"]);
+watch(
+  filters,
+  (val) => {
+    clearTimeout(debounceTimeout.value);
+    debounceTimeout.value = setTimeout(() => {
+      emit("update", { ...val });
+    }, 500);
+  },
+  { deep: true },
+);
 
-const filters = reactive({
-  gender: null,
-  city: "",
-  nonSmoker: false,
-  noPets: false,
-  budgetMax: null,
-  sortBy: "newest",
-});
+const filteredCities = ref<any[]>([]);
+const searchCity = async (event: any) => {
+  const query = event.query?.trim();
+  if (!query) return (filteredCities.value = []);
+
+  try {
+    const res = await $fetch(
+      `/api/geo/autocomplete?q=${encodeURIComponent(query)}`,
+    );
+    filteredCities.value =
+      res?.predictions?.map((p: any) => p.description.split(",")[0]) || [];
+  } catch (err) {
+    console.error("Error loading cities:", err);
+  }
+};
 
 const genderOptions = [
   { name: "Dowolna", id: null },
@@ -126,33 +167,7 @@ const sortOptions = [
   { label: "Budżet malejąco", value: "budgetDesc" },
 ];
 
-const filteredCities = ref<any[]>([]);
-const debounceTimeout = ref<NodeJS.Timeout>();
-
-const searchCity = async (event: any) => {
-  const query = event.query?.trim();
-  if (!query) return (filteredCities.value = []);
-
-  try {
-    const res = await $fetch(
-      `/api/geo/autocomplete?q=${encodeURIComponent(query)}`,
-    );
-    filteredCities.value =
-      res?.predictions?.map((p: any) => p.description.split(",")[0]) || [];
-  } catch (err) {
-    console.error("Error loading cities:", err);
-  }
+const clearFilters = () => {
+  Object.assign(filters, defaultFilters);
 };
-
-// Emit changes (debounced)
-watch(
-  filters,
-  (val) => {
-    clearTimeout(debounceTimeout.value);
-    debounceTimeout.value = setTimeout(() => {
-      emit("update", { ...val });
-    }, 500);
-  },
-  { deep: true },
-);
 </script>

@@ -37,7 +37,7 @@
           <NuxtLink class="nav-link" to="/users">Users</NuxtLink>
           <NuxtLink class="nav-link" to="/users">Product</NuxtLink>
           <NuxtLink class="nav-link" to="/contact">Contact</NuxtLink>
-          <AppLanguageSwitcher class="mt-auto lg:hidden" />
+          <AppLanguageSwitcher class="mt-auto pb-10 lg:hidden" />
         </div>
 
         <div class="hidden items-center gap-6 lg:flex">
