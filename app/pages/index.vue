@@ -4,6 +4,7 @@
     <AppFaq
       title="Najczęściej zadawane pytania"
       subtitle="Zanim napiszesz do nas — sprawdź, może odpowiedź już tu jest"
+      :containered="true"
       :questions="[
         {
           question: 'Jak mogę dodać ogłoszenie o mieszkaniu?',
@@ -24,10 +25,23 @@
     />
 
     <AppCta
+      title="Have some more questions?"
+      subtitle="See the FAQ page to find answers to your questions."
+    >
+      <Button asChild v-slot="slotProps" severity="primary">
+        <RouterLink :to="$localePath('faq')" :class="slotProps.class">
+          Go to FAQ
+        </RouterLink>
+      </Button>
+    </AppCta>
+
+    <AppCta
       title="We connect people searching for their dream apartments"
       subtitle="With the use of RealPro you can create searcher proflie or upload your
       apartment to seek for tenants."
       image="/images/home-cta.jpg"
+      :showLogo="true"
+      variant="primary"
     >
       <Button asChild v-slot="slotProps" severity="secondary">
         <RouterLink :to="$localePath('/auth/login')" :class="slotProps.class">

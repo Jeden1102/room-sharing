@@ -85,11 +85,20 @@
         severity="secondary"
         class="flex items-center gap-2 md:!hidden"
         @click="clearFilters"
+        v-if="anyFiltersSet"
       >
         <Icon name="fa7-solid:undo" class="text-sm" />
         Wyczyść filtry
       </Button>
     </div>
+    <button
+      class="mt-2 hidden items-center gap-2 pl-2 text-xs text-gray-600 md:flex"
+      @click="clearFilters"
+      v-if="anyFiltersSet"
+    >
+      <Icon name="fa7-solid:undo" class="text-xs" />
+      Wyczyść filtry
+    </button>
   </aside>
 </template>
 
@@ -116,6 +125,10 @@ const defaultFilters = {
 };
 
 const filters = reactive({ ...defaultFilters });
+
+const anyFiltersSet = computed(() => {
+  return JSON.stringify(filters) !== JSON.stringify(defaultFilters);
+});
 
 watch(
   () => filtersOpened.value,

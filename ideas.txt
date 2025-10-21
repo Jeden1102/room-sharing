@@ -1,7 +1,3 @@
-4. Users list
-4.0 users list - clear filters for desktop.
-4.1 Users list testing/refactors if needed
-5. Faq/help page
 6. Bookmark persons - heart -> bookmark (for properties as well)
 7. Bookmark listing - tab for persons/properties
 8. Properties add form
@@ -15,3 +11,6 @@ TO FIX:
 
 RESEARACH:
 1. File formatter for nuxt.
+
+Others:
+1. Profile/property reporting to admins.

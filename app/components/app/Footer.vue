@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-gray-100 py-10 text-gray-700 mt-auto">
+  <footer class="mt-auto bg-gray-100 py-10 text-gray-700">
     <div class="container mx-auto grid grid-cols-1 gap-8 px-6 md:grid-cols-4">
       <div>
         <div class="mb-4 flex items-center space-x-2">
@@ -42,10 +42,8 @@
         <h3 class="mb-3 font-semibold lg:text-lg">Explore</h3>
         <ul class="space-y-2 text-sm lg:space-y-3 lg:text-base">
           <li><NuxtLink to="#" class="footer-link">About Us</NuxtLink></li>
-          <li><NuxtLink to="#" class="footer-link">Our Projects</NuxtLink></li>
+          <li><NuxtLink to="faq" class="footer-link">FAQ</NuxtLink></li>
           <li><NuxtLink to="#" class="footer-link">Pricing</NuxtLink></li>
-          <li><NuxtLink to="#" class="footer-link">Testimonial</NuxtLink></li>
-          <li><NuxtLink to="#" class="footer-link">Appointment</NuxtLink></li>
         </ul>
       </div>
 
@@ -63,11 +61,6 @@
       <div>
         <h3 class="mb-3 font-semibold lg:text-lg">T&amp;C</h3>
         <ul class="space-y-2 text-sm lg:space-y-3 lg:text-base">
-          <li>
-            <NuxtLink to="#" class="footer-link">Property on sale</NuxtLink>
-          </li>
-          <li><NuxtLink to="#" class="footer-link">About Us</NuxtLink></li>
-          <li><NuxtLink to="#" class="footer-link">Our Team</NuxtLink></li>
           <li><NuxtLink to="#" class="footer-link">Terms of use</NuxtLink></li>
           <li>
             <NuxtLink to="#" class="footer-link">Privacy Policy</NuxtLink>
