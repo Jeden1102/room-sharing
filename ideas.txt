@@ -1,5 +1,3 @@
-6. Bookmark persons - heart -> bookmark (for properties as well)
-7. Bookmark listing - tab for persons/properties
 8. Properties add form
 9. properites full view
 10. properties listing

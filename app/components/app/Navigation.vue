@@ -20,7 +20,7 @@
         :class="
           clsx(
             {
-              '!pointer-events-auto z-10 translate-y-0 opacity-100':
+              '!pointer-events-auto z-20 translate-y-0 opacity-100':
                 isMenuOpened,
             },
             'pointer-events-none absolute top-16 left-0 z-10 flex size-full w-full -translate-y-4 flex-col justify-between bg-white p-4 opacity-0 transition-all duration-300 lg:pointer-events-auto lg:static lg:translate-y-0 lg:flex-row lg:items-center lg:p-0 lg:opacity-100',
@@ -35,9 +35,15 @@
             >Properties</NuxtLink
           >
           <NuxtLink class="nav-link" to="/users">Users</NuxtLink>
-          <NuxtLink class="nav-link" to="/users">Product</NuxtLink>
+          <NuxtLink class="nav-link" to="/product">Product</NuxtLink>
           <NuxtLink class="nav-link" to="/contact">Contact</NuxtLink>
-          <AppLanguageSwitcher class="mt-auto pb-10 lg:hidden" />
+          <NuxtLink
+            class="nav-link lg:hidden"
+            v-if="data?.user"
+            @click="() => signOut()"
+            >Logout</NuxtLink
+          >
+          <AppLanguageSwitcher class="mt-auto lg:hidden" />
         </div>
 
         <div class="hidden items-center gap-6 lg:flex">

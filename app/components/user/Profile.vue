@@ -47,7 +47,7 @@
           </div>
 
           <div class="mt-auto flex gap-2">
-            <Button label="Wiadomość" icon="pi pi-comment" />
+            <Button icon="pi pi-comment" rounded />
             <Button
               asChild
               v-slot="slotProps"
