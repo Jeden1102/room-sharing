@@ -8,7 +8,6 @@
     <Skeleton height="3rem" />
     <Skeleton height="13rem" class="col-span-2" />
   </div>
-
   <Form
     v-else-if="initialValues"
     v-slot="$form"
@@ -20,11 +19,14 @@
     <Message severity="secondary" class="py-2">
       <div class="flex gap-2">
         <p>Profile visibility:</p>
-        <Badge>Visible </Badge>
+        <Badge
+          :severity="initialValues.profileVisible ? 'primary' : 'danger'"
+          >{{ initialValues.profileVisible ? "Visible" : "Hidden" }}</Badge
+        >
       </div>
       <p class="mt-1.5 text-sm font-light">
-        Your profile is visible only if fields: First Name, Last Name, Age and
-        Gender are filled.
+        Your profile is visible on users list page only if fields: First Name,
+        Last Name, Age, Gender and City are filled.
       </p>
     </Message>
     <Fieldset legend="General">
@@ -343,6 +345,10 @@ const onFormSubmit = async ({ valid, values }: any) => {
   if (availableDistricts.value?.length === 0) {
     values.districts = [];
   }
+
+  const obligatoryFields = ["firstName", "lastName", "age", "gender", "city"];
+
+  values.profileVisible = obligatoryFields.every((field) => values[field]);
 
   try {
     const { data, error } = await useFetch("/api/user/update", {

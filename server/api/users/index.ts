@@ -17,7 +17,9 @@ export default defineEventHandler(async (event) => {
     const take = 10;
     const skip = (Number(page) - 1) * take;
 
-    const where: any = {};
+    const where: any = {
+      profileVisible: true,
+    };
 
     if (gender) where.gender = gender;
     if (city) where.city = { contains: city as string, mode: "insensitive" };

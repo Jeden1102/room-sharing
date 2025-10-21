@@ -23,6 +23,7 @@ model User {
   propertyId            String?
   emailVerificationCode String   @unique
   emailVerified         Boolean  @default(true)
+  profileVisible        Boolean  @default(false)
   provider              String?
   providerAccountId     String?
   passwordResetCode     String?  @unique

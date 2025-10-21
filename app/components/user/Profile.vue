@@ -73,7 +73,7 @@
             </p>
             <p class="mt-2 text-sm text-gray-700">
               {{ user.age }} lat • {{ user.city }}
-              <template v-if="user.districts">
+              <template v-if="user.districts.length > 0">
                 | {{ user.districts.join(", ") }}
               </template>
             </p>
@@ -84,9 +84,10 @@
               <i class="pi pi-user text-primary-500 text-xl"></i>
               <div>
                 <div class="text-xs text-gray-500">Imię</div>
-                <div class="font-medium">
+                <div class="font-medium" v-if="user.firstName && user.lastName">
                   {{ user.firstName }} {{ user.lastName }}
                 </div>
+                <div class="font-medium" v-else>No data</div>
               </div>
             </div>
 
@@ -96,7 +97,7 @@
                 <div class="text-xs text-gray-500">Zawód</div>
                 <div class="font-medium">
                   <span
-                    v-if="user.occupation"
+                    v-if="user.occupation.length > 0"
                     v-for="i in user.occupation"
                     :key="i.id"
                     >{{ i.name }}</span
@@ -123,12 +124,13 @@
               <i class="pi pi-map-marker text-primary-500 text-xl"></i>
               <div>
                 <div class="text-xs text-gray-500">Poszukiwana lokalizacja</div>
-                <div class="font-medium">
+                <div class="font-medium" v-if="user.city">
                   {{ user.city }}
-                  <template v-if="user.districts">
+                  <template v-if="user.districts.length > 0">
                     | {{ user.districts.join(", ") }}
                   </template>
                 </div>
+                <div class="font-medium" v-else>No data</div>
               </div>
             </div>
 
@@ -153,11 +155,12 @@
           </div>
 
           <div
+            v-if="user.description"
             class="mt-2 text-sm text-gray-700"
             v-html="user.description?.replaceAll('\n', '<br />')"
           ></div>
 
-          <div class="mt-4">
+          <div class="mt-4" v-if="user.interests.length > 0">
             <div class="flex flex-wrap gap-2">
               <Tag
                 v-for="i in user.interests"
@@ -176,24 +179,27 @@
             <div class="mt-4 space-y-3 text-sm text-gray-700">
               <div>
                 <strong>Preferencje:</strong>
-                <ul class="list-inside list-disc" v-if="user.searchPreferences">
+                <ul
+                  class="list-inside list-disc"
+                  v-if="user.searchPreferences.length > 0"
+                >
                   <li v-for="i in user.searchPreferences" :key="i.id">
                     {{ i.name }}
                   </li>
                 </ul>
-                <span v-else>No data</span>
+                <span v-else class="pl-2">No data</span>
               </div>
               <div>
                 <strong>Typ mieszkania:</strong>
                 <ul
                   class="list-inside list-disc"
-                  v-if="user.searchPropertyType"
+                  v-if="user.searchPropertyType.length > 0"
                 >
                   <li v-for="i in user.searchPropertyType" :key="i.id">
                     {{ i.name }}
                   </li>
                 </ul>
-                <span v-else>No data</span>
+                <span v-else class="pl-2">No data</span>
               </div>
             </div>
           </div>
@@ -205,21 +211,25 @@
                 <strong>Preferencje dotyczące ciszy:</strong>
                 <ul
                   class="list-inside list-disc"
-                  v-if="user.noiseCompatibility"
+                  v-if="user.noiseCompatibility.length > 0"
                 >
                   <li v-for="i in user.noiseCompatibility" :key="i.id">
                     {{ i.name }}
                   </li>
                 </ul>
-                <span v-else>No data</span>
+                <span v-else class="pl-2">No data</span>
               </div>
               <div>
                 <strong>Zwierzęta:</strong>
-                <ul class="list-inside list-disc" v-if="user.petsCompatibility">
+                <ul
+                  class="list-inside list-disc"
+                  v-if="user.petsCompatibility.length > 0"
+                >
                   <li v-for="i in user.petsCompatibility" :key="i.id">
                     {{ i.name }}
                   </li>
                 </ul>
+                <span v-else class="pl-2">No data</span>
               </div>
             </div>
           </div>
@@ -237,8 +247,8 @@
         <div class="card-base p-6">
           <h3 class="text-md mb-3 font-semibold">Kontakt</h3>
           <div class="text-sm text-gray-700">
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Telefon:</strong> {{ user.phone }}</p>
+            <p><strong>Email:</strong> {{ user.email || "No data" }}</p>
+            <p><strong>Telefon:</strong> {{ user.phone || "No data" }}</p>
           </div>
 
           <div class="mt-4 flex flex-col gap-3 md:flex-row">
@@ -248,6 +258,7 @@
               severity="secondary"
               label="Wyślij e-mail"
               icon="pi pi-envelope"
+              v-if="user.email"
             >
               <a :href="`mailto:${user.email}`" :class="slotProps.class">
                 Wyślij e-mail
@@ -258,6 +269,7 @@
               v-slot="slotProps"
               label="Wyślij e-mail"
               icon="pi pi-envelope"
+              v-if="user.phone"
             >
               <a :href="`tel:${user.phone}`" :class="slotProps.class"
                 >Zadzwoń</a
