@@ -47,7 +47,7 @@ const userMenuItems = ref([
   },
   {
     label: "Favorites",
-    icon: "pi pi-heart",
+    icon: "pi pi-bookmark",
     command: localePath("/user/favorites"),
   },
   {

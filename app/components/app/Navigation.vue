@@ -76,10 +76,10 @@
             v-slot="slotProps"
             rounded
             severity="secondary"
-            icon="pi pi-heart"
+            icon="pi pi-bookmark"
           >
             <RouterLink to="/user/favorites" :class="slotProps.class">
-              <span class="pi pi-heart"></span>
+              <span class="pi pi-bookmark"></span>
             </RouterLink>
           </Button>
 

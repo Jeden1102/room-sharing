@@ -28,9 +28,9 @@
         class="!absolute top-2 right-2"
         rounded
         severity="secondary"
-        icon="pi pi-heart"
+        icon="pi pi-bookmark"
       >
-        <span class="pi pi-heart"></span>
+        <span class="pi pi-bookmark"></span>
       </Button>
     </div>
 
