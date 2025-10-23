@@ -1,3 +1,4 @@
+7. Schema update.
 8. Properties add form
 9. properites full view
 10. properties listing
