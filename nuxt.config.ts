@@ -53,6 +53,7 @@ export default defineNuxtConfig({
     "nuxt-file-storage",
     "@nuxt/icon",
     "@nuxtjs/seo",
+    "nuxt-security",
   ],
   fileStorage: {
     mount: process.cwd() + "/public/uploads",
@@ -110,6 +111,19 @@ export default defineNuxtConfig({
       enablePeriodically: true,
       enableOnWindowFocus: true,
     },
+  },
+  security: {
+    rateLimiter: false,
+    headers: {
+      contentSecurityPolicy: {
+        'img-src': [
+          "'self'",
+          'data:',
+          'blob:',
+          'https://*.vercel-storage.com'
+        ]
+      }
+    }
   },
   nodemailer: {
     from: '"Rooms" <dev@dominikraducki.pl>',

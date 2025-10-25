@@ -92,7 +92,7 @@
       </Button>
     </div>
     <button
-      class="mt-2 hidden items-center gap-2 pl-2 text-xs text-gray-600 md:flex"
+      class="mt-2 hidden cursor-pointer items-center gap-2 pl-2 text-xs text-gray-600 md:flex"
       @click="clearFilters"
       v-if="anyFiltersSet"
     >
