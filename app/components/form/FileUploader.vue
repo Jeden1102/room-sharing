@@ -30,6 +30,14 @@
           icon="pi pi-trash"
           size="small"
         ></Button>
+        <Button
+          v-if="canSetPrimary"
+          class="!absolute top-14 right-2 z-10"
+          @click="setAsPrimary(img)"
+          icon="pi pi-star"
+          size="small"
+          severity="secondary"
+        ></Button>
       </div>
     </div>
 
@@ -58,6 +66,7 @@ const props = defineProps<{
   label: string;
   modelValue: string[];
   maxFiles: number;
+  canSetPrimary: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -76,6 +85,10 @@ const imageToDelete = ref<string | null>(null);
 const confirmDelete = (file: string) => {
   imageToDelete.value = file;
   deleteDialogVisible.value = true;
+};
+
+const setAsPrimary = (file: string) => {
+  emit("update:modelValue", [file]);
 };
 
 const doDelete = () => {

@@ -173,6 +173,7 @@
         id="moodboardImages"
         name="moodboardImages"
         label="Moodboard Images"
+        :canSetPrimary="false"
         v-model="initialValues.moodboardImages"
         @filesSelected="(newFiles) => (files = newFiles)"
         @delete="deleteImage"

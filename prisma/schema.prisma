@@ -57,7 +57,7 @@ model Property {
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
   type            String?
-  status          PropertyStatus @default(ACTIVE)
+  status          PropertyStatus @default(DRAFT)
   title           String
   description     String?
   price           Int
@@ -138,8 +138,7 @@ model PetsCompatibility {
 }
 
 enum PropertyStatus {
+  DRAFT
   ACTIVE
   RESERVED
-  RENTED
-  SOLD
 }

@@ -178,6 +178,7 @@
         @delete="onDeleteImage"
         :maxFiles="8 - (initialValues?.images?.length || 0)"
         :form="$form"
+        :can-set-primary="true"
       />
     </Fieldset>
 
@@ -233,9 +234,9 @@ const initialValues = ref<any>({
   city: null,
 });
 
-const props = defineProps({
-  isEdit: { type: Boolean, default: false },
-});
+const props = defineProps<{
+  isEdit?: boolean;
+}>();
 
 const formStatus = ref({ success: false, message: "", isLoading: false });
 const files = ref<File[]>([]);
@@ -329,7 +330,7 @@ watch(
   },
 );
 
-const onFormSubmit = async ({ valid, values }: any) => {
+const onFormSubmit = async ({ valid, values, reset }: any) => {
   if (!valid) return;
   formStatus.value.isLoading = true;
   formStatus.value.message = "";
@@ -352,7 +353,6 @@ const onFormSubmit = async ({ valid, values }: any) => {
     }
 
     const url = props.isEdit ? "/api/property/update" : "/api/property/create";
-    console.log(values);
     const { data, error } = await useFetch(url, {
       method: "POST",
       body: values,
@@ -363,7 +363,9 @@ const onFormSubmit = async ({ valid, values }: any) => {
     formStatus.value.success = true;
     formStatus.value.message = props.isEdit
       ? "Zaktualizowano ofertę"
-      : "Oferta dodana";
+      : "Oferta dodana, aby opublikować, przejdź do panelu Twoich ogłoszeń.";
+
+    reset();
   } catch (err: any) {
     console.error(err);
     formStatus.value.success = false;

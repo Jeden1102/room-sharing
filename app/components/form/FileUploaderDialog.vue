@@ -15,6 +15,7 @@
         @filesSelected="onFilesSelected"
         @delete="onDelete"
         :maxFiles="1"
+        :canSetPrimary="false"
       />
 
       <template #footer>
