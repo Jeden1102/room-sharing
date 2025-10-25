@@ -1,5 +1,6 @@
-7. Schema update.
 8. Properties add form
+8.0 My properties listing
+8.1 Property edit form
 9. properites full view
 10. properties listing
 10.1 Pricing page

@@ -40,8 +40,6 @@ model User {
   messagesReceived Message[]  @relation("MessagesReceived")
   messagesSent     Message[]  @relation("MessagesSent")
   properties       Property[]
-  reviewsWritten   Review[]   @relation("ReviewsWritten")
-  reviewsReceived  Review[]   @relation("ReviewsReceived")
 
   interests          Interest[]
   occupation         Occupation[]
@@ -58,55 +56,39 @@ model Property {
   id              String         @id @default(uuid())
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
-  type            PropertyType
+  type            String?
   status          PropertyStatus @default(ACTIVE)
   title           String
   description     String?
   price           Int
-  currency        String
   deposit         Int?
-  utilities       Int?
   city            String
   district        String?
   street          String?
-  postalCode      String?
-  latitude        Float?
-  longitude       Float?
+  buildingNumber  String?
+  latitude        Float? //todo
+  longitude       Float? // todo
   sizeM2          Int?
   rooms           Int?
-  bathrooms       Int?
   floor           Int?
   yearBuilt       Int?
   furnished       Boolean?
-  condition       String?
   balcony         Boolean?
   elevator        Boolean?
   parking         Boolean?
   petsAllowed     Boolean?
   smokingAllowed  Boolean?
   internet        Boolean?
+  tv              Boolean?
   washingMachine  Boolean?
   dishwasher      Boolean?
   airConditioning Boolean?
-  isShared        Boolean?       @default(false)
+  isShared        Boolean?       @default(false) // @todo
   roomType        String?
   images          String[]
-  videoUrl        String?
-  floorPlanUrl    String?
   ownerId         String
   owner           User           @relation(fields: [ownerId], references: [id])
   roommates       User[]         @relation("PropertyRoommates")
-}
-
-model Review {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now())
-  rating      Int
-  comment     String?
-  authorId    String
-  recipientId String
-  author      User     @relation("ReviewsWritten", fields: [authorId], references: [id])
-  recipient   User     @relation("ReviewsReceived", fields: [recipientId], references: [id])
 }
 
 model Message {
@@ -153,12 +135,6 @@ model PetsCompatibility {
   id    String @id @default(uuid())
   name  String @unique
   users User[]
-}
-
-enum PropertyType {
-  RENT
-  SALE
-  FLATSHARE
 }
 
 enum PropertyStatus {

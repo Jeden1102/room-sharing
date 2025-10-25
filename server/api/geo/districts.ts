@@ -60,6 +60,8 @@ export default defineEventHandler(async (event) => {
       return true;
     });
 
+    districts.sort((a,b ) => a.localeCompare(b));
+
     const result = { districts };
 
     await put(blobPath, JSON.stringify(result, null, 2), {

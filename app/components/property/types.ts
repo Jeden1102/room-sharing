@@ -13,20 +13,10 @@ export type Location = {
   address: string;
   city: string;
   district?: string;
-  postalCode?: string;
   country: string;
   latitude?: number;
   longitude?: number;
   nearbyPlaces?: string[];
-};
-
-export type Utilities = {
-  heating: "central" | "gas" | "electric" | "district" | "other";
-  water: "city" | "well" | "other";
-  electricity: boolean;
-  internet: boolean;
-  tv: boolean;
-  gas: boolean;
 };
 
 export type Amenities = {
@@ -76,7 +66,6 @@ export type SharingInfo = {
   availableSpots: number;
   preferredOccupants?: string[];
   description?: string;
-  roomType?: "single" | "double" | "shared";
   roomArea?: number;
   currentOccupantsProfiles?: {
     age: number;
@@ -110,13 +99,11 @@ export type Property = {
   videos?: Video[];
   location: Location;
   details: Details;
-  utilities?: Utilities;
   amenities?: Amenities;
   security?: Security;
   sharing?: SharingInfo;
   extra?: ExtraInfo;
   price: number;
-  currency?: "PLN" | "EUR" | "USD";
   createdAt: Date;
   updatedAt: Date;
   owner: UserRef;

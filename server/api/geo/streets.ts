@@ -48,17 +48,20 @@ export default defineEventHandler(async (event) => {
       },
     );
 
+
     const streetsRaw = response.elements
       .map((el) => el.tags?.name?.trim())
-      .filter((s) => s.name);
 
     const seen = new Set<string>();
     const streets = streetsRaw.filter((s) => {
-      const key = s.name.toLowerCase();
+      const key = s;
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
     });
+
+    streets.sort((a,b) => a.localeCompare(b));
+
 
     const result = { streets };
 
@@ -66,6 +69,7 @@ export default defineEventHandler(async (event) => {
       access: "public",
       addRandomSuffix: false,
       contentType: "application/json",
+      allowOverwrite: true,
     });
 
     return {
