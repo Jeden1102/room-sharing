@@ -13,18 +13,22 @@
       @row-edit-save="onRowEditSave"
     >
       <Column field="title" header="Title" sortable style="width: 25%">
-        <template #editor="{ data, field }">
-          <InputText v-model="data[field]" fluid />
-        </template>
       </Column>
       <Column field="city" header="City" sortable style="width: 25%"></Column>
       <Column field="price" header="Price" sortable style="width: 25%"></Column>
-      <Column
-        field="status"
-        header="Status"
-        sortable
-        style="width: 25%"
-      ></Column>
+      <Column field="status" header="Status" sortable style="width: 25%">
+        <template #editor="{ data, field }">
+          <AtomsDropdown
+            name="listingType"
+            label=""
+            :options="statusOptions"
+            optionLabel="label"
+            optionValue="value"
+            v-model="data[field]"
+            :form="null"
+          />
+        </template>
+      </Column>
       <Column header="Actions">
         <template #body="slotProps">
           <Button asChild v-slot="buttonProps">
@@ -60,13 +64,35 @@ usePageSeo({
   description: "Properties list",
 });
 
+const statusOptions = [
+  { label: "Szkic", value: "DRAFT" },
+  { label: "Aktywne", value: "ACTIVE" },
+  { label: "Zarezerwowane", value: "RESERVED" },
+];
+
 const editingRows = ref([]);
 
-const onRowEditSave = (event) => {
-  let { newData, index } = event;
+const onRowEditSave = async (event: any) => {
+  const { newData, index } = event;
 
-  console.log(newData, index);
+  try {
+    const res = await $fetch("/api/property/update", {
+      method: "POST",
+      body: {
+        id: newData.id,
+        status: newData.status,
+      },
+    });
+
+    if (res.success) {
+      await refresh();
+    }
+  } catch (error: any) {
+    console.error("Błąd aktualizacji:", error);
+  }
 };
 
-const { status, data } = await useFetch("/api/properties/my", { lazy: true });
+const { status, data, refresh } = await useFetch("/api/properties/my", {
+  lazy: true,
+});
 </script>
