@@ -46,9 +46,9 @@ const userMenuItems = ref([
     command: localePath("/user/profile"),
   },
   {
-    label: "My publications",
+    label: "My properties",
     icon: "pi pi-list",
-    command: localePath("/user/publications"),
+    command: localePath("/user/properties"),
   },
   {
     label: "Favorites",

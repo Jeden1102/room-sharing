@@ -15,6 +15,7 @@ export default defineEventHandler(async (event) => {
         title: body.title,
         description: body.description ?? null,
         type: body.type,
+        listingType: body.listingType,
         status: "ACTIVE",
         price: body.price ?? 0,
         deposit: body.deposit ?? null,

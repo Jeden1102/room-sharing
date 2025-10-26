@@ -57,6 +57,7 @@ model Property {
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
   type            String?
+  listingType     ListingType
   status          PropertyStatus @default(DRAFT)
   title           String
   description     String?
@@ -141,4 +142,9 @@ enum PropertyStatus {
   DRAFT
   ACTIVE
   RESERVED
+}
+
+enum ListingType {
+  SALE
+  RENT
 }

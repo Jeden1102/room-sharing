@@ -39,8 +39,8 @@ const links = [
   },
   {
     icon: "pi pi-plus",
-    to: localePath("/new-publication"),
-    title: "Add new publication",
+    to: localePath("/new-property"),
+    title: "Add new property",
   },
   {
     icon: "pi pi-search",

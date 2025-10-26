@@ -72,8 +72,8 @@
           </template>
 
           <Button asChild v-slot="slotProps">
-            <RouterLink to="/new-publication" :class="slotProps.class">
-              Add new publication
+            <RouterLink to="/new-property" :class="slotProps.class">
+              Add new property
             </RouterLink>
           </Button>
 

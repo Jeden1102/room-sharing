@@ -34,12 +34,21 @@
     </Message>
 
     <Fieldset legend="Dane podstawowe">
-      <div class="mt-4 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-        <AtomsInput name="title" label="Tytuł" :form="$form" />
+      <div class="mt-4 grid w-full grid-cols-1 gap-4 md:grid-cols-3">
+        <AtomsInput name="title" label="Tytuł*" :form="$form" />
         <AtomsDropdown
           name="type"
-          label="Typ nieruchomości"
+          label="Typ nieruchomości*"
           :options="typeOptions"
+          optionLabel="label"
+          optionValue="value"
+          :form="$form"
+        />
+
+        <AtomsDropdown
+          name="listingType"
+          label="Na wynajem/Na sprzedaz*"
+          :options="listingOptions"
           optionLabel="label"
           optionValue="value"
           :form="$form"
@@ -47,7 +56,13 @@
       </div>
 
       <div class="my-4 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-        <AtomsNumber name="price" label="Cena (PLN)" :form="$form" />
+        <div>
+          <AtomsNumber name="price" label="Cena (PLN)*" :form="$form" />
+          <span class="text-xs text-gray-500"
+            >Jeśli mieszkanie jest dzielone, podaj cenę najtańszego
+            pokoju.</span
+          >
+        </div>
         <AtomsNumber name="deposit" label="Kaucja (PLN)" :form="$form" />
       </div>
 
@@ -58,11 +73,10 @@
       <div class="mt-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
         <AtomsAutocomplete
           name="city"
-          label="Miasto"
+          label="Miasto*"
           :suggestions="filteredCities"
           v-model="initialValues.city"
           @complete="searchCity"
-          placeholder="Wpisz miasto"
           :form="$form"
         />
 
@@ -104,8 +118,8 @@
 
     <Fieldset legend="Wielkość & połozenie">
       <div class="mt-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-        <AtomsNumber name="sizeM2" label="Powierzchnia (m²)" :form="$form" />
-        <AtomsNumber name="rooms" label="Liczba pokoi" :form="$form" />
+        <AtomsNumber name="sizeM2" label="Powierzchnia (m²)*" :form="$form" />
+        <AtomsNumber name="rooms" label="Liczba pokoi*" :form="$form" />
         <AtomsNumber name="floor" label="Piętro" :form="$form" />
         <AtomsNumber name="yearBuilt" label="Rok budowy" :form="$form" />
       </div>
@@ -250,6 +264,11 @@ const typeOptions = [
   { label: "Dom", value: "HOUSE" },
   { label: "Pokój", value: "ROOM" },
   { label: "Studio", value: "STUDIO" },
+];
+
+const listingOptions = [
+  { label: "Na wynajem", value: "RENT" },
+  { label: "Na sprzedaz", value: "SALE" },
 ];
 
 const isLoading = ref(false);

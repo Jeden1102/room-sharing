@@ -85,7 +85,5 @@
 <script setup lang="ts">
 import type { Teaser } from "./types";
 
-const { formatPrice } = useFormatPrice();
-
 const props = defineProps<Teaser>();
 </script>
