@@ -29,6 +29,7 @@ export default requireAuth(
       "description",
       "status",
       "type",
+      "listingType",
       "price",
       "deposit",
       "city",
@@ -55,6 +56,8 @@ export default requireAuth(
       "isShared",
       "images",
       "roomType",
+      "email",
+      "phone",
     ];
 
     const updateData = Object.fromEntries(
@@ -69,6 +72,10 @@ export default requireAuth(
         data: updateData,
       });
 
+      const cacheStorage = useStorage("cache:properties:property");
+      await cacheStorage.removeItem(
+        `${id}.json`.replaceAll("-", ""),
+      );
       return { success: true, property: updatedProperty };
     } catch (e: any) {
       console.error("Błąd aktualizacji nieruchomości:", e);

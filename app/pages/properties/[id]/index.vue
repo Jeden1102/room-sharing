@@ -1,24 +1,7 @@
 <template>
   <main class="container flex max-w-5xl flex-col gap-6 py-6">
-    Here single property {{ route.query.id }}
+    Here single property
     {{ property }}
-
-    <Button asChild v-slot="buttonProps">
-      <RouterLink
-        :class="buttonProps.class"
-        :to="
-          $localePath({
-            name: 'properties-id-edit',
-            params: {
-              id: slugify(property.title),
-            },
-            query: { id: property.id },
-          })
-        "
-      >
-        Edit
-      </RouterLink>
-    </Button>
   </main>
 </template>
 

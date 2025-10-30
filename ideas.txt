@@ -1,5 +1,6 @@
-8.0 My properties listing (teaser + view)
 8.1 Property edit form
+0. main image set
+1. form validations for edit/add improve - front + backend
 9. properites full view
 10. properties listing
 10.1 Pricing page

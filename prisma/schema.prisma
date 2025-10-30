@@ -88,6 +88,8 @@ model Property {
   roomType        String?
   images          String[]
   ownerId         String
+  email           String?
+  phone           String?
   owner           User           @relation(fields: [ownerId], references: [id])
   roommates       User[]         @relation("PropertyRoommates")
 }

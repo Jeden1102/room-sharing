@@ -28,6 +28,8 @@ export default defineEventHandler(async (event) => {
         sizeM2: body.sizeM2 ?? null,
         rooms: body.rooms ?? null,
         floor: body.floor ?? null,
+        phone: body.phone ?? null,
+        email: body.email ?? null,
         yearBuilt: body.yearBuilt ?? null,
         furnished: body.furnished ?? false,
         balcony: body.balcony ?? false,

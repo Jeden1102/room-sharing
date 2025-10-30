@@ -23,6 +23,7 @@ export default requireAuth(
             type: true,
             listingType: true,
            },
+           orderBy: { createdAt: "desc" },
         });
         
         return { success: true, properties };

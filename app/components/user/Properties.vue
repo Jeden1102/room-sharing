@@ -48,6 +48,23 @@
               </RouterLink>
             </Button>
 
+            <Button asChild v-slot="buttonProps" severity="secondary">
+              <RouterLink
+                :class="buttonProps.class"
+                :to="
+                  $localePath({
+                    name: 'properties-id-edit',
+                    params: {
+                      id: slugify(slotProps.data.title),
+                    },
+                    query: { id: slotProps.data.id },
+                  })
+                "
+              >
+                Edit
+              </RouterLink>
+            </Button>
+
             <Button
               severity="danger"
               icon="pi pi-trash"

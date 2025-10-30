@@ -20,7 +20,7 @@
     <Message severity="secondary" class="py-2">
       <div class="flex items-center gap-2">
         <p class="font-medium">
-          {{ isEdit ? "Edytujesz nieruchomość" : "Dodajesz nieruchomość" }}
+          {{ property ? "Edytujesz nieruchomość" : "Dodajesz nieruchomość" }}
         </p>
         <Badge
           :severity="initialValues?.status === 'ACTIVE' ? 'success' : 'warning'"
@@ -28,7 +28,7 @@
           {{ initialValues?.status || "draft" }}
         </Badge>
       </div>
-      <p class="mt-1.5 text-sm font-light">
+      <p class="mt-1.5 text-sm font-light" v-if="!property">
         Dodaj podstawowe informacje o ofercie — możesz je edytować później.
       </p>
     </Message>
@@ -204,16 +204,8 @@
           :form="$form"
           v-if="false"
         />
-        <AtomsInput
-          name="contactPhone"
-          label="Numer kontaktowy"
-          :form="$form"
-        />
-        <AtomsInput
-          name="contactEmail"
-          label="Email kontaktowy"
-          :form="$form"
-        />
+        <AtomsInput name="phone" label="Numer kontaktowy" :form="$form" />
+        <AtomsInput name="email" label="email" :form="$form" />
       </div>
     </Fieldset>
 
@@ -223,7 +215,7 @@
       <div class="flex items-center gap-3">
         <Button
           type="submit"
-          :label="isEdit ? 'Zapisz zmiany' : 'Dodaj ofertę'"
+          :label="property ? 'Zapisz zmiany' : 'Dodaj ofertę'"
           :loading="formStatus.isLoading"
         />
       </div>
@@ -244,13 +236,15 @@ import { AtomsAutocomplete, AtomsDropdown } from "#components";
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { propertyCreateSchema } from "~/schemas/property";
 
-const initialValues = ref<any>({
-  city: null,
-});
-
 const props = defineProps<{
-  isEdit?: boolean;
+  property?: any;
 }>();
+
+const initialValues = ref<any>(
+  props.property || {
+    city: null,
+  },
+);
 
 const formStatus = ref({ success: false, message: "", isLoading: false });
 const files = ref<File[]>([]);
@@ -349,6 +343,13 @@ watch(
   },
 );
 
+onMounted(async () => {
+  if (props.property) {
+    await fetchDistricts(props.property.city);
+    await fetchStreets(props.property.city);
+  }
+});
+
 const onFormSubmit = async ({ valid, values, reset }: any) => {
   if (!valid) return;
   formStatus.value.isLoading = true;
@@ -367,11 +368,15 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
       values.images = imageUris.value || values.images || [];
     }
 
+    values.id = props.property?.id;
+
     if (availableDistricts.value?.length === 0) {
       values.district = null;
     }
 
-    const url = props.isEdit ? "/api/property/update" : "/api/property/create";
+    const url = props.property
+      ? "/api/property/update"
+      : "/api/property/create";
     const { data, error } = await useFetch(url, {
       method: "POST",
       body: values,
@@ -380,11 +385,13 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
     if (error.value) throw new Error(error.value.message || "Błąd serwera");
 
     formStatus.value.success = true;
-    formStatus.value.message = props.isEdit
+    formStatus.value.message = props.property
       ? "Zaktualizowano ofertę"
       : "Oferta dodana, aby opublikować, przejdź do panelu Twoich ogłoszeń.";
 
-    reset();
+    if (!props.property) {
+      reset();
+    }
   } catch (err: any) {
     console.error(err);
     formStatus.value.success = false;
