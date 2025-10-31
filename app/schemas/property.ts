@@ -14,6 +14,7 @@ export const propertyBaseSchema = z.object({
   street: z.string().nullable().optional(),
   latitude: z.number().nullable().optional(),
   longitude: z.number().nullable().optional(),
+  mainImageIdx: z.number().nullable().optional(),
   sizeM2: z.number().nonnegative(),
   rooms: z.number().nonnegative(),
   floor: z.number().int().nullable().optional(),

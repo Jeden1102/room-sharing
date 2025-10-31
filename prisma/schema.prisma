@@ -87,6 +87,7 @@ model Property {
   isShared        Boolean?       @default(false) // @todo
   roomType        String?
   images          String[]
+  mainImageIdx    Int?
   ownerId         String
   email           String?
   phone           String?

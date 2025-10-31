@@ -33,10 +33,10 @@
         <Button
           v-if="canSetPrimary"
           class="!absolute top-14 right-2 z-10"
-          @click="setAsPrimary(img)"
+          @click="handleSetAsPrimary(idx)"
           icon="pi pi-star"
           size="small"
-          severity="secondary"
+          :severity="idx === primaryImgIdx ? 'info' : 'secondary'"
         ></Button>
       </div>
     </div>
@@ -66,17 +66,26 @@ const props = defineProps<{
   label: string;
   modelValue: string[];
   maxFiles: number;
+  primaryImageIdx: number;
   canSetPrimary: boolean;
 }>();
+
+const primaryImgIdx = ref(props.primaryImageIdx);
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: string[]): void;
   (e: "filesSelected", files: File[]): void;
   (e: "delete", file: string): void;
+  (e: "setAsPrimary", idx: number): void;
 }>();
 
 const onFileSelect = (event: any) => {
   emit("filesSelected", event.files);
+};
+
+const handleSetAsPrimary = (idx: number) => {
+  primaryImgIdx.value = idx;
+  emit("setAsPrimary", idx);
 };
 
 const deleteDialogVisible = ref(false);

@@ -58,6 +58,7 @@ export default requireAuth(
       "roomType",
       "email",
       "phone",
+      "mainImageIdx"
     ];
 
     const updateData = Object.fromEntries(

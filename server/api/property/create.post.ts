@@ -45,6 +45,7 @@ export default defineEventHandler(async (event) => {
         isShared: body.isShared ?? false,
         images: body.images ?? [],
         owner: { connect: { id: session.user.id } },
+        mainImageIdx: 0,
       },
     });
 

@@ -193,6 +193,8 @@
         :maxFiles="8 - (initialValues?.images?.length || 0)"
         :form="$form"
         :can-set-primary="true"
+        @setAsPrimary="onSetAsPrimary"
+        :primaryImageIdx="initialValues?.mainImageIdx"
       />
     </Fieldset>
 
@@ -350,6 +352,20 @@ onMounted(async () => {
   }
 });
 
+const apiUri = computed(() => {
+  return props.property ? "/api/property/update" : "/api/property/create";
+});
+
+const onSetAsPrimary = async (idx: number) => {
+  await useFetch(apiUri.value, {
+    method: "POST",
+    body: {
+      id: props.property?.id,
+      mainImageIdx: idx,
+    },
+  });
+};
+
 const onFormSubmit = async ({ valid, values, reset }: any) => {
   if (!valid) return;
   formStatus.value.isLoading = true;
@@ -374,10 +390,7 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
       values.district = null;
     }
 
-    const url = props.property
-      ? "/api/property/update"
-      : "/api/property/create";
-    const { data, error } = await useFetch(url, {
+    const { data, error } = await useFetch(apiUri.value, {
       method: "POST",
       body: values,
     });
