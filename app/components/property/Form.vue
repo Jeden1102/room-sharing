@@ -400,7 +400,7 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
     formStatus.value.success = true;
     formStatus.value.message = props.property
       ? "Zaktualizowano ofertę"
-      : "Oferta dodana, aby opublikować, przejdź do panelu Twoich ogłoszeń.";
+      : "Oferta dodana pomyślnie";
 
     if (!props.property) {
       reset();

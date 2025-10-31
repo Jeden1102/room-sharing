@@ -1,5 +1,6 @@
 import prisma from "~~/lib/prisma";
 import { getServerSession } from "#auth";
+import { propertyCreateSchema } from "~/schemas/property";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -9,6 +10,15 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
   }
 
+  const validation = propertyCreateSchema.safeParse(body);
+
+  if (!validation.success) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Validation failed",
+    });
+  }
+
   try {
     const property = await prisma.property.create({
       data: {
@@ -16,7 +26,7 @@ export default defineEventHandler(async (event) => {
         description: body.description ?? null,
         type: body.type,
         listingType: body.listingType,
-        status: "DRAFT",
+        status: "ACTIVE",
         price: body.price ?? 0,
         deposit: body.deposit ?? null,
         city: body.city,

@@ -1,5 +1,6 @@
 import prisma from "~~/lib/prisma";
 import { requireAuth } from "../middleware/auth";
+import { propertyCreateSchema } from "~/schemas/property";
 
 export default requireAuth(
   defineEventHandler(async (event) => {
@@ -9,6 +10,15 @@ export default requireAuth(
 
     if (!id) {
       throw createError({ statusCode: 400, message: "Brak ID nieruchomości" });
+    }
+
+    const validation = propertyCreateSchema.safeParse(body);
+
+    if (!validation.success) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: "Validation failed",
+      });
     }
 
     const property = await prisma.property.findUnique({
