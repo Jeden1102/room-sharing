@@ -1,7 +1,13 @@
 8. properties listing
 9. properites full view
-10.1 Pricing page
-11. Chat
+10. GENERAL REFACTORS/IMPROVEMNETS/TESTING:
+a. Profile page - settings etc
+b. users listing page
+c. single user full page
+d. properties listinng
+e. property full page
+
+11. Home page sliders
 
 TO FIX:
 1. confirmt email - first logout if logged in user

@@ -190,7 +190,7 @@
         v-model="imageUris"
         @filesSelected="onFilesSelected"
         @delete="onDeleteImage"
-        :maxFiles="8 - (initialValues?.images?.length || 0)"
+        :maxFiles="20 - (initialValues?.images?.length || 0)"
         :form="$form"
         :can-set-primary="true"
         @setAsPrimary="onSetAsPrimary"
@@ -360,7 +360,7 @@ const onSetAsPrimary = async (idx: number) => {
   await useFetch(apiUri.value, {
     method: "POST",
     body: {
-      id: props.property?.id,
+      ...initialValues.value,
       mainImageIdx: idx,
     },
   });
@@ -379,7 +379,10 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
         method: "POST",
         body: fd,
       });
-      values.images = [...(values.images || []), ...(uploadRes || [])];
+      values.images = [
+        ...(initialValues.value.images || []),
+        ...(uploadRes || []),
+      ];
     } else {
       values.images = imageUris.value || values.images || [];
     }

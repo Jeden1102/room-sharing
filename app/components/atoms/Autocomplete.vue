@@ -11,7 +11,7 @@
         @update:modelValue="$emit('update:modelValue', $event)"
         fluid
       />
-      <label :for="name">{{ label }}</label>
+      <label v-if="label" :for="name">{{ label }}</label>
     </FloatLabel>
     <Message
       v-if="fieldState?.invalid"
@@ -27,7 +27,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   name: string;
-  label: string;
+  label?: string;
   modelValue?: any;
   suggestions?: any[];
   placeholder?: string;
