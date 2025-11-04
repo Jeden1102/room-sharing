@@ -22,7 +22,7 @@
     @apply scroll-smooth;
   }
   body {
-    @apply min-h-screen;
+    @apply min-h-screen bg-gray-50;
     * {
       @apply font-inter;
     }
@@ -46,5 +46,5 @@
 }
 
 @utility card-base {
-  @apply rounded bg-white p-3 shadow-sm;
+  @apply rounded-lg bg-white p-6;
 }

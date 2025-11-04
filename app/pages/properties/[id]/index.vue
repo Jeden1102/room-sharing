@@ -1,7 +1,6 @@
 <template>
-  <main class="container flex max-w-5xl flex-col gap-6 py-6">
-    Here single property
-    {{ property }}
+  <main>
+    <PropertyFull :property />
   </main>
 </template>
 

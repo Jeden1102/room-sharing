@@ -54,6 +54,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxtjs/seo",
     "nuxt-security",
+    "nuxt-easy-lightbox",
   ],
   fileStorage: {
     mount: process.cwd() + "/public/uploads",

@@ -1,4 +1,3 @@
-8. properties listing
 9. properites full view
 10. GENERAL REFACTORS/IMPROVEMNETS/TESTING:
 a. Profile page - settings etc
@@ -8,6 +7,9 @@ d. properties listinng
 e. property full page
 
 11. Home page sliders
+12. Bookmarks
+13. Chat
+10. GENERAL REFACTORS/IMPROVEMNETS/TESTING
 
 TO FIX:
 1. confirmt email - first logout if logged in user
