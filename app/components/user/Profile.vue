@@ -67,7 +67,7 @@
     <div class="mx-auto mt-24">
       <div class="flex flex-col gap-6">
         <div class="space-y-6">
-          <div>
+          <div class="card-base">
             <p class="text-lg font-semibold text-gray-600">
               {{ user.firstName }} {{ user.lastName }}
             </p>
@@ -154,20 +154,22 @@
             </div>
           </div>
 
-          <div
-            v-if="user.description"
-            class="mt-2 text-sm text-gray-700"
-            v-html="user.description?.replaceAll('\n', '<br />')"
-          ></div>
+          <div class="card-base">
+            <div
+              v-if="user.description"
+              class="mt-2 text-sm text-gray-700"
+              v-html="user.description?.replaceAll('\n', '<br />')"
+            ></div>
 
-          <div class="mt-4" v-if="user.interests.length > 0">
-            <div class="flex flex-wrap gap-2">
-              <Tag
-                v-for="i in user.interests"
-                :key="i.id"
-                class="capitalize"
-                :value="i.name"
-              />
+            <div class="mt-4" v-if="user.interests.length > 0">
+              <div class="flex flex-wrap gap-2">
+                <Tag
+                  v-for="i in user.interests"
+                  :key="i.id"
+                  class="capitalize"
+                  :value="i.name"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -235,13 +237,16 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-2 md:grid-cols-3">
-          <NuxtImg
-            v-for="(img, idx) in user.moodboardImages"
-            :key="idx"
-            :src="img"
-            class="h-40 w-full rounded object-cover md:h-52"
-          />
+        <div class="card-base">
+          <h3 class="text-md mb-3 font-semibold">Moodboard</h3>
+          <div class="grid grid-cols-2 gap-2 md:grid-cols-3">
+            <NuxtImg
+              v-for="(img, idx) in user.moodboardImages"
+              :key="idx"
+              :src="img"
+              class="h-40 w-full rounded object-cover md:h-52"
+            />
+          </div>
         </div>
 
         <div class="card-base p-6">

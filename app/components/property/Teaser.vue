@@ -67,7 +67,15 @@
         </div>
         <Button asChild v-slot="slotProps">
           <RouterLink
-            :to="$localePath({ name: 'properties-id', params: { id: 123 } })"
+            :to="
+              $localePath({
+                name: 'properties-id',
+                params: {
+                  id: slugify(property.title),
+                },
+                query: { id: property.id },
+              })
+            "
             :class="slotProps.class"
             >View details</RouterLink
           >

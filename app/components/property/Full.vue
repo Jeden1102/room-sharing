@@ -150,13 +150,16 @@
 
       <div class="lg:col-span-1">
         <div class="bg-primary-600 sticky top-6 rounded-lg p-6 text-white">
-          <h3 class="mb-6 text-xl font-bold">Contact agent</h3>
+          <h3 class="mb-6 text-xl font-bold">Contact</h3>
 
           <div class="mb-6 flex items-center gap-4">
             <img
-              :src="property.owner.profileImage || '/default-avatar.png'"
+              :src="
+                property.owner.profileImage ||
+                '/images/user/avatar-placeholder.webp'
+              "
               :alt="`${property.owner.firstName} ${property.owner.lastName}`"
-              class="h-16 w-16 rounded-full object-cover"
+              class="size-16 rounded-full object-cover"
             />
             <div>
               <div class="font-semibold">
@@ -168,45 +171,30 @@
           </div>
 
           <div class="space-y-3">
-            <a
-              :href="`tel:${property.phone}`"
-              class="flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 py-3 font-medium text-gray-900 transition hover:bg-gray-100"
-            >
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            <Button asChild v-slot="slotProps" severity="secondary">
+              <a
+                :href="`tel:${property.phone}`"
+                :class="slotProps.class"
+                class="w-full"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                />
-              </svg>
-              Call
-            </a>
+                Call
+              </a>
+            </Button>
 
-            <a
-              :href="`mailto:${property.email}`"
-              class="flex w-full items-center justify-center gap-2 rounded-lg border-2 border-white px-4 py-3 font-medium text-white transition hover:bg-white hover:text-gray-900"
+            <Button
+              asChild
+              v-slot="slotProps"
+              severity="info"
+              variant="outline"
             >
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+              <a
+                :href="`mailto:${property.email}`"
+                :class="slotProps.class"
+                class="w-full"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-              Email
-            </a>
+                Send Email
+              </a>
+            </Button>
           </div>
         </div>
       </div>
