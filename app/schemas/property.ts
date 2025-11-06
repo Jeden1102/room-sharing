@@ -8,7 +8,7 @@ export const propertyBaseSchema = z.object({
   status: z.enum(["ACTIVE", "INACTIVE"]).optional(),
   price: z.number("Pole wymagane").int().nonnegative(),
   deposit: z.number().int().nonnegative().nullable().optional(),
-  city: z.string("Pole wymagane"),
+  city: z.string("Pole wymagane").min(1, "Pole wymagane").max(200),
   district: z.string().nullable().optional(),
   buildingNumber: z.string().nullable().optional(),
   street: z.string().nullable().optional(),

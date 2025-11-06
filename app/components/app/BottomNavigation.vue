@@ -8,9 +8,9 @@
       asChild
       v-slot="slotProps"
       rounded
-      :severity="link.featured ? 'primary' : 'secondary'"
+      :severity="isActive(link.to) ? 'primary' : 'secondary'"
       :icon="link.icon"
-      :class="link.featured ? 'mb-4' : ''"
+      :class="isActive(link.to) ? 'mb-4' : ''"
       size="large"
     >
       <RouterLink
@@ -25,11 +25,13 @@
 </template>
 
 <script setup lang="ts">
-import { Title } from "#components";
-
+const route = useRoute();
 const { data } = useAuth();
-
 const localePath = useLocalePath();
+
+const isActive = (path: string) => {
+  return route.path === localePath(path);
+};
 
 const links = [
   {
@@ -45,7 +47,6 @@ const links = [
   {
     icon: "pi pi-search",
     to: localePath("/properties"),
-    featured: true,
     title: "Properties",
   },
   {

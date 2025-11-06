@@ -20,7 +20,10 @@
             <template v-if="property.street">
               {{ property.street }}
             </template>
-            <span v-if="property.buildingNumber" class="pl-1">
+            <span
+              v-if="property.buildingNumber && property.street"
+              class="pl-1"
+            >
               {{ property.buildingNumber }}
             </span>
           </p>
@@ -208,12 +211,33 @@
     :index="indexRef"
     @hide="onHide"
   />
+  <Button
+    asChild
+    v-slot="buttonProps"
+    v-if="data?.user?.id === property.ownerId"
+  >
+    <RouterLink
+      :class="buttonProps.class"
+      class="!fixed right-4 bottom-20 min-w-50 md:bottom-4"
+      :to="
+        $localePath({
+          name: 'properties-id-edit',
+          params: {
+            id: slugify(property.title),
+          },
+          query: { id: property.id },
+        })
+      "
+    >
+      Edit Property
+    </RouterLink>
+  </Button>
 </template>
 
 <script setup lang="ts">
-import { PropertyDetail } from "#components";
 import VueEasyLightbox from "vue-easy-lightbox";
 
+const { data } = useAuth();
 const props = defineProps<{ property: any }>();
 
 const visibleRef = ref(false);

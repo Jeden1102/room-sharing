@@ -125,7 +125,7 @@
       </div>
     </Fieldset>
     <Fieldset legend="Udogodnienia i warunki">
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div class="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4">
         <div class="flex flex-col gap-2">
           <AtomsCheckbox name="furnished" label="Umeblowane" :form="$form" />
           <AtomsCheckbox name="balcony" label="Balkon" :form="$form" />
@@ -161,8 +161,8 @@
         </div>
       </div>
 
-      <div class="mt-4">
-        <div class="flex items-center gap-4">
+      <div class="mt-2">
+        <div class="flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
           <AtomsCheckbox
             name="isShared"
             label="Dzielone (pod wynajem pokojów)"
