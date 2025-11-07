@@ -13,7 +13,6 @@ export default requireAuth(
     }
 
     const validation = propertyCreateSchema.safeParse(body);
-
     if (!validation.success) {
       throw createError({
         statusCode: 400,
@@ -71,11 +70,21 @@ export default requireAuth(
       "mainImageIdx"
     ];
 
-    const updateData = Object.fromEntries(
+    const updateData: Record<string, any> = Object.fromEntries(
       Object.entries(body).filter(
         ([key, value]) => allowedFields.includes(key) && value !== undefined
       )
     );
+
+    const { city, district, street, buildingNumber } = updateData;
+
+    if (city || street || buildingNumber) {
+      const geo = await geocodeAddress({ city, district, street, buildingNumber });
+      if (geo) {
+        updateData.latitude = geo.lat;
+        updateData.longitude = geo.lon;
+      }
+    }
 
     try {
       const updatedProperty = await prisma.property.update({
@@ -84,9 +93,8 @@ export default requireAuth(
       });
 
       const cacheStorage = useStorage("cache:properties:property");
-      await cacheStorage.removeItem(
-        `${id}.json`.replaceAll("-", ""),
-      );
+      await cacheStorage.removeItem(`${id}.json`.replaceAll("-", ""));
+
       return { success: true, property: updatedProperty };
     } catch (e: any) {
       console.error("Błąd aktualizacji nieruchomości:", e);

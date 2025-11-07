@@ -20,6 +20,16 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
+    const { city, district, street, buildingNumber } = body;
+
+    if (city || street || buildingNumber) {
+      const geo = await geocodeAddress({ city, district, street, buildingNumber });
+      if (geo) {
+        body.latitude = geo.lat;
+        body.longitude = geo.lon;
+      }
+    }
+
     const property = await prisma.property.create({
       data: {
         title: body.title,

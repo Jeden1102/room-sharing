@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     adminEmail: process.env.ADMIN_EMAIL,
     blobUrl: process.env.BLOB_URL,
     googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+    nominatimUrl: process.env.NOMINATIM_URL,
     auth: {
       google: {
         clientId: process.env.GOOGLE_CLIENT_ID,
@@ -55,6 +56,7 @@ export default defineNuxtConfig({
     "@nuxtjs/seo",
     "nuxt-security",
     "nuxt-easy-lightbox",
+    "@nuxtjs/leaflet",
   ],
   fileStorage: {
     mount: process.cwd() + "/public/uploads",
@@ -121,7 +123,10 @@ export default defineNuxtConfig({
           "'self'",
           'data:',
           'blob:',
-          'https://*.vercel-storage.com'
+          'https://*.vercel-storage.com',
+          'https://*.openstreetmap.org',
+          'https://*.basemaps.cartocdn.com',
+          'https://*.stadiamaps.com',
         ]
       }
     }

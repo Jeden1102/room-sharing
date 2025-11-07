@@ -114,6 +114,9 @@
 
         <AtomsInput name="buildingNumber" label="Numer budynku" :form="$form" />
       </div>
+      <span class="text-xs text-gray-500"
+        >Podaj dokładne dane, aby nieruchomość pojawiała na mapie</span
+      >
     </Fieldset>
 
     <Fieldset legend="Wielkość & połozenie">

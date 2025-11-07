@@ -151,7 +151,10 @@
         </div>
       </div>
 
-      <div class="lg:col-span-1">
+      <div class="flex flex-col gap-4 lg:col-span-1">
+        <div class="overflow-hidden rounded-lg">
+          <PropertyMap :lat="property.latitude" :lng="property.longitude" />
+        </div>
         <div class="bg-primary-600 sticky top-6 rounded-lg p-6 text-white">
           <h3 class="mb-6 text-xl font-bold">Contact</h3>
 
@@ -235,6 +238,7 @@
 </template>
 
 <script setup lang="ts">
+import { ClientOnly } from "#components";
 import VueEasyLightbox from "vue-easy-lightbox";
 
 const { data } = useAuth();
