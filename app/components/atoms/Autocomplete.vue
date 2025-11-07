@@ -8,6 +8,8 @@
         :suggestions
         :placeholder
         @complete="$emit('complete', $event)"
+        @option-select="$emit('option-select', $event)"
+        @clear="$emit('clear')"
         @update:modelValue="$emit('update:modelValue', $event)"
         fluid
       />
@@ -36,6 +38,8 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   complete: [event: any];
+  "option-select": [event: any];
+  clear: any;
   "update:modelValue": [value: any];
 }>();
 

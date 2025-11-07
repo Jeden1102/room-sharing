@@ -4,10 +4,14 @@
       class="flex items-center justify-between md:mb-4 md:grid md:grid-cols-2 md:gap-8"
     >
       <h1 class="text-xl font-medium md:text-2xl">Oferty nieruchomości</h1>
-      <PropertiesSorting
-        @update="applyFilters"
-        class="ml-auto hidden w-50 md:block"
-      />
+      <div class="flex">
+        <PropertiesSorting
+          @update="applyFilters"
+          class="ml-auto hidden w-50 md:block"
+        />
+        <button>here @todo</button>
+      </div>
+
       <PropertiesFilters
         @update="applyFilters"
         :total="propertiesData?.total"
@@ -18,7 +22,7 @@
 
     <!-- Properties List -->
     <section>
-      <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         <UserTeaserLoader v-if="pending" v-for="i in 8" :key="i" />
         <PropertyTeaser
           v-else-if="propertiesData"

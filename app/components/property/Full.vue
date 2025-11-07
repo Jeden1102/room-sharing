@@ -151,56 +151,58 @@
         </div>
       </div>
 
-      <div class="flex flex-col gap-4 lg:col-span-1">
-        <div class="overflow-hidden rounded-lg">
-          <PropertyMap :lat="property.latitude" :lng="property.longitude" />
-        </div>
-        <div class="bg-primary-600 sticky top-6 rounded-lg p-6 text-white">
-          <h3 class="mb-6 text-xl font-bold">Contact</h3>
-
-          <div class="mb-6 flex items-center gap-4">
-            <img
-              :src="
-                property.owner.profileImage ||
-                '/images/user/avatar-placeholder.webp'
-              "
-              :alt="`${property.owner.firstName} ${property.owner.lastName}`"
-              class="size-16 rounded-full object-cover"
-            />
-            <div>
-              <div class="font-semibold">
-                {{ property.owner.firstName }} {{ property.owner.lastName }}
-              </div>
-              <div class="text-sm text-gray-300">{{ property.phone }}</div>
-              <div class="text-sm text-gray-300">{{ property.email }}</div>
-            </div>
+      <div class="lg:col-span-1">
+        <div class="sticky top-4 flex flex-col gap-4">
+          <div class="overflow-hidden rounded-lg">
+            <PropertyMap :lat="property.latitude" :lng="property.longitude" />
           </div>
+          <div class="bg-primary-600 rounded-lg p-6 text-white">
+            <h3 class="mb-6 text-xl font-bold">Contact</h3>
 
-          <div class="space-y-3">
-            <Button asChild v-slot="slotProps" severity="secondary">
-              <a
-                :href="`tel:${property.phone}`"
-                :class="slotProps.class"
-                class="w-full"
-              >
-                Call
-              </a>
-            </Button>
+            <div class="mb-6 flex items-center gap-4">
+              <img
+                :src="
+                  property.owner.profileImage ||
+                  '/images/user/avatar-placeholder.webp'
+                "
+                :alt="`${property.owner.firstName} ${property.owner.lastName}`"
+                class="size-16 rounded-full object-cover"
+              />
+              <div>
+                <div class="font-semibold">
+                  {{ property.owner.firstName }} {{ property.owner.lastName }}
+                </div>
+                <div class="text-sm text-gray-300">{{ property.phone }}</div>
+                <div class="text-sm text-gray-300">{{ property.email }}</div>
+              </div>
+            </div>
 
-            <Button
-              asChild
-              v-slot="slotProps"
-              severity="info"
-              variant="outline"
-            >
-              <a
-                :href="`mailto:${property.email}`"
-                :class="slotProps.class"
-                class="w-full"
+            <div class="space-y-3">
+              <Button asChild v-slot="slotProps" severity="secondary">
+                <a
+                  :href="`tel:${property.phone}`"
+                  :class="slotProps.class"
+                  class="w-full"
+                >
+                  Call
+                </a>
+              </Button>
+
+              <Button
+                asChild
+                v-slot="slotProps"
+                severity="info"
+                variant="outline"
               >
-                Send Email
-              </a>
-            </Button>
+                <a
+                  :href="`mailto:${property.email}`"
+                  :class="slotProps.class"
+                  class="w-full"
+                >
+                  Send Email
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@
     <div
       :class="
         clsx(
-          'fixed top-0 left-full z-20 flex size-full w-full flex-col gap-4 bg-white p-4 transition-all duration-300 md:static md:grid md:grid-cols-3 md:p-0 lg:grid-cols-4 md:[&>div]:w-full',
+          'fixed top-0 left-full z-20 flex size-full w-full flex-col gap-4 bg-white p-4 transition-all duration-300 md:static md:grid md:grid-cols-3 md:p-0 lg:grid-cols-4 lg:bg-transparent md:[&>div]:w-full',
           { '!left-0': filtersOpened },
         )
       "
@@ -21,10 +21,11 @@
 
       <!-- City -->
       <AtomsAutocomplete
-        v-model="filters.city"
         :suggestions="filteredCities"
         @complete="searchCity"
         placeholder="Wpisz miasto"
+        @option-select="onCitySelect"
+        @clear="onCityClear"
         name="city"
       />
 
@@ -211,6 +212,16 @@ const searchCity = async (event: any) => {
   }
 };
 
+const onCitySelect = (event: any) => {
+  filters.city = event.value;
+  emit("update", { ...filters });
+};
+
+const onCityClear = () => {
+  filters.city = "";
+  emit("update", { ...filters });
+};
+
 const listingTypeOptions = [
   { name: "Dowolny", id: null },
   { name: "Wynajem", id: "RENT" },
@@ -250,5 +261,6 @@ const sortOptions = [
 
 const clearFilters = () => {
   Object.assign(filters, defaultFilters);
+  filters.city = "";
 };
 </script>

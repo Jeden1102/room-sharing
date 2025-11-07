@@ -41,7 +41,7 @@
       </Button>
     </div>
 
-    <div class="mt-auto space-y-3 p-4">
+    <div class="mt-auto space-y-3 p-4 pt-0">
       <div>
         <h3 class="text-lg font-semibold">{{ property.title }}</h3>
         <p class="flex items-center text-sm text-gray-500">

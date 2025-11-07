@@ -1,5 +1,3 @@
-9. properites full view
-9.1 Property google map init
 10. GENERAL REFACTORS/IMPROVEMNETS/TESTING:
 a. Profile page - settings etc
 b. users listing page
