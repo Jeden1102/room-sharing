@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col overflow-hidden rounded-2xl shadow-md"
+    class="flex flex-col gap-4 overflow-hidden rounded-2xl shadow-md"
     v-if="property"
   >
     <div class="relative">
@@ -15,6 +15,7 @@
         :showNavigators="false"
         :showIndicators="property.images.length > 1"
         :circular="true"
+        class="[&_.p-carousel-indicator-list]:absolute [&_.p-carousel-indicator-list]:bottom-0 [&_.p-carousel-indicator-list]:left-1/2 [&_.p-carousel-indicator-list]:w-full [&_.p-carousel-indicator-list]:-translate-x-1/2"
       >
         <template #item="slotProps">
           <img
