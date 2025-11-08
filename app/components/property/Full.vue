@@ -153,7 +153,7 @@
 
       <div class="lg:col-span-1">
         <div class="sticky top-4 flex flex-col gap-4">
-          <div class="overflow-hidden rounded-lg">
+          <div class="h-full overflow-hidden rounded-lg">
             <PropertyMap :lat="property.latitude" :lng="property.longitude" />
           </div>
           <div class="bg-primary-600 rounded-lg p-6 text-white">
@@ -264,4 +264,8 @@ const onHide = () => {
 };
 </script>
 
-<style scoped></style>
+<style>
+.vel-modal {
+  z-index: 99999;
+}
+</style>

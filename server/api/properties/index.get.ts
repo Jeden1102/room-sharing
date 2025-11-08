@@ -99,7 +99,21 @@ export default defineEventHandler(async (event) => {
       prisma.property.count({ where }),
     ]);
 
-    return { properties, total, page: Number(page) };
+    delete where.city;
+
+    where.latitude = { not: null };
+    where.longitude = { not: null };
+
+    const coords = await prisma.property.findMany({
+      where,
+      select: {
+        id: true,
+        latitude: true,
+        longitude: true
+      }
+    })
+
+    return { properties, total, page: Number(page), coords };
   } catch (error) {
     console.error(error);
     throw createError({

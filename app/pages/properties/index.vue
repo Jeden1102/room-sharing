@@ -1,10 +1,8 @@
 <template>
   <main class="container flex flex-col gap-4 py-6">
-    <div
-      class="flex items-center justify-between md:mb-4 md:grid md:grid-cols-2 md:gap-8"
-    >
+    <div class="flex items-center md:mb-4 md:grid md:grid-cols-2 md:gap-8">
       <h1 class="text-xl font-medium md:text-2xl">Nieruchomości</h1>
-      <div class="flex gap-2">
+      <div class="ml-auto flex gap-2">
         <PropertiesSorting
           @update="applyFilters"
           class="ml-auto hidden w-50 md:block"
@@ -27,7 +25,7 @@
         @update="applyFilters"
         :total="propertiesData?.total"
         :pending
-        class="col-span-2"
+        class="col-span-2 ml-4"
       />
     </div>
 
@@ -37,7 +35,7 @@
         :class="
           clsx(
             listingType === 'map' &&
-              'no-scrollbar hidden lg:block lg:max-h-screen lg:overflow-y-auto lg:px-2',
+              'no-scrollbar hidden lg:block lg:max-h-[80vh] lg:w-100 lg:overflow-y-auto lg:px-2',
           )
         "
       >
@@ -55,7 +53,7 @@
             v-for="property in propertiesData.properties"
             :key="property.id"
             :property="property"
-            :variant="listingType === 'map' ? 'small' : 'base'"
+            variant="large"
           />
         </div>
 
@@ -81,11 +79,11 @@
           clsx(
             'overflow-hidden rounded-lg',
             listingType === 'grid' && 'hidden',
-            listingType === 'map' && 'lg:!block lg:min-w-220',
+            listingType === 'map' && 'w-full lg:!block',
           )
         "
       >
-        <PropertiesMap />
+        <PropertiesMap :items="propertiesData?.coords" />
       </div>
     </div>
   </main>

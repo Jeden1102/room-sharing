@@ -1,13 +1,16 @@
 <template>
   <aside>
-    <button @click="filtersOpened = !filtersOpened" class="md:hidden">
+    <button
+      @click="filtersOpened = !filtersOpened"
+      class="grid place-content-center md:hidden"
+    >
       <Icon name="mage:filter" class="text-2xl" />
     </button>
 
     <div
       :class="
         clsx(
-          'fixed top-0 left-full z-20 flex size-full w-full flex-col gap-4 bg-white p-4 transition-all duration-300 md:static md:grid md:grid-cols-3 md:p-0 lg:grid-cols-4 lg:bg-transparent md:[&>div]:w-full',
+          'fixed top-0 left-full z-9999 flex size-full w-full flex-col gap-4 bg-white p-4 transition-all duration-300 md:static md:grid md:grid-cols-3 md:p-0 lg:grid-cols-4 lg:bg-transparent md:[&>div]:w-full',
           { '!left-0': filtersOpened },
         )
       "

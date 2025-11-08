@@ -29,14 +29,21 @@
         :value="property.type"
         severity="secondary"
         class="absolute top-2 left-2"
+        v-if="variant === 'large'"
       />
-      <Badge :value="property.listingType" class="absolute top-10 left-2" />
+
+      <Badge
+        :value="property.listingType"
+        class="absolute top-10 left-2"
+        v-if="variant === 'large'"
+      />
 
       <Button
         class="!absolute top-2 right-2"
         rounded
         severity="secondary"
         icon="pi pi-bookmark"
+        v-if="variant === 'large'"
       >
         <span class="pi pi-bookmark"></span>
       </Button>
@@ -50,7 +57,10 @@
         </p>
       </div>
 
-      <div class="mb-6 flex items-center gap-6 text-sm text-gray-600">
+      <div
+        class="mb-6 flex items-center gap-6 text-sm text-gray-600"
+        v-if="variant === 'large'"
+      >
         <span class="flex items-center gap-1">
           <i class="pi pi-window-minimize"></i> {{ property.sizeM2 }} m²
         </span>
@@ -61,7 +71,7 @@
           <i class="pi pi-home"></i> {{ property.floor }} piętro
         </span>
       </div>
-      <Divider />
+      <Divider v-if="variant === 'large'" />
       <div class="mt-6 flex items-center justify-between gap-4">
         <div class="text-primary-400 text-2xl font-semibold">
           ${{ formatPrice(property.price) }}
@@ -87,5 +97,5 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ property: any }>();
+const props = defineProps<{ property: any; variant?: "small" | "large" }>();
 </script>
