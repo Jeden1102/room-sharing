@@ -53,6 +53,7 @@ async function loadProperty(id: string) {
 
 <style>
 .leaflet-container {
+  z-index: 10;
   a.leaflet-popup-close-button {
     background-color: white;
     border-radius: 50%;

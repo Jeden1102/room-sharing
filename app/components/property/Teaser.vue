@@ -15,7 +15,7 @@
         :showNavigators="false"
         :showIndicators="property.images.length > 1"
         :circular="true"
-        class="[&_.p-carousel-indicator-list]:absolute [&_.p-carousel-indicator-list]:bottom-0 [&_.p-carousel-indicator-list]:left-1/2 [&_.p-carousel-indicator-list]:w-full [&_.p-carousel-indicator-list]:-translate-x-1/2"
+        class="[&_.p-carousel-indicator-list]:absolute [&_.p-carousel-indicator-list]:bottom-0 [&_.p-carousel-indicator-list]:left-1/2 [&_.p-carousel-indicator-list]:w-full [&_.p-carousel-indicator-list]:-translate-x-1/2 [&_.p-carousel-indicator-list]:bg-white/30 [&_.p-carousel-indicator-list]:backdrop-blur-sm"
       >
         <template #item="slotProps">
           <img

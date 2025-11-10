@@ -11,15 +11,8 @@ e. property full page
 10. GENERAL REFACTORS/IMPROVEMNETS/TESTING
 
 TO FIX:
-1. przycisk edytuj dla mobile
 2. te blokowanie scrolla page na otwarcie menu/filtrów
-3. moze jakis glossary bg dla paginacji zdjec
 4. full mieszkanie - ogarniecie sytuacji bez zdejc/opisow itd
-5.full mieszkanie - nie wyswietlaj mapy jak nie ma coordów
-5.1 dostosowanie teog lightboxa - usunas te actionsy, dodac swipe'owanie
-6. listing - ogarniecie z-index dla side iflter - ogolnie to do ogarniecia i cofniecia ak bylo - po prsotu na active filters najwyzej ukrywac mape
-7. faq page - ogarnieciebledu z tlem tabsów - moze cała sekcaj do cardsa
-8. form mieszkania - placeholder na email FIX
 9. profil osoby - cechy /opis itp na wzor mieszkania
 10. lightbox na moodboard/zdjeie osoby
 11. full person- kontakt jest brzydki

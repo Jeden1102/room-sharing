@@ -210,7 +210,7 @@
           v-if="false"
         />
         <AtomsInput name="phone" label="Numer kontaktowy" :form="$form" />
-        <AtomsInput name="email" label="email" :form="$form" />
+        <AtomsInput name="email" label="E-mail" :form="$form" />
       </div>
     </Fieldset>
 

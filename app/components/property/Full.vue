@@ -153,7 +153,10 @@
 
       <div class="lg:col-span-1">
         <div class="sticky top-4 flex flex-col gap-4">
-          <div class="h-full overflow-hidden rounded-lg">
+          <div
+            class="h-full overflow-hidden rounded-lg"
+            v-if="property.latitude && property.longitude"
+          >
             <PropertyMap :lat="property.latitude" :lng="property.longitude" />
           </div>
           <div class="bg-primary-600 rounded-lg p-6 text-white">
@@ -214,8 +217,12 @@
     :visible="visibleRef"
     :imgs="property.images"
     :index="indexRef"
+    :rotateDisabled="true"
+    :zoomDisabled="true"
+    :pinchDisabled="true"
     @hide="onHide"
   />
+
   <Button
     asChild
     v-slot="buttonProps"
@@ -223,7 +230,7 @@
   >
     <RouterLink
       :class="buttonProps.class"
-      class="!fixed right-4 bottom-20 min-w-50 md:bottom-4"
+      class="!fixed right-4 bottom-20 z-10 min-w-50 md:bottom-4"
       :to="
         $localePath({
           name: 'properties-id-edit',
@@ -240,7 +247,6 @@
 </template>
 
 <script setup lang="ts">
-import { ClientOnly } from "#components";
 import VueEasyLightbox from "vue-easy-lightbox";
 
 const { data } = useAuth();
