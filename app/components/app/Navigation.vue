@@ -116,7 +116,7 @@ watch(
 watch(
   () => isMenuOpened.value,
   () => {
-    document.body.classList.toggle("!overflow-y-hidden");
+    document.body.classList.toggle("!overflow-hidden");
   },
 );
 

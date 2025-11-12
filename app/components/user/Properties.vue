@@ -1,7 +1,9 @@
 <template>
   <ClientOnly>
     <DataTable
-      v-if="data.properties && data.properties.length > 0"
+      v-if="
+        data.properties && data.properties.length > 0 && status === 'success'
+      "
       :value="data.properties"
       tableStyle="min-width: 50rem"
       paginator
@@ -79,6 +81,16 @@
         bodyStyle="text-align:center"
       />
     </DataTable>
+
+    <div v-else-if="status === 'pending'" class="flex flex-col gap-1">
+      <div class="flex gap-1" v-for="i in 10">
+        <Skeleton height="3rem" />
+        <Skeleton height="3rem" />
+        <Skeleton height="3rem" />
+        <Skeleton height="3rem" />
+        <Skeleton height="3rem" />
+      </div>
+    </div>
 
     <AppCta
       v-else-if="data.properties"

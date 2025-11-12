@@ -45,16 +45,24 @@
           <!-- Main Image - Full width on mobile, 2 rows on desktop -->
           <div
             class="col-span-2 row-span-1 cursor-pointer lg:row-span-2"
+            :class="property.images.length === 0 && 'pointer-events-none'"
             @click="showImage(property.mainImageIdx)"
           >
             <img
-              :src="property.images[property.mainImageIdx]"
+              :src="
+                property.images[property.mainImageIdx] ||
+                '/images/user/bg-placeholder.webp'
+              "
               :alt="property.title"
               class="h-64 w-full rounded-lg object-cover lg:h-full"
             />
           </div>
 
-          <div class="col-span-1 cursor-pointer" @click="showImage(1)">
+          <div
+            class="col-span-1 cursor-pointer"
+            @click="showImage(1)"
+            v-if="property.images.length > 1"
+          >
             <img
               :src="property.images[1] || property.images[0]"
               :alt="property.title"
@@ -62,7 +70,11 @@
             />
           </div>
 
-          <div class="relative col-span-1 cursor-pointer" @click="showImage(2)">
+          <div
+            class="relative col-span-1 cursor-pointer"
+            @click="showImage(2)"
+            v-if="property.images.length > 2"
+          >
             <div
               class="absolute inset-0 z-10 flex cursor-pointer flex-col items-center justify-center rounded-lg bg-black/70 text-white transition"
               @click.stop="showAllImages"
@@ -79,19 +91,14 @@
           </div>
         </div>
 
-        <div class="card-base">
-          <h2 class="mb-4 text-2xl font-bold text-gray-900">Description</h2>
+        <AppCard title="Description" v-if="property.description">
           <div class="leading-relaxed whitespace-pre-line text-gray-700">
             {{ property.description }}
           </div>
-        </div>
+        </AppCard>
 
-        <!-- Property Details -->
-        <div class="card-base">
-          <h2 class="mb-6 text-2xl font-bold text-gray-900">
-            Property details
-          </h2>
-          <div class="grid gap-6 md:grid-cols-2">
+        <AppCard title="Property details">
+          <div class="mt-8 grid gap-6 md:grid-cols-2">
             <PropertyDetail
               icon="qlementine-icons:resize-bigger-16"
               label="Total area"
@@ -128,12 +135,10 @@
               :value="property.yearBuilt"
             />
           </div>
-        </div>
+        </AppCard>
 
-        <!-- Amenities -->
-        <div class="card-base">
-          <h2 class="mb-6 text-2xl font-bold text-gray-900">Amenities</h2>
-          <div class="grid gap-4 md:grid-cols-2">
+        <AppCard title="Amenities" v-if="hasAnyAmenities">
+          <div class="mt-8 grid gap-4 md:grid-cols-2">
             <PropertyAmenity v-if="property.furnished" label="Furnished" />
             <PropertyAmenity v-if="property.balcony" label="Balcony" />
             <PropertyAmenity v-if="property.internet" label="Internet" />
@@ -148,7 +153,7 @@
               label="Air Conditioning"
             />
           </div>
-        </div>
+        </AppCard>
       </div>
 
       <div class="lg:col-span-1">
@@ -268,6 +273,17 @@ const showAllImages = () => {
 const onHide = () => {
   visibleRef.value = false;
 };
+
+const hasAnyAmenities = computed(() => {
+  return (
+    props.property.balcony ||
+    props.property.internet ||
+    props.property.tv ||
+    props.property.washingMachine ||
+    props.property.dishwasher ||
+    props.property.airConditioning
+  );
+});
 </script>
 
 <style>

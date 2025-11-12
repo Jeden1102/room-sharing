@@ -29,7 +29,8 @@
             <NuxtImg
               :src="user.profileImage || '/images/user/avatar-placeholder.webp'"
               alt="profile"
-              class="h-32 w-32 rounded-full border-4 border-white object-cover shadow-lg"
+              class="h-32 w-32 cursor-pointer rounded-full border-4 border-white object-cover shadow-lg"
+              @click="isProfileImageVisible = true"
             />
 
             <FormFileUploaderDialog
@@ -63,6 +64,15 @@
         </div>
       </div>
     </div>
+
+    <vue-easy-lightbox
+      :visible="isProfileImageVisible"
+      :imgs="user.profileImage || '/images/user/avatar-placeholder.webp'"
+      :rotateDisabled="true"
+      :zoomDisabled="true"
+      :pinchDisabled="true"
+      @hide="isProfileImageVisible = false"
+    />
 
     <div class="mx-auto mt-24">
       <div class="flex flex-col gap-6">
@@ -154,13 +164,11 @@
             </div>
           </div>
 
-          <div class="card-base">
+          <AppCard title="Description" v-if="user.description">
             <div
-              v-if="user.description"
-              class="mt-2 text-sm text-gray-700"
+              class="leading-relaxed whitespace-pre-line text-gray-700"
               v-html="user.description?.replaceAll('\n', '<br />')"
             ></div>
-
             <div class="mt-4" v-if="user.interests.length > 0">
               <div class="flex flex-wrap gap-2">
                 <Tag
@@ -171,74 +179,60 @@
                 />
               </div>
             </div>
-          </div>
+          </AppCard>
         </div>
 
         <div class="flex flex-col gap-4 md:flex-row">
-          <div class="card-base flex-1 p-6">
-            <h2 class="text-lg font-semibold">W poszukiwaniu</h2>
+          <AppCard
+            title="W poszukiwaniu"
+            class="flex-1 space-y-3 text-sm text-gray-700"
+          >
+            <strong class="mb-2 block text-gray-900">Preferencje:</strong>
+            <PropertyAmenity
+              v-if="user.searchPreferences.length > 0"
+              v-for="i in user.searchPreferences"
+              :label="i.name"
+              :key="i.id"
+            />
+            <span v-else class="pl-2">No data</span>
 
-            <div class="mt-4 space-y-3 text-sm text-gray-700">
-              <div>
-                <strong>Preferencje:</strong>
-                <ul
-                  class="list-inside list-disc"
-                  v-if="user.searchPreferences.length > 0"
-                >
-                  <li v-for="i in user.searchPreferences" :key="i.id">
-                    {{ i.name }}
-                  </li>
-                </ul>
-                <span v-else class="pl-2">No data</span>
-              </div>
-              <div>
-                <strong>Typ mieszkania:</strong>
-                <ul
-                  class="list-inside list-disc"
-                  v-if="user.searchPropertyType.length > 0"
-                >
-                  <li v-for="i in user.searchPropertyType" :key="i.id">
-                    {{ i.name }}
-                  </li>
-                </ul>
-                <span v-else class="pl-2">No data</span>
-              </div>
-            </div>
-          </div>
+            <strong class="mb-2 block text-gray-900">Typ mieszkania:</strong>
+            <PropertyAmenity
+              v-if="user.searchPropertyType.length > 0"
+              v-for="i in user.searchPropertyType"
+              :label="i.name"
+              :key="i.id"
+            />
+            <span v-else class="pl-2">No data</span>
+          </AppCard>
 
-          <div class="card-base flex-1 p-6">
-            <h2 class="text-lg font-semibold">Kompatybilność</h2>
-            <div class="mt-3 flex flex-col gap-4 text-sm text-gray-600">
-              <div>
-                <strong>Preferencje dotyczące ciszy:</strong>
-                <ul
-                  class="list-inside list-disc"
-                  v-if="user.noiseCompatibility.length > 0"
-                >
-                  <li v-for="i in user.noiseCompatibility" :key="i.id">
-                    {{ i.name }}
-                  </li>
-                </ul>
-                <span v-else class="pl-2">No data</span>
-              </div>
-              <div>
-                <strong>Zwierzęta:</strong>
-                <ul
-                  class="list-inside list-disc"
-                  v-if="user.petsCompatibility.length > 0"
-                >
-                  <li v-for="i in user.petsCompatibility" :key="i.id">
-                    {{ i.name }}
-                  </li>
-                </ul>
-                <span v-else class="pl-2">No data</span>
-              </div>
-            </div>
-          </div>
+          <AppCard
+            class="flex-1 space-y-3 text-sm text-gray-700"
+            title="Kompatybilność"
+          >
+            <strong class="mb-2 block text-gray-900"
+              >Preferencje dotyczące ciszy:</strong
+            >
+            <PropertyAmenity
+              v-if="user.noiseCompatibility.length > 0"
+              v-for="i in user.noiseCompatibility"
+              :label="i.name"
+              :key="i.id"
+            />
+            <span v-else class="pl-2">No data</span>
+
+            <strong class="mb-2 block text-gray-900">Zwierzęta:</strong>
+            <PropertyAmenity
+              v-if="user.petsCompatibility.length > 0"
+              v-for="i in user.petsCompatibility"
+              :label="i.name"
+              :key="i.id"
+            />
+            <span v-else class="pl-2">No data</span>
+          </AppCard>
         </div>
 
-        <div class="card-base">
-          <h3 class="text-md mb-3 font-semibold">Moodboard</h3>
+        <AppCard title="Moodboard">
           <div class="grid grid-cols-2 gap-2 md:grid-cols-3">
             <NuxtImg
               v-for="(img, idx) in user.moodboardImages"
@@ -247,10 +241,9 @@
               class="h-40 w-full rounded object-cover md:h-52"
             />
           </div>
-        </div>
+        </AppCard>
 
-        <div class="card-base p-6">
-          <h3 class="text-md mb-3 font-semibold">Kontakt</h3>
+        <AppCard title="Kontakt">
           <div class="text-sm text-gray-700">
             <p><strong>Email:</strong> {{ user.email || "No data" }}</p>
             <p><strong>Telefon:</strong> {{ user.phone || "No data" }}</p>
@@ -281,13 +274,14 @@
               >
             </Button>
           </div>
-        </div>
+        </AppCard>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { PropertyAmenity } from "#components";
 import type { User, Prisma } from "@prisma/client";
 
 type FullUser = Prisma.UserGetPayload<{
@@ -308,6 +302,8 @@ const { user: userProp, editable } = defineProps<{
 }>();
 
 const user = ref(userProp);
+
+const isProfileImageVisible = ref(false);
 
 const onUploadImg = async (res: any, field: keyof User) => {
   if (!user.value || !editable) return;

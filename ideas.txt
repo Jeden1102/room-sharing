@@ -11,12 +11,6 @@ e. property full page
 10. GENERAL REFACTORS/IMPROVEMNETS/TESTING
 
 TO FIX:
-2. te blokowanie scrolla page na otwarcie menu/filtrów
-4. full mieszkanie - ogarniecie sytuacji bez zdejc/opisow itd
-9. profil osoby - cechy /opis itp na wzor mieszkania
-10. lightbox na moodboard/zdjeie osoby
-11. full person- kontakt jest brzydki
-12. moje properties - loader
 
 1. confirmt email - first logout if logged in user
 

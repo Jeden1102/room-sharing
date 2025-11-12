@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const propertyBaseSchema = z.object({
   title: z.string("Pole wymagane").min(5, "Tytuł za krótki").max(200),
-  description: z.string().max(2000).nullable().optional(),
+  description: z.string().max(2000),
   type: z.enum(["APARTMENT", "HOUSE", "ROOM", "STUDIO"]).or(z.string()),
   listingType: z.enum(["RENT", "SALE"]).or(z.string()),
   status: z.enum(["ACTIVE", "INACTIVE"]).optional(),

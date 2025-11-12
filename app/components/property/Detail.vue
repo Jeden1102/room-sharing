@@ -4,7 +4,7 @@
       <Icon :name="icon" />
       <span class="text-gray-700">{{ label }}</span>
     </div>
-    <span class="font-semibold text-gray-900">{{ value }}</span>
+    <span class="font-semibold text-gray-900">{{ value ? value : "-" }}</span>
   </div>
 </template>
 

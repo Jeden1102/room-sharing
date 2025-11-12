@@ -66,7 +66,7 @@
         <AtomsNumber name="deposit" label="Kaucja (PLN)" :form="$form" />
       </div>
 
-      <AtomsTextarea name="description" label="Opis" :rows="4" :form="$form" />
+      <AtomsTextarea name="description" label="Opis*" :rows="4" :form="$form" />
     </Fieldset>
 
     <Fieldset legend="Lokalizacja">

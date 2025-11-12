@@ -184,7 +184,7 @@ const anyFiltersSet = computed(() => {
 watch(
   () => filtersOpened.value,
   () => {
-    document.body.classList.toggle("!overflow-y-hidden");
+    document.body.classList.toggle("!overflow-hidden");
   },
 );
 
