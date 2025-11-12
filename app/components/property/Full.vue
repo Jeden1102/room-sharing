@@ -54,7 +54,7 @@
                 '/images/user/bg-placeholder.webp'
               "
               :alt="property.title"
-              class="h-64 w-full rounded-lg object-cover lg:h-full"
+              class="h-64 w-full rounded-lg object-cover lg:h-100"
             />
           </div>
 

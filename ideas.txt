@@ -10,10 +10,6 @@ e. property full page
 13. Chat
 10. GENERAL REFACTORS/IMPROVEMNETS/TESTING
 
-TO FIX:
-
-1. confirmt email - first logout if logged in user
-
 RESEARACH:
 1. File formatter for nuxt.
 

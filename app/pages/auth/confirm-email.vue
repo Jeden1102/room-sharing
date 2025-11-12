@@ -1,7 +1,8 @@
 <script setup lang="ts">
+const { signOut } = useAuth();
+
 definePageMeta({
   layout: "login",
-  unauthenticatedOnly: true,
 });
 
 const route = useRoute();
@@ -16,6 +17,7 @@ if (!code) {
 }
 
 const confirmEmail = async () => {
+  signOut();
   try {
     const response: { message: string } = await $fetch(
       "/api/auth/confirm-email",

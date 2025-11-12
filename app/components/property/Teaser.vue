@@ -5,17 +5,13 @@
   >
     <div class="relative">
       <Carousel
-        :value="
-          property.images.length > 0
-            ? property.images.slice(0, 5)
-            : ['/images/user/bg-placeholder.webp']
-        "
+        :value="carouselImages"
         :numVisible="1"
         :numScroll="1"
         :showNavigators="false"
-        :showIndicators="property.images.length > 1"
+        :showIndicators="carouselImages.length > 1"
         :circular="true"
-        class="[&_.p-carousel-indicator-list]:absolute [&_.p-carousel-indicator-list]:bottom-0 [&_.p-carousel-indicator-list]:left-1/2 [&_.p-carousel-indicator-list]:w-full [&_.p-carousel-indicator-list]:-translate-x-1/2 [&_.p-carousel-indicator-list]:bg-white/30 [&_.p-carousel-indicator-list]:backdrop-blur-sm"
+        class="[&_.p-carousel-indicator-list]:absolute [&_.p-carousel-indicator-list]:bottom-0 [&_.p-carousel-indicator-list]:left-1/2 [&_.p-carousel-indicator-list]:w-full [&_.p-carousel-indicator-list]:-translate-x-1/2 [&_.p-carousel-indicator-list]:bg-white/30 [&_.p-carousel-indicator-list]:backdrop-blur-md"
       >
         <template #item="slotProps">
           <img
@@ -25,19 +21,19 @@
           />
         </template>
       </Carousel>
+
+      <!-- Badges + Bookmark -->
       <Badge
         :value="property.type"
         severity="secondary"
         class="absolute top-2 left-2"
         v-if="variant === 'large'"
       />
-
       <Badge
         :value="property.listingType"
         class="absolute top-10 left-2"
         v-if="variant === 'large'"
       />
-
       <Button
         class="!absolute top-2 right-2"
         rounded
@@ -49,6 +45,7 @@
       </Button>
     </div>
 
+    <!-- Content -->
     <div class="mt-auto space-y-3 p-4 pt-0">
       <div>
         <h3 class="text-lg font-semibold">{{ property.title }}</h3>
@@ -71,7 +68,9 @@
           <i class="pi pi-home"></i> {{ property.floor }} piętro
         </span>
       </div>
+
       <Divider v-if="variant === 'large'" />
+
       <div class="mt-6 flex items-center justify-between gap-4">
         <div class="text-primary-400 text-2xl font-semibold">
           ${{ formatPrice(property.price) }}
@@ -98,4 +97,17 @@
 
 <script setup lang="ts">
 const props = defineProps<{ property: any; variant?: "small" | "large" }>();
+
+const carouselImages = computed(() => {
+  const imgs = props.property?.images || [];
+  if (!imgs.length) {
+    return ["/images/user/bg-placeholder.webp"];
+  }
+
+  const mainIdx = props.property.mainImageIdx ?? 0;
+  const main = imgs[mainIdx];
+  const rest = imgs.filter((_, i) => i !== mainIdx);
+
+  return [main, ...rest].slice(0, 5);
+});
 </script>
