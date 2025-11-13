@@ -7,7 +7,7 @@
     <div
       :class="
         clsx(
-          'fixed top-0 left-full z-20 flex size-full w-full flex-col gap-4 bg-white p-4 transition-all duration-300 md:static md:flex-row md:p-0 md:[&>div]:w-full',
+          'fixed top-0 left-full z-20 flex size-full w-full flex-col gap-4 bg-white p-4 transition-all duration-300 md:static md:flex-row md:bg-transparent md:p-0 md:[&>div]:w-full',
           { '!left-0': filtersOpened },
         )
       "

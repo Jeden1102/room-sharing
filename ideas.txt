@@ -6,12 +6,17 @@ d. properties listinng
 e. property full page
 
 11. Home page sliders
+11.1 Home Page cities - properties listing query params for city
 12. Bookmarks
+12.1 Cookies banner
 13. Chat
 10. GENERAL REFACTORS/IMPROVEMNETS/TESTING
 
-RESEARACH:
-1. File formatter for nuxt.
+To add/fix:
+1. File formatter for files.
+2. Auth session request fix.
+3. Seperate fonts for headings / content.
+4. Translations
 
 Others:
 1. Profile/property reporting to admins.
