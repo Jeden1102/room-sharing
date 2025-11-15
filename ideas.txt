@@ -1,4 +1,5 @@
 10. GENERAL REFACTORS/IMPROVEMNETS/TESTING:
+0. global consttans for taxonomies
 a. Profile page - settings etc
 b. users listing page
 c. single user full page
@@ -17,6 +18,7 @@ To add/fix:
 2. Auth session request fix.
 3. Seperate fonts for headings / content.
 4. Translations
+5. Proper links
 
 Others:
 1. Profile/property reporting to admins.
