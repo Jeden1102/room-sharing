@@ -8,6 +8,7 @@
       <RouterLink
         v-for="city in cities"
         :key="city.name"
+        :title="city.name"
         :to="city.link"
         :class="city.class"
         class="flex h-56 w-full md:h-72 lg:h-90"

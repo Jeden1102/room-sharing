@@ -43,6 +43,7 @@
         format="webp"
         sizes="100vw sm:516px"
         fetchpriority="high"
+        loading="eager"
       />
     </BitsAnimatedContent>
   </section>
