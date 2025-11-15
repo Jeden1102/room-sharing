@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white py-4 lg:px-4">
+  <nav class="bg-white py-4 lg:px-4">
     <div class="container flex items-center lg:gap-12 xl:gap-24">
       <div class="flex w-full justify-between lg:w-fit">
         <NuxtLink to="/">
@@ -35,7 +35,6 @@
             >Properties</NuxtLink
           >
           <NuxtLink class="nav-link" to="/users">Users</NuxtLink>
-          <NuxtLink class="nav-link" to="/product">Product</NuxtLink>
           <NuxtLink class="nav-link" to="/contact">Contact</NuxtLink>
           <NuxtLink
             class="nav-link lg:hidden"
@@ -93,7 +92,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script setup lang="ts">

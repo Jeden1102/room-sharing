@@ -1,3 +1,16 @@
+<template>
+  <div>
+    <Select
+      v-model="currentLocale"
+      :options="locales"
+      optionLabel="name"
+      class="w-32"
+      @change="setLocale(locale.code)"
+      size="small"
+    />
+  </div>
+</template>
+
 <script setup>
 const { locales, setLocale, locale } = useI18n();
 
@@ -11,16 +24,3 @@ onMounted(() => {
   currentLocale.value = locales.value.find((l) => l.code === locale.value);
 });
 </script>
-
-<template>
-  <div>
-    <Select
-      v-model="currentLocale"
-      :options="locales"
-      optionLabel="name"
-      class="w-32"
-      @change="setLocale(locale.code)"
-      size="small"
-    />
-  </div>
-</template>

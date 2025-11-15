@@ -66,7 +66,7 @@ const props = defineProps<{
   label: string;
   modelValue: string[];
   maxFiles: number;
-  primaryImageIdx: number;
+  primaryImageIdx?: number;
   canSetPrimary: boolean;
 }>();
 
@@ -94,10 +94,6 @@ const imageToDelete = ref<string | null>(null);
 const confirmDelete = (file: string) => {
   imageToDelete.value = file;
   deleteDialogVisible.value = true;
-};
-
-const setAsPrimary = (file: string) => {
-  emit("update:modelValue", [file]);
 };
 
 const doDelete = () => {

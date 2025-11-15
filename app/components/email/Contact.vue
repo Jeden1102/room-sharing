@@ -1,15 +1,3 @@
-<script setup lang="ts">
-import { Button, Text } from "@vue-email/components";
-import Layout from "./Layout.vue";
-
-defineProps({
-  from: String,
-  fromEmail: String,
-  reason: String,
-  text: String,
-});
-</script>
-
 <template>
   <Layout>
     <Text>
@@ -19,3 +7,15 @@ defineProps({
     <Text class="my-4"> {{ text }} </Text>
   </Layout>
 </template>
+
+<script setup lang="ts">
+import { Text } from "@vue-email/components";
+import Layout from "./Layout.vue";
+
+defineProps({
+  from: String,
+  fromEmail: String,
+  reason: String,
+  text: String,
+});
+</script>

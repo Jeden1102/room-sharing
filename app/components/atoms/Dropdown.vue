@@ -36,6 +36,5 @@ const props = defineProps<{
 
 const model = defineModel();
 
-const form = inject<any>("formContext");
 const fieldState = computed(() => props.form?.[props.name]);
 </script>

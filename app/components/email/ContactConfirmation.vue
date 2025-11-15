@@ -1,12 +1,3 @@
-<script setup lang="ts">
-import { Text } from "@vue-email/components";
-import Layout from "./Layout.vue";
-
-defineProps({
-  from: String,
-});
-</script>
-
 <template>
   <Layout>
     <Text class="mb-4"> Hello {{ from }}, </Text>
@@ -15,3 +6,12 @@ defineProps({
     </Text>
   </Layout>
 </template>
+
+<script setup lang="ts">
+import { Text } from "@vue-email/components";
+import Layout from "./Layout.vue";
+
+defineProps({
+  from: String,
+});
+</script>

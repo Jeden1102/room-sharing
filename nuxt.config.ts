@@ -56,15 +56,20 @@ export default defineNuxtConfig({
     "@nuxtjs/seo",
     "nuxt-security",
     "nuxt-easy-lightbox",
-    "@nuxtjs/leaflet",
+    ['@nuxtjs/leaflet', { ssr: false }]
   ],
+  routeRules: {
+    '/': {
+      prerender: true,
+    },
+  },
   fileStorage: {
     mount: process.cwd() + "/public/uploads",
   },
   fonts: {
     defaults: {
       weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-      styles: ["normal", "italic"],
+    styles: ["normal", "italic"],
     },
     families: [{ name: "Inter", provider: "google" }],
   },
@@ -73,6 +78,8 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   primevue: {
+    importTheme: false,
+    treeshake: true,
     options: {
       theme: {
         preset: MyPreset,

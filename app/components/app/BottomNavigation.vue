@@ -1,5 +1,5 @@
 <template>
-  <div
+  <nav
     class="fixed bottom-0 left-0 z-10 flex w-full items-center justify-between bg-white px-4 py-3 lg:hidden lg:px-4"
   >
     <Button
@@ -10,7 +10,6 @@
       rounded
       :severity="isActive(link.to) ? 'primary' : 'secondary'"
       :icon="link.icon"
-      :class="isActive(link.to) ? 'mb-4' : ''"
       size="large"
     >
       <RouterLink
@@ -21,7 +20,7 @@
         <span :class="link.icon"></span>
       </RouterLink>
     </Button>
-  </div>
+  </nav>
 </template>
 
 <script setup lang="ts">
@@ -51,7 +50,7 @@ const links = [
   },
   {
     icon: "pi pi-comment",
-    to: localePath("/chat"),
+    to: localePath("/user/chat"),
     title: "Chat",
   },
   {

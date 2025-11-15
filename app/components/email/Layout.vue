@@ -1,9 +1,3 @@
-<script setup lang="ts">
-import { Html, Body, Container, Tailwind, Img } from "@vue-email/components";
-
-const config = useRuntimeConfig();
-</script>
-
 <template>
   <Html lang="en">
     <Tailwind
@@ -38,3 +32,9 @@ const config = useRuntimeConfig();
     </Tailwind>
   </Html>
 </template>
+
+<script setup lang="ts">
+import { Html, Body, Container, Tailwind, Img } from "@vue-email/components";
+
+const config = useRuntimeConfig();
+</script>

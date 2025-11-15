@@ -84,6 +84,7 @@ const onSave = async () => {
   try {
     isLoading.value = true;
     const formData = new FormData();
+    if (!files.value[0]) return;
     formData.append(props.field, files.value[0]);
 
     const response = await $fetch<string[]>("/api/files", {

@@ -75,7 +75,7 @@
           <AtomsCheckbox name="pets" label="Has pets" :form="$form" />
         </div>
 
-        <AtomsTextarea
+        <AtomsBaseTextarea
           name="description"
           label="Description"
           :rows="4"

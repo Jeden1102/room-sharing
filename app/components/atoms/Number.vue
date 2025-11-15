@@ -21,7 +21,7 @@ const props = defineProps<{
   label: string;
   form?: any;
 }>();
-const model = defineModel();
+const model = defineModel<number | null>();
 
 const fieldState = computed(() => props.form?.[props.name]);
 </script>

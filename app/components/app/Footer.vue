@@ -23,17 +23,8 @@
           </li>
         </ul>
         <div class="mt-4 flex space-x-4 text-gray-500">
-          <a href="#" class="hover:text-blue-600"
-            ><i class="pi pi-twitter"></i
-          ></a>
-          <a href="#" class="hover:text-pink-500"
-            ><i class="pi pi-instagram"></i
-          ></a>
-          <a href="#" class="hover:text-red-600"
-            ><i class="pi pi-youtube"></i
-          ></a>
-          <a href="#" class="hover:text-blue-700"
-            ><i class="pi pi-facebook"></i
+          <a href="#" class="hover:text-gray-700"
+            ><i class="pi pi-tiktok"></i
           ></a>
         </div>
       </div>
@@ -42,7 +33,7 @@
         <h3 class="mb-3 font-semibold lg:text-lg">Explore</h3>
         <ul class="space-y-2 text-sm lg:space-y-3 lg:text-base">
           <li><NuxtLink to="#" class="footer-link">About Us</NuxtLink></li>
-          <li><NuxtLink to="faq" class="footer-link">FAQ</NuxtLink></li>
+          <li><NuxtLink to="#" class="footer-link">FAQ</NuxtLink></li>
           <li><NuxtLink to="#" class="footer-link">Pricing</NuxtLink></li>
         </ul>
       </div>

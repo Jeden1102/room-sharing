@@ -1,14 +1,3 @@
-<script setup lang="ts">
-import { Button, Text } from "@vue-email/components";
-import Layout from "./Layout.vue";
-
-defineProps({
-  actionUrl: String,
-  title: String,
-  actionText: String,
-});
-</script>
-
 <template>
   <Layout>
     <Text class="mb-4">
@@ -22,3 +11,14 @@ defineProps({
     </Button>
   </Layout>
 </template>
+
+<script setup lang="ts">
+import { Button, Text } from "@vue-email/components";
+import Layout from "./Layout.vue";
+
+defineProps({
+  actionUrl: String,
+  title: String,
+  actionText: String,
+});
+</script>

@@ -1,10 +1,11 @@
 <template>
   <main>
     <HomeHero />
-    <AppFaq
+    <LazyAppFaq
       title="Najczęściej zadawane pytania"
       subtitle="Zanim napiszesz do nas — sprawdź, może odpowiedź już tu jest"
       :containered="true"
+      hydrate-on-visible
       :questions="[
         {
           question: 'Jak mogę dodać ogłoszenie o mieszkaniu?',
@@ -24,7 +25,8 @@
       ]"
     />
 
-    <AppCta
+    <LazyAppCta
+      hydrate-on-visible
       title="Have some more questions?"
       subtitle="See the FAQ page to find answers to your questions."
     >
@@ -33,9 +35,10 @@
           Go to FAQ
         </RouterLink>
       </Button>
-    </AppCta>
+    </LazyAppCta>
 
-    <AppCta
+    <LazyAppCta
+      hydrate-on-visible
       title="We connect people searching for their dream apartments"
       subtitle="With the use of RealPro you can create searcher proflie or upload your
       apartment to seek for tenants."
@@ -48,38 +51,15 @@
           Start now!
         </RouterLink>
       </Button>
-    </AppCta>
+    </LazyAppCta>
 
-    <HomeLatestProperties
-      title="Properties for rent"
-      subtitle="Discover our latest properties"
-      type="rent"
-      :properties="rentProperties"
-    />
+    <LazyHomeServices hydrate-on-visible />
 
-    <HomeServices />
-
-    <HomeLatestProperties
-      title="Properties for sale"
-      subtitle="Discover our latest properties"
-      type="sale"
-      :properties="sellProperties"
-    />
-
-    <HomeCitiesBento />
-
-    <HomeLatestProperties
-      title="Properties for share"
-      subtitle="Discover our latest properties"
-      type="sale"
-      :properties="rentProperties"
-    />
+    <LazyHomeCitiesBento hydrate-on-visible />
   </main>
 </template>
 
 <script setup lang="ts">
-import { rentProperties, sellProperties } from "~/data/properties";
-
 definePageMeta({
   auth: false,
 });
