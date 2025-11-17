@@ -25,7 +25,7 @@
         @update="applyFilters"
         :total="propertiesData?.total"
         :pending
-        class="col-span-2"
+        class="col-span-2 ml-4 lg:ml-0"
       />
     </div>
 

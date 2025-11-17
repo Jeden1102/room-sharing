@@ -29,6 +29,9 @@
             <NuxtImg
               :src="user.profileImage || '/images/user/avatar-placeholder.webp'"
               alt="profile"
+              format="webp"
+              width="128"
+              height="128"
               class="h-32 w-32 cursor-pointer rounded-full border-4 border-white object-cover shadow-lg"
               @click="isProfileImageVisible = true"
             />

@@ -5,11 +5,11 @@
 10. GENERAL REFACTORS/IMPROVEMNETS/TESTING
 
 To add/fix:
-1. File formatter for files.
 2. Auth session request fix.
 3. Seperate fonts for headings / content.
 4. Translations
 5. Proper links
+6. anys
 
 Others:
 1. Profile/property reporting to admins.
