@@ -1,5 +1,4 @@
 11. Home page sliders
-11.1 Home Page cities - properties listing query params for city
 12. Bookmarks
 12.1 Cookies banner
 13. Chat

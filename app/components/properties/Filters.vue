@@ -27,8 +27,7 @@
         :suggestions="filteredCities"
         @complete="searchCity"
         placeholder="Wpisz miasto"
-        @option-select="onCitySelect"
-        @clear="onCityClear"
+        v-model="filters.city"
         name="city"
       />
 
@@ -136,6 +135,7 @@
 
 <script setup lang="ts">
 import clsx from "clsx";
+const route = useRoute();
 
 const props = defineProps<{
   total?: number;
@@ -150,7 +150,7 @@ const debounceTimeout = ref<NodeJS.Timeout>();
 const defaultFilters = {
   listingType: null,
   type: null,
-  city: "",
+  city: route.query.city || "",
   priceMin: null,
   priceMax: null,
   roomsMin: null,
@@ -198,16 +198,6 @@ const searchCity = async (event: any) => {
   } catch (err) {
     console.error("Error loading cities:", err);
   }
-};
-
-const onCitySelect = (event: any) => {
-  filters.city = event.value;
-  emit("update", { ...filters });
-};
-
-const onCityClear = () => {
-  filters.city = "";
-  emit("update", { ...filters });
 };
 
 const {

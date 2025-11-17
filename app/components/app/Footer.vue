@@ -23,7 +23,7 @@
           </li>
         </ul>
         <div class="mt-4 flex space-x-4 text-gray-500">
-          <a href="#" class="hover:text-gray-700"
+          <a href="#" class="hover:text-gray-700" title="Tiktok profile"
             ><i class="pi pi-tiktok"></i
           ></a>
         </div>

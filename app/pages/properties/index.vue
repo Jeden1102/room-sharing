@@ -25,7 +25,7 @@
         @update="applyFilters"
         :total="propertiesData?.total"
         :pending
-        class="col-span-2 ml-4"
+        class="col-span-2"
       />
     </div>
 
@@ -95,6 +95,8 @@
 <script setup lang="ts">
 import type { PropertyWithOwner } from "@/components/property/types";
 
+const route = useRoute();
+
 type Coord = {
   latitude: number;
   longitude: number;
@@ -113,7 +115,7 @@ watch(listingType, () => {
 const filters = ref({
   listingType: null,
   type: null,
-  city: "",
+  city: route.query.city || "",
   priceMin: null,
   priceMax: null,
   roomsMin: null,

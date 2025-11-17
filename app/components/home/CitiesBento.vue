@@ -43,29 +43,31 @@
 </template>
 
 <script setup lang="ts">
+const localePath = useLocalePath();
+
 const cities = [
   {
-    name: "Warsaw",
+    name: "Warszawa",
     image: "/images/warszawa.jpg",
-    link: "/city/warsaw",
+    link: localePath("/properties?city=Warszawa"),
     class: "md:w-[calc(30%-12px)]",
   },
   {
     name: "Kraków",
     image: "/images/krakow.jpg",
-    link: "/city/krakow",
+    link: localePath("/properties?city=Kraków"),
     class: "md:w-[calc(70%-12px)]",
   },
   {
     name: "Gdańsk",
     image: "/images/gdansk.jpg",
-    link: "/city/gdansk",
+    link: localePath("/properties?city=Gdańsk"),
     class: "md:w-[calc(55%-12px)]",
   },
   {
     name: "Wrocław",
     image: "/images/wroclaw.jpg",
-    link: "/city/wroclaw",
+    link: localePath("/properties?city=Wrocław"),
     class: "md:w-[calc(45%-12px)]",
   },
 ];
