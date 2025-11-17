@@ -42,9 +42,9 @@
             <Dropdown
               id="reason"
               name="reason"
-              :options="reasonOptions"
-              optionLabel="name"
-              optionValue="id"
+              :options="contactReasonOptions"
+              optionLabel="label"
+              optionValue="value"
               fluid
             />
             <label for="reason">Contact reason</label>
@@ -120,10 +120,7 @@ import { contactSchema } from "~/schemas/contact";
 
 const formStatus = ref({ success: false, message: "", isLoading: false });
 
-const reasonOptions = ref([
-  { name: "Male", id: "male" },
-  { name: "Female", id: "female" },
-]);
+const { contactReasonOptions } = useTaxonomies();
 
 const resolver = ref(zodResolver(contactSchema));
 

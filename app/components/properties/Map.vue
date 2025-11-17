@@ -29,17 +29,22 @@
 </template>
 
 <script lang="ts" setup>
+import type { PropertyWithOwner } from "@/components/property/types";
+
 defineProps<{
   items: { latitude: number; longitude: number; id: string }[];
 }>();
 
-const propertyData = ref<any | null>(null);
+const propertyData = ref<PropertyWithOwner | null>(null);
 
 async function loadProperty(id: string) {
   propertyData.value = null;
 
   try {
-    const { data, error } = await useFetch(`/api/property/${id}`, {
+    const { data, error } = await useFetch<{
+      success: boolean;
+      property: PropertyWithOwner;
+    }>(`/api/property/${id}`, {
       cache: "no-cache",
     });
 

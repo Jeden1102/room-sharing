@@ -59,9 +59,9 @@ export default defineNuxtConfig({
     ['@nuxtjs/leaflet', { ssr: false }]
   ],
   routeRules: {
-    '/': {
-      prerender: true,
-    },
+    '/': { prerender: true },
+    '/**': { isr: 3600 },
+    '/api/**': { cors: true },
   },
   fileStorage: {
     mount: process.cwd() + "/public/uploads",
@@ -149,8 +149,15 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
+    preset: 'vercel',
+    vercel: {
+      functions: {
+        maxDuration: 10,
+      },
+    },
     rollupConfig: {
       plugins: [vue()],
     },
-  },
+    compressPublicAssets: true,
+  }
 });

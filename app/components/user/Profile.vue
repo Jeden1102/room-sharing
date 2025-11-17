@@ -281,7 +281,6 @@
 </template>
 
 <script setup lang="ts">
-import { PropertyAmenity } from "#components";
 import type { User, Prisma } from "@prisma/client";
 
 type FullUser = Prisma.UserGetPayload<{

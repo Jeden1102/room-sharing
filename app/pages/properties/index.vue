@@ -83,13 +83,24 @@
           )
         "
       >
-        <PropertiesMap :items="propertiesData?.coords" />
+        <PropertiesMap
+          v-if="propertiesData?.coords"
+          :items="propertiesData?.coords"
+        />
       </div>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
+import type { PropertyWithOwner } from "@/components/property/types";
+
+type Coord = {
+  latitude: number;
+  longitude: number;
+  id: string;
+};
+
 import clsx from "clsx";
 
 const listingType = ref("grid");
@@ -113,11 +124,11 @@ const filters = ref({
   page: 1,
 });
 
-const {
-  data: propertiesData,
-  pending,
-  refresh,
-} = await useFetch("/api/properties", {
+const { data: propertiesData, pending } = await useFetch<{
+  properties: PropertyWithOwner[];
+  total: number;
+  coords: Coord[];
+}>("/api/properties", {
   query: filters,
   watch: [filters],
 });

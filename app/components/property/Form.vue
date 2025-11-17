@@ -134,39 +134,13 @@
     </Fieldset>
     <Fieldset legend="Udogodnienia i warunki">
       <div class="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4">
-        <div class="flex flex-col gap-2">
-          <AtomsCheckbox name="furnished" label="Umeblowane" :form="$form" />
-          <AtomsCheckbox name="balcony" label="Balkon" :form="$form" />
-          <AtomsCheckbox name="elevator" label="Winda" :form="$form" />
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <AtomsCheckbox
-            name="parking"
-            label="Miejsce parkingowe"
-            :form="$form"
-          />
-          <AtomsCheckbox
-            name="petsAllowed"
-            label="Zwierzęta dozwolone"
-            :form="$form"
-          />
-          <AtomsCheckbox
-            name="smokingAllowed"
-            label="Palenie dozwolone"
-            :form="$form"
-          />
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <AtomsCheckbox name="washingMachine" label="Pralka" :form="$form" />
-          <AtomsCheckbox name="dishwasher" label="Zmywarka" :form="$form" />
-          <AtomsCheckbox
-            name="airConditioning"
-            label="Klimatyzacja"
-            :form="$form"
-          />
-        </div>
+        <AtomsCheckbox
+          :name="amenity.value"
+          :label="amenity.label"
+          :form="$form"
+          v-for="amenity in amenitiesOptions"
+          :key="amenity.value"
+        />
       </div>
 
       <div class="mt-2">
@@ -184,9 +158,14 @@
     </Fieldset>
 
     <Fieldset legend="Media">
-      <div class="flex flex-col gap-2">
-        <AtomsCheckbox name="internet" label="Internet" :form="$form" />
-        <AtomsCheckbox name="tv" label="Telewizja" :form="$form" />
+      <div class="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4">
+        <AtomsCheckbox
+          :name="media.value"
+          :label="media.label"
+          :form="$form"
+          v-for="media in mediasOptions"
+          :key="media.value"
+        />
       </div>
     </Fieldset>
 
@@ -228,6 +207,22 @@
           :label="property ? 'Zapisz zmiany' : 'Dodaj ofertę'"
           :loading="formStatus.isLoading"
         />
+
+        <Button v-if="property" asChild v-slot="slotProps" severity="secondary">
+          <RouterLink
+            :to="
+              $localePath({
+                name: 'properties-id',
+                params: {
+                  id: slugify(property.title),
+                },
+                query: { id: property.id },
+              })
+            "
+            :class="slotProps.class"
+            >Preview property</RouterLink
+          >
+        </Button>
       </div>
 
       <Message
@@ -242,7 +237,6 @@
 </template>
 
 <script setup lang="ts">
-import { AtomsAutocomplete, AtomsDropdown } from "#components";
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { propertyCreateSchema } from "~/schemas/property";
 
@@ -263,17 +257,20 @@ const imageUris = ref<string[]>(initialValues.value?.images || []);
 const filteredCities = ref<string[]>([]);
 const availableDistricts = ref<any[]>([]);
 
-const typeOptions = [
-  { label: "Mieszkanie", value: "APARTMENT" },
-  { label: "Dom", value: "HOUSE" },
-  { label: "Pokój", value: "ROOM" },
-  { label: "Studio", value: "STUDIO" },
-];
+const {
+  propertyTypeOptions,
+  listingTypeOptions,
+  amenitiesOptions,
+  mediasOptions,
+} = useTaxonomies();
 
-const listingOptions = [
-  { label: "Na wynajem", value: "RENT" },
-  { label: "Na sprzedaz", value: "SALE" },
-];
+const typeOptions = computed(() => {
+  return propertyTypeOptions.filter((o: any) => o.value !== null);
+});
+
+const listingOptions = computed(() => {
+  return listingTypeOptions.filter((o: any) => o.value !== null);
+});
 
 const isLoading = ref(false);
 

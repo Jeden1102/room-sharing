@@ -23,7 +23,7 @@
         :key="idx"
         class="max-size-40 relative overflow-hidden rounded-lg shadow"
       >
-        <img :src="img" class="h-full w-full object-cover" />
+        <img :src="img" class="h-40 w-full object-cover" />
         <Button
           class="!absolute top-2 right-2 z-10"
           @click="confirmDelete(img)"

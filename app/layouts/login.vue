@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <div class="flex flex-col lg:min-h-screen lg:pb-0">
     <AppHeaderSimple />

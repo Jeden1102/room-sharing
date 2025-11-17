@@ -97,6 +97,7 @@
         />
         <div
           v-if="
+            availableDistricts &&
             (availableDistricts?.length > 0 ||
               initialValues.districts.length > 0) &&
             initialValues.city
@@ -218,10 +219,7 @@ const files = ref<File[]>([]);
 const filteredCities = ref<any[]>([]);
 const availableDistricts = ref<any[]>();
 
-const genderOptions = [
-  { name: "Male", id: "male" },
-  { name: "Female", id: "female" },
-];
+const { genderOptions } = useTaxonomies();
 
 const interestOptions = ref<any[]>([]);
 const occupationOptions = ref<any[]>([]);

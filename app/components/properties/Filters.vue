@@ -36,8 +36,8 @@
       <AtomsDropdown
         label="Typ oferty"
         :options="listingTypeOptions"
-        optionLabel="name"
-        optionValue="id"
+        optionLabel="label"
+        optionValue="value"
         v-model="filters.listingType"
         name="listingType"
       />
@@ -46,8 +46,8 @@
       <AtomsDropdown
         label="Typ nieruchomości"
         :options="propertyTypeOptions"
-        optionLabel="name"
-        optionValue="id"
+        optionLabel="label"
+        optionValue="value"
         v-model="filters.type"
         name="type"
       />
@@ -83,25 +83,10 @@
           id="amenities"
           name="amenities"
           v-model="filters.amenities"
-          :options="amenitiesOptions"
-          optionLabel="name"
-          optionValue="id"
+          :options="[...amenitiesOptions, ...mediasOptions]"
+          optionLabel="label"
+          optionValue="value"
           placeholder="Wybierz udogodnienia"
-          display="chip"
-          fluid
-        />
-      </div>
-
-      <!-- Preferences MultiSelect -->
-      <div>
-        <MultiSelect
-          id="preferences"
-          name="preferences"
-          v-model="filters.preferences"
-          :options="preferencesOptions"
-          optionLabel="name"
-          optionValue="id"
-          placeholder="Wybierz preferencje"
           display="chip"
           fluid
         />
@@ -225,33 +210,12 @@ const onCityClear = () => {
   emit("update", { ...filters });
 };
 
-const listingTypeOptions = [
-  { name: "Dowolny", id: null },
-  { name: "Wynajem", id: "RENT" },
-  { name: "Sprzedaż", id: "SALE" },
-];
-
-const propertyTypeOptions = [
-  { name: "Dowolny", id: null },
-  { name: "Mieszkanie", id: "APARTMENT" },
-  { name: "Dom", id: "HOUSE" },
-  { name: "Pokój", id: "ROOM" },
-  { name: "Studio", id: "STUDIO" },
-];
-
-const amenitiesOptions = [
-  { name: "Umeblowane", id: "furnished" },
-  { name: "Balkon", id: "balcony" },
-  { name: "Winda", id: "elevator" },
-  { name: "Parking", id: "parking" },
-  { name: "Internet", id: "internet" },
-  { name: "Pralka", id: "washingMachine" },
-];
-
-const preferencesOptions = [
-  { name: "Zwierzęta dozwolone", id: "petsAllowed" },
-  { name: "Palenie dozwolone", id: "smokingAllowed" },
-];
+const {
+  listingTypeOptions,
+  propertyTypeOptions,
+  amenitiesOptions,
+  mediasOptions,
+} = useTaxonomies();
 
 const sortOptions = [
   { label: "Najnowsze", value: "newest" },

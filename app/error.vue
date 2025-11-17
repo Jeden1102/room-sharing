@@ -1,3 +1,23 @@
+<template>
+  <NuxtLayout>
+    <div
+      class="container flex flex-col items-center gap-6 py-10 text-center md:gap-10"
+    >
+      <img :src="image" alt="Error image" class="max-w-sm" />
+
+      <h2 class="text-3xl font-bold uppercase md:text-4xl lg:text-6xl">
+        {{ props.error?.statusCode }}
+      </h2>
+
+      <p class="text-lg text-gray-600 md:text-xl">
+        {{ message }}
+      </p>
+
+      <Button class="w-fit" @click="handleError">Go home</Button>
+    </div>
+  </NuxtLayout>
+</template>
+
 <script setup lang="ts">
 import type { NuxtError } from "#app";
 
@@ -35,23 +55,3 @@ const image = computed(() => {
   return errorImages[props.error?.statusCode ?? 0] || "/icons/error.svg";
 });
 </script>
-
-<template>
-  <NuxtLayout>
-    <div
-      class="container flex flex-col items-center gap-6 py-10 text-center md:gap-10"
-    >
-      <img :src="image" alt="Error image" class="max-w-sm" />
-
-      <h2 class="text-3xl font-bold uppercase md:text-4xl lg:text-6xl">
-        {{ props.error?.statusCode }}
-      </h2>
-
-      <p class="text-lg text-gray-600 md:text-xl">
-        {{ message }}
-      </p>
-
-      <Button class="w-fit" @click="handleError">Go home</Button>
-    </div>
-  </NuxtLayout>
-</template>

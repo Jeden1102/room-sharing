@@ -52,8 +52,6 @@
 </template>
 
 <script setup lang="ts">
-import { BitsAnimatedContent } from "#components";
-
 const services = [
   {
     title: "Buy & Sell Properties",

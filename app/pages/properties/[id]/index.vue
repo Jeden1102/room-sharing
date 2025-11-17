@@ -5,6 +5,8 @@
 </template>
 
 <script setup lang="ts">
+import type { PropertyWithOwner } from "@/components/property/types";
+
 const route = useRoute();
 
 definePageMeta({
@@ -16,9 +18,12 @@ usePageSeo({
   description: "Single property",
 });
 
-const { data, error } = await useFetch(`/api/property/${route.query.id}`, {
-  cache: "no-cache",
-});
+const { data, error } = await useFetch<{ property: PropertyWithOwner }>(
+  `/api/property/${route.query.id}`,
+  {
+    cache: "no-cache",
+  },
+);
 
 if (error.value || !data.value?.property) {
   throw createError({

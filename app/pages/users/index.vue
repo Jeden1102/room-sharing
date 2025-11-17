@@ -44,6 +44,20 @@
 </template>
 
 <script setup lang="ts">
+import type { Prisma } from "@prisma/client";
+
+type FullUser = Prisma.UserGetPayload<{
+  include: {
+    searchPreferences: true;
+    searchPropertyType: true;
+    interests: true;
+    occupation: true;
+    properties: true;
+    noiseCompatibility: true;
+    petsCompatibility: true;
+  };
+}>;
+
 const filters = ref({
   gender: null,
   city: "",
@@ -54,11 +68,10 @@ const filters = ref({
   page: 1,
 });
 
-const {
-  data: usersData,
-  pending,
-  refresh,
-} = await useFetch("/api/users", {
+const { data: usersData, pending } = await useFetch<{
+  users: FullUser[];
+  total: number;
+}>("/api/users", {
   query: filters,
   watch: [filters],
 });

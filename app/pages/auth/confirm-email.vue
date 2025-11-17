@@ -1,3 +1,15 @@
+<template>
+  <h1 class="text-3xl font-semibold md:text-4xl">E-mail confirmation</h1>
+  <p class="mt-2 mb-6 text-xl font-light">
+    {{ responseMessage }}
+  </p>
+  <Button asChild v-slot="slotProps" v-if="!isError">
+    <RouterLink to="/auth/login" :class="slotProps.class"
+      >Go to login</RouterLink
+    >
+  </Button>
+</template>
+
 <script setup lang="ts">
 const { signOut } = useAuth();
 
@@ -45,14 +57,3 @@ onMounted(() => {
   confirmEmail();
 });
 </script>
-<template>
-  <h1 class="text-3xl font-semibold md:text-4xl">E-mail confirmation</h1>
-  <p class="mt-2 mb-6 text-xl font-light">
-    {{ responseMessage }}
-  </p>
-  <Button asChild v-slot="slotProps" v-if="!isError">
-    <RouterLink to="/auth/login" :class="slotProps.class"
-      >Go to login</RouterLink
-    >
-  </Button>
-</template>

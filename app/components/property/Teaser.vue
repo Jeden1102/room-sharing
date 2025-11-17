@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col overflow-hidden rounded-2xl shadow-md"
+    class="flex flex-col gap-2 overflow-hidden rounded-2xl bg-white shadow-md"
     v-if="property"
   >
     <div class="relative">
@@ -106,7 +106,7 @@ const carouselImages = computed(() => {
 
   const mainIdx = props.property.mainImageIdx ?? 0;
   const main = imgs[mainIdx];
-  const rest = imgs.filter((_, i) => i !== mainIdx);
+  const rest = imgs.filter((_: unknown, i: number) => i !== mainIdx);
 
   return [main, ...rest].slice(0, 5);
 });

@@ -164,12 +164,7 @@ const searchCity = async (event: any) => {
   }
 };
 
-const genderOptions = [
-  { name: "Dowolna", id: null },
-  { name: "Mężczyzna", id: "male" },
-  { name: "Kobieta", id: "female" },
-  { name: "Inne", id: "others" },
-];
+const { genderOptions } = useTaxonomies();
 
 const sortOptions = [
   { label: "Brak", value: null },

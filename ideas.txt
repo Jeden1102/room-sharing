@@ -1,11 +1,3 @@
-10. GENERAL REFACTORS/IMPROVEMNETS/TESTING:
-0. global consttans for taxonomies
-a. Profile page - settings etc
-b. users listing page
-c. single user full page
-d. properties listinng
-e. property full page
-
 11. Home page sliders
 11.1 Home Page cities - properties listing query params for city
 12. Bookmarks

@@ -1,3 +1,12 @@
+type Prediction = {
+  place_id: string;
+  description: string;
+}
+
+type Response = {
+  predictions: Prediction[]
+}
+
 export default eventHandler(async (event) => {
   const { q }: { q: string } = getQuery(event);
 
@@ -20,7 +29,7 @@ export default eventHandler(async (event) => {
 
   try {
     const response = await $fetch(url, { params });
-    return response;
+    return response as Response;
   } catch (error) {
     console.error("Error fetching autocomplete:", error);
     throw createError({
