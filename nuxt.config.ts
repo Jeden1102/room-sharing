@@ -69,7 +69,7 @@ export default defineNuxtConfig({
       weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
     styles: ["normal", "italic"],
     },
-    families: [{ name: "Inter", provider: "google" }],
+    families: [{ name: "Poppins", provider: "google" }],
   },
   css: ["~/assets/css/tailwind.css"],
   vite: {
@@ -116,9 +116,10 @@ export default defineNuxtConfig({
       },
     },
     sessionRefresh: {
-      enablePeriodically: true,
+      enablePeriodically: 60000, // 1 minute
       enableOnWindowFocus: true,
     },
+    
   },
   security: {
     rateLimiter: false,

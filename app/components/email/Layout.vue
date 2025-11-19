@@ -13,10 +13,10 @@
         <Container class="mx-auto max-w-xl rounded bg-white p-6 shadow-sm">
           <div class="mb-4 border-b border-gray-200 pb-2">
             <Img
-              :src="config.public.APP_PROD_URI + '/email/logo.png'"
+              :src="config.public.APP_PROD_URI + '/logo.png'"
               alt="Page logo"
-              width="162"
-              height="32"
+              width="80"
+              height="63"
             />
           </div>
 

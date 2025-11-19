@@ -68,7 +68,7 @@ const services = [
     image: "/icons/rent-property.svg",
     actions: [
       { label: "Find", link: "/rent" },
-      { label: "Rent your property", link: "/lease" },
+      { label: "Rent property", link: "/lease" },
     ],
   },
   {

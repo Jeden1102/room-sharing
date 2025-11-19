@@ -10,6 +10,7 @@
         :placeholder
         display="chip"
         fluid
+        v-model="model"
       />
       <label :for="name">{{ label }}</label>
     </FloatLabel>
@@ -32,8 +33,9 @@ const props = defineProps<{
   optionLabel?: string;
   optionValue?: string;
   placeholder?: string;
-  form: any;
+  form?: any;
 }>();
+const model = defineModel();
 
 const fieldState = computed(() => props.form?.[props.name]);
 </script>

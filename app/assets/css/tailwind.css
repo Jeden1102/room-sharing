@@ -2,7 +2,7 @@
 @import "primeicons/primeicons.css";
 
 @theme {
-  --font-inter: "Inter", "sans-serif";
+  --font-poppins: "Poppins", "sans-serif";
 
   --color-primary-50: #f0f6fc;
   --color-primary-100: #d9e8f9;
@@ -24,7 +24,7 @@
   body {
     @apply min-h-screen bg-gray-50;
     * {
-      @apply font-inter;
+      @apply font-poppins;
     }
   }
 }

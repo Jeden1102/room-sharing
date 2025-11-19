@@ -10,7 +10,7 @@
     <div
       :class="
         clsx(
-          'fixed top-0 left-full z-20 flex size-full max-h-screen w-full flex-col gap-4 overflow-y-scroll bg-white p-4 transition-all duration-300 md:static md:grid md:grid-cols-3 md:bg-transparent md:p-0 lg:grid-cols-4 lg:bg-transparent md:[&>div]:w-full',
+          'fixed top-0 left-full z-20 flex size-full max-h-screen w-full flex-col gap-4 overflow-y-scroll bg-white p-4 transition-all duration-300 md:static md:grid md:grid-cols-3 md:bg-transparent md:p-0 md:pt-2 lg:grid-cols-4 lg:bg-transparent md:[&>div]:w-full',
           { '!left-0': filtersOpened },
         )
       "
@@ -26,7 +26,7 @@
       <AtomsAutocomplete
         :suggestions="filteredCities"
         @complete="searchCity"
-        placeholder="Wpisz miasto"
+        label="Wpisz miasto"
         v-model="filters.city"
         name="city"
       />
@@ -78,14 +78,14 @@
 
       <!-- Amenities MultiSelect -->
       <div>
-        <MultiSelect
+        <AtomsMultiselect
           id="amenities"
           name="amenities"
           v-model="filters.amenities"
           :options="[...amenitiesOptions, ...mediasOptions]"
           optionLabel="label"
           optionValue="value"
-          placeholder="Wybierz udogodnienia"
+          label="Wybierz udogodnienia"
           display="chip"
           fluid
         />

@@ -1,12 +1,9 @@
-11. Home page sliders
 12. Bookmarks
 12.1 Cookies banner
 13. Chat
 10. GENERAL REFACTORS/IMPROVEMNETS/TESTING
 
 To add/fix:
-2. Auth session request fix.
-3. Seperate fonts for headings / content.
 4. Translations
 5. Proper links
 6. anys

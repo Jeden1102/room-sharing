@@ -25,7 +25,6 @@
         v-model="filters.city"
         :suggestions="filteredCities"
         @complete="searchCity"
-        placeholder="Wpisz miasto"
         name="city"
       />
 

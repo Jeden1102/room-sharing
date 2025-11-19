@@ -10,10 +10,10 @@
     <div class="flex flex-col gap-4 p-8 lg:gap-6 lg:p-12">
       <NuxtImg
         class="brightness-0 invert-100"
-        src="/logo.svg"
+        src="/logo.png"
+        width="80"
+        height="63"
         alt="logo"
-        width="162"
-        height="32"
         v-if="showLogo"
       />
       <h2 class="text-2xl font-medium lg:text-3xl">
@@ -35,6 +35,12 @@
       alt="image"
       class="ml-auto hidden w-100 rounded-r-md object-cover md:block lg:w-120"
     />
+    <Icon
+      v-if="icon"
+      :name="icon"
+      class="my-auto mr-20 ml-auto text-8xl"
+      :class="variant === 'primary' ? 'text-gray-200' : 'text-gray-600'"
+    />
   </section>
 </template>
 
@@ -43,6 +49,7 @@ defineProps<{
   title: string;
   subtitle: string;
   image?: string;
+  icon?: string;
   showLogo?: boolean;
   variant?: "primary" | "secondary";
 }>();

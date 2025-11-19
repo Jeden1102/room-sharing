@@ -3,7 +3,7 @@
     <div class="container mx-auto grid grid-cols-1 gap-8 px-6 md:grid-cols-4">
       <div>
         <div class="mb-4 flex items-center space-x-2">
-          <NuxtImg src="/logo.svg" alt="logo" width="162" height="32" />
+          <NuxtImg src="/logo.png" alt="logo" width="80" height="63" />
         </div>
         <ul class="space-y-2 text-sm lg:space-y-3 lg:text-base">
           <li>

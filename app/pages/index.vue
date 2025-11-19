@@ -1,6 +1,17 @@
 <template>
   <main>
     <HomeHero />
+
+    <LazyHomeServices hydrate-on-visible />
+
+    <LazyHomeLatestProperties
+      hydrate-on-visible
+      v-if="properties"
+      title="Ostatnio dodane"
+      subtitle="Odkryj najnowsze ogłoszenia"
+      :properties="properties?.properties"
+    />
+
     <LazyAppFaq
       title="Najczęściej zadawane pytania"
       subtitle="Zanim napiszesz do nas — sprawdź, może odpowiedź już tu jest"
@@ -29,6 +40,7 @@
       hydrate-on-visible
       title="Have some more questions?"
       subtitle="See the FAQ page to find answers to your questions."
+      icon="material-symbols-light:live-help-outline-rounded"
     >
       <Button asChild v-slot="slotProps" severity="primary">
         <RouterLink :to="$localePath('faq')" :class="slotProps.class">
@@ -37,29 +49,29 @@
       </Button>
     </LazyAppCta>
 
+    <LazyHomeCitiesBento hydrate-on-visible />
+
     <LazyAppCta
       hydrate-on-visible
       title="We connect people searching for their dream apartments"
-      subtitle="With the use of RealPro you can create searcher proflie or upload your
+      subtitle="With the use of Pokój Z Wami you can create searcher proflie or upload your
       apartment to seek for tenants."
-      image="/images/home-cta.jpg"
+      icon="fluent:people-community-add-20-regular"
       :showLogo="true"
       variant="primary"
     >
       <Button asChild v-slot="slotProps" severity="secondary">
-        <RouterLink :to="$localePath('/auth/login')" :class="slotProps.class">
+        <RouterLink :to="$localePath('/users')" :class="slotProps.class">
           Start now!
         </RouterLink>
       </Button>
     </LazyAppCta>
-
-    <LazyHomeServices hydrate-on-visible />
-
-    <LazyHomeCitiesBento hydrate-on-visible />
   </main>
 </template>
 
 <script setup lang="ts">
+import type { PropertyWithOwner } from "@/components/property/types";
+
 definePageMeta({
   auth: false,
 });
@@ -67,5 +79,16 @@ definePageMeta({
 usePageSeo({
   title: "Home",
   description: "Find your next home",
+});
+
+const { data: properties, pending } = await useFetch<{
+  properties: PropertyWithOwner[];
+  total: number;
+}>("/api/properties", {
+  query: {
+    limit: 6,
+    sortBy: "newest",
+    page: 1,
+  },
 });
 </script>

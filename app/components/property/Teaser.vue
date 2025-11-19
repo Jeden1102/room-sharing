@@ -4,7 +4,14 @@
     v-if="property"
   >
     <div class="relative">
+      <img
+        v-if="noCarousel"
+        :src="carouselImages[0]"
+        alt="Property image"
+        class="h-48 w-full object-cover"
+      />
       <Carousel
+        v-else
         :value="carouselImages"
         :numVisible="1"
         :numScroll="1"
@@ -24,14 +31,8 @@
 
       <!-- Badges + Bookmark -->
       <Badge
-        :value="property.type"
-        severity="secondary"
-        class="absolute top-2 left-2"
-        v-if="variant === 'large'"
-      />
-      <Badge
         :value="property.listingType"
-        class="absolute top-10 left-2"
+        class="absolute top-4 left-4"
         v-if="variant === 'large'"
       />
       <Button
@@ -96,7 +97,13 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ property: any; variant?: "small" | "large" }>();
+import type { PropertyWithOwner } from "@/components/property/types";
+
+const props = defineProps<{
+  property: PropertyWithOwner;
+  noCarousel?: boolean;
+  variant?: "small" | "large";
+}>();
 
 const carouselImages = computed(() => {
   const imgs = props.property?.images || [];

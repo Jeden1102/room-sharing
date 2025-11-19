@@ -13,7 +13,7 @@ useHead({
     lang: locale,
   },
   titleTemplate: (titleChunk) => {
-    return titleChunk ? `${titleChunk} | RealPro` : "RealPro";
+    return titleChunk ? `${titleChunk} | Pokój Z Wami` : "Pokój Z Wami";
   },
 });
 </script>
