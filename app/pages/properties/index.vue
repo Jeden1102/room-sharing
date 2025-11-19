@@ -36,6 +36,7 @@
           clsx(
             listingType === 'map' &&
               'no-scrollbar hidden lg:block lg:max-h-[80vh] lg:w-100 lg:overflow-y-auto lg:px-2',
+            'w-full',
           )
         "
       >

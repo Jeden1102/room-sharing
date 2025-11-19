@@ -1,5 +1,5 @@
 <template>
-  <div class="card-base rounded-xl px-0 shadow-md">
+  <div class="card-base rounded-xl p-0 shadow-md">
     <Skeleton height="8rem" />
 
     <div class="space-y-3 p-4 pb-1.5">

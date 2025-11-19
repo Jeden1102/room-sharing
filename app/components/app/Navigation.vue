@@ -6,8 +6,8 @@
           <NuxtImg
             src="/logo.png"
             alt="logo"
-            width="80"
-            height="63"
+            width="60"
+            height="48"
             class="md:w-25"
           />
         </NuxtLink>
