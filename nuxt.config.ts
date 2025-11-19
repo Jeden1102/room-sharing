@@ -60,8 +60,6 @@ export default defineNuxtConfig({
   ],
   routeRules: {
     '/': { prerender: true },
-    '/**': { isr: 3600 },
-    '/api/**': { cors: true },
   },
   fileStorage: {
     mount: process.cwd() + "/public/uploads",
