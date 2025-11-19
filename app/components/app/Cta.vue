@@ -38,7 +38,7 @@
     <Icon
       v-if="icon"
       :name="icon"
-      class="my-auto mr-20 ml-auto text-8xl"
+      class="my-auto mr-20 ml-auto hidden text-8xl md:block"
       :class="variant === 'primary' ? 'text-gray-200' : 'text-gray-600'"
     />
   </section>
