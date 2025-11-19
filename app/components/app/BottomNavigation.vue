@@ -40,7 +40,7 @@ const links = [
   },
   {
     icon: "pi pi-plus",
-    to: localePath("/new-property"),
+    to: localePath(data.value?.user ? "/new-property" : "/auth/login"),
     title: "Add new property",
   },
   {

@@ -7,10 +7,6 @@
 <script setup lang="ts">
 const route = useRoute();
 
-definePageMeta({
-  auth: true,
-});
-
 usePageSeo({
   title: "Profile",
   description: "User profile",

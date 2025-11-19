@@ -71,7 +71,10 @@
           </template>
 
           <Button asChild v-slot="slotProps">
-            <RouterLink to="/new-property" :class="slotProps.class">
+            <RouterLink
+              :to="$localePath(data?.user ? '/new-property' : '/auth/login')"
+              :class="slotProps.class"
+            >
               Add new property
             </RouterLink>
           </Button>

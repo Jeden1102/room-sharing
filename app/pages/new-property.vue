@@ -3,3 +3,9 @@
     <PropertyForm />
   </div>
 </template>
+
+<script lang="ts" setup>
+definePageMeta({
+  auth: true,
+});
+</script>
