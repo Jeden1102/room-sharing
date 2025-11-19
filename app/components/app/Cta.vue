@@ -35,12 +35,13 @@
       alt="image"
       class="ml-auto hidden w-100 rounded-r-md object-cover md:block lg:w-120"
     />
-    <Icon
-      v-if="icon"
-      :name="icon"
-      class="my-auto mr-20 ml-auto hidden text-8xl md:block"
-      :class="variant === 'primary' ? 'text-gray-200' : 'text-gray-600'"
-    />
+    <span v-if="icon" class="m-auto hidden md:block">
+      <Icon
+        :name="icon"
+        class="mr-20 text-8xl"
+        :class="variant === 'primary' ? 'text-gray-200' : 'text-gray-600'"
+      />
+    </span>
   </section>
 </template>
 
