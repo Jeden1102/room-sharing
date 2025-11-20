@@ -1,8 +1,12 @@
 import prisma from "~~/lib/prisma";
+import { getServerSession } from "#auth";
 
 export default defineEventHandler(async (event) => {
   try {
     const query = getQuery(event);
+    const session = await getServerSession(event);
+
+    const userId = session?.user?.id
 
     const {
       gender,
@@ -49,11 +53,27 @@ export default defineEventHandler(async (event) => {
         orderBy,
         skip,
         take,
+        include: {
+          bookmarkedByUsers: userId ? {
+            where: { id: userId },
+            select: { id: true }
+          } : false
+        }
       }),
       prisma.user.count({ where }),
     ]);
 
-    return { users, total, page: Number(page) };
+    const usersWithBookmark = users.map(user => ({
+      ...user,
+      isBookmarked: userId ? user.bookmarkedByUsers.length > 0 : false,
+      bookmarkedByUsers: undefined 
+    }));
+
+    return { 
+      users: usersWithBookmark, 
+      total, 
+      page: Number(page) 
+    };
   } catch (error) {
     console.error(error);
     throw createError({

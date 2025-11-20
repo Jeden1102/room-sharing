@@ -50,6 +50,11 @@ model User {
   petsCompatibility  PetsCompatibility[]
 
   roommateInProperties Property[] @relation("PropertyRoommates")
+
+  // Bookmarks
+  bookmarkedUsers      User[]     @relation("UserBookmarks")
+  bookmarkedByUsers    User[]     @relation("UserBookmarks")
+  bookmarkedProperties Property[] @relation("PropertyBookmarks")
 }
 
 model Property {
@@ -67,8 +72,8 @@ model Property {
   district        String?
   street          String?
   buildingNumber  String?
-  latitude        Float? //todo
-  longitude       Float? // todo
+  latitude        Float?
+  longitude       Float?
   sizeM2          Int?
   rooms           Int?
   floor           Int?
@@ -93,6 +98,7 @@ model Property {
   phone           String?
   owner           User           @relation(fields: [ownerId], references: [id])
   roommates       User[]         @relation("PropertyRoommates")
+  bookmarkedBy    User[]         @relation("PropertyBookmarks")
 }
 
 model Message {

@@ -1,8 +1,12 @@
 import prisma from "~~/lib/prisma";
+import { getServerSession } from "#auth";
 
 export default defineEventHandler(async (event) => {
   try {
     const query = getQuery(event);
+    const session = await getServerSession(event);
+
+    const userId = session?.user?.id
 
     const {
       listingType,
@@ -19,9 +23,7 @@ export default defineEventHandler(async (event) => {
       limit = 10,
     } = query;
     
-
     const take = Number(limit) || 10;
-
     const skip = (Number(page) - 1) * take;
 
     const where: any = {
@@ -98,9 +100,21 @@ export default defineEventHandler(async (event) => {
         orderBy,
         skip,
         take,
+        include: {
+          bookmarkedBy: userId ? {
+            where: { id: userId },
+            select: { id: true }
+          } : false
+        }
       }),
       prisma.property.count({ where }),
     ]);
+
+    const propertiesWithBookmark = properties.map(property => ({
+      ...property,
+      isBookmarked: userId ? property.bookmarkedBy.length > 0 : false,
+      bookmarkedBy: undefined
+    }));
 
     delete where.city;
 
@@ -114,9 +128,14 @@ export default defineEventHandler(async (event) => {
         latitude: true,
         longitude: true
       }
-    })
+    });
 
-    return { properties, total, page: Number(page), coords };
+    return { 
+      properties: propertiesWithBookmark, 
+      total, 
+      page: Number(page), 
+      coords 
+    };
   } catch (error) {
     console.error(error);
     throw createError({

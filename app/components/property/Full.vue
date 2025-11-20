@@ -28,8 +28,15 @@
             </span>
           </p>
         </div>
-        <div class="text-3xl font-bold whitespace-nowrap md:text-4xl">
-          {{ formatPrice(property.price) }} zł
+        <div class="flex flex-col items-end gap-8">
+          <AppEntityBookmark
+            entity-type="property"
+            :entity-id="property.id"
+            :initial-bookmarked="property.isBookmarked"
+          />
+          <div class="text-3xl font-bold whitespace-nowrap md:text-4xl">
+            {{ formatPrice(property.price) }} zł
+          </div>
         </div>
       </div>
     </div>

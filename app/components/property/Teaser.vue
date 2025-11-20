@@ -35,15 +35,13 @@
         class="absolute top-4 left-4"
         v-if="variant === 'large'"
       />
-      <Button
-        class="!absolute top-2 right-2"
-        rounded
-        severity="secondary"
-        icon="pi pi-bookmark"
+      <AppEntityBookmark
         v-if="variant === 'large'"
-      >
-        <span class="pi pi-bookmark"></span>
-      </Button>
+        entity-type="property"
+        :entity-id="property.id"
+        :initial-bookmarked="property.isBookmarked"
+        button-class="!absolute top-2 right-2"
+      />
     </div>
 
     <!-- Content -->

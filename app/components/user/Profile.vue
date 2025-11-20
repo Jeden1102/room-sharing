@@ -52,17 +52,11 @@
 
           <div class="mt-auto flex gap-2">
             <Button icon="pi pi-comment" rounded />
-            <Button
-              asChild
-              v-slot="slotProps"
-              rounded
-              severity="secondary"
-              icon="pi pi-bookmark"
-            >
-              <RouterLink to="/user/favorites" :class="slotProps.class">
-                <span class="pi pi-bookmark"></span>
-              </RouterLink>
-            </Button>
+            <AppEntityBookmark
+              entity-type="user"
+              :entity-id="user.id"
+              :initial-bookmarked="user.isBookmarked"
+            />
           </div>
         </div>
       </div>
@@ -296,7 +290,9 @@ type FullUser = Prisma.UserGetPayload<{
     noiseCompatibility: true;
     petsCompatibility: true;
   };
-}>;
+}> & {
+  isBookmarked?: boolean;
+};
 
 const { user: userProp, editable } = defineProps<{
   user: FullUser;

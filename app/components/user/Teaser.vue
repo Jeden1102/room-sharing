@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card-base group relative overflow-hidden rounded-xl px-0 shadow-md transition"
+    class="card-base group relative overflow-hidden rounded-xl px-0 pt-0 shadow-md transition"
   >
     <div class="relative h-40 w-full">
       <img
@@ -72,6 +72,13 @@
         <Button icon="pi pi-comments" severity="secondary" rounded />
       </div>
     </div>
+
+    <AppEntityBookmark
+      entity-type="user"
+      :entity-id="user.id"
+      :initial-bookmarked="user.isBookmarked"
+      button-class="!absolute top-2 right-2 z-10"
+    />
   </div>
 </template>
 
@@ -88,7 +95,9 @@ type FullUser = Prisma.UserGetPayload<{
     noiseCompatibility: true;
     petsCompatibility: true;
   };
-}>;
+}> & {
+  isBookmarked?: boolean;
+};
 
 const props = defineProps<{
   user: FullUser;
