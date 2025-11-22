@@ -1,14 +1,10 @@
 import prisma from "~~/lib/prisma";
-import { getServerSession } from "#auth";
 import { propertyCreateSchema } from "~/schemas/property";
+import { requireAuth } from "../middleware/auth";
 
-export default defineEventHandler(async (event) => {
+export default requireAuth(defineEventHandler(async (event) => {
   const body = await readBody(event);
-  const session = await getServerSession(event);
-
-  if (!session || !session.user) {
-    throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
-  }
+  const userId = event.context.user.id;
 
   const validation = propertyCreateSchema.safeParse(body);
 
@@ -64,7 +60,7 @@ export default defineEventHandler(async (event) => {
         airConditioning: body.airConditioning ?? false,
         isShared: body.isShared ?? false,
         images: body.images ?? [],
-        owner: { connect: { id: session.user.id } },
+        owner: { connect: { id: userId } },
         mainImageIdx: 0,
       },
     });
@@ -77,4 +73,4 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Nie udało się utworzyć nieruchomości",
     });
   }
-});
+}));

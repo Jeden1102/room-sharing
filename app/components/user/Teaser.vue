@@ -78,6 +78,7 @@
       :entity-id="user.id"
       :initial-bookmarked="user.isBookmarked"
       button-class="!absolute top-2 right-2 z-10"
+      v-if="data?.user?.id !== user.id"
     />
   </div>
 </template>
@@ -98,6 +99,8 @@ type FullUser = Prisma.UserGetPayload<{
 }> & {
   isBookmarked?: boolean;
 };
+
+const { data } = useAuth();
 
 const props = defineProps<{
   user: FullUser;

@@ -156,8 +156,7 @@ const onRowEditSave = async (event: any) => {
     const res = await $fetch("/api/property/update", {
       method: "POST",
       body: {
-        id: newData.id,
-        status: newData.status,
+        ...newData,
       },
     });
 

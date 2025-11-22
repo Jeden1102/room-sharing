@@ -1,12 +1,10 @@
 import prisma from "~~/lib/prisma";
-import { getServerSession } from "#auth";
+import { session } from "../middleware/session"
 
-export default defineEventHandler(async (event) => {
+export default session(defineEventHandler(async (event) => {
   try {
     const query = getQuery(event);
-    const session = await getServerSession(event);
-
-    const userId = session?.user?.id
+    const userId = event.context.user?.id;
 
     const {
       listingType,
@@ -143,4 +141,4 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Failed to fetch properties",
     });
   }
-});
+}));

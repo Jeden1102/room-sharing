@@ -1,13 +1,9 @@
 import prisma from "~~/lib/prisma";
-import { getServerSession } from "#auth";
+import { requireAuth } from "../middleware/auth";
 
-export default defineEventHandler(async (event) => {
+export default requireAuth(defineEventHandler(async (event) => {
   const body = await readBody(event);
-  const session = await getServerSession(event);
-
-  if (!session || !session.user) {
-    throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
-  }
+  const userId = event.context.user.id;
 
   try {
     const directFields = [
@@ -54,7 +50,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const updatedUser = await prisma.user.update({
-      where: { id: session.user?.id },
+      where: { id: userId },
       data,
       include: {
         interests: true,
@@ -68,7 +64,7 @@ export default defineEventHandler(async (event) => {
 
     const cacheStorage = useStorage("cache:users:user");
     await cacheStorage.removeItem(
-      `${session.user?.id}.json`.replaceAll("-", ""),
+      `${userId}.json`.replaceAll("-", ""),
     );
 
     return { success: true, user: updatedUser };
@@ -79,4 +75,4 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Failed to update user",
     });
   }
-});
+}));

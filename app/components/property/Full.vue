@@ -33,6 +33,7 @@
             entity-type="property"
             :entity-id="property.id"
             :initial-bookmarked="property.isBookmarked"
+            v-if="data?.user?.id !== property.ownerId"
           />
           <div class="text-3xl font-bold whitespace-nowrap md:text-4xl">
             {{ formatPrice(property.price) }} zł

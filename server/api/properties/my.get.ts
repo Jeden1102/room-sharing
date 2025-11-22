@@ -22,6 +22,7 @@ export default requireAuth(
             images: true,
             type: true,
             listingType: true,
+            description: true,
            },
            orderBy: { createdAt: "desc" },
         });

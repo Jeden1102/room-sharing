@@ -56,6 +56,7 @@
               entity-type="user"
               :entity-id="user.id"
               :initial-bookmarked="user.isBookmarked"
+              v-if="user.id !== data?.user?.id"
             />
           </div>
         </div>
@@ -293,6 +294,8 @@ type FullUser = Prisma.UserGetPayload<{
 }> & {
   isBookmarked?: boolean;
 };
+
+const { data } = useAuth();
 
 const { user: userProp, editable } = defineProps<{
   user: FullUser;

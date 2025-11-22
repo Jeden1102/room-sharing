@@ -36,7 +36,7 @@
         v-if="variant === 'large'"
       />
       <AppEntityBookmark
-        v-if="variant === 'large'"
+        v-if="variant === 'large' && property.ownerId !== data?.user?.id"
         entity-type="property"
         :entity-id="property.id"
         :initial-bookmarked="property.isBookmarked"
@@ -96,7 +96,7 @@
 
 <script setup lang="ts">
 import type { PropertyWithOwner } from "@/components/property/types";
-
+const { data } = useAuth();
 const props = defineProps<{
   property: PropertyWithOwner;
   noCarousel?: boolean;
