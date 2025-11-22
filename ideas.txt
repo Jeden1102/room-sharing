@@ -1,6 +1,5 @@
 12. Bookmarks
 - bookmarks listing
-- bookmarks count (global store?)
 12.1 Cookies banner
 13. Chat
 10. GENERAL REFACTORS/IMPROVEMNETS/TESTING

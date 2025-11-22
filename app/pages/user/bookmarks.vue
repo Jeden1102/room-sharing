@@ -1,10 +1,10 @@
 <template>
-  <div>Favorites</div>
+  <div>Bookmarks</div>
 </template>
 
 <script setup lang="ts">
 usePageSeo({
-  title: "Favorites",
+  title: "Bookmarks",
   description: "Saved properties",
 });
 </script>

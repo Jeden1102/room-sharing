@@ -85,17 +85,7 @@
             </RouterLink>
           </Button>
 
-          <Button
-            asChild
-            v-slot="slotProps"
-            rounded
-            severity="secondary"
-            icon="pi pi-bookmark"
-          >
-            <RouterLink to="/user/favorites" :class="slotProps.class">
-              <span class="pi pi-bookmark"></span>
-            </RouterLink>
-          </Button>
+          <AppBookmarkCount />
 
           <AppLanguageSwitcher />
         </div>
