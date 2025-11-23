@@ -1,5 +1,6 @@
 <template>
   <NuxtLayout>
+    <AppCookieBanner />
     <NuxtPage />
   </NuxtLayout>
 </template>

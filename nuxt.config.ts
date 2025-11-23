@@ -56,7 +56,8 @@ export default defineNuxtConfig({
     "@nuxtjs/seo",
     "nuxt-security",
     "nuxt-easy-lightbox",
-    ['@nuxtjs/leaflet', { ssr: false }]
+    ['@nuxtjs/leaflet', { ssr: false }],
+    "@dargmuesli/nuxt-cookie-control"
   ],
   routeRules: {
     '/': { prerender: true },
@@ -146,6 +147,79 @@ export default defineNuxtConfig({
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
+  },
+  cookieControl: {
+    colors: {
+      barBackground: '#fff',
+      barButtonBackground: '#fff',
+      barButtonColor: '#00509d',
+      barButtonHoverBackground: '#fff',
+      barButtonHoverColor: '#00478c',
+      barTextColor: '#000',
+      checkboxActiveBackground: '#000',
+      checkboxActiveCircleBackground: '#fff',
+      checkboxDisabledBackground: '#ddd',
+      checkboxDisabledCircleBackground: '#fff',
+      checkboxInactiveBackground: '#000',
+      checkboxInactiveCircleBackground: '#fff',
+      controlButtonBackground: '#fff',
+      controlButtonHoverBackground: '#000',
+      controlButtonIconColor: '#000',
+      controlButtonIconHoverColor: '#fff',
+      focusRingColor: '#808080',
+      modalBackground: '#fff',
+      modalButtonBackground: '#000',
+      modalButtonColor: '#fff',
+      modalButtonHoverBackground: '#333',
+      modalButtonHoverColor: '#fff',
+      modalOverlay: '#000',
+      modalOverlayOpacity: 0.8,
+      modalTextColor: '#000',
+      modalUnsavedColor: '#fff',
+    },
+    locales: ['en', 'pl', 'uk'],
+    cookies: {
+      necessary: [
+        {
+          description: {
+            en: 'Essential cookies for the website to function properly.',
+            pl: 'Niezbędne pliki cookie do prawidłowego działania strony.'
+          },
+          id: 'necessary',
+          name: {
+            en: 'Necessary Cookies',
+            pl: 'Niezbędne pliki cookie'
+          },
+          targetCookieIds: ['auth.session-token', 'auth.csrf-token'],
+        }
+      ],
+      optional: [
+        {
+          description: {
+            en: 'Analytics cookies help us improve the website.',
+            pl: 'Pliki cookie analityczne pomagają nam ulepszać stronę.'
+          },
+          id: 'google-analytics',
+          name: {
+            en: 'Google Analytics',
+            pl: 'Google Analytics'
+          },
+          targetCookieIds: ['_ga', '_gid', '_gat'],
+        },
+        {
+          description: {
+            en: 'Preference cookies store your settings.',
+            pl: 'Pliki cookie preferencji przechowują Twoje ustawienia.'
+          },
+          id: 'preferences',
+          name: {
+            en: 'Preferences',
+            pl: 'Preferencje'
+          },
+          targetCookieIds: ['user-preferences', 'theme'],
+        }
+      ]
+    }
   },
   nitro: {
     preset: 'vercel',
