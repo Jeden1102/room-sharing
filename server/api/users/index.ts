@@ -32,39 +32,41 @@ export default session(defineEventHandler(async (event) => {
     // Sorting
     const orderBy: any = (() => {
       switch (sortBy) {
-        case "ageAsc":
-          return { age: "asc" };
-        case "ageDesc":
-          return { age: "desc" };
-        case "budgetAsc":
-          return { budgetMax: "asc" };
-        case "budgetDesc":
-          return { budgetMax: "desc" };
-        default:
-          return { createdAt: "desc" };
+        case "ageAsc": return { age: "asc" };
+        case "ageDesc": return { age: "desc" };
+        case "budgetAsc": return { budgetMax: "asc" };
+        case "budgetDesc": return { budgetMax: "desc" };
+        default: return { createdAt: "desc" };
       }
     })();
 
+    // Fetch users
     const [users, total] = await Promise.all([
       prisma.user.findMany({
         where,
         orderBy,
         skip,
         take,
-        include: {
-          bookmarkedByUsers: userId ? {
-            where: { id: userId },
-            select: { id: true }
-          } : false
-        }
       }),
       prisma.user.count({ where }),
     ]);
 
+    // Fetch bookmarks for visible users
+    let bookmarkedUserIds: string[] = [];
+    if (userId && users.length) {
+      const bookmarks = await prisma.userBookmark.findMany({
+        where: {
+          userId,
+          targetId: { in: users.map(u => u.id) }
+        },
+        select: { targetId: true }
+      });
+      bookmarkedUserIds = bookmarks.map(b => b.targetId);
+    }
+
     const usersWithBookmark = users.map(user => ({
       ...user,
-      isBookmarked: userId ? user.bookmarkedByUsers.length > 0 : false,
-      bookmarkedByUsers: undefined 
+      isBookmarked: bookmarkedUserIds.includes(user.id)
     }));
 
     return { 

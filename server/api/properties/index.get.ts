@@ -20,13 +20,11 @@ export default session(defineEventHandler(async (event) => {
       page = 1,
       limit = 10,
     } = query;
-    
+
     const take = Number(limit) || 10;
     const skip = (Number(page) - 1) * take;
 
-    const where: any = {
-      status: "ACTIVE",
-    };
+    const where: any = { status: "ACTIVE" };
 
     // Basic filters
     if (listingType) where.listingType = listingType;
@@ -44,7 +42,7 @@ export default session(defineEventHandler(async (event) => {
     if (roomsMin) where.rooms = { gte: Number(roomsMin) };
     if (sizeMin) where.sizeM2 = { gte: Number(sizeMin) };
 
-    // Amenities - parse from comma-separated string or array
+    // Amenities
     const amenitiesList = Array.isArray(amenities) 
       ? amenities 
       : amenities 
@@ -61,7 +59,7 @@ export default session(defineEventHandler(async (event) => {
       if (trimmed === "washingMachine") where.washingMachine = true;
     });
 
-    // Preferences - parse from comma-separated string or array
+    // Preferences
     const preferencesList = Array.isArray(preferences)
       ? preferences
       : preferences
@@ -77,55 +75,53 @@ export default session(defineEventHandler(async (event) => {
     // Sorting
     const orderBy: any = (() => {
       switch (sortBy) {
-        case "oldest":
-          return { createdAt: "asc" };
-        case "priceAsc":
-          return { price: "asc" };
-        case "priceDesc":
-          return { price: "desc" };
-        case "sizeAsc":
-          return { sizeM2: "asc" };
-        case "sizeDesc":
-          return { sizeM2: "desc" };
-        default:
-          return { createdAt: "desc" };
+        case "oldest": return { createdAt: "asc" };
+        case "priceAsc": return { price: "asc" };
+        case "priceDesc": return { price: "desc" };
+        case "sizeAsc": return { sizeM2: "asc" };
+        case "sizeDesc": return { sizeM2: "desc" };
+        default: return { createdAt: "desc" };
       }
     })();
 
+    // Fetch properties with pagination
     const [properties, total] = await Promise.all([
       prisma.property.findMany({
         where,
         orderBy,
         skip,
         take,
-        include: {
-          bookmarkedBy: userId ? {
-            where: { id: userId },
-            select: { id: true }
-          } : false
-        }
       }),
       prisma.property.count({ where }),
     ]);
 
+    // Fetch user bookmarks for visible properties
+    let bookmarkedPropertyIds: string[] = [];
+    if (userId) {
+      const bookmarks = await prisma.propertyBookmark.findMany({
+        where: {
+          userId,
+          propertyId: { in: properties.map(p => p.id) }
+        },
+        select: { propertyId: true }
+      });
+      bookmarkedPropertyIds = bookmarks.map(b => b.propertyId);
+    }
+
+    // Add isBookmarked flag
     const propertiesWithBookmark = properties.map(property => ({
       ...property,
-      isBookmarked: userId ? property.bookmarkedBy.length > 0 : false,
-      bookmarkedBy: undefined
+      isBookmarked: bookmarkedPropertyIds.includes(property.id)
     }));
 
-    delete where.city;
-
-    where.latitude = { not: null };
-    where.longitude = { not: null };
-
+    // Fetch coordinates for map display
     const coords = await prisma.property.findMany({
-      where,
-      select: {
-        id: true,
-        latitude: true,
-        longitude: true
-      }
+      where: {
+        latitude: { not: null },
+        longitude: { not: null },
+        status: "ACTIVE"
+      },
+      select: { id: true, latitude: true, longitude: true }
     });
 
     return { 
@@ -134,6 +130,7 @@ export default session(defineEventHandler(async (event) => {
       page: Number(page), 
       coords 
     };
+
   } catch (error) {
     console.error(error);
     throw createError({

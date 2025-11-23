@@ -51,10 +51,10 @@ model User {
 
   roommateInProperties Property[] @relation("PropertyRoommates")
 
-  // Bookmarks
-  bookmarkedUsers      User[]     @relation("UserBookmarks")
-  bookmarkedByUsers    User[]     @relation("UserBookmarks")
-  bookmarkedProperties Property[] @relation("PropertyBookmarks")
+  // NEW: Explicit Bookmarks
+  bookmarkedProperties PropertyBookmark[] @relation("UserPropertyBookmarks")
+  bookmarkedByUsers    UserBookmark[]     @relation("BookmarkTargetUser")
+  bookmarkedUsers      UserBookmark[]     @relation("BookmarkOwnerUser")
 }
 
 model Property {
@@ -89,7 +89,7 @@ model Property {
   washingMachine  Boolean?
   dishwasher      Boolean?
   airConditioning Boolean?
-  isShared        Boolean?       @default(false) // @todo
+  isShared        Boolean?       @default(false)
   roomType        String?
   images          String[]
   mainImageIdx    Int?
@@ -98,7 +98,35 @@ model Property {
   phone           String?
   owner           User           @relation(fields: [ownerId], references: [id])
   roommates       User[]         @relation("PropertyRoommates")
-  bookmarkedBy    User[]         @relation("PropertyBookmarks")
+
+  // NEW: explicit bookmark relation
+  bookmarkedBy PropertyBookmark[] @relation("PropertyBookmarks")
+}
+
+model PropertyBookmark {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  userId     String
+  propertyId String
+
+  user     User     @relation("UserPropertyBookmarks", fields: [userId], references: [id])
+  property Property @relation("PropertyBookmarks", fields: [propertyId], references: [id])
+
+  @@unique([userId, propertyId])
+}
+
+model UserBookmark {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  userId   String // who bookmarked
+  targetId String // who was bookmarked
+
+  user   User @relation("BookmarkOwnerUser", fields: [userId], references: [id])
+  target User @relation("BookmarkTargetUser", fields: [targetId], references: [id])
+
+  @@unique([userId, targetId])
 }
 
 model Message {

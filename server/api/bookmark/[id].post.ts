@@ -7,45 +7,47 @@ export default session(eventHandler(async (event) => {
   const userId = event.context.user.id;
 
   try {
-    if (entity === 'user') {
-      await prisma.user.update({
-        where: { id: userId },
+    if (entity === "user") {
+
+      await prisma.userBookmark.create({
         data: {
-          bookmarkedUsers: {
-            connect: { id }
-          }
+          userId,
+          targetId: id
         }
       });
-      
+
       await useStorage("cache:users:user").removeItem(
-        `${id}.json`.replaceAll("-", ""),
+        `${id}.json`.replaceAll("-", "")
       );
-    } else if (entity === 'property') {
-      await prisma.user.update({
-        where: { id: userId },
+
+    } else if (entity === "property") {
+
+      await prisma.propertyBookmark.create({
         data: {
-          bookmarkedProperties: {
-            connect: { id }
-          }
+          userId,
+          propertyId: id
         }
       });
-      
+
       await useStorage("cache:properties:property").removeItem(
-        `${id}.json`.replaceAll("-", ""),
+        `${id}.json`.replaceAll("-", "")
       );
+
     } else {
       throw createError({
         statusCode: 400,
-        statusMessage: "Invalid entity type. Must be 'user' or 'property'",
+        statusMessage: "Invalid entity type. Must be 'user' or 'property'"
       });
     }
 
     return { success: true, message: "Bookmark added" };
+
   } catch (error) {
-    console.error('Error adding bookmark:', error);
+    console.error("Error adding bookmark:", error);
+
     throw createError({
       statusCode: 500,
-      statusMessage: "Failed to add bookmark",
+      statusMessage: "Failed to add bookmark"
     });
   }
 }));

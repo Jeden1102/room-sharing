@@ -1,6 +1,9 @@
 <template>
   <Button asChild rounded severity="secondary">
-    <RouterLink to="/user/bookmarks" class="relative flex items-center">
+    <RouterLink
+      to="/user/bookmarks/properties"
+      class="relative flex items-center"
+    >
       <span class="pi pi-bookmark text-xl"></span>
 
       <span

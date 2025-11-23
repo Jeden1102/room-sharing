@@ -10,13 +10,9 @@ export default session(defineCachedEventHandler(
 
     try {
       const property: PropertyWithOwner | null = await prisma.property.findUnique({
-        where: { id: id },
+        where: { id },
         include: {
-          owner: true,
-          bookmarkedBy: userId ? {
-            where: { id: userId },
-            select: { id: true }
-          } : false
+          owner: true
         }
       });
 
@@ -27,14 +23,27 @@ export default session(defineCachedEventHandler(
         });
       }
 
+      let isBookmarked = false;
+      if (userId) {
+        const bookmark = await prisma.propertyBookmark.findUnique({
+          where: {
+            userId_propertyId: {
+              userId,
+              propertyId: id
+            }
+          }
+        });
+        isBookmarked = !!bookmark;
+      }
+
       const propertyWithBookmark = {
         ...property,
-        isBookmarked: userId ? property.bookmarkedBy.length > 0 : false,
-        bookmarkedBy: undefined
+        isBookmarked
       };
       
       return { success: true, property: propertyWithBookmark };
     } catch (error) {
+      console.error(error);
       throw createError({
         statusCode: 500,
         statusMessage: "Failed to get property",

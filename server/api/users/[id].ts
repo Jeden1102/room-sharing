@@ -8,18 +8,14 @@ export default session(defineCachedEventHandler(
 
     try {
       const user = await prisma.user.findUnique({
-        where: { id: id },
+        where: { id },
         include: {
           interests: true,
           occupation: true,
           searchPreferences: true,
           searchPropertyType: true,
           noiseCompatibility: true,
-          petsCompatibility: true,
-          bookmarkedByUsers: userId ? {
-            where: { id: userId },
-            select: { id: true }
-          } : false
+          petsCompatibility: true
         },
       });
 
@@ -30,14 +26,27 @@ export default session(defineCachedEventHandler(
         });
       }
 
+      let isBookmarked = false;
+      if (userId) {
+        const bookmark = await prisma.userBookmark.findUnique({
+          where: {
+            userId_targetId: {
+              userId,
+              targetId: id
+            }
+          }
+        });
+        isBookmarked = !!bookmark;
+      }
+
       const userWithBookmark = {
         ...user,
-        isBookmarked: userId ? user.bookmarkedByUsers.length > 0 : false,
-        bookmarkedByUsers: undefined
+        isBookmarked
       };
 
       return { success: true, user: userWithBookmark };
     } catch (error) {
+      console.error(error);
       throw createError({
         statusCode: 500,
         statusMessage: "Failed to get user",

@@ -1,12 +1,15 @@
-12. Bookmarks
-- bookmarks listing
 12.1 Cookies banner
+12.2 new elements / changes:
+- new gallery / lightbox
+- similar properties
+- similar users (inni szukajacy w miescie)
+- tlumaczenia i teksty
+- linkowania
+- do osoby dodać pole - szukam "x" ilosci osób
 13. Chat
 10. GENERAL REFACTORS/IMPROVEMNETS/TESTING
 
 To add/fix:
-4. Translations
-5. Proper links
 6. anys
 
 Others:

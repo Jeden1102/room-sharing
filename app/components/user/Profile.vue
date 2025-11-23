@@ -80,7 +80,9 @@
               {{ user.firstName }} {{ user.lastName }}
             </p>
             <p class="mt-2 text-sm text-gray-700">
-              {{ user.age }} lat • {{ user.city }}
+              <template v-if="user.age || user.city">
+                {{ user.age }} lat • {{ user.city }}
+              </template>
               <template v-if="user.districts.length > 0">
                 | {{ user.districts.join(", ") }}
               </template>
