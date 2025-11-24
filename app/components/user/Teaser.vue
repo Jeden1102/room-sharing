@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card-base group relative overflow-hidden rounded-xl px-0 pt-0 shadow-md transition"
+    class="card-base group relative flex h-full flex-col overflow-hidden rounded-xl px-0 pt-0 pb-2 shadow-md transition"
   >
     <div class="relative h-40 w-full">
       <img
@@ -19,7 +19,7 @@
       />
     </div>
 
-    <div class="space-y-3 p-4 pb-1.5">
+    <div class="flex flex-1 flex-col space-y-3 p-4 pb-1.5">
       <div class="flex items-center justify-between">
         <div>
           <h3 class="text-lg font-semibold text-gray-900">
@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <div class="flex items-center justify-between pt-3">
+      <div class="mt-auto flex items-center justify-between pt-3">
         <Button
           asChild
           v-slot="slotProps"

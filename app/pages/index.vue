@@ -4,12 +4,13 @@
 
     <LazyHomeServices hydrate-on-visible />
 
-    <LazyHomeLatestProperties
+    <LazyHomeItemsCarousel
       hydrate-on-visible
       v-if="properties"
       title="Ostatnio dodane"
       subtitle="Odkryj najnowsze ogłoszenia"
-      :properties="properties?.properties"
+      :items="properties?.properties"
+      entity="property"
     />
 
     <LazyAppFaq

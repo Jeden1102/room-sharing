@@ -1,8 +1,5 @@
-12.1 Cookies banner
 12.2 new elements / changes:
 - new gallery / lightbox
-- similar properties
-- similar users (inni szukajacy w miescie)
 - tlumaczenia i teksty
 - linkowania
 - do osoby dodać pole - szukam "x" ilosci osób

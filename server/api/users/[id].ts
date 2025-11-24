@@ -5,6 +5,7 @@ export default session(defineCachedEventHandler(
   async (event) => {
     const { id } = event.context.params as { id: string };
     const userId = event.context.user?.id;
+    const getSimilar = getQuery(event).getSimilar === 'true';
 
     try {
       const user = await prisma.user.findUnique({
@@ -44,7 +45,56 @@ export default session(defineCachedEventHandler(
         isBookmarked
       };
 
-      return { success: true, user: userWithBookmark };
+      let similarUsers: any[] = [];
+      if (getSimilar) {
+        const whereConditions: any = {
+          id: { not: id },
+          city: user.city
+        };
+
+        const similar = await prisma.user.findMany({
+          where: whereConditions,
+          include: {
+            interests: true,
+            occupation: true,
+            searchPreferences: true,
+            searchPropertyType: true,
+            noiseCompatibility: true,
+            petsCompatibility: true
+          },
+          take: 3,
+          orderBy: {
+            createdAt: 'desc'
+          }
+        });
+
+        if (userId && similar.length === 3) {
+          const bookmarkIds = await prisma.userBookmark.findMany({
+            where: {
+              userId,
+              targetId: { in: similar.map(u => u.id) }
+            },
+            select: { targetId: true }
+          });
+          
+          const bookmarkedIds = new Set(bookmarkIds.map(b => b.targetId));
+          similarUsers = similar.map(u => ({
+            ...u,
+            isBookmarked: bookmarkedIds.has(u.id)
+          }));
+        } else {
+          similarUsers = similar.map(u => ({
+            ...u,
+            isBookmarked: false
+          }));
+        }
+      }
+
+      return { 
+        success: true, 
+        user: userWithBookmark,
+        ...(getSimilar && { similarUsers })
+      };
     } catch (error) {
       console.error(error);
       throw createError({

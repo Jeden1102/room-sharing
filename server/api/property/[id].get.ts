@@ -7,6 +7,7 @@ export default session(defineCachedEventHandler(
   async (event) => {
     const { id } = event.context.params as { id: string };
     const userId = event.context.user?.id;
+    const getSimilar = getQuery(event).getSimilar === 'true';
 
     try {
       const property: PropertyWithOwner | null = await prisma.property.findUnique({
@@ -40,8 +41,51 @@ export default session(defineCachedEventHandler(
         ...property,
         isBookmarked
       };
-      
-      return { success: true, property: propertyWithBookmark };
+
+      let similarProperties: any[] = [];
+      if (getSimilar && property.city) {
+        const similar = await prisma.property.findMany({
+          where: {
+            city: property.city,
+            id: { not: id },
+            status: 'ACTIVE'
+          },
+          include: {
+            owner: true
+          },
+          take: 3,
+          orderBy: {
+            createdAt: 'desc'
+          }
+        });
+
+        if (userId) {
+          const bookmarkIds = await prisma.propertyBookmark.findMany({
+            where: {
+              userId,
+              propertyId: { in: similar.map(p => p.id) }
+            },
+            select: { propertyId: true }
+          });
+          
+          const bookmarkedIds = new Set(bookmarkIds.map(b => b.propertyId));
+          similarProperties = similar.map(p => ({
+            ...p,
+            isBookmarked: bookmarkedIds.has(p.id)
+          }));
+        } else {
+          similarProperties = similar.map(p => ({
+            ...p,
+            isBookmarked: false
+          }));
+        }
+      }
+
+      return { 
+        success: true, 
+        property: propertyWithBookmark,
+        ...(getSimilar && { similarProperties })
+      };
     } catch (error) {
       console.error(error);
       throw createError({

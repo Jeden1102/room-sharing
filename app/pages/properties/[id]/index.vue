@@ -1,6 +1,17 @@
 <template>
   <main>
     <PropertyFull :property />
+    <div class="container mt-4 lg:mt-12">
+      <LazyHomeItemsCarousel
+        hydrate-on-visible
+        v-if="data && data.similarProperties"
+        title="Podobne ogłoszenia"
+        subtitle="Odkryj podobne ogłoszenia"
+        :items="data?.similarProperties"
+        :showNavigation="false"
+        entity="property"
+      />
+    </div>
   </main>
 </template>
 
@@ -18,12 +29,12 @@ usePageSeo({
   description: "Single property",
 });
 
-const { data, error } = await useFetch<{ property: PropertyWithOwner }>(
-  `/api/property/${route.query.id}`,
-  {
-    cache: "no-cache",
-  },
-);
+const { data, error } = await useFetch<{
+  property: PropertyWithOwner;
+  similarProperties: PropertyWithOwner[];
+}>(`/api/property/${route.query.id}?getSimilar=true`, {
+  cache: "no-cache",
+});
 
 if (error.value || !data.value?.property) {
   throw createError({

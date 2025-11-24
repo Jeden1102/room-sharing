@@ -3,19 +3,27 @@
     <section class="container mb-30">
       <AppSectionTitle :title :subtitle />
       <Carousel
-        :value="properties"
+        :value="items"
         :numVisible="3"
         :numScroll="1"
         :gap="20"
         :responsiveOptions="responsiveOptions"
+        :showNavigators="showNavigation"
+        :showIndicators="showNavigation"
         contentClass="[&>.p-carousel-viewport]:py-4 [&_.p-button-rounded]:!hidden lg:[&_.p-button-rounded]:!block"
       >
         <template #item="slotProps">
           <PropertyTeaser
+            v-if="entity === 'property'"
             :property="slotProps.data"
             class="mx-2"
             :no-carousel="true"
             variant="large"
+          />
+          <UserTeaser
+            v-else-if="entity === 'user'"
+            :user="slotProps.data"
+            class="mx-2"
           />
         </template>
       </Carousel>
@@ -24,10 +32,14 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+import { UserTeaser } from "#components";
+
+const { showNavigation = true } = defineProps<{
   title: string;
   subtitle: string;
-  properties: any[];
+  items: any[];
+  showNavigation?: boolean;
+  entity: "property" | "user";
 }>();
 
 const responsiveOptions = ref([

@@ -232,7 +232,7 @@
           </AppCard>
         </div>
 
-        <AppCard title="Moodboard">
+        <AppCard title="Moodboard" v-if="user.moodboardImages.length > 0">
           <div class="grid grid-cols-2 gap-2 md:grid-cols-3">
             <NuxtImg
               v-for="(img, idx) in user.moodboardImages"

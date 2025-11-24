@@ -1,8 +1,5 @@
 <template>
-  <section
-    class="text-center"
-    :class="containered && 'container max-w-5xl py-10'"
-  >
+  <section :class="containered && 'container max-w-5xl py-10'">
     <div class="mb-8 flex flex-col items-center" v-if="title && subtitle">
       <AppSectionTitle :title="title" :subtitle="subtitle" />
     </div>
