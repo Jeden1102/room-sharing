@@ -4,7 +4,7 @@
     {{ responseMessage }}
   </p>
   <Button asChild v-slot="slotProps" v-if="!isError">
-    <RouterLink to="/auth/login" :class="slotProps.class"
+    <RouterLink :to="$localePath('/auth/login')" :class="slotProps.class"
       >Go to login</RouterLink
     >
   </Button>

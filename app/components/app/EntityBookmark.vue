@@ -10,6 +10,12 @@
 </template>
 
 <script setup lang="ts">
+const router = useRouter();
+
+const { data } = useAuth();
+
+const localePath = useLocalePath();
+
 const props = defineProps<{
   entityType: "user" | "property";
   entityId: string;
@@ -21,6 +27,10 @@ const { toggleBookmark, isLoading } = useBookmarks();
 const isBookmarked = ref(props.initialBookmarked ?? false);
 
 const handleBookmarkClick = async () => {
+  if (!data.value) {
+    return router.push(localePath("/auth/login?feat=bookmarks"));
+  }
+
   const success = await toggleBookmark(
     props.entityType,
     props.entityId,

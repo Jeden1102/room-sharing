@@ -5,28 +5,33 @@
     <div class="flex flex-col gap-4">
       <BitsAnimatedContent :delay="0.2">
         <p class="font-light lg:text-xl">
-          More than 10M+ house avaiable for sell & rent
+          {{ $t("hero.subtitle") }}
         </p>
       </BitsAnimatedContent>
 
       <BitsAnimatedContent :delay="0.4">
         <h1
-          class="mb-4 text-3xl font-bold uppercase md:max-w-150 md:text-4xl lg:text-6xl"
+          class="mb-4 text-3xl font-semibold uppercase md:max-w-150 md:text-4xl lg:text-6xl"
         >
-          Find your next perfect <span class="text-primary-400">place</span>
+          {{ $t("hero.title") }}
+          <span class="text-primary-400">{{ $t("hero.titleHighlight") }}</span>
         </h1>
       </BitsAnimatedContent>
       <BitsAnimatedContent :delay="0.6">
         <Button asChild v-slot="slotProps">
-          <RouterLink to="/properties" :class="slotProps.class" class="w-fit">
-            Explore properties
+          <RouterLink
+            :to="$localePath('/properties')"
+            :class="slotProps.class"
+            class="w-fit"
+          >
+            {{ $t("hero.cta") }}
           </RouterLink>
         </Button>
       </BitsAnimatedContent>
       <div class="ml-auto hidden size-50 lg:block">
         <BitsAnimatedContent :scale="0" :delay="0.8">
           <BitsCircularText
-            text="FOR RENT * FOR SALE * FOR SHARE * "
+            :text="$t('hero.circularText')"
             :spin-duration="20"
             on-hover="speedUp"
           />
@@ -36,7 +41,7 @@
     <BitsAnimatedContent :delay="0.6">
       <NuxtImg
         src="/images/hero.png"
-        alt="hero"
+        :alt="$t('hero.imageAlt')"
         class="rounded-lg"
         width="516"
         height="530"

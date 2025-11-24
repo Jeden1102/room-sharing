@@ -7,63 +7,46 @@
     <LazyHomeItemsCarousel
       hydrate-on-visible
       v-if="properties"
-      title="Ostatnio dodane"
-      subtitle="Odkryj najnowsze ogłoszenia"
+      :title="$t('recentlyAdded.title')"
+      :subtitle="$t('recentlyAdded.subtitle')"
       :items="properties?.properties"
       entity="property"
     />
-
-    <LazyAppFaq
-      title="Najczęściej zadawane pytania"
-      subtitle="Zanim napiszesz do nas — sprawdź, może odpowiedź już tu jest"
-      :containered="true"
-      hydrate-on-visible
-      :questions="[
-        {
-          question: 'Jak mogę dodać ogłoszenie o mieszkaniu?',
-          answer:
-            'Po zalogowaniu kliknij „Dodaj ogłoszenie”, wypełnij formularz i opublikuj. To zajmuje mniej niż 2 minuty.',
-        },
-        {
-          question: 'Czy mogę współdzielić mieszkanie z innymi?',
-          answer:
-            'Tak! W naszej platformie to główny cel — możesz wyszukać współlokatorów lub dołączyć do istniejących ofert.',
-        },
-        {
-          question: 'Czy platforma jest darmowa?',
-          answer:
-            'Tak, przeglądanie ogłoszeń i wyszukiwanie współlokatorów jest całkowicie bezpłatne.',
-        },
-      ]"
-    />
-
-    <LazyAppCta
-      hydrate-on-visible
-      title="Have some more questions?"
-      subtitle="See the FAQ page to find answers to your questions."
-      icon="material-symbols-light:live-help-outline-rounded"
-    >
-      <Button asChild v-slot="slotProps" severity="primary">
-        <RouterLink :to="$localePath('faq')" :class="slotProps.class">
-          Go to FAQ
-        </RouterLink>
-      </Button>
-    </LazyAppCta>
 
     <LazyHomeCitiesBento hydrate-on-visible />
 
     <LazyAppCta
       hydrate-on-visible
-      title="We connect people searching for their dream apartments"
-      subtitle="With the use of Pokój Z Wami you can create searcher proflie or upload your
-      apartment to seek for tenants."
+      :title="$t('cta.connectPeople.title')"
+      :subtitle="$t('cta.connectPeople.subtitle')"
       icon="fluent:people-community-add-20-regular"
       :showLogo="true"
       variant="primary"
     >
       <Button asChild v-slot="slotProps" severity="secondary">
         <RouterLink :to="$localePath('/users')" :class="slotProps.class">
-          Start now!
+          {{ $t("cta.connectPeople.button") }}
+        </RouterLink>
+      </Button>
+    </LazyAppCta>
+
+    <LazyAppFaq
+      :title="$t('faq.title')"
+      :subtitle="$t('faq.subtitle')"
+      :containered="true"
+      hydrate-on-visible
+      :questions="faqQuestions"
+    />
+
+    <LazyAppCta
+      hydrate-on-visible
+      :title="$t('cta.moreQuestions.title')"
+      :subtitle="$t('cta.moreQuestions.subtitle')"
+      icon="material-symbols-light:live-help-outline-rounded"
+    >
+      <Button asChild v-slot="slotProps" severity="primary">
+        <RouterLink :to="$localePath('faq')" :class="slotProps.class">
+          {{ $t("cta.moreQuestions.button") }}
         </RouterLink>
       </Button>
     </LazyAppCta>
@@ -77,9 +60,11 @@ definePageMeta({
   auth: false,
 });
 
+const { t } = useI18n();
+
 usePageSeo({
-  title: "Home",
-  description: "Find your next home",
+  title: t("seo.home.title"),
+  description: t("seo.home.description"),
 });
 
 const { data: properties, pending } = await useFetch<{
@@ -92,4 +77,23 @@ const { data: properties, pending } = await useFetch<{
     page: 1,
   },
 });
+
+const faqQuestions = computed(() => [
+  {
+    question: t("faq.questions.addListing.question"),
+    answer: t("faq.questions.addListing.answer"),
+  },
+  {
+    question: t("faq.questions.shareRoom.question"),
+    answer: t("faq.questions.shareRoom.answer"),
+  },
+  {
+    question: t("faq.questions.pricing.question"),
+    answer: t("faq.questions.pricing.answer"),
+  },
+  {
+    question: t("faq.questions.roommate.question"),
+    answer: t("faq.questions.roommate.answer"),
+  },
+]);
 </script>

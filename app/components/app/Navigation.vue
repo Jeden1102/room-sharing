@@ -2,10 +2,10 @@
   <nav class="bg-white py-4 lg:px-4">
     <div class="container flex items-center lg:gap-12 xl:gap-24">
       <div class="flex w-full justify-between lg:w-fit">
-        <NuxtLink to="/">
+        <NuxtLink :to="$localePath('index')">
           <NuxtImg
             src="/logo.png"
-            alt="logo"
+            :alt="$t('nav.home')"
             width="100"
             height="79"
             class="w-20 md:w-25"
@@ -18,7 +18,7 @@
           severity="secondary"
           :icon="isMenuOpened ? 'pi pi-times' : 'pi pi-bars'"
           @click="isMenuOpened = !isMenuOpened"
-          title="Toggle menu"
+          :title="$t('nav.toggleMenu')"
         />
       </div>
 
@@ -36,18 +36,25 @@
         <div
           class="flex h-[calc(100%-6rem)] flex-col gap-3 lg:h-auto lg:flex-row lg:gap-6 xl:gap-12"
         >
-          <NuxtLink class="nav-link" :to="$localePath('index')">Home</NuxtLink>
-          <NuxtLink class="nav-link" :to="$localePath('properties')"
-            >Properties</NuxtLink
-          >
-          <NuxtLink class="nav-link" to="/users">Users</NuxtLink>
-          <NuxtLink class="nav-link" to="/contact">Contact</NuxtLink>
+          <NuxtLink class="nav-link" :to="$localePath('index')">
+            {{ $t("nav.home") }}
+          </NuxtLink>
+          <NuxtLink class="nav-link" :to="$localePath('properties')">
+            {{ $t("nav.properties") }}
+          </NuxtLink>
+          <NuxtLink class="nav-link" :to="$localePath('users')">
+            {{ $t("nav.users") }}
+          </NuxtLink>
+          <NuxtLink class="nav-link" :to="$localePath('contact')">
+            {{ $t("nav.contact") }}
+          </NuxtLink>
           <NuxtLink
             class="nav-link lg:hidden"
             v-if="data?.user"
             @click="() => signOut()"
-            >Logout</NuxtLink
           >
+            {{ $t("nav.logout") }}
+          </NuxtLink>
           <AppLanguageSwitcher class="mt-auto lg:hidden" />
         </div>
 
@@ -58,7 +65,7 @@
                 :to="$localePath('/auth/login')"
                 :class="slotProps.class"
               >
-                Login
+                {{ $t("nav.login") }}
               </RouterLink>
             </Button>
           </template>
@@ -70,6 +77,7 @@
               icon="pi pi-user"
               @click="toggleUserMenu"
               ref="userButton"
+              :title="$t('nav.profile')"
             >
             </Button>
 
@@ -81,7 +89,7 @@
               :to="$localePath(data?.user ? '/new-property' : '/auth/login')"
               :class="slotProps.class"
             >
-              Add new property
+              {{ $t("nav.addProperty") }}
             </RouterLink>
           </Button>
 
@@ -98,6 +106,7 @@
 import { clsx } from "clsx";
 
 const { data, signOut } = useAuth();
+const { t } = useI18n();
 const isMenuOpened = ref(false);
 const localePath = useLocalePath();
 const userMenu = ref();
@@ -122,14 +131,14 @@ const toggleUserMenu = (event: Event) => {
   userMenu.value.toggle(event);
 };
 
-const userMenuItems = ref([
+const userMenuItems = computed(() => [
   {
-    label: "Profile",
+    label: t("nav.profile"),
     icon: "pi pi-user",
     command: () => navigateTo(localePath("/user/profile")),
   },
   {
-    label: "Logout",
+    label: t("nav.logout"),
     icon: "pi pi-sign-out",
     command: () => signOut(),
   },

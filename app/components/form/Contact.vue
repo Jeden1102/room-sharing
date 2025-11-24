@@ -85,11 +85,11 @@
             <Checkbox id="terms" name="terms" binary />
             <label for="terms">
               By contacting us, you agree to our
-              <NuxtLink to="/terms" class="underline"
+              <NuxtLink :to="$localePath('/terms')" class="underline"
                 >Terms of Service</NuxtLink
               >
               and
-              <NuxtLink to="/privacy-policy" class="underline">
+              <NuxtLink :to="$localePath('/privacy-policy')" class="underline">
                 Privacy Policy
               </NuxtLink>
             </label>

@@ -1,3 +1,161 @@
 {
-  "welcome": "Witamy"
+  "languages": {
+    "en": "Angielski",
+    "pl": "Polski"
+  },
+  "seo": {
+    "home": {
+      "title": "Pokój Z Wami - Znajdź pokój i współlokatora | Wynajem mieszkań",
+      "description": "Szukasz pokoju lub współlokatora? Pokój Z Wami to platforma do wynajmu mieszkań i współdzielenia pokoi w całej Polsce. Oferty w Warszawie, Krakowie, Wrocławiu i innych miastach."
+    }
+  },
+  "cookies": {
+    "title": "Ciasteczka",
+    "description": "Używamy cookies dla wygody i rozwoju strony. Ty decydujesz, które zaakceptujesz!"
+  },
+  "nav": {
+    "home": "Strona główna",
+    "properties": "Oferty",
+    "users": "Użytkownicy",
+    "contact": "Kontakt",
+    "login": "Zaloguj się",
+    "logout": "Wyloguj",
+    "addProperty": "Dodaj ogłoszenie",
+    "profile": "Profil",
+    "toggleMenu": "Przełącz menu"
+  },
+  "hero": {
+    "subtitle": "Ponad 10 000 ofert mieszkań i pokoi w całej Polsce",
+    "title": "Znajdź swój pokój. Znajdź",
+    "titleHighlight": "swoich ludzi",
+    "cta": "Zobacz oferty",
+    "circularText": "WYNAJEM * SPRZEDAŻ * WSPÓŁDZIELENIE * ",
+    "imageAlt": "Szczęśliwi współlokatorzy w nowym mieszkaniu"
+  },
+  "services": {
+    "sectionTitle": "Jak możemy Ci pomóc",
+    "sectionSubtitle": "Poznaj nasze usługi",
+    "buyAndSell": {
+      "title": "Kup lub sprzedaj",
+      "description": "Znajdź swoje wymarzone mieszkanie lub dom. Sprzedaj nieruchomość szybko i bezpiecznie.",
+      "imageAlt": "Ikona kupna i sprzedaży nieruchomości",
+      "browse": "Przeglądaj oferty",
+      "list": "Dodaj ogłoszenie"
+    },
+    "rentAndLease": {
+      "title": "Wynajmij lub wydzierżaw",
+      "description": "Szukasz mieszkania na wynajem? A może chcesz wynająć swoją nieruchomość? Jesteśmy tu dla Ciebie.",
+      "imageAlt": "Ikona wynajmu nieruchomości",
+      "find": "Szukaj mieszkania",
+      "rent": "Wydzierżaw"
+    },
+    "shareAndColiving": {
+      "title": "Współdziel i poznawaj",
+      "description": "Podziel koszty wynajmu z fajnymi ludźmi. Znajdź współlokatora dopasowanego do Twoich potrzeb.",
+      "imageAlt": "Ikona współdzielenia mieszkania",
+      "offer": "Oferuję pokój",
+      "join": "Szukam pokoju"
+    }
+  },
+  "faq": {
+    "title": "Najczęściej zadawane pytania",
+    "subtitle": "Zanim napiszesz do nas — sprawdź, może odpowiedź już tu jest",
+    "questions": {
+      "addListing": {
+        "question": "Jak mogę dodać ogłoszenie o mieszkaniu?",
+        "answer": "Po zalogowaniu kliknij 'Dodaj ogłoszenie', wypełnij formularz i opublikuj. To zajmuje mniej niż 2 minuty."
+      },
+      "shareRoom": {
+        "question": "Czy mogę współdzielić mieszkanie z innymi?",
+        "answer": "Tak! W naszej platformie to główny cel — możesz wyszukać współlokatorów lub dołączyć do istniejących ofert."
+      },
+      "pricing": {
+        "question": "Czy platforma jest darmowa?",
+        "answer": "Tak, przeglądanie ogłoszeń i wyszukiwanie współlokatorów jest całkowicie bezpłatne."
+      },
+      "roommate": {
+        "question": "Jak znaleźć odpowiedniego współlokatora?",
+        "answer": "Skorzystaj z naszych filtrów dopasowania — styl życia, zainteresowania, budżet. Możesz też sprawdzić profile i opinie innych użytkowników."
+      }
+    }
+  },
+  "recentlyAdded": {
+    "title": "Ostatnio dodane",
+    "subtitle": "Odkryj najnowsze ogłoszenia"
+  },
+  "cta": {
+    "moreQuestions": {
+      "title": "Masz jeszcze pytania?",
+      "subtitle": "Sprawdź naszą pełną listę FAQ, aby znaleźć odpowiedzi na wszystkie wątpliwości.",
+      "button": "Przejdź do FAQ"
+    },
+    "connectPeople": {
+      "title": "Łączymy ludzi szukających idealnego miejsca do życia",
+      "subtitle": "Za pomocą Pokój Z Wami możesz stworzyć profil poszukującego lub dodać swoje mieszkanie, aby znaleźć najemców.",
+      "button": "Zacznij teraz!"
+    }
+  },
+  "cities": {
+      "title": "W jakim mieście będziesz mieszkać?",
+      "subtitle": "Odkryj nasze miasta",
+      "imageAlt": "Panorama miasta",
+      "list": {
+        "warszawa": "Warszawa",
+        "krakow": "Kraków",
+        "gdansk": "Gdańsk",
+        "wroclaw": "Wrocław"
+      }
+  },
+  "footer": {
+    "logoAlt": "Pokój Z Wami - logo",
+    "contact": {
+      "phone": "+48 123 456 789",
+      "email": "kontakt{'@'}pokojzwami.pl",
+      "phoneLinkTitle": "Zadzwoń do nas",
+      "emailLinkTitle": "Napisz do nas"
+    },
+    "social": {
+      "tiktok": "Pokój Z Wami na TikToku",
+      "facebook": "Pokój Z Wami na Facebooku",
+      "instagram": "Pokój Z Wami na Instagramie"
+    },
+    "explore": {
+      "title": "Odkryj",
+      "aboutUs": "O nas",
+      "faq": "Najczęściej zadawane pytania",
+      "blog": "Blog",
+      "howItWorks": "Jak to działa",
+      "forStudents": "Dla studentów"
+    },
+    "quickLinks": {
+      "title": "Szybkie linki",
+      "contact": "Kontakt",
+      "properties": "Przeglądaj oferty",
+      "addProperty": "Dodaj ogłoszenie",
+      "findRoommate": "Znajdź współlokatora",
+      "cities": "Miasta"
+    },
+    "forRenters": {
+      "title": "Dla najemców",
+      "rentApartment": "Wynajmij mieszkanie",
+      "findRoom": "Znajdź pokój",
+      "shareApartment": "Współdziel mieszkanie",
+      "studentHousing": "Mieszkania dla studentów"
+    },
+    "forOwners": {
+      "title": "Dla właścicieli",
+      "listProperty": "Dodaj nieruchomość",
+      "rentOut": "Wynajmij swoje mieszkanie",
+      "findTenant": "Znajdź najemcę",
+      "pricing": "Cennik"
+    },
+    "legal": {
+      "title": "Informacje prawne",
+      "terms": "Regulamin",
+      "privacy": "Polityka prywatności",
+      "cookies": "Polityka cookies",
+      "gdpr": "RODO"
+    },
+    "copyrightText": "Pokój Z Wami. Wszelkie prawa zastrzeżone."
+  }
 }

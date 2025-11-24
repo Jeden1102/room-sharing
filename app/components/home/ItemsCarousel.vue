@@ -10,7 +10,7 @@
         :responsiveOptions="responsiveOptions"
         :showNavigators="showNavigation"
         :showIndicators="showNavigation"
-        contentClass="[&>.p-carousel-viewport]:py-4 [&_.p-button-rounded]:!hidden lg:[&_.p-button-rounded]:!block"
+        contentClass="[&>.p-carousel-viewport]:py-4 [&_.p-carousel-next-button]:!hidden [&_.p-carousel-prev-button]:!hidden lg:[&_.p-carousel-next-button]:!block lg:[&_.p-carousel-prev-button]:!block"
       >
         <template #item="slotProps">
           <PropertyTeaser
@@ -57,7 +57,6 @@ const responsiveOptions = ref([
     breakpoint: "575px",
     numVisible: 1,
     numScroll: 1,
-    showIndicators: false,
   },
 ]);
 </script>

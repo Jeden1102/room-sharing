@@ -40,7 +40,7 @@
         entity-type="property"
         :entity-id="property.id"
         :initial-bookmarked="property.isBookmarked"
-        button-class="!absolute top-2 right-2"
+        button-class="!absolute top-2 right-2 siema"
       />
     </div>
 

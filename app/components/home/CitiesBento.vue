@@ -1,14 +1,14 @@
 <template>
   <section class="container mb-30">
     <AppSectionTitle
-      title="What city will you live in?"
-      subtitle="Discover our cities"
+      :title="$t('cities.title')"
+      :subtitle="$t('cities.subtitle')"
     />
     <div class="mt-10 flex flex-wrap gap-6">
       <RouterLink
         v-for="city in cities"
-        :key="city.name"
-        :title="city.name"
+        :key="city.nameKey"
+        :title="$t(city.nameKey)"
         :to="city.link"
         :class="city.class"
         class="flex h-56 w-full md:h-72 lg:h-90"
@@ -24,7 +24,7 @@
         >
           <NuxtImg
             :src="city.image"
-            :alt="city.name + ' landscape'"
+            :alt="`${$t(city.nameKey)} - ${$t('cities.imageAlt')}`"
             format="webp"
             class="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-110"
             loading="lazy"
@@ -34,7 +34,7 @@
             class="absolute inset-0 bg-black/40 transition-colors group-hover:bg-black/50"
           ></div>
           <h3 class="absolute bottom-4 left-4 text-lg text-white">
-            {{ city.name }}
+            {{ $t(city.nameKey) }}
           </h3>
         </BitsFadeContent>
       </RouterLink>
@@ -47,25 +47,25 @@ const localePath = useLocalePath();
 
 const cities = [
   {
-    name: "Warszawa",
+    nameKey: "cities.list.warszawa",
     image: "/images/warszawa.jpg",
     link: localePath("/properties?city=Warszawa"),
     class: "md:w-[calc(30%-12px)]",
   },
   {
-    name: "Kraków",
+    nameKey: "cities.list.krakow",
     image: "/images/krakow.jpg",
     link: localePath("/properties?city=Kraków"),
     class: "md:w-[calc(70%-12px)]",
   },
   {
-    name: "Gdańsk",
+    nameKey: "cities.list.gdansk",
     image: "/images/gdansk.jpg",
     link: localePath("/properties?city=Gdańsk"),
     class: "md:w-[calc(55%-12px)]",
   },
   {
-    name: "Wrocław",
+    nameKey: "cities.list.wroclaw",
     image: "/images/wroclaw.jpg",
     link: localePath("/properties?city=Wrocław"),
     class: "md:w-[calc(45%-12px)]",

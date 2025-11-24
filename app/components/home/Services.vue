@@ -1,46 +1,47 @@
 <template>
   <section class="container mb-30">
     <AppSectionTitle
-      title="What are we providing"
-      subtitle="Discover our services"
+      :title="$t('services.sectionTitle')"
+      :subtitle="$t('services.sectionSubtitle')"
     />
 
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       <div
         v-for="service in services"
-        :key="service.title"
+        :key="service.titleKey"
         class="overflow-hidden rounded-2xl pt-6 shadow-md"
       >
         <BitsAnimatedContent :scale="0">
           <img
             :src="service.image"
-            :alt="service.title"
+            :alt="$t(service.imageAltKey)"
             class="mx-auto size-20 object-cover"
           />
         </BitsAnimatedContent>
 
         <div class="space-y-4 p-6">
           <BitsAnimatedContent>
-            <h3 class="text-xl font-semibold">{{ service.title }}</h3>
+            <h3 class="text-xl font-semibold">{{ $t(service.titleKey) }}</h3>
           </BitsAnimatedContent>
           <BitsAnimatedContent :delay="0.2">
-            <p class="text-gray-600">{{ service.description }}</p>
+            <p class="text-gray-600">{{ $t(service.descriptionKey) }}</p>
           </BitsAnimatedContent>
 
           <div class="flex gap-3">
             <Button
               v-for="(action, idx) in service.actions"
+              :key="action.labelKey"
               asChild
               v-slot="slotProps"
               :severity="idx === 0 ? 'primary' : 'secondary'"
             >
               <BitsAnimatedContent :delay="0.4 + idx * 0.2" class="md:w-full">
                 <RouterLink
-                  :to="action.link"
+                  :to="$localePath(action.link)"
                   :class="slotProps.class"
                   class="md:w-full"
                 >
-                  {{ action.label }}
+                  {{ $t(action.labelKey) }}
                 </RouterLink>
               </BitsAnimatedContent>
             </Button>
@@ -54,31 +55,33 @@
 <script setup lang="ts">
 const services = [
   {
-    title: "Buy & Sell Properties",
-    description: "Buy your dream home or sell your property with ease.",
+    titleKey: "services.buyAndSell.title",
+    descriptionKey: "services.buyAndSell.description",
+    imageAltKey: "services.buyAndSell.imageAlt",
     image: "/icons/buy-property.svg",
     actions: [
-      { label: "Browse", link: "/buy" },
-      { label: "List your property", link: "/sell" },
+      { labelKey: "services.buyAndSell.browse", link: "/properties" },
+      { labelKey: "services.buyAndSell.list", link: "/new-property" },
     ],
   },
   {
-    title: "Rent & Lease",
-    description: "Find a place to rent or lease out your property to tenants.",
+    titleKey: "services.rentAndLease.title",
+    descriptionKey: "services.rentAndLease.description",
+    imageAltKey: "services.rentAndLease.imageAlt",
     image: "/icons/rent-property.svg",
     actions: [
-      { label: "Find", link: "/rent" },
-      { label: "Rent property", link: "/lease" },
+      { labelKey: "services.rentAndLease.find", link: "/properties" },
+      { labelKey: "services.rentAndLease.rent", link: "/new-property" },
     ],
   },
   {
-    title: "Share & Co-Living",
-    description:
-      "Share your property with others or join an existing co-living space.",
+    titleKey: "services.shareAndColiving.title",
+    descriptionKey: "services.shareAndColiving.description",
+    imageAltKey: "services.shareAndColiving.imageAlt",
     image: "/icons/home-sharing.png",
     actions: [
-      { label: "Offer a room", link: "/share" },
-      { label: "Join co-living", link: "/coliving" },
+      { labelKey: "services.shareAndColiving.offer", link: "/new-property" },
+      { labelKey: "services.shareAndColiving.join", link: "/properties" },
     ],
   },
 ];

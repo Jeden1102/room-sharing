@@ -91,7 +91,7 @@ export default defineNuxtConfig({
     },
   },
   i18n: {
-    defaultLocale: "en",
+    defaultLocale: "pl",
     locales: [
       { code: "en", name: "English", file: "en.json" },
       { code: "pl", name: "Polish", file: "pl.json" },
@@ -168,10 +168,10 @@ export default defineNuxtConfig({
       controlButtonIconHoverColor: '#fff',
       focusRingColor: '#808080',
       modalBackground: '#fff',
-      modalButtonBackground: '#000',
-      modalButtonColor: '#fff',
-      modalButtonHoverBackground: '#333',
-      modalButtonHoverColor: '#fff',
+      modalButtonBackground: '#fff',
+      modalButtonColor: '#00509d',
+      modalButtonHoverBackground: '#fff',
+      modalButtonHoverColor: '#00478c',
       modalOverlay: '#000',
       modalOverlayOpacity: 0.8,
       modalTextColor: '#000',

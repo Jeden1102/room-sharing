@@ -1,7 +1,13 @@
 <template>
   <Button asChild rounded severity="secondary">
     <RouterLink
-      to="/user/bookmarks/properties"
+      :to="
+        $localePath(
+          data?.user
+            ? '/user/bookmarks/properties'
+            : '/auth/login?feat=bookmarks',
+        )
+      "
       class="relative flex items-center"
     >
       <span class="pi pi-bookmark text-xl"></span>
@@ -17,6 +23,7 @@
 </template>
 
 <script setup>
+const { data } = useAuth();
 import { useBookmarksStore } from "~/stores/bookmarks";
 
 const store = useBookmarksStore();

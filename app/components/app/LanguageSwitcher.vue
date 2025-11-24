@@ -3,18 +3,21 @@
     <Select
       v-model="currentLocale"
       :options="locales"
-      optionLabel="name"
+      :optionLabel="getLocaleName"
       class="w-32"
-      @change="setLocale(locale.code)"
       size="small"
     />
   </div>
 </template>
 
 <script setup>
-const { locales, setLocale, locale } = useI18n();
+const { locales, setLocale, locale, t } = useI18n();
 
 const currentLocale = ref(locale.value);
+
+const getLocaleName = (loc) => {
+  return t(`languages.${loc.code}`);
+};
 
 watch(currentLocale, (newLocale) => {
   setLocale(newLocale.code);
