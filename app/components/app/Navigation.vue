@@ -6,9 +6,9 @@
           <NuxtImg
             src="/logo.png"
             alt="logo"
-            width="80"
-            height="63"
-            class="md:w-25"
+            width="100"
+            height="79"
+            class="w-20 md:w-25"
           />
         </NuxtLink>
 
