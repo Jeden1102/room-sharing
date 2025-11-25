@@ -1,3 +1,4 @@
+
 import Aura from "@primeuix/themes/aura";
 
 import tailwindcss from "@tailwindcss/vite";
@@ -91,8 +92,10 @@ export default defineNuxtConfig({
     },
   },
   i18n: {
+    lazy: true,
     defaultLocale: "pl",
     langDir: "./locales",
+    fallbackLocale: "pl",
     locales: [
       { code: "en", name: "English", file: "en.json" },
       { code: "pl", name: "Polish", file: "pl.json" },
