@@ -3,11 +3,6 @@ import Aura from "@primeuix/themes/aura";
 import tailwindcss from "@tailwindcss/vite";
 import vue from "@vitejs/plugin-vue";
 
-import en from "./i18n/locales/en.json"
-import pl from "./i18n/locales/pl.json"
-
-console.log(en, pl, 'here')
-
 import { definePreset } from "@primeuix/themes";
 
 const MyPreset = definePreset(Aura, {
@@ -97,7 +92,6 @@ export default defineNuxtConfig({
   },
   i18n: {
     defaultLocale: "pl",
-    langDir: "locales",
     locales: [
       { code: "en", name: "English", file: "en.json" },
       { code: "pl", name: "Polish", file: "pl.json" },
