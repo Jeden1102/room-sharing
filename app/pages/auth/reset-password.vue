@@ -11,6 +11,11 @@ definePageMeta({
   unauthenticatedOnly: true,
 });
 
+usePageSeo({
+  title: "seo.resetPassword.title",
+  description: "seo.resetPassword.description",
+});
+
 const route = useRoute();
 
 const code = route.query.code as string;

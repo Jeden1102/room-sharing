@@ -7,6 +7,7 @@ export default function usePageSeo({
   description: string;
   image?: string;
 }) {
+  const { t } = useI18n();
   const config = useRuntimeConfig();
 
   const imageUrl = image
@@ -14,10 +15,10 @@ export default function usePageSeo({
     : config.public.APP_BASE_URI + "/images/hero.png";
 
   return useSeoMeta({
-    title,
-    ogTitle: title,
-    description,
-    ogDescription: description,
+    title: t(title),
+    ogTitle: t(title),
+    description: t(description),
+    ogDescription: t(description),
     ogImage: imageUrl,
     twitterCard: "summary_large_image",
   });

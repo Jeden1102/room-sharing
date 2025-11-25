@@ -30,6 +30,11 @@ definePageMeta({
   auth: true,
 });
 
+usePageSeo({
+  title: "seo.bookmarks.title",
+  description: "seo.bookmarks.description",
+});
+
 const userMenuItems = ref([
   {
     label: "Bookmarked properties",

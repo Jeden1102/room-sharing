@@ -12,7 +12,7 @@ definePageMeta({
 });
 
 usePageSeo({
-  title: "Contact",
-  description: "Contact us",
+  title: "seo.contact.title",
+  description: "seo.contact.description",
 });
 </script>

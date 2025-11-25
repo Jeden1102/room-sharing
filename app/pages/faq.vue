@@ -128,7 +128,7 @@ definePageMeta({
 });
 
 usePageSeo({
-  title: "Faq",
-  description: "Faq",
+  title: "seo.faq.title",
+  description: "seo.faq.description",
 });
 </script>

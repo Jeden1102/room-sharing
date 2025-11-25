@@ -14,8 +14,8 @@ definePageMeta({
 });
 
 usePageSeo({
-  title: "Property",
-  description: "Single property",
+  title: "seo.propertyEdit.title",
+  description: "seo.propertyEdit.description",
 });
 
 const { data, error } = await useFetch<{ property: PropertyWithOwner }>(

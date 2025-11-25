@@ -17,6 +17,11 @@ definePageMeta({
   layout: "login",
 });
 
+usePageSeo({
+  title: "seo.confirmEmail.title",
+  description: "seo.confirmEmail.description",
+});
+
 const route = useRoute();
 
 const code = route.query.code as string;

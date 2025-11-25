@@ -8,4 +8,9 @@
 definePageMeta({
   auth: true,
 });
+
+usePageSeo({
+  title: "seo.newProperty.title",
+  description: "seo.newProperty.description",
+});
 </script>

@@ -9,8 +9,8 @@ definePageMeta({
 });
 
 usePageSeo({
-  title: "Profile",
-  description: "User profile",
+  title: "seo.profile.title",
+  description: "seo.profile.description",
 });
 
 const { data: userData, pending } = await useFetch("/api/user/me", {

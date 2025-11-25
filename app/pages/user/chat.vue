@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 usePageSeo({
-  title: "Chat",
-  description: "Chat with other users",
+  title: "seo.chat.title",
+  description: "seo.chat.description",
 });
 </script>

@@ -32,8 +32,8 @@
 
 <script setup lang="ts">
 usePageSeo({
-  title: "Bookmarks",
-  description: "Saved properties",
+  title: "seo.bookmarkedProperties.title",
+  description: "seo.bookmarkedProperties.description",
 });
 
 const { data, error, pending } = await useFetch("/api/bookmark/properties");

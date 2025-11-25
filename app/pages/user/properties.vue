@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 usePageSeo({
-  title: "Properties",
-  description: "Properties list",
+  title: "seo.userProperties.title",
+  description: "seo.userProperties.description",
 });
 </script>

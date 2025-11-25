@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 usePageSeo({
-  title: "Settings",
-  description: "User settings",
+  title: "seo.userSettings.title",
+  description: "seo.userSettings.description",
 });
 </script>

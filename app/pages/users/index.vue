@@ -58,6 +58,11 @@ type FullUser = Prisma.UserGetPayload<{
   };
 }>;
 
+usePageSeo({
+  title: "seo.users.title",
+  description: "seo.users.description",
+});
+
 const filters = ref({
   gender: null,
   city: "",

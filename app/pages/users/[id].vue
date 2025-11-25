@@ -18,8 +18,8 @@
 const route = useRoute();
 
 usePageSeo({
-  title: "Profile",
-  description: "User profile",
+  title: "seo.user.title",
+  description: "seo.user.description",
 });
 
 const { data: userData, error } = await useFetch(

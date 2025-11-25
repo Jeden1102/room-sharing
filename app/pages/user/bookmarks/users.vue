@@ -33,8 +33,8 @@
 
 <script setup lang="ts">
 usePageSeo({
-  title: "Bookmarks",
-  description: "Saved users",
+  title: "seo.bookmarkedUsers.title",
+  description: "seo.bookmarkedUsers.description",
 });
 
 const { data, error, pending } = await useFetch("/api/bookmark/users");

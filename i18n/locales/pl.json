@@ -7,6 +7,94 @@
     "home": {
       "title": "Pokój Z Wami - Znajdź pokój i współlokatora | Wynajem mieszkań",
       "description": "Szukasz pokoju lub współlokatora? Pokój Z Wami to platforma do wynajmu mieszkań i współdzielenia pokoi w całej Polsce. Oferty w Warszawie, Krakowie, Wrocławiu i innych miastach."
+    },
+    "confirmEmail": {
+      "title": "Potwierdź adres e-mail",
+      "description": "Potwierdź swój adres e-mail, aby aktywować konto i zacząć przeglądać pokoje, mieszkania oraz znaleźć idealnego współlokatora."
+    },
+    "forgotPassword": {
+      "title": "Zapomniałeś hasła?",
+      "description": "Odzyskaj dostęp do swojego konta. Zresetuj hasło i wróć do przeglądania ofert wynajmu mieszkań, pokoi i współlokatorów."
+    },
+    "login": {
+      "title": "Logowanie",
+      "description": "Zaloguj się, aby przeglądać mieszkania i pokoje na wynajem, kontaktować się z właścicielami oraz znaleźć współlokatora."
+    },
+    "register": {
+      "title": "Załóż konto",
+      "description": "Dołącz do społeczności współdzielących mieszkania. Twórz ogłoszenia, rezerwuj pokoje i znajdź idealnego współlokatora."
+    },
+    "resetPassword": {
+      "title": "Ustaw nowe hasło",
+      "description": "Ustaw nowe hasło i odzyskaj pełny dostęp do konta, swoich ogłoszeń, ulubionych ofert i wiadomości."
+    },
+    "propertyEdit": {
+      "title": "Edytuj ogłoszenie",
+      "description": "Edytuj swoje ogłoszenie wynajmu mieszkania lub pokoju. Aktualizuj wolne miejsca, ceny, zdjęcia i informacje o współlokatorach."
+    },
+    "property": {
+      "title": "Szczegóły ogłoszenia",
+      "description": "Sprawdź szczegóły mieszkania lub pokoju na wynajem: wolne miejsca, współlokatorzy, cena, lokalizacja i udogodnienia."
+    },
+    "properties": {
+      "title": "Oferty wynajmu mieszkań i pokoi",
+      "description": "Przeglądaj mieszkania i pokoje na wynajem w całej Polsce. Sprawdź wolne miejsca, profile współlokatorów i oferty dla studentów."
+    },
+    "bookmarkedProperties": {
+      "title": "Zapisane mieszkania",
+      "description": "Zapisane oferty wynajmu mieszkań i pokoi. Szybko wróć do ulubionych ogłoszeń i zarezerwuj najlepsze miejsce."
+    },
+    "bookmarkedUsers": {
+      "title": "Zapisani użytkownicy",
+      "description": "Lista zapisanych użytkowników i potencjalnych współlokatorów. Sprawdź profile, preferencje i skontaktuj się."
+    },
+    "bookmarks": {
+      "title": "Zakładki",
+      "description": "Zarządzaj zapisanymi mieszkaniami, pokojami i użytkownikami. Wróć do najciekawszych ofert wynajmu."
+    },
+    "chat": {
+      "title": "Czat z właścicielami i współlokatorami",
+      "description": "Rozmawiaj z właścicielami mieszkań i potencjalnymi współlokatorami. Ustal szczegóły wynajmu i dostępne miejsca."
+    },
+    "profile": {
+      "title": "Twój profil",
+      "description": "Zarządzaj swoim profilem: opis, zdjęcia, preferencje współlokatora. Zwiększ szanse na znalezienie idealnego miejsca."
+    },
+    "userProperties": {
+      "title": "Twoje ogłoszenia",
+      "description": "Zarządzaj ogłoszeniami wynajmu mieszkań i pokoi. Dodawaj, edytuj i aktualizuj wolne miejsca."
+    },
+    "userSettings": {
+      "title": "Ustawienia konta",
+      "description": "Zmień dane konta, ustaw preferencje wynajmu, powiadomienia i prywatność."
+    },
+    "user": {
+      "title": "Profil użytkownika",
+      "description": "Sprawdź profil użytkownika: preferencje mieszkania, współlokatorów, wolne miejsca oraz informacje kontaktowe."
+    },
+    "users": {
+      "title": "Współlokatorzy",
+      "description": "Znajdź współlokatora do mieszkania lub pokoju. Przeglądaj profile studentów i osób szukających współdzielenia."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "description": "Skontaktuj się z nami w sprawie współpracy, pomocy technicznej lub zgłoszeń dotyczących ogłoszeń."
+    },
+    "faq": {
+      "title": "FAQ – Najczęstsze pytania",
+      "description": "Poznaj odpowiedzi na najczęstsze pytania dotyczące wynajmu mieszkań, współlokatorów i korzystania z serwisu."
+    },
+    "terms": {
+      "title": "Regulamin serwisu",
+      "description": "Przeczytaj regulamin korzystania z platformy wynajmu mieszkań i współdzielenia pokoi."
+    },
+    "newProperty": {
+      "title": "Dodaj ogłoszenie wynajmu",
+      "description": "Dodaj nowe ogłoszenie mieszkania lub pokoju. Określ wolne miejsca, zasady współdzielenia i preferencje współlokatorów."
+    },
+    "privacyPolicy": {
+      "title": "Polityka prywatności",
+      "description": "Dowiedz się, jak przetwarzamy Twoje dane podczas korzystania z platformy wynajmu mieszkań i pokoi."
     }
   },
   "cookies": {

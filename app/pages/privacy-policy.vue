@@ -10,7 +10,7 @@ definePageMeta({
 });
 
 usePageSeo({
-  title: "Privacy policy",
-  description: "Privacy policy",
+  title: "seo.privacyPolicy.title",
+  description: "seo.privacyPolicy.description",
 });
 </script>

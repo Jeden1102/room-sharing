@@ -15,7 +15,7 @@ definePageMeta({
 });
 
 usePageSeo({
-  title: "Register",
-  description: "Register to your account",
+  title: "seo.register.title",
+  description: "seo.register.description",
 });
 </script>

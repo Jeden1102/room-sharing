@@ -15,7 +15,7 @@ definePageMeta({
 });
 
 usePageSeo({
-  title: "Login",
-  description: "Login to your account",
+  title: "seo.login.title",
+  description: "seo.login.description",
 });
 </script>

@@ -11,4 +11,9 @@ definePageMeta({
   layout: "login",
   unauthenticatedOnly: true,
 });
+
+usePageSeo({
+  title: "seo.forgotPassword.title",
+  description: "seo.forgotPassword.description",
+});
 </script>

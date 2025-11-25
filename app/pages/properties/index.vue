@@ -95,6 +95,7 @@
 
 <script setup lang="ts">
 import type { PropertyWithOwner } from "@/components/property/types";
+import clsx from "clsx";
 
 const route = useRoute();
 
@@ -104,7 +105,10 @@ type Coord = {
   id: string;
 };
 
-import clsx from "clsx";
+usePageSeo({
+  title: "seo.properties.title",
+  description: "seo.properties.description",
+});
 
 const listingType = ref("grid");
 

@@ -25,8 +25,8 @@ definePageMeta({
 });
 
 usePageSeo({
-  title: "Property",
-  description: "Single property",
+  title: "seo.property.title",
+  description: "seo.property.description",
 });
 
 const { data, error } = await useFetch<{

@@ -10,7 +10,7 @@ definePageMeta({
 });
 
 usePageSeo({
-  title: "Terms",
-  description: "Terms",
+  title: "seo.terms.title",
+  description: "seo.terms.description",
 });
 </script>
