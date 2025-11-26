@@ -114,8 +114,8 @@
   },
   "hero": {
     "subtitle": "Ponad 10 000 ofert mieszkań i pokoi w całej Polsce",
-    "title": "Znajdź swój pokój. Znajdź",
-    "titleHighlight": "swoich ludzi",
+    "title": "Znajdź swój pokój.",
+    "titleHighlight": "Poznaj swoich ludzi",
     "cta": "Zobacz oferty",
     "circularText": "WYNAJEM * SPRZEDAŻ * WSPÓŁDZIELENIE * ",
     "imageAlt": "Szczęśliwi współlokatorzy w nowym mieszkaniu"
@@ -184,15 +184,15 @@
     }
   },
   "cities": {
-      "title": "W jakim mieście będziesz mieszkać?",
-      "subtitle": "Odkryj nasze miasta",
-      "imageAlt": "Panorama miasta",
-      "list": {
-        "warszawa": "Warszawa",
-        "krakow": "Kraków",
-        "gdansk": "Gdańsk",
-        "wroclaw": "Wrocław"
-      }
+    "title": "W jakim mieście będziesz mieszkać?",
+    "subtitle": "Odkryj nasze miasta",
+    "imageAlt": "Panorama miasta",
+    "list": {
+      "warszawa": "Warszawa",
+      "krakow": "Kraków",
+      "gdansk": "Gdańsk",
+      "wroclaw": "Wrocław"
+    }
   },
   "footer": {
     "logoAlt": "Pokój Z Wami - logo",
@@ -245,5 +245,103 @@
       "gdpr": "RODO"
     },
     "copyrightText": "Pokój Z Wami. Wszelkie prawa zastrzeżone."
+  },
+  "forgotPassword": {
+    "email": {
+      "placeholder": "Email"
+    },
+    "button": {
+      "sendResetLink": "Wyślij link resetujący"
+    }
+  },
+  "login": {
+  "email": {
+    "placeholder": "Email"
+  },
+  "password": {
+    "placeholder": "Hasło"
+  },
+  "forgotPassword": "Zapomniałeś hasła?",
+  "button": {
+    "submit": "Zaloguj się",
+    "google": "Zaloguj przez Google"
+  },
+  "noAccount": "Nie masz konta?",
+  "registerLink": "Zarejestruj się"
+},
+"register": {
+  "email": {
+    "placeholder": "Email"
+  },
+  "password": {
+    "placeholder": "Hasło"
+  },
+  "passwordRepeat": {
+    "placeholder": "Powtórz hasło"
+  },
+  "button": {
+    "submit": "Zarejestruj się"
+  },
+  "hasAccount": "Masz już konto?",
+  "loginLink": "Zaloguj się"
+},
+"resetPassword": {
+  "password": {
+    "placeholder": "Nowe hasło"
+  },
+  "passwordRepeat": {
+    "placeholder": "Powtórz nowe hasło"
+  },
+  "button": {
+    "submit": "Zresetuj hasło"
   }
+},
+"emailContact": {
+  "greeting": "Witaj, otrzymano nową wiadomość od {from} ({fromEmail}).",
+  "reason": "Powód kontaktu"
+},
+"emailContactConfirmation": {
+  "greeting": "Witaj {from},",
+  "message": "Otrzymaliśmy Twoją wiadomość i wkrótce się z Tobą skontaktujemy."
+},
+"emailLayout": {
+  "logoAlt": "Logo strony",
+  "footer": "© 2025 Rooms. Wszelkie prawa zastrzeżone."
+},
+"contactForm": {
+  "legend": "Skontaktuj się z nami",
+  "name": {
+    "label": "Imię"
+  },
+  "email": {
+    "label": "Adres e-mail"
+  },
+  "reason": {
+    "label": "Powód kontaktu"
+  },
+  "description": {
+    "label": "Opis"
+  },
+  "terms": {
+    "prefix": "Kontaktując się z nami, akceptujesz nasze",
+    "termsLink": "Warunki korzystania z usługi",
+    "and": "oraz",
+    "privacyLink": "Politykę prywatności"
+  },
+  "button": {
+    "submit": "Wyślij wiadomość"
+  }
+},
+"fileUploader": {
+  "deleteDialog": {
+    "header": "Potwierdź usunięcie",
+    "message": "Czy na pewno chcesz usunąć to zdjęcie?",
+    "cancelButton": "Anuluj",
+    "confirmButton": "Usuń"
+  }
+},
+"fileUploaderDialog": {
+  "cancelButton": "Anuluj",
+  "saveButton": "Zapisz"
+}
 }

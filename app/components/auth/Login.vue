@@ -8,7 +8,12 @@
       class="flex w-full flex-col gap-4"
     >
       <div class="flex flex-col gap-1">
-        <InputText name="email" type="email" placeholder="Email" fluid />
+        <InputText
+          name="email"
+          type="email"
+          :placeholder="$t('login.email.placeholder')"
+          fluid
+        />
         <Message
           v-if="$form.email?.invalid"
           severity="error"
@@ -21,7 +26,7 @@
         <InputText
           name="password"
           type="password"
-          placeholder="Password"
+          :placeholder="$t('login.password.placeholder')"
           fluid
         />
         <Message
@@ -36,9 +41,13 @@
         :to="$localePath('/auth/forgot-password')"
         class="text-primary-600 text-sm font-semibold"
       >
-        Forgot Password?
+        {{ $t("login.forgotPassword") }}
       </NuxtLink>
-      <Button type="submit" label="Login" :loading="formStatus.isLoading" />
+      <Button
+        type="submit"
+        :label="$t('login.button.submit')"
+        :loading="formStatus.isLoading"
+      />
       <Message
         class="w-full"
         :severity="formStatus.success ? 'info' : 'error'"
@@ -47,15 +56,15 @@
       >
       <div class="mt-4 flex flex-col gap-4">
         <Button severity="secondary" @click="signIn('google')">
-          <i class="pi pi-google"></i> Login with Google
+          <i class="pi pi-google"></i> {{ $t("login.button.google") }}
         </Button>
         <span>
-          Don't have an account?
+          {{ $t("login.noAccount") }}
           <NuxtLink
             :to="$localePath('/auth/register')"
             class="text-primary-600 font-semibold"
           >
-            Register
+            {{ $t("login.registerLink") }}
           </NuxtLink>
         </span>
       </div>

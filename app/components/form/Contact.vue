@@ -5,12 +5,12 @@
     @submit="onFormSubmit"
     class="flex w-full flex-col gap-6"
   >
-    <Fieldset legend="Contact us">
+    <Fieldset :legend="$t('contactForm.legend')">
       <div class="flex flex-col gap-6">
         <div>
           <FloatLabel variant="on">
             <InputText id="name" name="name" fluid />
-            <label for="name">Name</label>
+            <label for="name">{{ $t("contactForm.name.label") }}</label>
           </FloatLabel>
           <Message
             v-if="$form.name?.invalid"
@@ -25,7 +25,7 @@
         <div>
           <FloatLabel variant="on">
             <InputText id="email" name="email" fluid />
-            <label for="email">E-mail address</label>
+            <label for="email">{{ $t("contactForm.email.label") }}</label>
           </FloatLabel>
           <Message
             v-if="$form.email?.invalid"
@@ -47,7 +47,7 @@
               optionValue="value"
               fluid
             />
-            <label for="reason">Contact reason</label>
+            <label for="reason">{{ $t("contactForm.reason.label") }}</label>
           </FloatLabel>
           <Message
             v-if="$form.reason?.invalid"
@@ -68,7 +68,9 @@
               rows="4"
               fluid
             />
-            <label for="description">Description</label>
+            <label for="description">{{
+              $t("contactForm.description.label")
+            }}</label>
           </FloatLabel>
           <Message
             v-if="$form.description?.invalid"
@@ -84,13 +86,13 @@
           <div class="flex flex-row gap-2">
             <Checkbox id="terms" name="terms" binary />
             <label for="terms">
-              By contacting us, you agree to our
-              <NuxtLink :to="$localePath('/terms')" class="underline"
-                >Terms of Service</NuxtLink
-              >
-              and
+              {{ $t("contactForm.terms.prefix") }}
+              <NuxtLink :to="$localePath('/terms')" class="underline">{{
+                $t("contactForm.terms.termsLink")
+              }}</NuxtLink>
+              {{ $t("contactForm.terms.and") }}
               <NuxtLink :to="$localePath('/privacy-policy')" class="underline">
-                Privacy Policy
+                {{ $t("contactForm.terms.privacyLink") }}
               </NuxtLink>
             </label>
           </div>
@@ -98,7 +100,7 @@
 
         <Button
           type="submit"
-          label="Send message"
+          :label="$t('contactForm.button.submit')"
           :loading="formStatus.isLoading"
           class="mt-4 w-fit"
         />

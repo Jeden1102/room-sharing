@@ -8,7 +8,12 @@
       class="flex w-full flex-col gap-4"
     >
       <div class="flex flex-col gap-1">
-        <InputText name="email" type="email" placeholder="Email" fluid />
+        <InputText
+          name="email"
+          type="email"
+          :placeholder="$t('forgotPassword.email.placeholder')"
+          fluid
+        />
         <Message
           v-if="$form.email?.invalid"
           severity="error"
@@ -20,7 +25,7 @@
       <Button
         class="w-fit"
         type="submit"
-        label="Send reset link"
+        :label="$t('forgotPassword.button.sendResetLink')"
         :loading="formStatus.isLoading"
       />
       <Message

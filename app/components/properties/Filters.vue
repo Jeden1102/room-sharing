@@ -96,7 +96,7 @@
       <!-- Sorting (mobile only) -->
       <AtomsDropdown
         label="Sortuj według"
-        :options="sortOptions"
+        :options="propertiesSortOptions"
         optionLabel="label"
         optionValue="value"
         v-model="filters.sortBy"
@@ -205,16 +205,8 @@ const {
   propertyTypeOptions,
   amenitiesOptions,
   mediasOptions,
+  propertiesSortOptions,
 } = useTaxonomies();
-
-const sortOptions = [
-  { label: "Najnowsze", value: "newest" },
-  { label: "Najstarsze", value: "oldest" },
-  { label: "Cena rosnąco", value: "priceAsc" },
-  { label: "Cena malejąco", value: "priceDesc" },
-  { label: "Powierzchnia rosnąco", value: "sizeAsc" },
-  { label: "Powierzchnia malejąco", value: "sizeDesc" },
-];
 
 const clearFilters = () => {
   Object.assign(filters, defaultFilters);

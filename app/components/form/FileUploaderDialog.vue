@@ -22,13 +22,13 @@
         <div class="flex justify-end gap-2">
           <Button
             type="button"
-            label="Cancel"
+            :label="$t('fileUploaderDialog.cancelButton')"
             severity="secondary"
             @click="onCancel"
           />
           <Button
             type="button"
-            label="Save"
+            :label="$t('fileUploaderDialog.saveButton')"
             :loading="isLoading"
             @click="onSave"
           />

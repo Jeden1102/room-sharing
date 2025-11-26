@@ -44,16 +44,20 @@
     <Dialog
       v-model:visible="deleteDialogVisible"
       modal
-      header="Confirm deletion"
+      :header="$t('fileUploader.deleteDialog.header')"
     >
-      <p class="mb-4">Are you sure you want to delete this image?</p>
+      <p class="mb-4">{{ $t("fileUploader.deleteDialog.message") }}</p>
       <div class="flex justify-end gap-2">
         <Button
-          label="Cancel"
+          :label="$t('fileUploader.deleteDialog.cancelButton')"
           severity="secondary"
           @click="deleteDialogVisible = false"
         />
-        <Button label="Delete" severity="danger" @click="doDelete" />
+        <Button
+          :label="$t('fileUploader.deleteDialog.confirmButton')"
+          severity="danger"
+          @click="doDelete"
+        />
       </div>
     </Dialog>
   </div>

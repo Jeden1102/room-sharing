@@ -11,7 +11,7 @@
         <InputText
           name="password"
           type="password"
-          placeholder="New password"
+          :placeholder="$t('resetPassword.password.placeholder')"
           fluid
         />
         <Message
@@ -26,7 +26,7 @@
         <InputText
           name="passwordRepeat"
           type="password"
-          placeholder="Repeat new password"
+          :placeholder="$t('resetPassword.passwordRepeat.placeholder')"
           fluid
         />
         <Message
@@ -39,7 +39,7 @@
       </div>
       <Button
         type="submit"
-        label="Reset password"
+        :label="$t('resetPassword.button.submit')"
         :loading="formStatus.isLoading"
         class="w-fit"
       />

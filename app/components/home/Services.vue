@@ -11,23 +11,17 @@
         :key="service.titleKey"
         class="overflow-hidden rounded-2xl pt-6 shadow-md"
       >
-        <BitsAnimatedContent :scale="0">
-          <img
-            :src="service.image"
-            :alt="$t(service.imageAltKey)"
-            class="mx-auto size-20 object-cover"
-          />
-        </BitsAnimatedContent>
+        <img
+          :src="service.image"
+          :alt="$t(service.imageAltKey)"
+          class="mx-auto size-20 object-cover"
+        />
 
         <div class="space-y-4 p-6">
-          <BitsAnimatedContent>
-            <h3 class="text-xl font-semibold">{{ $t(service.titleKey) }}</h3>
-          </BitsAnimatedContent>
-          <BitsAnimatedContent :delay="0.2">
-            <p class="text-gray-600">{{ $t(service.descriptionKey) }}</p>
-          </BitsAnimatedContent>
+          <h3 class="text-xl font-semibold">{{ $t(service.titleKey) }}</h3>
+          <p class="text-gray-600">{{ $t(service.descriptionKey) }}</p>
 
-          <div class="flex gap-3">
+          <div class="flex flex-col gap-3 sm:flex-row">
             <Button
               v-for="(action, idx) in service.actions"
               :key="action.labelKey"
@@ -35,15 +29,13 @@
               v-slot="slotProps"
               :severity="idx === 0 ? 'primary' : 'secondary'"
             >
-              <BitsAnimatedContent :delay="0.4 + idx * 0.2" class="md:w-full">
-                <RouterLink
-                  :to="$localePath(action.link)"
-                  :class="slotProps.class"
-                  class="md:w-full"
-                >
-                  {{ $t(action.labelKey) }}
-                </RouterLink>
-              </BitsAnimatedContent>
+              <RouterLink
+                :to="$localePath(action.link)"
+                :class="slotProps.class"
+                class="md:w-full"
+              >
+                {{ $t(action.labelKey) }}
+              </RouterLink>
             </Button>
           </div>
         </div>

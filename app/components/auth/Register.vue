@@ -8,7 +8,12 @@
       class="flex w-full flex-col gap-4"
     >
       <div class="flex flex-col gap-1">
-        <InputText name="email" type="email" placeholder="Email" fluid />
+        <InputText
+          name="email"
+          type="email"
+          :placeholder="$t('register.email.placeholder')"
+          fluid
+        />
         <Message
           v-if="$form.email?.invalid"
           severity="error"
@@ -21,7 +26,7 @@
         <InputText
           name="password"
           type="password"
-          placeholder="Password"
+          :placeholder="$t('register.password.placeholder')"
           fluid
         />
         <Message
@@ -36,7 +41,7 @@
         <InputText
           name="passwordRepeat"
           type="password"
-          placeholder="Repeat password"
+          :placeholder="$t('register.passwordRepeat.placeholder')"
           fluid
         />
         <Message
@@ -47,7 +52,11 @@
           >{{ $form.passwordRepeat.error.message }}</Message
         >
       </div>
-      <Button type="submit" label="Register" :loading="formStatus.isLoading" />
+      <Button
+        type="submit"
+        :label="$t('register.button.submit')"
+        :loading="formStatus.isLoading"
+      />
       <Message
         :severity="formStatus.success ? 'info' : 'error'"
         v-if="formStatus.message"
@@ -56,12 +65,12 @@
       >
       <div class="mt-4 flex flex-col gap-4">
         <span>
-          Already have an account?
+          {{ $t("register.hasAccount") }}
           <NuxtLink
             :to="$localePath('/auth/login')"
             class="text-primary-600 font-semibold"
           >
-            Login
+            {{ $t("register.loginLink") }}
           </NuxtLink>
         </span>
       </div>

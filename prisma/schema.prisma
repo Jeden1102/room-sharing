@@ -36,22 +36,21 @@ model User {
   districts             String[]
   searchAmount          String?
 
+  interests           String[] @default([])
+  occupations         String[] @default([])
+  searchPreferences   String[] @default([])
+  searchPropertyTypes String[] @default([])
+  noiseCompatibility  String[] @default([])
+  petsCompatibility   String[] @default([])
+
   // Relations
   messagesReceived Message[]  @relation("MessagesReceived")
   messagesSent     Message[]  @relation("MessagesSent")
   properties       Property[]
 
-  interests          Interest[]
-  occupation         Occupation[]
-  searchPreferences  SearchPreference[]
-  searchPropertyType PropertyOption[]
-
-  noiseCompatibility NoiseCompatibility[]
-  petsCompatibility  PetsCompatibility[]
-
   roommateInProperties Property[] @relation("PropertyRoommates")
 
-  // NEW: Explicit Bookmarks
+  // Bookmarks
   bookmarkedProperties PropertyBookmark[] @relation("UserPropertyBookmarks")
   bookmarkedByUsers    UserBookmark[]     @relation("BookmarkTargetUser")
   bookmarkedUsers      UserBookmark[]     @relation("BookmarkOwnerUser")
@@ -99,7 +98,7 @@ model Property {
   owner           User           @relation(fields: [ownerId], references: [id])
   roommates       User[]         @relation("PropertyRoommates")
 
-  // NEW: explicit bookmark relation
+  // Bookmarks
   bookmarkedBy PropertyBookmark[] @relation("PropertyBookmarks")
 }
 
@@ -137,42 +136,6 @@ model Message {
   receiverId String
   receiver   User     @relation("MessagesReceived", fields: [receiverId], references: [id])
   sender     User     @relation("MessagesSent", fields: [senderId], references: [id])
-}
-
-model Interest {
-  id    String @id @default(uuid())
-  name  String @unique
-  users User[]
-}
-
-model Occupation {
-  id    String @id @default(uuid())
-  name  String @unique
-  users User[]
-}
-
-model SearchPreference {
-  id    String @id @default(uuid())
-  name  String @unique
-  users User[]
-}
-
-model PropertyOption {
-  id    String @id @default(uuid())
-  name  String @unique
-  users User[]
-}
-
-model NoiseCompatibility {
-  id    String @id @default(uuid())
-  name  String @unique
-  users User[]
-}
-
-model PetsCompatibility {
-  id    String @id @default(uuid())
-  name  String @unique
-  users User[]
 }
 
 enum PropertyStatus {

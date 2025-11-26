@@ -52,7 +52,7 @@
           <AtomsMultiselect
             name="interests"
             label="Interests"
-            :options="interestOptions"
+            :options="taxonomies.interestsOptions"
             optionLabel="name"
             optionValue="id"
             placeholder="Select interests"
@@ -60,9 +60,9 @@
           />
 
           <AtomsMultiselect
-            name="occupation"
+            name="occupations"
             label="Occupation"
-            :options="occupationOptions"
+            :options="taxonomies.occupationsOptions"
             optionLabel="name"
             optionValue="id"
             placeholder="Select occupation options"
@@ -124,7 +124,7 @@
         <AtomsMultiselect
           name="searchPreferences"
           label="Search preferences"
-          :options="searchPreferencesOptions"
+          :options="taxonomies.searchPreferencesOptions"
           optionLabel="name"
           optionValue="id"
           placeholder="Select search preferences"
@@ -132,9 +132,9 @@
         />
 
         <AtomsMultiselect
-          name="searchPropertyType"
+          name="searchPropertyTypes"
           label="Search property type"
-          :options="searchPropertyTypeOptions"
+          :options="taxonomies.searchPropertyTypesOptions"
           optionLabel="name"
           optionValue="id"
           placeholder="Select property type"
@@ -150,7 +150,7 @@
         <AtomsMultiselect
           name="noiseCompatibility"
           label="Noise compatibility"
-          :options="noiseCompatibilityOptions"
+          :options="taxonomies.noiseCompatibilityOptions"
           optionLabel="name"
           optionValue="id"
           placeholder="Select noise compatibility"
@@ -160,7 +160,7 @@
         <AtomsMultiselect
           name="petsCompatibility"
           label="Pets compatibility"
-          :options="petsCompatibilityOptions"
+          :options="taxonomies.petsCompatibilityOptions"
           optionLabel="name"
           optionValue="id"
           placeholder="Select pets compatibility"
@@ -219,55 +219,28 @@ const files = ref<File[]>([]);
 const filteredCities = ref<any[]>([]);
 const availableDistricts = ref<any[]>();
 
-const { genderOptions } = useTaxonomies();
-
-const interestOptions = ref<any[]>([]);
-const occupationOptions = ref<any[]>([]);
-const searchPreferencesOptions = ref<any[]>([]);
-const searchPropertyTypeOptions = ref<any[]>([]);
-const noiseCompatibilityOptions = ref<any[]>([]);
-const petsCompatibilityOptions = ref<any[]>([]);
-
-const { status: taxonomyStatus, data: taxonomies } = await useFetch(
-  "/api/user/taxonomies",
-  { lazy: true },
-);
+const taxonomies = useTaxonomies();
+const { genderOptions } = taxonomies;
 
 const { status: userStatus, data: userData } = await useFetch("/api/user/me", {
   lazy: true,
   cache: "no-cache",
 });
 
-const isLoading = computed(
-  () => taxonomyStatus.value === "pending" || userStatus.value === "pending",
-);
+const isLoading = computed(() => userStatus.value === "pending");
 
 const initializeForm = () => {
-  if (taxonomies.value) {
-    interestOptions.value = taxonomies.value.interests || [];
-    occupationOptions.value = taxonomies.value.occupations || [];
-    searchPreferencesOptions.value = taxonomies.value.searchPreferences || [];
-    searchPropertyTypeOptions.value = taxonomies.value.propertyTypes || [];
-    noiseCompatibilityOptions.value = taxonomies.value.noiseCompatibility || [];
-    petsCompatibilityOptions.value = taxonomies.value.petsCompatibility || [];
-  }
-
   if (userData.value?.user) {
     const u = userData.value.user;
-    u.interests = u.interests.map((i: any) => i.id || i);
-    u.occupation = u.occupation.map((i: any) => i.id || i);
-    u.searchPreferences = u.searchPreferences.map((i: any) => i.id || i);
-    u.searchPropertyType = u.searchPropertyType.map((i: any) => i.id || i);
-    u.noiseCompatibility = u.noiseCompatibility.map((i: any) => i.id || i);
-    u.petsCompatibility = u.petsCompatibility.map((i: any) => i.id || i);
+
     initialValues.value = u;
   }
 };
 
 watch(
-  [taxonomyStatus, userStatus],
-  ([taxStatus, userStat]) => {
-    if (taxStatus === "success" && userStat === "success") {
+  userStatus,
+  (status) => {
+    if (status === "success") {
       initializeForm();
     }
   },

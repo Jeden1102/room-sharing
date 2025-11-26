@@ -64,7 +64,7 @@
       <!-- Sorting (mobile only) -->
       <AtomsDropdown
         label="Sortuj według"
-        :options="sortOptions"
+        :options="usersSortOptions"
         optionLabel="label"
         optionValue="value"
         v-model="filters.sortBy"
@@ -163,16 +163,7 @@ const searchCity = async (event: any) => {
   }
 };
 
-const { genderOptions } = useTaxonomies();
-
-const sortOptions = [
-  { label: "Brak", value: null },
-  { label: "Najnowsze", value: "newest" },
-  { label: "Wiek rosnąco", value: "ageAsc" },
-  { label: "Wiek malejąco", value: "ageDesc" },
-  { label: "Budżet rosnąco", value: "budgetAsc" },
-  { label: "Budżet malejąco", value: "budgetDesc" },
-];
+const { genderOptions, usersSortOptions } = useTaxonomies();
 
 const clearFilters = () => {
   Object.assign(filters, defaultFilters);

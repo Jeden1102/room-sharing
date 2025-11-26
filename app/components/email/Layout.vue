@@ -1,5 +1,5 @@
 <template>
-  <Html lang="en">
+  <Html lang="pl">
     <Tailwind
       :config="{
         theme: {
@@ -14,7 +14,7 @@
           <div class="mb-4 border-b border-gray-200 pb-2">
             <Img
               :src="config.public.APP_PROD_URI + '/logo.png'"
-              alt="Page logo"
+              :alt="$t('emailLayout.logoAlt')"
               width="80"
               height="63"
             />
@@ -25,7 +25,7 @@
           <div
             class="mt-6 border-t border-gray-200 pt-2 text-center text-xs text-gray-500"
           >
-            © 2025 Rooms. All rights reserved.
+            {{ $t("emailLayout.footer") }}
           </div>
         </Container>
       </Body>

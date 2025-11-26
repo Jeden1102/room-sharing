@@ -24,11 +24,11 @@ export default requireAuth(defineEventHandler(async (event) => {
       "profileVisible",
     ];
 
-    const relationFields = [
+    const arrayFields = [
       "interests",
-      "occupation",
+      "occupations",
       "searchPreferences",
-      "searchPropertyType",
+      "searchPropertyTypes",
       "noiseCompatibility",
       "petsCompatibility",
     ];
@@ -41,25 +41,17 @@ export default requireAuth(defineEventHandler(async (event) => {
       }
     }
 
-    for (const field of relationFields) {
+    for (const field of arrayFields) {
       if (field in body) {
-        data[field] = {
-          set: body[field].map((id: string) => ({ id })),
-        };
+        if (Array.isArray(body[field])) {
+          data[field] = body[field];
+        }
       }
     }
 
     const updatedUser = await prisma.user.update({
       where: { id: userId },
       data,
-      include: {
-        interests: true,
-        occupation: true,
-        searchPreferences: true,
-        searchPropertyType: true,
-        noiseCompatibility: true,
-        petsCompatibility: true,
-      },
     });
 
     const cacheStorage = useStorage("cache:users:user");

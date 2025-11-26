@@ -107,10 +107,10 @@
                 <div class="text-xs text-gray-500">Zawód</div>
                 <div class="font-medium">
                   <span
-                    v-if="user.occupation.length > 0"
-                    v-for="i in user.occupation"
-                    :key="i.id"
-                    >{{ i.name }}</span
+                    v-if="userOccupations.length > 0"
+                    v-for="occupation in userOccupations"
+                    :key="occupation?.id"
+                    >{{ occupation?.name }}</span
                   >
                   <span v-else>No data</span>
                 </div>
@@ -169,13 +169,13 @@
               class="leading-relaxed whitespace-pre-line text-gray-700"
               v-html="user.description?.replaceAll('\n', '<br />')"
             ></div>
-            <div class="mt-4" v-if="user.interests.length > 0">
+            <div class="mt-4" v-if="userInterests.length > 0">
               <div class="flex flex-wrap gap-2">
                 <Tag
-                  v-for="i in user.interests"
-                  :key="i.id"
+                  v-for="interest in userInterests"
+                  :key="interest?.id"
                   class="capitalize"
-                  :value="i.name"
+                  :value="interest?.name"
                 />
               </div>
             </div>
@@ -189,19 +189,19 @@
           >
             <strong class="mb-2 block text-gray-900">Preferencje:</strong>
             <PropertyAmenity
-              v-if="user.searchPreferences.length > 0"
-              v-for="i in user.searchPreferences"
-              :label="i.name"
-              :key="i.id"
+              v-if="userSearchPreferences.length > 0"
+              v-for="pref in userSearchPreferences"
+              :label="pref?.name || ''"
+              :key="pref?.id || ''"
             />
             <span v-else class="pl-2">No data</span>
 
             <strong class="mb-2 block text-gray-900">Typ mieszkania:</strong>
             <PropertyAmenity
-              v-if="user.searchPropertyType.length > 0"
-              v-for="i in user.searchPropertyType"
-              :label="i.name"
-              :key="i.id"
+              v-if="userSearchPropertyTypes.length > 0"
+              v-for="type in userSearchPropertyTypes"
+              :label="type?.name || ''"
+              :key="type?.id"
             />
             <span v-else class="pl-2">No data</span>
           </AppCard>
@@ -214,19 +214,19 @@
               >Preferencje dotyczące ciszy:</strong
             >
             <PropertyAmenity
-              v-if="user.noiseCompatibility.length > 0"
-              v-for="i in user.noiseCompatibility"
-              :label="i.name"
-              :key="i.id"
+              v-if="userNoiseCompatibility.length > 0"
+              v-for="noise in userNoiseCompatibility"
+              :label="noise?.name || ''"
+              :key="noise?.id"
             />
             <span v-else class="pl-2">No data</span>
 
             <strong class="mb-2 block text-gray-900">Zwierzęta:</strong>
             <PropertyAmenity
-              v-if="user.petsCompatibility.length > 0"
-              v-for="i in user.petsCompatibility"
-              :label="i.name"
-              :key="i.id"
+              v-if="userPetsCompatibility.length > 0"
+              v-for="pet in userPetsCompatibility"
+              :label="pet?.name || ''"
+              :key="pet?.id || ''"
             />
             <span v-else class="pl-2">No data</span>
           </AppCard>
@@ -281,19 +281,9 @@
 </template>
 
 <script setup lang="ts">
-import type { User, Prisma } from "@prisma/client";
+import type { User } from "@prisma/client";
 
-type FullUser = Prisma.UserGetPayload<{
-  include: {
-    searchPreferences: true;
-    searchPropertyType: true;
-    interests: true;
-    occupation: true;
-    properties: true;
-    noiseCompatibility: true;
-    petsCompatibility: true;
-  };
-}> & {
+type FullUser = User & {
   isBookmarked?: boolean;
 };
 
@@ -305,8 +295,45 @@ const { user: userProp, editable } = defineProps<{
 }>();
 
 const user = ref(userProp);
-
 const isProfileImageVisible = ref(false);
+
+const taxonomies = useTaxonomies();
+
+const userInterests = computed(() => {
+  return user.value.interests
+    .map((id) => taxonomies.interestsOptions.find((i) => i.id === id))
+    .filter(Boolean);
+});
+
+const userOccupations = computed(() => {
+  return user.value.occupations
+    .map((id) => taxonomies.occupationsOptions.find((o) => o.id === id))
+    .filter(Boolean);
+});
+
+const userSearchPreferences = computed(() => {
+  return user.value.searchPreferences
+    .map((id) => taxonomies.searchPreferencesOptions.find((s) => s.id === id))
+    .filter(Boolean);
+});
+
+const userSearchPropertyTypes = computed(() => {
+  return user.value.searchPropertyTypes
+    .map((id) => taxonomies.searchPropertyTypesOptions.find((t) => t.id === id))
+    .filter(Boolean);
+});
+
+const userNoiseCompatibility = computed(() => {
+  return user.value.noiseCompatibility
+    .map((id) => taxonomies.noiseCompatibilityOptions.find((n) => n.id === id))
+    .filter(Boolean);
+});
+
+const userPetsCompatibility = computed(() => {
+  return user.value.petsCompatibility
+    .map((id) => taxonomies.petsCompatibilityOptions.find((p) => p.id === id))
+    .filter(Boolean);
+});
 
 const onUploadImg = async (res: any, field: keyof User) => {
   if (!user.value || !editable) return;

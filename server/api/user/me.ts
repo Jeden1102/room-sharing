@@ -7,15 +7,7 @@ export default requireAuth(
       const userId = event.context.user.id;
 
       const user = await prisma.user.findUnique({
-        where: { id: userId },
-        include: {
-          interests: true,
-          occupation: true,
-          searchPreferences: true,
-          searchPropertyType: true,
-          noiseCompatibility: true,
-          petsCompatibility: true,
-        },
+        where: { id: userId }
       });
 
       return { success: true, user };

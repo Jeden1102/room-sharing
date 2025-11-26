@@ -1,8 +1,10 @@
 <template>
   <Layout>
-    <Text class="mb-4"> Hello {{ from }}, </Text>
     <Text class="mb-4">
-      We have received your message and will get back to you soon.
+      {{ $t("emailContactConfirmation.greeting", { from }) }}
+    </Text>
+    <Text class="mb-4">
+      {{ $t("emailContactConfirmation.message") }}
     </Text>
   </Layout>
 </template>

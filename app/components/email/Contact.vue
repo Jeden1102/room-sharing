@@ -1,9 +1,9 @@
 <template>
   <Layout>
     <Text>
-      Hello, a new message from {{ from }} ({{ fromEmail }}) has been received.
+      {{ $t("emailContact.greeting", { from, fromEmail }) }}
     </Text>
-    <Text class="my-4"> Contact reason: {{ reason }} </Text>
+    <Text class="my-4"> {{ $t("emailContact.reason") }}: {{ reason }} </Text>
     <Text class="my-4"> {{ text }} </Text>
   </Layout>
 </template>

@@ -10,14 +10,6 @@ export default session(defineCachedEventHandler(
     try {
       const user = await prisma.user.findUnique({
         where: { id },
-        include: {
-          interests: true,
-          occupation: true,
-          searchPreferences: true,
-          searchPropertyType: true,
-          noiseCompatibility: true,
-          petsCompatibility: true
-        },
       });
 
       if (!user) {
@@ -54,14 +46,6 @@ export default session(defineCachedEventHandler(
 
         const similar = await prisma.user.findMany({
           where: whereConditions,
-          include: {
-            interests: true,
-            occupation: true,
-            searchPreferences: true,
-            searchPropertyType: true,
-            noiseCompatibility: true,
-            petsCompatibility: true
-          },
           take: 3,
           orderBy: {
             createdAt: 'desc'
