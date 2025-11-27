@@ -1,5 +1,4 @@
 12.2 new elements / changes:
-- obluga feat redirecta na login page
 - new gallery / lightbox
 - tłumaczenia - validations
 - do osoby dodać pole - szukam "x" ilosci osób

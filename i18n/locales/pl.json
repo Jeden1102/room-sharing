@@ -887,7 +887,10 @@
   },
   "loginPage": {
     "title": "Witaj ponownie",
-    "subtitle": "Miło Cię ponownie widzieć. Wprowadź swoje dane"
+    "subtitle": "Miło Cię ponownie widzieć. Wprowadź swoje dane",
+    "feature": {
+      "bookmarks": "Zaloguj się, lub utwórz konto, aby zapisawać ogłoszenia lub interesujących Cię użytkowników."
+    }
   },
   "registerPage": {
     "title": "Nowe konto",
