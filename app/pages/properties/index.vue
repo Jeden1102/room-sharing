@@ -1,7 +1,9 @@
 <template>
   <main class="container flex flex-col gap-4 py-6">
     <div class="flex items-center md:mb-4 md:grid md:grid-cols-2 md:gap-8">
-      <h1 class="text-xl font-medium md:text-2xl">Nieruchomości</h1>
+      <h1 class="text-xl font-medium md:text-2xl">
+        {{ $t("propertiesPage.title") }}
+      </h1>
       <div class="ml-auto flex gap-2">
         <PropertiesSorting
           @update="applyFilters"
@@ -62,7 +64,7 @@
           v-if="propertiesData?.properties.length === 0"
           class="mt-4 text-gray-500"
         >
-          Brak wyników
+          {{ $t("propertiesPage.noResults") }}
         </p>
 
         <Paginator

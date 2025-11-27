@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
   if (!validation.success) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Validation failed",
+      statusMessage: "api.contact.validationFailed",
     });
   }
 
@@ -20,12 +20,12 @@ export default defineEventHandler(async (event) => {
 
     return {
       success: true,
-      message: "Mail sent successfully",
+      message: "api.contact.success",
     };
   } catch (error) {
     throw createError({
       statusCode: 500,
-      statusMessage: "Failed to send reset password mail",
+      statusMessage: "api.contact.failed",
     });
   }
 });
@@ -76,7 +76,7 @@ const sendContactMail = async (body: {
   } catch (error) {
     throw createError({
       statusCode: 500,
-      statusMessage: "apiResponses.failedTosendContactMail",
+      statusMessage: "api.contact.failedToSendEmail",
     });
   }
 };

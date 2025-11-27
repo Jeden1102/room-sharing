@@ -1,25 +1,28 @@
 <template>
-  <h1 class="text-3xl font-semibold md:text-4xl">E-mail confirmation</h1>
+  <h1 class="text-3xl font-semibold md:text-4xl">
+    {{ $t("confirmEmailPage.title") }}
+  </h1>
   <p class="mt-2 mb-6 text-xl font-light">
     {{ responseMessage }}
   </p>
   <Button asChild v-slot="slotProps" v-if="!isError">
-    <RouterLink :to="$localePath('/auth/login')" :class="slotProps.class"
-      >Go to login</RouterLink
-    >
+    <RouterLink :to="$localePath('/auth/login')" :class="slotProps.class">
+      {{ $t("confirmEmailPage.goToLogin") }}
+    </RouterLink>
   </Button>
 </template>
 
 <script setup lang="ts">
 const { signOut } = useAuth();
+const { t } = useI18n();
 
 definePageMeta({
   layout: "login",
 });
 
 usePageSeo({
-  title: "seo.confirmEmail.title",
-  description: "seo.confirmEmail.description",
+  title: t("seo.confirmEmail.title"),
+  description: t("seo.confirmEmail.description"),
 });
 
 const route = useRoute();
@@ -46,14 +49,14 @@ const confirmEmail = async () => {
       },
     );
 
-    responseMessage.value = response.message;
+    responseMessage.value = t(response.message);
     isError.value = false;
   } catch (error: any) {
     isError.value = true;
     if (error.data && error.data.statusMessage) {
-      responseMessage.value = error.data.statusMessage;
+      responseMessage.value = t(error.data.statusMessage);
     } else {
-      responseMessage.value = "Something went wrong. Please try again.";
+      responseMessage.value = t("confirmEmailPage.error");
     }
   }
 };

@@ -5,14 +5,14 @@
         <NuxtImg
           class="h-40 w-full rounded-md object-cover md:h-52"
           :src="user.bgImage || '/images/user/bg-placeholder.webp'"
-          alt="cover"
+          :alt="$t('userProfile.coverAlt')"
         />
         <FormFileUploaderDialog
           v-if="editable"
           v-model="user.bgImage"
           id="bgImage"
           name="bgImage"
-          title="Background Image"
+          :title="$t('userProfile.backgroundImage')"
           entity="user"
           field="bgImage"
           class="absolute top-4 right-4"
@@ -28,7 +28,7 @@
           <div class="relative">
             <NuxtImg
               :src="user.profileImage || '/images/user/avatar-placeholder.webp'"
-              alt="profile"
+              :alt="$t('userProfile.profileAlt')"
               format="webp"
               width="128"
               height="128"
@@ -41,7 +41,7 @@
               v-model="user.profileImage"
               id="profileImage"
               name="profileImage"
-              title="Profile Image"
+              :title="$t('userProfile.profileImage')"
               entity="user"
               field="profileImage"
               class="absolute right-0 bottom-4"
@@ -81,7 +81,8 @@
             </p>
             <p class="mt-2 text-sm text-gray-700">
               <template v-if="user.age || user.city">
-                {{ user.age }} lat • {{ user.city }}
+                {{ user.age }} {{ $t("userProfile.yearsOld") }} •
+                {{ user.city }}
               </template>
               <template v-if="user.districts.length > 0">
                 | {{ user.districts.join(", ") }}
@@ -93,18 +94,24 @@
             <div class="card-base flex items-center gap-3">
               <i class="pi pi-user text-primary-500 text-xl"></i>
               <div>
-                <div class="text-xs text-gray-500">Imię</div>
+                <div class="text-xs text-gray-500">
+                  {{ $t("userProfile.infoCards.name.label") }}
+                </div>
                 <div class="font-medium" v-if="user.firstName && user.lastName">
                   {{ user.firstName }} {{ user.lastName }}
                 </div>
-                <div class="font-medium" v-else>No data</div>
+                <div class="font-medium" v-else>
+                  {{ $t("userProfile.noData") }}
+                </div>
               </div>
             </div>
 
             <div class="card card-base flex items-center gap-3">
               <i class="pi pi-briefcase text-primary-500 text-xl"></i>
               <div>
-                <div class="text-xs text-gray-500">Zawód</div>
+                <div class="text-xs text-gray-500">
+                  {{ $t("userProfile.infoCards.occupation.label") }}
+                </div>
                 <div class="font-medium">
                   <span
                     v-if="userOccupations.length > 0"
@@ -112,7 +119,7 @@
                     :key="occupation?.id"
                     >{{ occupation?.name }}</span
                   >
-                  <span v-else>No data</span>
+                  <span v-else>{{ $t("userProfile.noData") }}</span>
                 </div>
               </div>
             </div>
@@ -120,12 +127,14 @@
             <div class="card-base flex items-center gap-3">
               <i class="pi pi-wallet text-primary-500 text-xl"></i>
               <div>
-                <div class="text-xs text-gray-500">Budżet maks.</div>
+                <div class="text-xs text-gray-500">
+                  {{ $t("userProfile.infoCards.budget.label") }}
+                </div>
                 <div class="font-medium">
                   <span v-if="user.budgetMax">
                     {{ formatCurrency(user.budgetMax) }}
                   </span>
-                  <span v-else>No data</span>
+                  <span v-else>{{ $t("userProfile.noData") }}</span>
                 </div>
               </div>
             </div>
@@ -133,22 +142,32 @@
             <div class="card-base flex items-center gap-3">
               <i class="pi pi-map-marker text-primary-500 text-xl"></i>
               <div>
-                <div class="text-xs text-gray-500">Poszukiwana lokalizacja</div>
+                <div class="text-xs text-gray-500">
+                  {{ $t("userProfile.infoCards.location.label") }}
+                </div>
                 <div class="font-medium" v-if="user.city">
                   {{ user.city }}
                   <template v-if="user.districts.length > 0">
                     | {{ user.districts.join(", ") }}
                   </template>
                 </div>
-                <div class="font-medium" v-else>No data</div>
+                <div class="font-medium" v-else>
+                  {{ $t("userProfile.noData") }}
+                </div>
               </div>
             </div>
 
             <div class="card-base flex items-center gap-3">
               <Icon name="cil:smoke" class="text-primary-500 text-xl" />
               <div>
-                <div class="text-xs text-gray-500">Osoba paląca</div>
-                <div class="font-medium">{{ user.smoker ? "Tak" : "Nie" }}</div>
+                <div class="text-xs text-gray-500">
+                  {{ $t("userProfile.infoCards.smoker.label") }}
+                </div>
+                <div class="font-medium">
+                  {{
+                    user.smoker ? $t("userProfile.yes") : $t("userProfile.no")
+                  }}
+                </div>
               </div>
             </div>
 
@@ -158,13 +177,20 @@
                 class="text-primary-500 text-xl"
               />
               <div>
-                <div class="text-xs text-gray-500">Posiada zwierzęta</div>
-                <div class="font-medium">{{ user.pets ? "Tak" : "Nie" }}</div>
+                <div class="text-xs text-gray-500">
+                  {{ $t("userProfile.infoCards.pets.label") }}
+                </div>
+                <div class="font-medium">
+                  {{ user.pets ? $t("userProfile.yes") : $t("userProfile.no") }}
+                </div>
               </div>
             </div>
           </div>
 
-          <AppCard title="Description" v-if="user.description">
+          <AppCard
+            :title="$t('userProfile.description.title')"
+            v-if="user.description"
+          >
             <div
               class="leading-relaxed whitespace-pre-line text-gray-700"
               v-html="user.description?.replaceAll('\n', '<br />')"
@@ -184,34 +210,38 @@
 
         <div class="flex flex-col gap-4 md:flex-row">
           <AppCard
-            title="W poszukiwaniu"
+            :title="$t('userProfile.searchPreferences.title')"
             class="flex-1 space-y-3 text-sm text-gray-700"
           >
-            <strong class="mb-2 block text-gray-900">Preferencje:</strong>
+            <strong class="mb-2 block text-gray-900"
+              >{{ $t("userProfile.searchPreferences.preferences") }}:</strong
+            >
             <PropertyAmenity
               v-if="userSearchPreferences.length > 0"
               v-for="pref in userSearchPreferences"
               :label="pref?.name || ''"
               :key="pref?.id || ''"
             />
-            <span v-else class="pl-2">No data</span>
+            <span v-else class="pl-2">{{ $t("userProfile.noData") }}</span>
 
-            <strong class="mb-2 block text-gray-900">Typ mieszkania:</strong>
+            <strong class="mb-2 block text-gray-900"
+              >{{ $t("userProfile.searchPreferences.propertyType") }}:</strong
+            >
             <PropertyAmenity
               v-if="userSearchPropertyTypes.length > 0"
               v-for="type in userSearchPropertyTypes"
               :label="type?.name || ''"
               :key="type?.id"
             />
-            <span v-else class="pl-2">No data</span>
+            <span v-else class="pl-2">{{ $t("userProfile.noData") }}</span>
           </AppCard>
 
           <AppCard
             class="flex-1 space-y-3 text-sm text-gray-700"
-            title="Kompatybilność"
+            :title="$t('userProfile.compatibility.title')"
           >
             <strong class="mb-2 block text-gray-900"
-              >Preferencje dotyczące ciszy:</strong
+              >{{ $t("userProfile.compatibility.noise") }}:</strong
             >
             <PropertyAmenity
               v-if="userNoiseCompatibility.length > 0"
@@ -219,20 +249,25 @@
               :label="noise?.name || ''"
               :key="noise?.id"
             />
-            <span v-else class="pl-2">No data</span>
+            <span v-else class="pl-2">{{ $t("userProfile.noData") }}</span>
 
-            <strong class="mb-2 block text-gray-900">Zwierzęta:</strong>
+            <strong class="mb-2 block text-gray-900"
+              >{{ $t("userProfile.compatibility.pets") }}:</strong
+            >
             <PropertyAmenity
               v-if="userPetsCompatibility.length > 0"
               v-for="pet in userPetsCompatibility"
               :label="pet?.name || ''"
               :key="pet?.id || ''"
             />
-            <span v-else class="pl-2">No data</span>
+            <span v-else class="pl-2">{{ $t("userProfile.noData") }}</span>
           </AppCard>
         </div>
 
-        <AppCard title="Moodboard" v-if="user.moodboardImages.length > 0">
+        <AppCard
+          :title="$t('userProfile.moodboard.title')"
+          v-if="user.moodboardImages.length > 0"
+        >
           <div class="grid grid-cols-2 gap-2 md:grid-cols-3">
             <NuxtImg
               v-for="(img, idx) in user.moodboardImages"
@@ -243,10 +278,16 @@
           </div>
         </AppCard>
 
-        <AppCard title="Kontakt">
+        <AppCard :title="$t('userProfile.contact.title')">
           <div class="text-sm text-gray-700">
-            <p><strong>Email:</strong> {{ user.email || "No data" }}</p>
-            <p><strong>Telefon:</strong> {{ user.phone || "No data" }}</p>
+            <p>
+              <strong>{{ $t("userProfile.contact.email") }}:</strong>
+              {{ user.email || $t("userProfile.noData") }}
+            </p>
+            <p>
+              <strong>{{ $t("userProfile.contact.phone") }}:</strong>
+              {{ user.phone || $t("userProfile.noData") }}
+            </p>
           </div>
 
           <div class="mt-4 flex flex-col gap-3 md:flex-row">
@@ -254,24 +295,24 @@
               asChild
               v-slot="slotProps"
               severity="secondary"
-              label="Wyślij e-mail"
+              :label="$t('userProfile.contact.sendEmail')"
               icon="pi pi-envelope"
               v-if="user.email"
             >
               <a :href="`mailto:${user.email}`" :class="slotProps.class">
-                Wyślij e-mail
+                {{ $t("userProfile.contact.sendEmail") }}
               </a>
             </Button>
             <Button
               asChild
               v-slot="slotProps"
-              label="Wyślij e-mail"
-              icon="pi pi-envelope"
+              :label="$t('userProfile.contact.call')"
+              icon="pi pi-phone"
               v-if="user.phone"
             >
-              <a :href="`tel:${user.phone}`" :class="slotProps.class"
-                >Zadzwoń</a
-              >
+              <a :href="`tel:${user.phone}`" :class="slotProps.class">
+                {{ $t("userProfile.contact.call") }}
+              </a>
             </Button>
           </div>
         </AppCard>

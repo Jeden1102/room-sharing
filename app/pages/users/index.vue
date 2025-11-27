@@ -3,7 +3,9 @@
     <div
       class="flex items-center justify-between md:mb-4 md:grid md:grid-cols-2 md:gap-8"
     >
-      <h1 class="text-xl font-medium md:text-2xl">Users listing</h1>
+      <h1 class="text-xl font-medium md:text-2xl">
+        {{ $t("usersPage.title") }}
+      </h1>
       <UsersSorting
         @update="applyFilters"
         class="ml-auto hidden w-50 md:block"
@@ -28,7 +30,7 @@
       </div>
 
       <p v-if="usersData?.users.length === 0" class="mt-4 text-gray-500">
-        Brak wyników
+        {{ $t("usersPage.noResults") }}
       </p>
 
       <Paginator

@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
   if (!validation.success) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Validation failed",
+      statusMessage: "api.forgotPassword.validationFailed",
     });
   }
 
@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
   if (!user) {
     return {
       success: true,
-      message: "Mail sent successfully",
+      message: "api.forgotPassword.mailSent",
     };
   }
 
@@ -38,12 +38,12 @@ export default defineEventHandler(async (event) => {
 
     return {
       success: true,
-      message: "Mail sent successfully",
+      message: "api.forgotPassword.mailSent",
     };
   } catch (error) {
     throw createError({
       statusCode: 500,
-      statusMessage: "Failed to send reset password mail",
+      statusMessage: "api.forgotPassword.failed",
     });
   }
 });
@@ -79,7 +79,7 @@ const sendVerificationEmail = async (email: string) => {
   } catch (error) {
     throw createError({
       statusCode: 500,
-      statusMessage: "apiResponses.failedToSendVerificationEmail",
+      statusMessage: "api.forgotPassword.failedToSendEmail",
     });
   }
 };

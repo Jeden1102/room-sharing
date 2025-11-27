@@ -4,8 +4,8 @@
     <LazyHomeItemsCarousel
       hydrate-on-visible
       v-if="userData && userData.similarUsers"
-      title="Podobni uzytkownicy"
-      subtitle="Odkryj innych uzytkownikow"
+      :title="$t('userPage.similar.title')"
+      :subtitle="$t('userPage.similar.subtitle')"
       :items="userData.similarUsers"
       :showNavigation="false"
       entity="user"

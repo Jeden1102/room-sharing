@@ -13,20 +13,20 @@
 
       <AppCta
         v-else
-        title="You don't have any bookmarked properties yet"
-        subtitle="Explore the properties we have for you. Bookmark a property and it will show up here."
+        :title="$t('userBookmarksPage.empty.title')"
+        :subtitle="$t('userBookmarksPage.empty.subtitle')"
         :showLogo="true"
         variant="primary"
       >
         <Button asChild v-slot="slotProps" severity="secondary">
           <RouterLink :to="$localePath('properties')" :class="slotProps.class">
-            Explore properties
+            {{ $t("userBookmarksPage.empty.button") }}
           </RouterLink>
         </Button>
       </AppCta>
     </template>
 
-    <p v-if="error">Błąd pobierania nieruchomości</p>
+    <p v-if="error">{{ $t("userBookmarksPage.error") }}</p>
   </div>
 </template>
 

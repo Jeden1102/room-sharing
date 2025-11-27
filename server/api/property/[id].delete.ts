@@ -13,19 +13,25 @@ export default requireAuth(
       });
 
       if (!property) {
-        throw createError({ statusCode: 404, statusMessage: "Nieruchomość nie znaleziona" });
+        throw createError({ 
+          statusCode: 404, 
+          statusMessage: "api.property.notFound" 
+        });
       }
 
       await prisma.property.delete({
         where: { id },
       });
 
-      return { success: true, message: "Nieruchomość została usunięta" };
+      return { 
+        success: true, 
+        message: "api.property.deleteSuccess" 
+      };
     } catch (error) {
-      console.error("Błąd usuwania nieruchomości:", error);
+      console.error("Property delete error:", error);
       throw createError({
         statusCode: 500,
-        statusMessage: "Nie udało się usunąć nieruchomości",
+        statusMessage: "api.property.deleteFailed",
       });
     }
   })

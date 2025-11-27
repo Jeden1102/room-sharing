@@ -67,10 +67,10 @@ export default requireAuth(defineEventHandler(async (event) => {
 
     return { success: true, property };
   } catch (error) {
-    console.error("Błąd tworzenia nieruchomości:", error);
+    console.error("Error creating property", error);
     throw createError({
       statusCode: 500,
-      statusMessage: "Nie udało się utworzyć nieruchomości",
+      statusMessage: "There was an error creating the property",
     });
   }
 }));

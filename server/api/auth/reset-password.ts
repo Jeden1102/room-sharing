@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   if (!body.code) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Missing code",
+      statusMessage: "api.resetPassword.missingCode",
     });
   }
 
@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
   if (!validation.success) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Validation failed",
+      statusMessage: "api.resetPassword.validationFailed",
     });
   }
 
@@ -28,8 +28,8 @@ export default defineEventHandler(async (event) => {
 
     if (!user) {
       throw createError({
-        statusCode: 500,
-        statusMessage: "Failed to set new password",
+        statusCode: 400,
+        statusMessage: "api.resetPassword.invalidCode",
       });
     }
     const hashedPassword = await bcrypt.hash(body.password, 10);
@@ -43,13 +43,13 @@ export default defineEventHandler(async (event) => {
 
     return {
       success: true,
-      message: "New password set successfully",
+      message: "api.resetPassword.success",
     };
   } catch (error) {
     console.log(error);
     throw createError({
       statusCode: 500,
-      statusMessage: "Failed to set new password",
+      statusMessage: "api.resetPassword.failed",
     });
   }
 });

@@ -1,6 +1,8 @@
 <template>
   <div class="flex flex-col gap-8">
-    <h1 class="text-3xl font-semibold md:text-4xl">Password reset</h1>
+    <h1 class="text-3xl font-semibold md:text-4xl">
+      {{ $t("resetPasswordPage.title") }}
+    </h1>
     <AuthResetPassword :code />
   </div>
 </template>
@@ -11,9 +13,11 @@ definePageMeta({
   unauthenticatedOnly: true,
 });
 
+const { t } = useI18n();
+
 usePageSeo({
-  title: "seo.resetPassword.title",
-  description: "seo.resetPassword.description",
+  title: t("seo.resetPassword.title"),
+  description: t("seo.resetPassword.description"),
 });
 
 const route = useRoute();

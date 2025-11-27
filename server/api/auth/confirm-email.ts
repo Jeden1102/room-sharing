@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   if (!body.code) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Missing code",
+      statusMessage: "api.confirmEmail.missingCode",
     });
   }
 
@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     if (user) {
       return {
         success: true,
-        message: "Email already confirmed",
+        message: "api.confirmEmail.alreadyConfirmed",
       };
     }
 
@@ -31,12 +31,12 @@ export default defineEventHandler(async (event) => {
 
     return {
       success: true,
-      message: "Email confirmed successfully",
+      message: "api.confirmEmail.success",
     };
   } catch (error) {
     throw createError({
       statusCode: 500,
-      statusMessage: "Failed to confirm email",
+      statusMessage: "api.confirmEmail.failed",
     });
   }
 });

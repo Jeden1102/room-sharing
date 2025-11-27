@@ -5,8 +5,8 @@
       <LazyHomeItemsCarousel
         hydrate-on-visible
         v-if="data && data.similarProperties"
-        title="Podobne ogłoszenia"
-        subtitle="Odkryj podobne ogłoszenia"
+        :title="$t('propertyPage.similar.title')"
+        :subtitle="$t('propertyPage.similar.subtitle')"
         :items="data?.similarProperties"
         :showNavigation="false"
         entity="property"

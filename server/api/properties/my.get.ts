@@ -29,7 +29,7 @@ export default requireAuth(
         
         return { success: true, properties };
       } catch (error) {
-        throw createError({ statusCode: 404, message: "Błąd pobierania nieruchomości" });
+        throw createError({ statusCode: 404, message: "Error fetching properties" });
       }
     },
   ),

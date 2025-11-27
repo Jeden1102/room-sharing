@@ -774,5 +774,176 @@
       "active": "Aktywne",
       "reserved": "Zarezerwowane"
     }
+  },
+  "api": {
+    "confirmEmail": {
+      "missingCode": "Brak kodu weryfikacyjnego",
+      "alreadyConfirmed": "Email został już potwierdzony",
+      "success": "Email został pomyślnie potwierdzony",
+      "failed": "Nie udało się potwierdzić emaila"
+    },
+    "forgotPassword": {
+      "validationFailed": "Walidacja nie powiodła się",
+      "mailSent": "Email z linkiem resetującym został wysłany",
+      "failed": "Nie udało się wysłać emaila resetującego hasło",
+      "failedToSendEmail": "Nie udało się wysłać emaila weryfikacyjnego"
+    },
+    "register": {
+      "validationFailed": "Walidacja nie powiodła się",
+      "emailInUse": "Ten email jest już używany",
+      "successWithVerification": "Konto zostało utworzone. Sprawdź swoją skrzynkę email, aby potwierdzić adres.",
+      "failed": "Nie udało się utworzyć konta",
+      "failedToSendEmail": "Nie udało się wysłać emaila weryfikacyjnego"
+    },
+    "resetPassword": {
+      "missingCode": "Brak kodu resetującego",
+      "validationFailed": "Walidacja nie powiodła się",
+      "invalidCode": "Nieprawidłowy lub wygasły kod resetujący",
+      "success": "Hasło zostało pomyślnie zmienione",
+      "failed": "Nie udało się zmienić hasła"
+    },
+    "property": {
+      "notFound": "Nieruchomość nie została znaleziona",
+      "deleteSuccess": "Nieruchomość została usunięta",
+      "deleteFailed": "Nie udało się usunąć nieruchomości"
+    },
+    "contact": {
+      "validationFailed": "Walidacja nie powiodła się",
+      "success": "Wiadomość została wysłana pomyślnie",
+      "failed": "Nie udało się wysłać wiadomości",
+      "failedToSendEmail": "Nie udało się wysłać emaila kontaktowego"
+    }
+  },
+  "faqPage": {
+    "hero": {
+      "title": "Potrzebujesz pomocy lub masz pytania?",
+      "subtitle": "Jesteśmy tutaj, aby pomóc Ci z wszelkimi pytaniami lub wątpliwościami.",
+      "button": "Zobacz wszystkie pytania"
+    },
+    "tabs": {
+      "sharing": "Dzielenie mieszkań",
+      "renting": "Wynajmowanie mieszkań",
+      "other": "Inne pytania"
+    },
+    "sharing": {
+      "q1": {
+        "question": "Jak mogę znaleźć współlokatora?",
+        "answer": "W wyszukiwarce wybierz opcję \"Szukam współlokatora\" lub \"Chcę dołączyć do mieszkania\". Możesz filtrować oferty po wieku, płci, stylu życia i lokalizacji."
+      },
+      "q2": {
+        "question": "Czy mogę zobaczyć, ile wolnych miejsc jest w mieszkaniu?",
+        "answer": "Tak — każda oferta pokazuje aktualną liczbę dostępnych miejsc oraz profil osób, które już tam mieszkają."
+      },
+      "q3": {
+        "question": "Jak skontaktować się z osobą, która szuka współlokatora?",
+        "answer": "Po zalogowaniu możesz wysłać wiadomość bezpośrednio z poziomu ogłoszenia. Pamiętaj, by uzupełnić swój profil – zwiększa to szansę na akceptację."
+      },
+      "q4": {
+        "question": "Czy mogę dodać preferencje dotyczące współlokatora?",
+        "answer": "Tak, w sekcji \"Profil\" możesz określić swoje preferencje (np. spokojny tryb życia, niepalący, student itp.), a system automatycznie dopasuje oferty."
+      }
+    },
+    "renting": {
+      "q1": {
+        "question": "Jak dodać ogłoszenie o wynajmie?",
+        "answer": "Po zalogowaniu kliknij \"Dodaj ogłoszenie\", wypełnij dane nieruchomości, dodaj zdjęcia i określ, czy mieszkanie może być współdzielone. Ogłoszenie będzie widoczne od razu po zatwierdzeniu."
+      },
+      "q2": {
+        "question": "Czy mogę dodać informację o wolnych pokojach w istniejącym mieszkaniu?",
+        "answer": "Oczywiście. W formularzu ogłoszenia wybierz typ \"pokój\" i wskaż liczbę dostępnych miejsc. Możesz też opisać, kogo szukasz (np. studentkę, osobę pracującą, itp.)."
+      },
+      "q3": {
+        "question": "Czy mogę samodzielnie ustalić zasady współdzielenia?",
+        "answer": "Tak, to Twoje ogłoszenie – możesz określić preferencje dotyczące współlokatorów, zasad mieszkania, kosztów wspólnych mediów i inne szczegóły."
+      },
+      "q4": {
+        "question": "Czy platforma pobiera prowizję za wynajem?",
+        "answer": "Nie. Nie pobieramy żadnej prowizji od transakcji – kontakt między użytkownikami odbywa się bezpośrednio."
+      }
+    },
+    "other": {
+      "q1": {
+        "question": "Czy korzystanie z platformy jest darmowe?",
+        "answer": "Tak. Wyszukiwanie ofert, dodawanie ogłoszeń i kontakt z użytkownikami są darmowe. Płatne mogą być jedynie usługi promowania ogłoszeń."
+      },
+      "q2": {
+        "question": "Jak zwiększyć widoczność mojego ogłoszenia?",
+        "answer": "Możesz skorzystać z opcji wyróżnienia oferty, dodania zdjęć premium lub weryfikacji konta — wszystkie te działania zwiększają zaufanie i widoczność w wynikach wyszukiwania."
+      },
+      "q3": {
+        "question": "Czy muszę mieć konto, żeby przeglądać ogłoszenia?",
+        "answer": "Nie, ogłoszenia możesz przeglądać bez logowania. Konto jest potrzebne dopiero, gdy chcesz dodać własne ogłoszenie lub napisać do innego użytkownika."
+      },
+      "q4": {
+        "question": "Jak mogę zgłosić nieodpowiednie ogłoszenie lub użytkownika?",
+        "answer": "Pod każdym ogłoszeniem znajdziesz przycisk \"Zgłoś\". Nasz zespół weryfikuje każde zgłoszenie w ciągu 24 godzin."
+      }
+    },
+    "cta": {
+      "title": "Nie znalazłeś odpowiedzi na swoje pytanie?",
+      "subtitle": "Możesz zapytać nas o wszystko. Jesteśmy tutaj, aby pomóc Ci z wszelkimi pytaniami lub wątpliwościami.",
+      "button": "Skontaktuj się z nami"
+    }
+  },
+  "loginPage": {
+    "title": "Witaj ponownie",
+    "subtitle": "Miło Cię ponownie widzieć. Wprowadź swoje dane"
+  },
+  "registerPage": {
+    "title": "Nowe konto",
+    "subtitle": "Witaj! Utwórz konto i rozpocznij swoją przygodę"
+  },
+  "confirmEmailPage": {
+    "title": "Potwierdzenie adresu e-mail",
+    "goToLogin": "Przejdź do logowania",
+    "error": "Coś poszło nie tak. Spróbuj ponownie."
+  },
+  "forgotPasswordPage": {
+    "title": "Zapomniałeś hasła",
+    "subtitle": "Wprowadź swój adres e-mail, aby zresetować hasło"
+  },
+  "resetPasswordPage": {
+    "title": "Resetowanie hasła"
+  },
+  "propertyPage": {
+    "similar": {
+      "title": "Podobne ogłoszenia",
+      "subtitle": "Odkryj podobne ogłoszenia"
+    }
+  },
+  "propertiesPage": {
+    "title": "Nieruchomości",
+    "noResults": "Brak wyników"
+  },
+  "userBookmarksPage": {
+    "empty": {
+      "title": "Nie masz jeszcze żadnych zapisanych nieruchomości",
+      "subtitle": "Przeglądaj nieruchomości, które dla Ciebie przygotowaliśmy. Zapisz nieruchomość, a pojawi się tutaj.",
+      "button": "Przeglądaj nieruchomości"
+    },
+    "error": "Błąd pobierania nieruchomości"
+  },
+  "userBookmarksUsersPage": {
+    "empty": {
+      "title": "Nie masz jeszcze żadnych zapisanych użytkowników",
+      "subtitle": "Przeglądaj użytkowników, których dla Ciebie przygotowaliśmy. Zapisz użytkownika, a pojawi się tutaj.",
+      "button": "Przeglądaj użytkowników"
+    },
+    "error": "Błąd pobierania użytkowników"
+  },
+  "userPage": {
+    "similar": {
+      "title": "Podobni użytkownicy",
+      "subtitle": "Odkryj innych użytkowników"
+    }
+  },
+  "usersPage": {
+    "title": "Lista użytkowników",
+    "noResults": "Brak wyników"
+  },
+  "validation": {
+    "email": "Podaj poprawny adres e-mail",
+    "min": "Pole musi mieć co najmniej {count} znaków",
+    "default": "Nieprawidłowa wartość"
   }
 }

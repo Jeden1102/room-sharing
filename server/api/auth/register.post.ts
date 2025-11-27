@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
   if (!validation.success) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Validation failed",
+      statusMessage: "api.register.validationFailed",
     });
   }
 
@@ -22,7 +22,10 @@ export default defineEventHandler(async (event) => {
 
   if (existingUser) {
     if (existingUser.password !== null) {
-      throw createError({ statusMessage: "Email already in use" });
+      throw createError({ 
+        statusCode: 400,
+        statusMessage: "api.register.emailInUse" 
+      });
     } else {
       // User previously registered without a password - provider.
       const hashedPassword = await bcrypt.hash(body.password, 10);
@@ -41,12 +44,12 @@ export default defineEventHandler(async (event) => {
 
         return {
           success: true,
-          message: "Account created successfully",
+          message: "api.register.successWithVerification",
         };
       } catch (error) {
         throw createError({
           statusCode: 500,
-          statusMessage: "Failed to create account",
+          statusMessage: "api.register.failed",
         });
       }
     }
@@ -67,13 +70,12 @@ export default defineEventHandler(async (event) => {
     });
     return {
       success: true,
-      statusMessage:
-        "Account created successfully. Please check your email for verification.",
+      statusMessage: "api.register.successWithVerification",
     };
   } catch (error) {
     throw createError({
       statusCode: 500,
-      statusMessage: "Failed to create account",
+      statusMessage: "api.register.failed",
     });
   }
 });
@@ -109,7 +111,7 @@ const sendVerificationEmail = async (email: string) => {
   } catch (error) {
     throw createError({
       statusCode: 500,
-      statusMessage: "apiResponses.failedToSendVerificationEmail",
+      statusMessage: "api.register.failedToSendEmail",
     });
   }
 };

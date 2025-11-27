@@ -14,20 +14,20 @@
 
       <AppCta
         v-else
-        title="You don't have any bookmarked users yet"
-        subtitle="Explore the users we have for you. Bookmark a user and it will show up here."
+        :title="$t('userBookmarksUsersPage.empty.title')"
+        :subtitle="$t('userBookmarksUsersPage.empty.subtitle')"
         :showLogo="true"
         variant="primary"
       >
         <Button asChild v-slot="slotProps" severity="secondary">
           <RouterLink :to="$localePath('users')" :class="slotProps.class">
-            Explore users
+            {{ $t("userBookmarksUsersPage.empty.button") }}
           </RouterLink>
         </Button>
       </AppCta>
     </template>
 
-    <p v-if="error">Błąd pobierania userów</p>
+    <p v-if="error">{{ $t("userBookmarksUsersPage.error") }}</p>
   </div>
 </template>
 

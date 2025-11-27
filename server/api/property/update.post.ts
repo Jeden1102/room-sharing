@@ -9,7 +9,7 @@ export default requireAuth(
     const { id } = body;
 
     if (!id) {
-      throw createError({ statusCode: 400, message: "Brak ID nieruchomości" });
+      throw createError({ statusCode: 400, message: "Property ID is required" });
     }
 
     const validation = propertyCreateSchema.safeParse(body);
@@ -26,11 +26,11 @@ export default requireAuth(
     });
 
     if (!property) {
-      throw createError({ statusCode: 404, message: "Nieruchomość nie znaleziona" });
+      throw createError({ statusCode: 404, message: "Property not found" });
     }
 
     if (property.ownerId !== userId) {
-      throw createError({ statusCode: 403, message: "Brak uprawnień do edycji" });
+      throw createError({ statusCode: 403, message: "Unauthorized" });
     }
 
     const allowedFields = [
@@ -97,10 +97,10 @@ export default requireAuth(
 
       return { success: true, property: updatedProperty };
     } catch (e: any) {
-      console.error("Błąd aktualizacji nieruchomości:", e);
+      console.error("Error updating property", e);
       throw createError({
         statusCode: 500,
-        message: "Błąd podczas aktualizacji nieruchomości.",
+        message: "Error updating property",
       });
     }
   })

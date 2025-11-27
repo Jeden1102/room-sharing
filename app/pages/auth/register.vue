@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1 class="text-3xl font-semibold">New account</h1>
+    <h1 class="text-3xl font-semibold">{{ $t("registerPage.title") }}</h1>
     <p class="mt-2 mb-6 font-light">
-      Hi! Create an account and start your journey
+      {{ $t("registerPage.subtitle") }}
     </p>
     <AuthRegister />
   </div>
@@ -14,8 +14,10 @@ definePageMeta({
   unauthenticatedOnly: true,
 });
 
+const { t } = useI18n();
+
 usePageSeo({
-  title: "seo.register.title",
-  description: "seo.register.description",
+  title: t("seo.register.title"),
+  description: t("seo.register.description"),
 });
 </script>
