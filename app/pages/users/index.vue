@@ -1,5 +1,5 @@
 <template>
-  <main class="container flex flex-col gap-4 py-6">
+  <main class="container flex flex-col gap-4 py-6" ref="container">
     <div
       class="flex items-center justify-between md:mb-4 md:grid md:grid-cols-2 md:gap-8"
     >
@@ -34,6 +34,15 @@
       </p>
 
       <Paginator
+        :template="{
+          '640px': 'PrevPageLink CurrentPageReport NextPageLink',
+          '960px':
+            'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
+          '1300px':
+            'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink',
+          default:
+            'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink JumpToPageDropdown',
+        }"
         v-if="(usersData?.total || 0) > 0"
         class="mt-8"
         :rows="12"
@@ -47,6 +56,8 @@
 
 <script setup lang="ts">
 import type { Prisma } from "@prisma/client";
+
+const container = useTemplateRef("container");
 
 type FullUser = Prisma.UserGetPayload<{
   include: {
@@ -89,5 +100,9 @@ const applyFilters = (newFilters: any) => {
 
 const onPageChange = (event: any) => {
   filters.value.page = Math.floor(event.first / event.rows) + 1;
+
+  if (container.value) {
+    container.value.scrollIntoView({ behavior: "smooth" });
+  }
 };
 </script>

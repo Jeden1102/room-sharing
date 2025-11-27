@@ -1,5 +1,5 @@
 <template>
-  <main class="container flex flex-col gap-4 py-6">
+  <main class="container flex flex-col gap-4 py-6" ref="container">
     <div class="flex items-center md:mb-4 md:grid md:grid-cols-2 md:gap-8">
       <h1 class="text-xl font-medium md:text-2xl">
         {{ $t("propertiesPage.title") }}
@@ -68,6 +68,15 @@
         </p>
 
         <Paginator
+          :template="{
+            '640px': 'PrevPageLink CurrentPageReport NextPageLink',
+            '960px':
+              'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
+            '1300px':
+              'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink',
+            default:
+              'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink JumpToPageDropdown',
+          }"
           v-if="(propertiesData?.total || 0) > 0"
           class="mt-8"
           :rows="12"
@@ -100,6 +109,8 @@ import type { PropertyWithOwner } from "@/components/property/types";
 import clsx from "clsx";
 
 const route = useRoute();
+
+const container = useTemplateRef("container");
 
 type Coord = {
   latitude: number;
@@ -148,5 +159,9 @@ const applyFilters = (newFilters: any) => {
 
 const onPageChange = (event: any) => {
   filters.value.page = Math.floor(event.first / event.rows) + 1;
+
+  if (container.value) {
+    container.value.scrollIntoView({ behavior: "smooth" });
+  }
 };
 </script>
