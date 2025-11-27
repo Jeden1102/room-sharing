@@ -83,9 +83,6 @@ const generateUser = () => {
   };
 };
 
-/* -------------------------------------------------
-   PROPERTY SEEDER
-------------------------------------------------- */
 const generateProperty = (ownerId: string) => {
   const city = faker.helpers.arrayElement(ALL_CITIES);
   const district = faker.helpers.arrayElement(CITY_DISTRICTS[city]);

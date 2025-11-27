@@ -1,3 +1,966 @@
 {
-  "welcome": "Welcome"
+  "languages": {
+    "en": "English",
+    "pl": "Polish"
+  },
+  "seo": {
+    "home": {
+      "title": "Pokój Z Wami - Find a Room & Roommate | Apartment Rentals",
+      "description": "Looking for a room or a roommate? Pokój Z Wami is the platform for apartment rentals, flatshares, and coliving in Poland. Find listings in Warsaw, Krakow, Wroclaw, and more."
+    },
+    "confirmEmail": {
+      "title": "Confirm Your Email Address",
+      "description": "Verify your email to activate your account and start browsing rooms, apartments, and finding your perfect flatmate."
+    },
+    "forgotPassword": {
+      "title": "Forgot Password?",
+      "description": "Recover access to your account. Reset your password to return to browsing rental listings, rooms, and roommates."
+    },
+    "login": {
+      "title": "Sign In",
+      "description": "Log in to browse apartments and rooms for rent, contact landlords, and find a roommate."
+    },
+    "register": {
+      "title": "Create an Account",
+      "description": "Join the flatsharing community. Create listings, book rooms, and find the perfect roommate."
+    },
+    "resetPassword": {
+      "title": "Set New Password",
+      "description": "Set a new password to regain full access to your account, listings, favorites, and messages."
+    },
+    "propertyEdit": {
+      "title": "Edit Listing",
+      "description": "Edit your rental apartment or room listing. Update availability, pricing, photos, and roommate details."
+    },
+    "property": {
+      "title": "Listing Details",
+      "description": "Check details of the apartment or room for rent: availability, current roommates, price, location, and amenities."
+    },
+    "properties": {
+      "title": "Apartments & Rooms for Rent",
+      "description": "Browse apartments and rooms for rent across Poland. Check availability, roommate profiles, and student housing offers."
+    },
+    "bookmarkedProperties": {
+      "title": "Saved Properties",
+      "description": "Your saved apartment and room listings. Quickly return to your favorites and book the best spot."
+    },
+    "bookmarkedUsers": {
+      "title": "Saved Users",
+      "description": "List of saved users and potential roommates. Check profiles, preferences, and get in touch."
+    },
+    "bookmarks": {
+      "title": "Bookmarks",
+      "description": "Manage your saved apartments, rooms, and users. Return to the most interesting rental offers."
+    },
+    "chat": {
+      "title": "Chat with Landlords & Roommates",
+      "description": "Chat with property owners and potential flatmates. Arrange rental details and check availability."
+    },
+    "profile": {
+      "title": "Your Profile",
+      "description": "Manage your profile: bio, photos, roommate preferences. Increase your chances of finding the perfect place."
+    },
+    "userProperties": {
+      "title": "Your Listings",
+      "description": "Manage your rental listings for apartments and rooms. Add, edit, and update availability."
+    },
+    "userSettings": {
+      "title": "Account Settings",
+      "description": "Change account details, set rental preferences, manage notifications, and privacy."
+    },
+    "user": {
+      "title": "User Profile",
+      "description": "View user profile: housing preferences, roommate habits, availability, and contact info."
+    },
+    "users": {
+      "title": "Find Roommates",
+      "description": "Find a roommate for an apartment or room. Browse profiles of students and professionals looking to share."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Contact us regarding partnerships, technical support, or reports concerning listings."
+    },
+    "faq": {
+      "title": "FAQ – Frequently Asked Questions",
+      "description": "Find answers to the most common questions about renting apartments, finding roommates, and using the platform."
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "description": "Read the terms and conditions for using the apartment rental and flatsharing platform."
+    },
+    "newProperty": {
+      "title": "List a Property",
+      "description": "Add a new listing for an apartment or room. Specify availability, sharing rules, and roommate preferences."
+    },
+    "privacyPolicy": {
+      "title": "Privacy Policy",
+      "description": "Learn how we process your data while you use the apartment and room rental platform."
+    }
+  },
+  "cookies": {
+    "title": "Cookies",
+    "description": "We use cookies for your convenience and site development. You decide which ones to accept!"
+  },
+  "nav": {
+    "home": "Home",
+    "properties": "Listings",
+    "users": "Roommates",
+    "contact": "Contact",
+    "login": "Log in",
+    "logout": "Log out",
+    "addProperty": "List a Place",
+    "profile": "Profile",
+    "toggleMenu": "Toggle menu"
+  },
+  "hero": {
+    "subtitle": "Over 10,000 apartments and rooms across Poland",
+    "title": "Find your room.",
+    "titleHighlight": "Meet your people",
+    "cta": "Browse Offers",
+    "circularText": "RENT * SELL * SHARE * ",
+    "imageAlt": "Happy roommates in a new apartment"
+  },
+  "services": {
+    "sectionTitle": "How we can help you",
+    "sectionSubtitle": "Explore our services",
+    "buyAndSell": {
+      "title": "Buy or Sell",
+      "description": "Find your dream apartment or house. Sell real estate quickly and safely.",
+      "imageAlt": "Real estate buy and sell icon",
+      "browse": "Browse Offers",
+      "list": "Add Listing"
+    },
+    "rentAndLease": {
+      "title": "Rent or Lease",
+      "description": "Looking for an apartment to rent? Or want to rent out your property? We are here for you.",
+      "imageAlt": "Real estate rental icon",
+      "find": "Find an Apartment",
+      "rent": "Rent Out"
+    },
+    "shareAndColiving": {
+      "title": "Share & Coliving",
+      "description": "Split rental costs with cool people. Find a roommate matched to your needs.",
+      "imageAlt": "Flatshare icon",
+      "offer": "Offer a Room",
+      "join": "Find a Room"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Before you write to us — check, the answer might already be here",
+    "questions": {
+      "addListing": {
+        "question": "How can I list an apartment?",
+        "answer": "After logging in, click 'List a Place', fill out the form, and publish. It takes less than 2 minutes."
+      },
+      "shareRoom": {
+        "question": "Can I share an apartment with others?",
+        "answer": "Yes! That's the main goal of our platform — you can search for roommates or join existing offers."
+      },
+      "pricing": {
+        "question": "Is the platform free?",
+        "answer": "Yes, browsing listings and searching for roommates is completely free."
+      },
+      "roommate": {
+        "question": "How do I find the right roommate?",
+        "answer": "Use our compatibility filters — lifestyle, interests, budget. You can also check profiles and reviews of other users."
+      }
+    }
+  },
+  "recentlyAdded": {
+    "title": "Recently Added",
+    "subtitle": "Discover the latest listings"
+  },
+  "cta": {
+    "moreQuestions": {
+      "title": "Still have questions?",
+      "subtitle": "Check our full FAQ list to find answers to all your doubts.",
+      "button": "Go to FAQ"
+    },
+    "connectPeople": {
+      "title": "Connecting people looking for the perfect home",
+      "subtitle": "With Pokój Z Wami you can create a seeker profile or list your apartment to find tenants.",
+      "button": "Get Started!"
+    }
+  },
+  "cities": {
+    "title": "Which city will you live in?",
+    "subtitle": "Discover our cities",
+    "imageAlt": "City panorama",
+    "list": {
+      "warszawa": "Warsaw",
+      "krakow": "Krakow",
+      "gdansk": "Gdansk",
+      "wroclaw": "Wroclaw"
+    }
+  },
+  "footer": {
+    "logoAlt": "Pokój Z Wami - logo",
+    "contact": {
+      "phone": "+48 123 456 789",
+      "email": "kontakt{'@'}pokojzwami.pl",
+      "phoneLinkTitle": "Call us",
+      "emailLinkTitle": "Email us"
+    },
+    "social": {
+      "tiktok": "Pokój Z Wami on TikTok",
+      "facebook": "Pokój Z Wami on Facebook",
+      "instagram": "Pokój Z Wami on Instagram"
+    },
+    "explore": {
+      "title": "Explore",
+      "aboutUs": "About Us",
+      "faq": "FAQ",
+      "blog": "Blog",
+      "howItWorks": "How it Works",
+      "forStudents": "For Students"
+    },
+    "quickLinks": {
+      "title": "Quick Links",
+      "contact": "Contact",
+      "properties": "Browse Listings",
+      "addProperty": "List a Place",
+      "findRoommate": "Find a Roommate",
+      "cities": "Cities"
+    },
+    "forRenters": {
+      "title": "For Renters",
+      "rentApartment": "Rent an Apartment",
+      "findRoom": "Find a Room",
+      "shareApartment": "Share an Apartment",
+      "studentHousing": "Student Housing"
+    },
+    "forOwners": {
+      "title": "For Owners",
+      "listProperty": "List Property",
+      "rentOut": "Rent Out Your Flat",
+      "findTenant": "Find a Tenant",
+      "pricing": "Pricing"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy",
+      "gdpr": "GDPR"
+    },
+    "copyrightText": "Pokój Z Wami. All rights reserved."
+  },
+  "forgotPassword": {
+    "email": {
+      "placeholder": "Email"
+    },
+    "button": {
+      "sendResetLink": "Send Reset Link"
+    }
+  },
+  "login": {
+    "email": {
+      "placeholder": "Email"
+    },
+    "password": {
+      "placeholder": "Password"
+    },
+    "forgotPassword": "Forgot password?",
+    "button": {
+      "submit": "Log In",
+      "google": "Log in with Google"
+    },
+    "noAccount": "Don't have an account?",
+    "registerLink": "Sign up"
+  },
+  "register": {
+    "email": {
+      "placeholder": "Email"
+    },
+    "password": {
+      "placeholder": "Password"
+    },
+    "passwordRepeat": {
+      "placeholder": "Repeat password"
+    },
+    "button": {
+      "submit": "Sign Up"
+    },
+    "hasAccount": "Already have an account?",
+    "loginLink": "Log in"
+  },
+  "resetPassword": {
+    "password": {
+      "placeholder": "New password"
+    },
+    "passwordRepeat": {
+      "placeholder": "Repeat new password"
+    },
+    "button": {
+      "submit": "Reset Password"
+    }
+  },
+  "emailContact": {
+    "greeting": "Hello, you received a new message from {from} ({fromEmail}).",
+    "reason": "Reason for contact"
+  },
+  "emailContactConfirmation": {
+    "greeting": "Hello {from},",
+    "message": "We received your message and will contact you shortly."
+  },
+  "emailLayout": {
+    "logoAlt": "Site Logo",
+    "footer": "© 2025 Rooms. All rights reserved."
+  },
+  "contactForm": {
+    "legend": "Contact Us",
+    "name": {
+      "label": "Name"
+    },
+    "email": {
+      "label": "Email Address"
+    },
+    "reason": {
+      "label": "Reason for contact"
+    },
+    "description": {
+      "label": "Message"
+    },
+    "terms": {
+      "prefix": "By contacting us, you accept our",
+      "termsLink": "Terms of Service",
+      "and": "and",
+      "privacyLink": "Privacy Policy"
+    },
+    "button": {
+      "submit": "Send Message"
+    }
+  },
+  "fileUploader": {
+    "deleteDialog": {
+      "header": "Confirm Deletion",
+      "message": "Are you sure you want to delete this photo?",
+      "cancelButton": "Cancel",
+      "confirmButton": "Delete"
+    }
+  },
+  "fileUploaderDialog": {
+    "cancelButton": "Cancel",
+    "saveButton": "Save"
+  },
+  "propertiesFilters": {
+    "title": "Filters",
+    "city": {
+      "label": "Enter city"
+    },
+    "listingType": {
+      "label": "Listing type"
+    },
+    "propertyType": {
+      "label": "Property type"
+    },
+    "priceMin": {
+      "label": "Min price"
+    },
+    "priceMax": {
+      "label": "Max price"
+    },
+    "roomsMin": {
+      "label": "Min rooms"
+    },
+    "sizeMin": {
+      "label": "Min size (m²)"
+    },
+    "amenities": {
+      "label": "Select amenities"
+    },
+    "sortBy": {
+      "label": "Sort by"
+    },
+    "showResults": "Show results ({count})",
+    "clearFilters": "Clear filters"
+  },
+  "propertiesSorting": {
+    "label": "Sort by"
+  },
+  "propertyForm": {
+    "editingProperty": "Editing Property",
+    "addingProperty": "Adding Property",
+    "addBasicInfo": "Add basic info about the listing — you can edit it later.",
+    "basicData": {
+      "legend": "Basic Details",
+      "title": "Title*",
+      "propertyType": "Property Type*",
+      "listingType": "For Rent/For Sale*",
+      "price": "Price (PLN)*",
+      "priceHint": "If shared, enter price for the cheapest room.",
+      "deposit": "Deposit (PLN)",
+      "description": "Description*"
+    },
+    "location": {
+      "legend": "Location",
+      "city": "City*",
+      "district": "District",
+      "districtPlaceholder": "Select district",
+      "street": "Street",
+      "streetPlaceholder": "Select street",
+      "buildingNumber": "Building Number",
+      "hint": "Provide exact details for the property to appear on the map"
+    },
+    "sizeAndLocation": {
+      "legend": "Size & Position",
+      "size": "Size (m²)*",
+      "rooms": "Number of rooms*",
+      "floor": "Floor",
+      "yearBuilt": "Year Built"
+    },
+    "amenities": {
+      "legend": "Amenities & Conditions",
+      "isShared": "Shared (room rental)",
+      "isSharedHint": "If checked - fields for roommates/room type will appear."
+    },
+    "media": {
+      "legend": "Utilities"
+    },
+    "images": {
+      "legend": "Media (Photos)",
+      "label": "Property Photos"
+    },
+    "contact": {
+      "legend": "Contact / Owner",
+      "ownerId": "ownerId (hidden for regular users)",
+      "phone": "Contact Number",
+      "email": "E-mail"
+    },
+    "submit": {
+      "edit": "Save Changes",
+      "add": "Add Listing",
+      "preview": "Preview Listing"
+    }
+  },
+  "propertyFull": {
+    "currency": "PLN",
+    "yes": "Yes",
+    "no": "No",
+    "gallery": {
+      "showAll": "Show all",
+      "photosCount": "{count} photos"
+    },
+    "description": {
+      "title": "Description"
+    },
+    "details": {
+      "title": "Property Details",
+      "totalArea": "Total Area",
+      "elevator": "Elevator",
+      "rooms": "Rooms",
+      "parking": "Parking",
+      "floor": "Floor",
+      "yearBuilt": "Year Built"
+    },
+    "amenities": {
+      "title": "Amenities",
+      "furnished": "Furnished",
+      "balcony": "Balcony",
+      "internet": "Internet",
+      "tv": "TV",
+      "washingMachine": "Washing Machine",
+      "dishwasher": "Dishwasher",
+      "airConditioning": "Air Conditioning"
+    },
+    "contact": {
+      "title": "Contact",
+      "call": "Call",
+      "sendEmail": "Send Email"
+    },
+    "editButton": "Edit Listing"
+  },
+  "propertyTeaser": {
+    "imageAlt": "Property image",
+    "units": {
+      "squareMeters": "m²",
+      "rooms": "rooms",
+      "floor": "floor"
+    },
+    "currency": "PLN",
+    "viewDetails": "Details"
+  },
+  "userProfile": {
+    "coverAlt": "Profile cover image",
+    "profileAlt": "Profile picture",
+    "backgroundImage": "Background Image",
+    "profileImage": "Profile Image",
+    "yearsOld": "years old",
+    "noData": "No data",
+    "yes": "Yes",
+    "no": "No",
+    "infoCards": {
+      "name": {
+        "label": "Name"
+      },
+      "occupation": {
+        "label": "Occupation"
+      },
+      "budget": {
+        "label": "Max Budget"
+      },
+      "location": {
+        "label": "Desired Location"
+      },
+      "smoker": {
+        "label": "Smoker"
+      },
+      "pets": {
+        "label": "Has Pets"
+      }
+    },
+    "description": {
+      "title": "Description"
+    },
+    "searchPreferences": {
+      "title": "Looking For",
+      "preferences": "Preferences",
+      "propertyType": "Type of Place"
+    },
+    "compatibility": {
+      "title": "Compatibility",
+      "noise": "Noise Preferences",
+      "pets": "Pets"
+    },
+    "moodboard": {
+      "title": "Moodboard"
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "Email",
+      "phone": "Phone",
+      "sendEmail": "Send Email",
+      "call": "Call"
+    }
+  },
+  "userProperties": {
+    "table": {
+      "title": "Title",
+      "city": "City",
+      "price": "Price",
+      "status": "Status",
+      "actions": "Actions",
+      "preview": "Preview",
+      "edit": "Edit"
+    },
+    "empty": {
+      "title": "You have no properties listed",
+      "subtitle": "You can create your first listing now. We are here to help with any questions.",
+      "createButton": "Create New Property"
+    },
+    "deleteDialog": {
+      "header": "Confirm Deletion",
+      "message": "Are you sure you want to delete",
+      "cancel": "Cancel",
+      "confirm": "Delete"
+    }
+  },
+  "userSettingsForm": {
+    "profileVisibility": {
+      "label": "Profile Visibility",
+      "visible": "Visible",
+      "hidden": "Hidden",
+      "hint": "Your profile is visible in the user list only if Name, Last Name, Age, Gender, and City are filled."
+    },
+    "general": {
+      "legend": "General",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "age": "Age",
+      "gender": "Gender",
+      "interests": "Interests",
+      "interestsPlaceholder": "Select interests",
+      "occupation": "Occupation",
+      "occupationPlaceholder": "Select occupation",
+      "smoker": "Smokes",
+      "pets": "Has pets",
+      "description": "Description"
+    },
+    "searchLocation": {
+      "legend": "Search Location",
+      "city": "City",
+      "cityPlaceholder": "Enter city",
+      "district": "District",
+      "districtPlaceholder": "Select district"
+    },
+    "searchPreferences": {
+      "legend": "Search Preferences",
+      "preferences": "Search preferences",
+      "preferencesPlaceholder": "Select preferences",
+      "propertyType": "Property type",
+      "propertyTypePlaceholder": "Select property type",
+      "budgetMax": "Maximum Budget"
+    },
+    "compatibility": {
+      "legend": "Compatibility",
+      "noise": "Noise compatibility",
+      "noisePlaceholder": "Select noise preference",
+      "pets": "Pets compatibility",
+      "petsPlaceholder": "Select pets preference"
+    },
+    "media": {
+      "legend": "Media",
+      "moodboardImages": "Moodboard Images"
+    },
+    "contact": {
+      "legend": "Contact",
+      "phone": "Phone Number"
+    },
+    "submit": "Save Changes"
+  },
+  "userTeaser": {
+    "bgImageAlt": "User background",
+    "avatarAlt": "User avatar",
+    "budgetUpTo": "up to",
+    "currency": "PLN",
+    "viewProfile": "View Profile"
+  },
+  "usersFilters": {
+    "title": "Filters",
+    "city": {
+      "label": "City"
+    },
+    "gender": {
+      "label": "Gender"
+    },
+    "budgetMax": {
+      "label": "Max Budget"
+    },
+    "nonSmoker": {
+      "label": "Non-smoker"
+    },
+    "noPets": {
+      "label": "No pets"
+    },
+    "sortBy": {
+      "label": "Sort by"
+    },
+    "showResults": "Show results ({count})",
+    "clearFilters": "Clear filters"
+  },
+  "usersSorting": {
+    "label": "Sort by"
+  },
+  "taxonomies": {
+    "listingType": {
+      "any": "Any",
+      "rent": "For Rent",
+      "sale": "For Sale"
+    },
+    "propertyType": {
+      "any": "Any",
+      "apartment": "Apartment",
+      "house": "House",
+      "room": "Room",
+      "studio": "Studio"
+    },
+    "amenities": {
+      "furnished": "Furnished",
+      "balcony": "Balcony",
+      "elevator": "Elevator",
+      "parking": "Parking",
+      "washingMachine": "Washing Machine",
+      "dishwasher": "Dishwasher",
+      "airConditioning": "Air Conditioning",
+      "petsAllowed": "Pets Allowed",
+      "smokingAllowed": "Smoking Allowed"
+    },
+    "media": {
+      "internet": "Internet",
+      "tv": "TV"
+    },
+    "contactReason": {
+      "bug": "Bug Report",
+      "technical": "Technical Issue",
+      "listing": "Question about a listing",
+      "reportListing": "Report Inappropriate Listing",
+      "reportUser": "Report User",
+      "account": "Account Issue",
+      "payment": "Payment Issue",
+      "partnership": "Partnership Inquiry",
+      "suggestion": "Suggestion/Feature Request",
+      "search": "Search Issue",
+      "login": "Login Issue",
+      "terms": "Terms of Service Question",
+      "privacy": "Privacy Question",
+      "spam": "Spam/Fraud",
+      "verification": "Verification Issue",
+      "premium": "Premium Features Question",
+      "deleteAccount": "Delete Account",
+      "other": "Other"
+    },
+    "gender": {
+      "any": "Any",
+      "male": "Male",
+      "female": "Female",
+      "others": "Other"
+    },
+    "propertiesSort": {
+      "newest": "Newest",
+      "oldest": "Oldest",
+      "priceAsc": "Price (Low to High)",
+      "priceDesc": "Price (High to Low)",
+      "sizeAsc": "Size (Small to Large)",
+      "sizeDesc": "Size (Large to Small)"
+    },
+    "usersSort": {
+      "none": "None",
+      "newest": "Newest",
+      "ageAsc": "Age (Youngest First)",
+      "ageDesc": "Age (Oldest First)",
+      "budgetAsc": "Budget (Low to High)",
+      "budgetDesc": "Budget (High to Low)"
+    },
+    "interests": {
+      "sports": "Sports",
+      "music": "Music",
+      "travel": "Travel",
+      "cooking": "Cooking",
+      "reading": "Reading",
+      "gaming": "Gaming",
+      "movies": "Movies",
+      "art": "Art",
+      "photography": "Photography",
+      "fitness": "Fitness",
+      "dance": "Dance",
+      "yoga": "Yoga",
+      "hiking": "Hiking",
+      "cycling": "Cycling",
+      "technology": "Technology"
+    },
+    "occupations": {
+      "student": "Student",
+      "worker": "Working Professional",
+      "remoteWorker": "Remote Worker",
+      "unemployed": "Unemployed"
+    },
+    "searchPreferences": {
+      "quiet": "Quiet Neighborhood",
+      "central": "City Center",
+      "green": "Near Parks/Greenery",
+      "transport": "Good Public Transport",
+      "nonSmoker": "Non-smokers Only",
+      "university": "Close to University",
+      "work": "Close to Workplace",
+      "shops": "Shops Nearby",
+      "restaurants": "Restaurants Nearby",
+      "gym": "Gym Nearby",
+      "safe": "Safe Neighborhood"
+    },
+    "searchPropertyTypes": {
+      "apartment": "Apartment",
+      "house": "House",
+      "studio": "Studio",
+      "room": "Room",
+      "loft": "Loft"
+    },
+    "noiseCompatibility": {
+      "veryQuiet": "Very Quiet",
+      "quiet": "Quiet",
+      "moderate": "Moderate",
+      "loud": "Loud",
+      "veryLoud": "Very Loud"
+    },
+    "petsCompatibility": {
+      "noPets": "No Pets",
+      "cats": "Cats",
+      "dogs": "Dogs",
+      "smallPets": "Small Pets",
+      "allPets": "All Pets"
+    },
+    "status": {
+      "draft": "Draft",
+      "active": "Active",
+      "reserved": "Reserved"
+    }
+  },
+  "api": {
+    "confirmEmail": {
+      "missingCode": "Verification code missing",
+      "alreadyConfirmed": "Email already confirmed",
+      "success": "Email successfully confirmed",
+      "failed": "Failed to confirm email"
+    },
+    "forgotPassword": {
+      "validationFailed": "Validation failed",
+      "mailSent": "Reset link email sent",
+      "failed": "Failed to send password reset email",
+      "failedToSendEmail": "Failed to send verification email"
+    },
+    "register": {
+      "validationFailed": "Validation failed",
+      "emailInUse": "This email is already in use",
+      "successWithVerification": "Account created. Check your inbox to confirm your email.",
+      "failed": "Failed to create account",
+      "failedToSendEmail": "Failed to send verification email"
+    },
+    "resetPassword": {
+      "missingCode": "Reset code missing",
+      "validationFailed": "Validation failed",
+      "invalidCode": "Invalid or expired reset code",
+      "success": "Password successfully changed",
+      "failed": "Failed to change password"
+    },
+    "property": {
+      "notFound": "Property not found",
+      "deleteSuccess": "Property deleted",
+      "deleteFailed": "Failed to delete property"
+    },
+    "contact": {
+      "validationFailed": "Validation failed",
+      "success": "Message sent successfully",
+      "failed": "Failed to send message",
+      "failedToSendEmail": "Failed to send contact email"
+    }
+  },
+  "faqPage": {
+    "hero": {
+      "title": "Need help or have questions?",
+      "subtitle": "We are here to help you with any questions or concerns.",
+      "button": "View All Questions"
+    },
+    "tabs": {
+      "sharing": "Flatsharing",
+      "renting": "Renting Apartments",
+      "other": "Other Questions"
+    },
+    "sharing": {
+      "q1": {
+        "question": "How can I find a roommate?",
+        "answer": "In the search bar, select \"Find a Roommate\" or \"Join a Flat\". You can filter offers by age, gender, lifestyle, and location."
+      },
+      "q2": {
+        "question": "Can I see how many spots are left in an apartment?",
+        "answer": "Yes — every listing shows the current number of available spots and profiles of people already living there."
+      },
+      "q3": {
+        "question": "How do I contact someone looking for a roommate?",
+        "answer": "After logging in, you can send a message directly from the listing. Remember to complete your profile – it increases your chance of acceptance."
+      },
+      "q4": {
+        "question": "Can I add roommate preferences?",
+        "answer": "Yes, in the \"Profile\" section you can specify your preferences (e.g., quiet lifestyle, non-smoker, student, etc.), and the system will match listings automatically."
+      }
+    },
+    "renting": {
+      "q1": {
+        "question": "How do I list a rental?",
+        "answer": "After logging in, click \"List a Place\", fill in the property details, add photos, and specify if the apartment is shareable. The listing will be visible immediately after approval."
+      },
+      "q2": {
+        "question": "Can I list available rooms in an existing apartment?",
+        "answer": "Absolutely. In the form, select type \"Room\" and indicate the number of available spots. You can also describe who you are looking for (e.g., female student, professional, etc.)."
+      },
+      "q3": {
+        "question": "Can I set the sharing rules myself?",
+        "answer": "Yes, it's your listing – you can define preferences regarding roommates, house rules, shared utility costs, and other details."
+      },
+      "q4": {
+        "question": "Does the platform charge a commission for rentals?",
+        "answer": "No. We do not charge any commission on transactions – contact between users is direct."
+      }
+    },
+    "other": {
+      "q1": {
+        "question": "Is using the platform free?",
+        "answer": "Yes. Searching for offers, adding listings, and contacting users is free. Fees may apply only for premium listing promotion services."
+      },
+      "q2": {
+        "question": "How can I increase the visibility of my listing?",
+        "answer": "You can use the option to feature your offer, add premium photos, or verify your account — all these actions increase trust and visibility in search results."
+      },
+      "q3": {
+        "question": "Do I need an account to browse listings?",
+        "answer": "No, you can browse listings without logging in. An account is only needed if you want to add your own listing or message another user."
+      },
+      "q4": {
+        "question": "How can I report an inappropriate listing or user?",
+        "answer": "Under every listing, you will find a \"Report\" button. Our team verifies every report within 24 hours."
+      }
+    },
+    "cta": {
+      "title": "Didn't find the answer to your question?",
+      "subtitle": "You can ask us anything. We are here to help you with any doubts.",
+      "button": "Contact Us"
+    }
+  },
+  "loginPage": {
+    "title": "Welcome Back",
+    "subtitle": "Good to see you again. Enter your details.",
+    "feature": {
+      "bookmarks": "Log in or create an account to save listings or users that interest you."
+    }
+  },
+  "registerPage": {
+    "title": "New Account",
+    "subtitle": "Hello! Create an account and start your journey."
+  },
+  "confirmEmailPage": {
+    "title": "Email Confirmation",
+    "goToLogin": "Go to Login",
+    "error": "Something went wrong. Please try again."
+  },
+  "forgotPasswordPage": {
+    "title": "Forgot Password",
+    "subtitle": "Enter your email address to reset your password."
+  },
+  "resetPasswordPage": {
+    "title": "Reset Password"
+  },
+  "propertyPage": {
+    "similar": {
+      "title": "Similar Listings",
+      "subtitle": "Discover similar offers"
+    }
+  },
+  "propertiesPage": {
+    "title": "Properties",
+    "noResults": "No results found"
+  },
+  "userBookmarksPage": {
+    "empty": {
+      "title": "You haven't saved any properties yet",
+      "subtitle": "Browse properties we prepared for you. Save a property, and it will appear here.",
+      "button": "Browse Properties"
+    },
+    "error": "Error fetching properties"
+  },
+  "userBookmarksUsersPage": {
+    "empty": {
+      "title": "You haven't saved any users yet",
+      "subtitle": "Browse users we prepared for you. Save a user, and they will appear here.",
+      "button": "Browse Users"
+    },
+    "error": "Error fetching users"
+  },
+  "userPage": {
+    "similar": {
+      "title": "Similar Users",
+      "subtitle": "Discover other users"
+    }
+  },
+  "usersPage": {
+    "title": "User List",
+    "noResults": "No results found"
+  },
+  "validation": {
+    "invalidEmail": "Invalid email address",
+    "invalidURL": "Invalid URL",
+    
+    "tooShort": "Value is too short (min. {min} characters)",
+    "tooLong": "Value is too long (max. {max} characters)",
+    
+    "passwordTooShort": "Password must be at least {min} characters",
+    "passwordRepeatTooShort": "Repeat password must be at least {min} characters",
+    "usernameTooShort": "Username must be at least {min} characters",
+    
+    "tooSmallNumber": "Number must be greater than or equal to {min}",
+    "tooBigNumber": "Number cannot be greater than {max}",
+    
+    "arrayTooShort": "Select at least {min} item(s)",
+    "arrayTooLong": "You can select max {max} item(s)",
+    
+    "customError": "Invalid value"
+  }
 }

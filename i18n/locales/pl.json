@@ -945,8 +945,22 @@
     "noResults": "Brak wyników"
   },
   "validation": {
-    "email": "Podaj poprawny adres e-mail",
-    "min": "Pole musi mieć co najmniej {count} znaków",
-    "default": "Nieprawidłowa wartość"
+    "invalidEmail": "Nieprawidłowy adres e-mail",
+    "invalidURL": "Nieprawidłowy URL",
+
+    "tooShort": "Wartość jest za krótka (min. {min} znaków)",
+    "tooLong": "Wartość jest za długa (max. {max} znaków)",
+
+    "passwordTooShort": "Hasło musi mieć co najmniej {min} znaków",
+    "passwordRepeatTooShort": "Powtórzone hasło musi mieć co najmniej {min} znaków",
+    "usernameTooShort": "Nazwa użytkownika musi mieć co najmniej {min} znaków",
+
+    "tooSmallNumber": "Liczba musi być większa lub równa {min}",
+    "tooBigNumber": "Liczba nie może być większa niż {max}",
+
+    "arrayTooShort": "Wybierz przynajmniej {min} element(y/ów)",
+    "arrayTooLong": "Możesz wybrać maksymalnie {max} element(y/ów)",
+
+    "customError": "Nieprawidłowa wartość"
   }
 }
