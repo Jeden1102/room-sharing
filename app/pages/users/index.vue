@@ -34,9 +34,9 @@
       <Paginator
         v-if="(usersData?.total || 0) > 0"
         class="mt-8"
-        :rows="10"
+        :rows="12"
         :totalRecords="usersData?.total"
-        :first="(filters.page - 1) * 10"
+        :first="(filters.page - 1) * 12"
         @page="onPageChange"
       />
     </section>

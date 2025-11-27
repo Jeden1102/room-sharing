@@ -20,7 +20,11 @@
     <Message severity="secondary" class="py-2">
       <div class="flex items-center gap-2">
         <p class="font-medium">
-          {{ property ? "Edytujesz nieruchomość" : "Dodajesz nieruchomość" }}
+          {{
+            property
+              ? $t("propertyForm.editingProperty")
+              : $t("propertyForm.addingProperty")
+          }}
         </p>
         <Badge
           :severity="initialValues?.status === 'ACTIVE' ? 'success' : 'warning'"
@@ -29,16 +33,20 @@
         </Badge>
       </div>
       <p class="mt-1.5 text-sm font-light" v-if="!property">
-        Dodaj podstawowe informacje o ofercie — możesz je edytować później.
+        {{ $t("propertyForm.addBasicInfo") }}
       </p>
     </Message>
 
-    <Fieldset legend="Dane podstawowe">
+    <Fieldset :legend="$t('propertyForm.basicData.legend')">
       <div class="mt-4 grid w-full grid-cols-1 gap-4 md:grid-cols-3">
-        <AtomsInput name="title" label="Tytuł*" :form="$form" />
+        <AtomsInput
+          name="title"
+          :label="$t('propertyForm.basicData.title')"
+          :form="$form"
+        />
         <AtomsDropdown
           name="type"
-          label="Typ nieruchomości*"
+          :label="$t('propertyForm.basicData.propertyType')"
           :options="typeOptions"
           optionLabel="label"
           optionValue="value"
@@ -47,7 +55,7 @@
 
         <AtomsDropdown
           name="listingType"
-          label="Na wynajem/Na sprzedaz*"
+          :label="$t('propertyForm.basicData.listingType')"
           :options="listingOptions"
           optionLabel="label"
           optionValue="value"
@@ -57,28 +65,35 @@
 
       <div class="my-4 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
         <div>
-          <AtomsNumber name="price" label="Cena (PLN)*" :form="$form" />
-          <span class="text-xs text-gray-500"
-            >Jeśli mieszkanie jest dzielone, podaj cenę najtańszego
-            pokoju.</span
-          >
+          <AtomsNumber
+            name="price"
+            :label="$t('propertyForm.basicData.price')"
+            :form="$form"
+          />
+          <span class="text-xs text-gray-500">
+            {{ $t("propertyForm.basicData.priceHint") }}
+          </span>
         </div>
-        <AtomsNumber name="deposit" label="Kaucja (PLN)" :form="$form" />
+        <AtomsNumber
+          name="deposit"
+          :label="$t('propertyForm.basicData.deposit')"
+          :form="$form"
+        />
       </div>
 
       <AtomsBaseTextarea
         name="description"
-        label="Opis*"
+        :label="$t('propertyForm.basicData.description')"
         :rows="4"
         :form="$form"
       />
     </Fieldset>
 
-    <Fieldset legend="Lokalizacja">
+    <Fieldset :legend="$t('propertyForm.location.legend')">
       <div class="mt-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
         <AtomsAutocomplete
           name="city"
-          label="Miasto*"
+          :label="$t('propertyForm.location.city')"
           :suggestions="filteredCities"
           v-model="initialValues.city"
           @complete="searchCity"
@@ -97,8 +112,8 @@
               name="district"
               :options="availableDistricts"
               display="chip"
-              placeholder="Wybierz dzielnicę"
-              label="Dzielnica"
+              :placeholder="$t('propertyForm.location.districtPlaceholder')"
+              :label="$t('propertyForm.location.district')"
               :form="$form"
               fluid
             />
@@ -109,30 +124,51 @@
           <AtomsAutocomplete
             v-if="availableStreets?.length"
             name="street"
-            label="Ulica"
+            :label="$t('propertyForm.location.street')"
             @complete="searchStreet"
             :suggestions="filteredStreets"
-            placeholder="Wybierz ulicę"
+            :placeholder="$t('propertyForm.location.streetPlaceholder')"
             :form="$form"
           />
         </div>
 
-        <AtomsInput name="buildingNumber" label="Numer budynku" :form="$form" />
+        <AtomsInput
+          name="buildingNumber"
+          :label="$t('propertyForm.location.buildingNumber')"
+          :form="$form"
+        />
       </div>
-      <span class="text-xs text-gray-500"
-        >Podaj dokładne dane, aby nieruchomość pojawiała na mapie</span
-      >
+      <span class="text-xs text-gray-500">
+        {{ $t("propertyForm.location.hint") }}
+      </span>
     </Fieldset>
 
-    <Fieldset legend="Wielkość & połozenie">
+    <Fieldset :legend="$t('propertyForm.sizeAndLocation.legend')">
       <div class="mt-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-        <AtomsNumber name="sizeM2" label="Powierzchnia (m²)*" :form="$form" />
-        <AtomsNumber name="rooms" label="Liczba pokoi*" :form="$form" />
-        <AtomsNumber name="floor" label="Piętro" :form="$form" />
-        <AtomsNumber name="yearBuilt" label="Rok budowy" :form="$form" />
+        <AtomsNumber
+          name="sizeM2"
+          :label="$t('propertyForm.sizeAndLocation.size')"
+          :form="$form"
+        />
+        <AtomsNumber
+          name="rooms"
+          :label="$t('propertyForm.sizeAndLocation.rooms')"
+          :form="$form"
+        />
+        <AtomsNumber
+          name="floor"
+          :label="$t('propertyForm.sizeAndLocation.floor')"
+          :form="$form"
+        />
+        <AtomsNumber
+          name="yearBuilt"
+          :label="$t('propertyForm.sizeAndLocation.yearBuilt')"
+          :form="$form"
+        />
       </div>
     </Fieldset>
-    <Fieldset legend="Udogodnienia i warunki">
+
+    <Fieldset :legend="$t('propertyForm.amenities.legend')">
       <div class="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4">
         <AtomsCheckbox
           :name="amenity.value"
@@ -147,17 +183,17 @@
         <div class="flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
           <AtomsCheckbox
             name="isShared"
-            label="Dzielone (pod wynajem pokojów)"
+            :label="$t('propertyForm.amenities.isShared')"
             :form="$form"
           />
           <p class="text-muted text-sm">
-            Jeśli zaznaczone - pokażą się pola dla współlokatorów/typ pokoju.
+            {{ $t("propertyForm.amenities.isSharedHint") }}
           </p>
         </div>
       </div>
     </Fieldset>
 
-    <Fieldset legend="Media">
+    <Fieldset :legend="$t('propertyForm.media.legend')">
       <div class="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4">
         <AtomsCheckbox
           :name="media.value"
@@ -169,11 +205,11 @@
       </div>
     </Fieldset>
 
-    <Fieldset legend="Media (zdjęcia)">
+    <Fieldset :legend="$t('propertyForm.images.legend')">
       <FormFileUploader
         id="propertyImages"
         name="images"
-        label="Zdjęcia nieruchomości"
+        :label="$t('propertyForm.images.label')"
         v-model="imageUris"
         @filesSelected="onFilesSelected"
         @delete="onDeleteImage"
@@ -185,16 +221,24 @@
       />
     </Fieldset>
 
-    <Fieldset legend="Kontakt / właściciel">
+    <Fieldset :legend="$t('propertyForm.contact.legend')">
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
         <AtomsInput
           name="ownerId"
-          label="ownerId (ukryte dla zwykłych użytkowników)"
+          :label="$t('propertyForm.contact.ownerId')"
           :form="$form"
           v-if="false"
         />
-        <AtomsInput name="phone" label="Numer kontaktowy" :form="$form" />
-        <AtomsInput name="email" label="E-mail" :form="$form" />
+        <AtomsInput
+          name="phone"
+          :label="$t('propertyForm.contact.phone')"
+          :form="$form"
+        />
+        <AtomsInput
+          name="email"
+          :label="$t('propertyForm.contact.email')"
+          :form="$form"
+        />
       </div>
     </Fieldset>
 
@@ -204,7 +248,11 @@
       <div class="flex items-center gap-3">
         <Button
           type="submit"
-          :label="property ? 'Zapisz zmiany' : 'Dodaj ofertę'"
+          :label="
+            property
+              ? $t('propertyForm.submit.edit')
+              : $t('propertyForm.submit.add')
+          "
           :loading="formStatus.isLoading"
         />
 
@@ -220,7 +268,7 @@
               })
             "
             :class="slotProps.class"
-            >Preview property</RouterLink
+            >{{ $t("propertyForm.submit.preview") }}</RouterLink
           >
         </Button>
       </div>

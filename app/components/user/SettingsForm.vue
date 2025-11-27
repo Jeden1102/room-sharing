@@ -18,29 +18,44 @@
   >
     <Message severity="secondary" class="py-2">
       <div class="flex gap-2">
-        <p>Profile visibility:</p>
+        <p>{{ $t("userSettingsForm.profileVisibility.label") }}:</p>
         <Badge
           :severity="initialValues.profileVisible ? 'primary' : 'danger'"
-          >{{ initialValues.profileVisible ? "Visible" : "Hidden" }}</Badge
+          >{{
+            initialValues.profileVisible
+              ? $t("userSettingsForm.profileVisibility.visible")
+              : $t("userSettingsForm.profileVisibility.hidden")
+          }}</Badge
         >
       </div>
       <p class="mt-1.5 text-sm font-light">
-        Your profile is visible on users list page only if fields: First Name,
-        Last Name, Age, Gender and City are filled.
+        {{ $t("userSettingsForm.profileVisibility.hint") }}
       </p>
     </Message>
-    <Fieldset legend="General">
+    <Fieldset :legend="$t('userSettingsForm.general.legend')">
       <div class="flex flex-col gap-6">
         <div class="mt-4 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-          <AtomsInput name="firstName" label="First Name" :form="$form" />
-          <AtomsInput name="lastName" label="Last Name" :form="$form" />
+          <AtomsInput
+            name="firstName"
+            :label="$t('userSettingsForm.general.firstName')"
+            :form="$form"
+          />
+          <AtomsInput
+            name="lastName"
+            :label="$t('userSettingsForm.general.lastName')"
+            :form="$form"
+          />
         </div>
 
         <div class="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-          <AtomsNumber name="age" label="Age" :form="$form" />
+          <AtomsNumber
+            name="age"
+            :label="$t('userSettingsForm.general.age')"
+            :form="$form"
+          />
           <AtomsDropdown
             name="gender"
-            label="Gender"
+            :label="$t('userSettingsForm.general.gender')"
             :options="genderOptions"
             optionLabel="name"
             optionValue="id"
@@ -51,48 +66,56 @@
         <div class="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
           <AtomsMultiselect
             name="interests"
-            label="Interests"
+            :label="$t('userSettingsForm.general.interests')"
             :options="taxonomies.interestsOptions"
             optionLabel="name"
             optionValue="id"
-            placeholder="Select interests"
+            :placeholder="$t('userSettingsForm.general.interestsPlaceholder')"
             :form="$form"
           />
 
           <AtomsMultiselect
             name="occupations"
-            label="Occupation"
+            :label="$t('userSettingsForm.general.occupation')"
             :options="taxonomies.occupationsOptions"
             optionLabel="name"
             optionValue="id"
-            placeholder="Select occupation options"
+            :placeholder="$t('userSettingsForm.general.occupationPlaceholder')"
             :form="$form"
           />
         </div>
 
         <div class="flex gap-6">
-          <AtomsCheckbox name="smoker" label="Smoker" :form="$form" />
-          <AtomsCheckbox name="pets" label="Has pets" :form="$form" />
+          <AtomsCheckbox
+            name="smoker"
+            :label="$t('userSettingsForm.general.smoker')"
+            :form="$form"
+          />
+          <AtomsCheckbox
+            name="pets"
+            :label="$t('userSettingsForm.general.pets')"
+            :form="$form"
+          />
         </div>
 
         <AtomsBaseTextarea
           name="description"
-          label="Description"
+          :label="$t('userSettingsForm.general.description')"
           :rows="4"
           :form="$form"
         />
       </div>
     </Fieldset>
 
-    <Fieldset legend="Search location">
+    <Fieldset :legend="$t('userSettingsForm.searchLocation.legend')">
       <div class="mt-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
         <AtomsAutocomplete
           name="city"
-          label="City"
+          :label="$t('userSettingsForm.searchLocation.city')"
           v-model="initialValues.city"
           :suggestions="filteredCities"
           @complete="searchCity"
-          placeholder="Wpisz miasto"
+          :placeholder="$t('userSettingsForm.searchLocation.cityPlaceholder')"
           :form="$form"
         />
         <div
@@ -109,8 +132,10 @@
               name="districts"
               :options="availableDistricts"
               display="chip"
-              placeholder="Wybierz dzielnicę"
-              label="Dzielnica"
+              :placeholder="
+                $t('userSettingsForm.searchLocation.districtPlaceholder')
+              "
+              :label="$t('userSettingsForm.searchLocation.district')"
               :form="$form"
               fluid
             />
@@ -119,61 +144,69 @@
       </div>
     </Fieldset>
 
-    <Fieldset legend="Search preferences">
+    <Fieldset :legend="$t('userSettingsForm.searchPreferences.legend')">
       <div class="my-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
         <AtomsMultiselect
           name="searchPreferences"
-          label="Search preferences"
+          :label="$t('userSettingsForm.searchPreferences.preferences')"
           :options="taxonomies.searchPreferencesOptions"
           optionLabel="name"
           optionValue="id"
-          placeholder="Select search preferences"
+          :placeholder="
+            $t('userSettingsForm.searchPreferences.preferencesPlaceholder')
+          "
           :form="$form"
         />
 
         <AtomsMultiselect
           name="searchPropertyTypes"
-          label="Search property type"
+          :label="$t('userSettingsForm.searchPreferences.propertyType')"
           :options="taxonomies.searchPropertyTypesOptions"
           optionLabel="name"
           optionValue="id"
-          placeholder="Select property type"
+          :placeholder="
+            $t('userSettingsForm.searchPreferences.propertyTypePlaceholder')
+          "
           :form="$form"
         />
 
-        <AtomsNumber name="budgetMax" label="Max Budget" :form="$form" />
+        <AtomsNumber
+          name="budgetMax"
+          :label="$t('userSettingsForm.searchPreferences.budgetMax')"
+          :form="$form"
+        />
       </div>
     </Fieldset>
 
-    <Fieldset legend="Compatibility">
+    <Fieldset :legend="$t('userSettingsForm.compatibility.legend')">
       <div class="my-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
         <AtomsMultiselect
           name="noiseCompatibility"
-          label="Noise compatibility"
+          :label="$t('userSettingsForm.compatibility.noise')"
           :options="taxonomies.noiseCompatibilityOptions"
           optionLabel="name"
           optionValue="id"
-          placeholder="Select noise compatibility"
+          :placeholder="$t('userSettingsForm.compatibility.noisePlaceholder')"
           :form="$form"
         />
 
         <AtomsMultiselect
           name="petsCompatibility"
-          label="Pets compatibility"
+          :label="$t('userSettingsForm.compatibility.pets')"
           :options="taxonomies.petsCompatibilityOptions"
           optionLabel="name"
           optionValue="id"
-          placeholder="Select pets compatibility"
+          :placeholder="$t('userSettingsForm.compatibility.petsPlaceholder')"
           :form="$form"
         />
       </div>
     </Fieldset>
 
-    <Fieldset legend="Media">
+    <Fieldset :legend="$t('userSettingsForm.media.legend')">
       <FormFileUploader
         id="moodboardImages"
         name="moodboardImages"
-        label="Moodboard Images"
+        :label="$t('userSettingsForm.media.moodboardImages')"
         :canSetPrimary="false"
         v-model="initialValues.moodboardImages"
         @filesSelected="(newFiles) => (files = newFiles)"
@@ -183,9 +216,13 @@
       />
     </Fieldset>
 
-    <Fieldset legend="Contact">
+    <Fieldset :legend="$t('userSettingsForm.contact.legend')">
       <div class="my-2 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-        <AtomsInput name="phone" label="Phone Number" :form="$form" />
+        <AtomsInput
+          name="phone"
+          :label="$t('userSettingsForm.contact.phone')"
+          :form="$form"
+        />
       </div>
     </Fieldset>
 
@@ -194,7 +231,7 @@
     >
       <Button
         type="submit"
-        label="Save Changes"
+        :label="$t('userSettingsForm.submit')"
         :loading="formStatus.isLoading"
         class="mt-4 w-fit"
       />

@@ -120,7 +120,6 @@ export default defineNuxtConfig({
       enablePeriodically: 60000, // 1 minute
       enableOnWindowFocus: true,
     },
-    
   },
   security: {
     rateLimiter: false,
@@ -134,6 +133,7 @@ export default defineNuxtConfig({
           'https://*.openstreetmap.org',
           'https://*.basemaps.cartocdn.com',
           'https://*.stadiamaps.com',
+          '*'
         ]
       }
     }

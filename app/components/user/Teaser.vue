@@ -5,7 +5,7 @@
     <div class="relative h-40 w-full">
       <img
         :src="user.bgImage || '/images/user/bg-placeholder.webp'"
-        alt="user background"
+        :alt="$t('userTeaser.bgImageAlt')"
         class="h-full w-full rounded-t-xl object-cover"
       />
       <div
@@ -14,7 +14,7 @@
 
       <img
         :src="user.profileImage || '/images/user/avatar-placeholder.webp'"
-        alt="user avatar"
+        :alt="$t('userTeaser.avatarAlt')"
         class="absolute bottom-2 left-2 h-16 w-16 rounded-full border-2 border-white object-cover shadow-md"
       />
     </div>
@@ -41,7 +41,9 @@
 
       <div class="flex flex-wrap gap-2 text-xs text-gray-600">
         <div class="flex items-center gap-2" v-if="user.budgetMax">
-          <i class="pi pi-wallet text-gray-600"></i> do {{ user.budgetMax }} zł
+          <i class="pi pi-wallet text-gray-600"></i>
+          {{ $t("userTeaser.budgetUpTo") }} {{ user.budgetMax }}
+          {{ $t("userTeaser.currency") }}
         </div>
       </div>
 
@@ -49,7 +51,7 @@
         <Button
           asChild
           v-slot="slotProps"
-          label="Zobacz profil"
+          :label="$t('userTeaser.viewProfile')"
           size="small"
           class="rounded-full text-sm"
         >
@@ -65,7 +67,7 @@
             "
             :class="slotProps.class"
           >
-            Zobacz profil
+            {{ $t("userTeaser.viewProfile") }}
           </RouterLink>
         </Button>
 

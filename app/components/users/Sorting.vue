@@ -1,6 +1,6 @@
 <template>
   <AtomsDropdown
-    label="Sortuj według"
+    :label="$t('usersSorting.label')"
     :options="usersSortOptions"
     optionLabel="label"
     optionValue="value"

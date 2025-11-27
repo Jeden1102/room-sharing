@@ -13,7 +13,9 @@
       "
     >
       <div class="flex items-center justify-between md:hidden">
-        <h2 class="mb-4 text-lg font-semibold">Filtry</h2>
+        <h2 class="mb-4 text-lg font-semibold">
+          {{ $t("usersFilters.title") }}
+        </h2>
         <button @click="filtersOpened = !filtersOpened">
           <Icon name="mage:filter" class="text-2xl" />
         </button>
@@ -21,7 +23,7 @@
 
       <!-- City -->
       <AtomsAutocomplete
-        label="Miasto"
+        :label="$t('usersFilters.city.label')"
         v-model="filters.city"
         :suggestions="filteredCities"
         @complete="searchCity"
@@ -30,7 +32,7 @@
 
       <!-- Gender -->
       <AtomsDropdown
-        label="Płeć"
+        :label="$t('usersFilters.gender.label')"
         :options="genderOptions"
         optionLabel="name"
         optionValue="id"
@@ -40,7 +42,7 @@
 
       <!-- Budget -->
       <AtomsNumber
-        label="Budżet maksymalny"
+        :label="$t('usersFilters.budgetMax.label')"
         v-model="filters.budgetMax"
         name="budgetMax"
       />
@@ -48,12 +50,12 @@
       <!-- Smoker / Pets -->
       <div class="flex flex-col gap-2 md:flex-row md:gap-4">
         <AtomsCheckbox
-          label="Nie pali"
+          :label="$t('usersFilters.nonSmoker.label')"
           v-model="filters.nonSmoker"
           name="nonSmoker"
         />
         <AtomsCheckbox
-          label="Bez zwierząt"
+          :label="$t('usersFilters.noPets.label')"
           v-model="filters.noPets"
           name="noPets"
         />
@@ -63,7 +65,7 @@
 
       <!-- Sorting (mobile only) -->
       <AtomsDropdown
-        label="Sortuj według"
+        :label="$t('usersFilters.sortBy.label')"
         :options="usersSortOptions"
         optionLabel="label"
         optionValue="value"
@@ -75,7 +77,7 @@
       <!-- Apply (mobile only) -->
       <Button
         class="mt-4 min-h-10 md:!hidden"
-        :label="`Wyświetl wyniki (${total})`"
+        :label="$t('usersFilters.showResults', { count: total })"
         :loading="pending"
         @click="filtersOpened = false"
       />
@@ -87,7 +89,7 @@
         v-if="anyFiltersSet"
       >
         <Icon name="fa7-solid:undo" class="text-sm" />
-        Wyczyść filtry
+        {{ $t("usersFilters.clearFilters") }}
       </Button>
     </div>
     <button
@@ -96,7 +98,7 @@
       v-if="anyFiltersSet"
     >
       <Icon name="fa7-solid:undo" class="text-xs" />
-      Wyczyść filtry
+      {{ $t("usersFilters.clearFilters") }}
     </button>
   </aside>
 </template>

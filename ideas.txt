@@ -1,7 +1,7 @@
 12.2 new elements / changes:
 - obluga feat redirecta na login page
 - new gallery / lightbox
-- tlumaczenia i teksty - dokończyć
+- tłumaczenia - api response + validations
 - do osoby dodać pole - szukam "x" ilosci osób
 13. Chat
 10. GENERAL REFACTORS/IMPROVEMNETS/TESTING

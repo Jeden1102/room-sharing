@@ -36,7 +36,7 @@
             v-if="data?.user?.id !== property.ownerId"
           />
           <div class="text-3xl font-bold whitespace-nowrap md:text-4xl">
-            {{ formatPrice(property.price) }} zł
+            {{ formatPrice(property.price) }} {{ $t("propertyFull.currency") }}
           </div>
         </div>
       </div>
@@ -88,8 +88,14 @@
               @click.stop="showAllImages"
             >
               <i class="pi pi-camera" style="font-size: 2rem"></i>
-              <span class="font-semibold">Show all</span>
-              <span class="text-sm">{{ property.images.length }} photos</span>
+              <span class="font-semibold">{{
+                $t("propertyFull.gallery.showAll")
+              }}</span>
+              <span class="text-sm">{{
+                $t("propertyFull.gallery.photosCount", {
+                  count: property.images.length,
+                })
+              }}</span>
             </div>
             <img
               :src="property.images[2] || property.images[0]"
@@ -99,66 +105,95 @@
           </div>
         </div>
 
-        <AppCard title="Description" v-if="property.description">
+        <AppCard
+          :title="$t('propertyFull.description.title')"
+          v-if="property.description"
+        >
           <div class="leading-relaxed whitespace-pre-line text-gray-700">
             {{ property.description }}
           </div>
         </AppCard>
 
-        <AppCard title="Property details">
+        <AppCard :title="$t('propertyFull.details.title')">
           <div class="mt-8 grid gap-6 md:grid-cols-2">
             <PropertyDetail
               icon="qlementine-icons:resize-bigger-16"
-              label="Total area"
+              :label="$t('propertyFull.details.totalArea')"
               :value="property.sizeM2 + ' m2'"
             />
 
             <PropertyDetail
               icon="tabler:arrows-up-down"
-              label="Elevator"
-              :value="property.elevator ? 'Yes' : 'No'"
+              :label="$t('propertyFull.details.elevator')"
+              :value="
+                property.elevator
+                  ? $t('propertyFull.yes')
+                  : $t('propertyFull.no')
+              "
             />
 
             <PropertyDetail
               icon="material-symbols-light:bedroom-parent-outline-sharp"
-              label="Rooms"
+              :label="$t('propertyFull.details.rooms')"
               :value="property.rooms"
             />
 
             <PropertyDetail
               icon="material-symbols-light:local-parking"
-              label="Parking"
-              :value="property.parking ? 'Yes' : 'No'"
+              :label="$t('propertyFull.details.parking')"
+              :value="
+                property.parking
+                  ? $t('propertyFull.yes')
+                  : $t('propertyFull.no')
+              "
             />
 
             <PropertyDetail
               icon="material-symbols:floor-rounded"
-              label="Floor"
+              :label="$t('propertyFull.details.floor')"
               :value="property.floor"
             />
 
             <PropertyDetail
               icon="material-symbols:calendar-check-outline-sharp"
-              label="Year built"
+              :label="$t('propertyFull.details.yearBuilt')"
               :value="property.yearBuilt"
             />
           </div>
         </AppCard>
 
-        <AppCard title="Amenities" v-if="hasAnyAmenities">
+        <AppCard
+          :title="$t('propertyFull.amenities.title')"
+          v-if="hasAnyAmenities"
+        >
           <div class="mt-8 grid gap-4 md:grid-cols-2">
-            <PropertyAmenity v-if="property.furnished" label="Furnished" />
-            <PropertyAmenity v-if="property.balcony" label="Balcony" />
-            <PropertyAmenity v-if="property.internet" label="Internet" />
-            <PropertyAmenity v-if="property.tv" label="TV" />
+            <PropertyAmenity
+              v-if="property.furnished"
+              :label="$t('propertyFull.amenities.furnished')"
+            />
+            <PropertyAmenity
+              v-if="property.balcony"
+              :label="$t('propertyFull.amenities.balcony')"
+            />
+            <PropertyAmenity
+              v-if="property.internet"
+              :label="$t('propertyFull.amenities.internet')"
+            />
+            <PropertyAmenity
+              v-if="property.tv"
+              :label="$t('propertyFull.amenities.tv')"
+            />
             <PropertyAmenity
               v-if="property.washingMachine"
-              label="Washing Machine"
+              :label="$t('propertyFull.amenities.washingMachine')"
             />
-            <PropertyAmenity v-if="property.dishwasher" label="Dishwasher" />
+            <PropertyAmenity
+              v-if="property.dishwasher"
+              :label="$t('propertyFull.amenities.dishwasher')"
+            />
             <PropertyAmenity
               v-if="property.airConditioning"
-              label="Air Conditioning"
+              :label="$t('propertyFull.amenities.airConditioning')"
             />
           </div>
         </AppCard>
@@ -173,7 +208,9 @@
             <PropertyMap :lat="property.latitude" :lng="property.longitude" />
           </div>
           <div class="bg-primary-600 rounded-lg p-6 text-white">
-            <h3 class="mb-6 text-xl font-bold">Contact</h3>
+            <h3 class="mb-6 text-xl font-bold">
+              {{ $t("propertyFull.contact.title") }}
+            </h3>
 
             <div class="mb-6 flex items-center gap-4">
               <img
@@ -200,7 +237,7 @@
                   :class="slotProps.class"
                   class="w-full"
                 >
-                  Call
+                  {{ $t("propertyFull.contact.call") }}
                 </a>
               </Button>
 
@@ -215,7 +252,7 @@
                   :class="slotProps.class"
                   class="w-full"
                 >
-                  Send Email
+                  {{ $t("propertyFull.contact.sendEmail") }}
                 </a>
               </Button>
             </div>
@@ -254,7 +291,7 @@
         })
       "
     >
-      Edit Property
+      {{ $t("propertyFull.editButton") }}
     </RouterLink>
   </Button>
 </template>

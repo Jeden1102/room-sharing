@@ -16,7 +16,7 @@ export default session(defineEventHandler(async (event) => {
       page = 1,
     } = query;
 
-    const take = 10;
+    const take = 12;
     const skip = (Number(page) - 1) * take;
 
     const where: any = {

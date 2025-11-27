@@ -255,93 +255,524 @@
     }
   },
   "login": {
-  "email": {
-    "placeholder": "Email"
+    "email": {
+      "placeholder": "Email"
+    },
+    "password": {
+      "placeholder": "Hasło"
+    },
+    "forgotPassword": "Zapomniałeś hasła?",
+    "button": {
+      "submit": "Zaloguj się",
+      "google": "Zaloguj przez Google"
+    },
+    "noAccount": "Nie masz konta?",
+    "registerLink": "Zarejestruj się"
   },
-  "password": {
-    "placeholder": "Hasło"
+  "register": {
+    "email": {
+      "placeholder": "Email"
+    },
+    "password": {
+      "placeholder": "Hasło"
+    },
+    "passwordRepeat": {
+      "placeholder": "Powtórz hasło"
+    },
+    "button": {
+      "submit": "Zarejestruj się"
+    },
+    "hasAccount": "Masz już konto?",
+    "loginLink": "Zaloguj się"
   },
-  "forgotPassword": "Zapomniałeś hasła?",
-  "button": {
-    "submit": "Zaloguj się",
-    "google": "Zaloguj przez Google"
+  "resetPassword": {
+    "password": {
+      "placeholder": "Nowe hasło"
+    },
+    "passwordRepeat": {
+      "placeholder": "Powtórz nowe hasło"
+    },
+    "button": {
+      "submit": "Zresetuj hasło"
+    }
   },
-  "noAccount": "Nie masz konta?",
-  "registerLink": "Zarejestruj się"
-},
-"register": {
-  "email": {
-    "placeholder": "Email"
+  "emailContact": {
+    "greeting": "Witaj, otrzymano nową wiadomość od {from} ({fromEmail}).",
+    "reason": "Powód kontaktu"
   },
-  "password": {
-    "placeholder": "Hasło"
+  "emailContactConfirmation": {
+    "greeting": "Witaj {from},",
+    "message": "Otrzymaliśmy Twoją wiadomość i wkrótce się z Tobą skontaktujemy."
   },
-  "passwordRepeat": {
-    "placeholder": "Powtórz hasło"
+  "emailLayout": {
+    "logoAlt": "Logo strony",
+    "footer": "© 2025 Rooms. Wszelkie prawa zastrzeżone."
   },
-  "button": {
-    "submit": "Zarejestruj się"
+  "contactForm": {
+    "legend": "Skontaktuj się z nami",
+    "name": {
+      "label": "Imię"
+    },
+    "email": {
+      "label": "Adres e-mail"
+    },
+    "reason": {
+      "label": "Powód kontaktu"
+    },
+    "description": {
+      "label": "Opis"
+    },
+    "terms": {
+      "prefix": "Kontaktując się z nami, akceptujesz nasze",
+      "termsLink": "Warunki korzystania z usługi",
+      "and": "oraz",
+      "privacyLink": "Politykę prywatności"
+    },
+    "button": {
+      "submit": "Wyślij wiadomość"
+    }
   },
-  "hasAccount": "Masz już konto?",
-  "loginLink": "Zaloguj się"
-},
-"resetPassword": {
-  "password": {
-    "placeholder": "Nowe hasło"
+  "fileUploader": {
+    "deleteDialog": {
+      "header": "Potwierdź usunięcie",
+      "message": "Czy na pewno chcesz usunąć to zdjęcie?",
+      "cancelButton": "Anuluj",
+      "confirmButton": "Usuń"
+    }
   },
-  "passwordRepeat": {
-    "placeholder": "Powtórz nowe hasło"
-  },
-  "button": {
-    "submit": "Zresetuj hasło"
-  }
-},
-"emailContact": {
-  "greeting": "Witaj, otrzymano nową wiadomość od {from} ({fromEmail}).",
-  "reason": "Powód kontaktu"
-},
-"emailContactConfirmation": {
-  "greeting": "Witaj {from},",
-  "message": "Otrzymaliśmy Twoją wiadomość i wkrótce się z Tobą skontaktujemy."
-},
-"emailLayout": {
-  "logoAlt": "Logo strony",
-  "footer": "© 2025 Rooms. Wszelkie prawa zastrzeżone."
-},
-"contactForm": {
-  "legend": "Skontaktuj się z nami",
-  "name": {
-    "label": "Imię"
-  },
-  "email": {
-    "label": "Adres e-mail"
-  },
-  "reason": {
-    "label": "Powód kontaktu"
-  },
-  "description": {
-    "label": "Opis"
-  },
-  "terms": {
-    "prefix": "Kontaktując się z nami, akceptujesz nasze",
-    "termsLink": "Warunki korzystania z usługi",
-    "and": "oraz",
-    "privacyLink": "Politykę prywatności"
-  },
-  "button": {
-    "submit": "Wyślij wiadomość"
-  }
-},
-"fileUploader": {
-  "deleteDialog": {
-    "header": "Potwierdź usunięcie",
-    "message": "Czy na pewno chcesz usunąć to zdjęcie?",
+  "fileUploaderDialog": {
     "cancelButton": "Anuluj",
-    "confirmButton": "Usuń"
+    "saveButton": "Zapisz"
+  },
+  "propertiesFilters": {
+    "title": "Filtry",
+    "city": {
+      "label": "Wpisz miasto"
+    },
+    "listingType": {
+      "label": "Typ oferty"
+    },
+    "propertyType": {
+      "label": "Typ nieruchomości"
+    },
+    "priceMin": {
+      "label": "Cena min"
+    },
+    "priceMax": {
+      "label": "Cena max"
+    },
+    "roomsMin": {
+      "label": "Min. liczba pokoi"
+    },
+    "sizeMin": {
+      "label": "Min. powierzchnia (m²)"
+    },
+    "amenities": {
+      "label": "Wybierz udogodnienia"
+    },
+    "sortBy": {
+      "label": "Sortuj według"
+    },
+    "showResults": "Wyświetl wyniki ({count})",
+    "clearFilters": "Wyczyść filtry"
+  },
+  "propertiesSorting": {
+    "label": "Sortuj według"
+  },
+  "propertyForm": {
+    "editingProperty": "Edytujesz nieruchomość",
+    "addingProperty": "Dodajesz nieruchomość",
+    "addBasicInfo": "Dodaj podstawowe informacje o ofercie — możesz je edytować później.",
+    "basicData": {
+      "legend": "Dane podstawowe",
+      "title": "Tytuł*",
+      "propertyType": "Typ nieruchomości*",
+      "listingType": "Na wynajem/Na sprzedaż*",
+      "price": "Cena (PLN)*",
+      "priceHint": "Jeśli mieszkanie jest dzielone, podaj cenę najtańszego pokoju.",
+      "deposit": "Kaucja (PLN)",
+      "description": "Opis*"
+    },
+    "location": {
+      "legend": "Lokalizacja",
+      "city": "Miasto*",
+      "district": "Dzielnica",
+      "districtPlaceholder": "Wybierz dzielnicę",
+      "street": "Ulica",
+      "streetPlaceholder": "Wybierz ulicę",
+      "buildingNumber": "Numer budynku",
+      "hint": "Podaj dokładne dane, aby nieruchomość pojawiła się na mapie"
+    },
+    "sizeAndLocation": {
+      "legend": "Wielkość & położenie",
+      "size": "Powierzchnia (m²)*",
+      "rooms": "Liczba pokoi*",
+      "floor": "Piętro",
+      "yearBuilt": "Rok budowy"
+    },
+    "amenities": {
+      "legend": "Udogodnienia i warunki",
+      "isShared": "Dzielone (pod wynajem pokojów)",
+      "isSharedHint": "Jeśli zaznaczone - pokażą się pola dla współlokatorów/typ pokoju."
+    },
+    "media": {
+      "legend": "Media"
+    },
+    "images": {
+      "legend": "Media (zdjęcia)",
+      "label": "Zdjęcia nieruchomości"
+    },
+    "contact": {
+      "legend": "Kontakt / właściciel",
+      "ownerId": "ownerId (ukryte dla zwykłych użytkowników)",
+      "phone": "Numer kontaktowy",
+      "email": "E-mail"
+    },
+    "submit": {
+      "edit": "Zapisz zmiany",
+      "add": "Dodaj ofertę",
+      "preview": "Podgląd oferty"
+    }
+  },
+  "propertyFull": {
+    "currency": "zł",
+    "yes": "Tak",
+    "no": "Nie",
+    "gallery": {
+      "showAll": "Pokaż wszystkie",
+      "photosCount": "{count} zdjęć"
+    },
+    "description": {
+      "title": "Opis"
+    },
+    "details": {
+      "title": "Szczegóły nieruchomości",
+      "totalArea": "Całkowita powierzchnia",
+      "elevator": "Winda",
+      "rooms": "Pokoje",
+      "parking": "Parking",
+      "floor": "Piętro",
+      "yearBuilt": "Rok budowy"
+    },
+    "amenities": {
+      "title": "Udogodnienia",
+      "furnished": "Umeblowane",
+      "balcony": "Balkon",
+      "internet": "Internet",
+      "tv": "TV",
+      "washingMachine": "Pralka",
+      "dishwasher": "Zmywarka",
+      "airConditioning": "Klimatyzacja"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "call": "Zadzwoń",
+      "sendEmail": "Wyślij e-mail"
+    },
+    "editButton": "Edytuj ogłoszenie"
+  },
+  "propertyTeaser": {
+    "imageAlt": "Zdjęcie nieruchomości",
+    "units": {
+      "squareMeters": "m²",
+      "rooms": "pokoje",
+      "floor": "piętro"
+    },
+    "currency": "zł",
+    "viewDetails": "Szczegóły"
+  },
+  "userProfile": {
+    "coverAlt": "Zdjęcie w tle profilu",
+    "profileAlt": "Zdjęcie profilowe",
+    "backgroundImage": "Zdjęcie w tle",
+    "profileImage": "Zdjęcie profilowe",
+    "yearsOld": "lat",
+    "noData": "Brak danych",
+    "yes": "Tak",
+    "no": "Nie",
+    "infoCards": {
+      "name": {
+        "label": "Imię"
+      },
+      "occupation": {
+        "label": "Zawód"
+      },
+      "budget": {
+        "label": "Budżet maks."
+      },
+      "location": {
+        "label": "Poszukiwana lokalizacja"
+      },
+      "smoker": {
+        "label": "Osoba paląca"
+      },
+      "pets": {
+        "label": "Posiada zwierzęta"
+      }
+    },
+    "description": {
+      "title": "Opis"
+    },
+    "searchPreferences": {
+      "title": "W poszukiwaniu",
+      "preferences": "Preferencje",
+      "propertyType": "Typ mieszkania"
+    },
+    "compatibility": {
+      "title": "Kompatybilność",
+      "noise": "Preferencje dotyczące ciszy",
+      "pets": "Zwierzęta"
+    },
+    "moodboard": {
+      "title": "Moodboard"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "email": "Email",
+      "phone": "Telefon",
+      "sendEmail": "Wyślij e-mail",
+      "call": "Zadzwoń"
+    }
+  },
+  "userProperties": {
+    "table": {
+      "title": "Tytuł",
+      "city": "Miasto",
+      "price": "Cena",
+      "status": "Status",
+      "actions": "Akcje",
+      "preview": "Podgląd",
+      "edit": "Edytuj"
+    },
+    "empty": {
+      "title": "Nie masz żadnych nieruchomości",
+      "subtitle": "Możesz utworzyć swoją pierwszą ofertę. Jesteśmy tutaj, aby pomóc Ci z wszelkimi pytaniami lub wątpliwościami.",
+      "createButton": "Utwórz nową nieruchomość"
+    },
+    "deleteDialog": {
+      "header": "Potwierdź usunięcie",
+      "message": "Czy na pewno chcesz usunąć",
+      "cancel": "Anuluj",
+      "confirm": "Usuń"
+    }
+  },
+  "userSettingsForm": {
+    "profileVisibility": {
+      "label": "Widoczność profilu",
+      "visible": "Widoczny",
+      "hidden": "Ukryty",
+      "hint": "Twój profil jest widoczny na liście użytkowników tylko wtedy, gdy wypełnione są pola: Imię, Nazwisko, Wiek, Płeć i Miasto."
+    },
+    "general": {
+      "legend": "Ogólne",
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "age": "Wiek",
+      "gender": "Płeć",
+      "interests": "Zainteresowania",
+      "interestsPlaceholder": "Wybierz zainteresowania",
+      "occupation": "Zawód",
+      "occupationPlaceholder": "Wybierz zawód",
+      "smoker": "Pali",
+      "pets": "Ma zwierzęta",
+      "description": "Opis"
+    },
+    "searchLocation": {
+      "legend": "Lokalizacja poszukiwań",
+      "city": "Miasto",
+      "cityPlaceholder": "Wpisz miasto",
+      "district": "Dzielnica",
+      "districtPlaceholder": "Wybierz dzielnicę"
+    },
+    "searchPreferences": {
+      "legend": "Preferencje wyszukiwania",
+      "preferences": "Preferencje wyszukiwania",
+      "preferencesPlaceholder": "Wybierz preferencje",
+      "propertyType": "Typ nieruchomości",
+      "propertyTypePlaceholder": "Wybierz typ nieruchomości",
+      "budgetMax": "Maksymalny budżet"
+    },
+    "compatibility": {
+      "legend": "Kompatybilność",
+      "noise": "Kompatybilność hałasu",
+      "noisePlaceholder": "Wybierz preferencje hałasu",
+      "pets": "Kompatybilność zwierząt",
+      "petsPlaceholder": "Wybierz preferencje zwierząt"
+    },
+    "media": {
+      "legend": "Media",
+      "moodboardImages": "Zdjęcia Moodboard"
+    },
+    "contact": {
+      "legend": "Kontakt",
+      "phone": "Numer telefonu"
+    },
+    "submit": "Zapisz zmiany"
+  },
+  "userTeaser": {
+    "bgImageAlt": "Tło użytkownika",
+    "avatarAlt": "Avatar użytkownika",
+    "budgetUpTo": "do",
+    "currency": "zł",
+    "viewProfile": "Zobacz profil"
+  },
+  "usersFilters": {
+    "title": "Filtry",
+    "city": {
+      "label": "Miasto"
+    },
+    "gender": {
+      "label": "Płeć"
+    },
+    "budgetMax": {
+      "label": "Budżet maksymalny"
+    },
+    "nonSmoker": {
+      "label": "Nie pali"
+    },
+    "noPets": {
+      "label": "Bez zwierząt"
+    },
+    "sortBy": {
+      "label": "Sortuj według"
+    },
+    "showResults": "Wyświetl wyniki ({count})",
+    "clearFilters": "Wyczyść filtry"
+  },
+  "usersSorting": {
+    "label": "Sortuj według"
+  },
+  "taxonomies": {
+    "listingType": {
+      "any": "Dowolny",
+      "rent": "Wynajem",
+      "sale": "Sprzedaż"
+    },
+    "propertyType": {
+      "any": "Dowolny",
+      "apartment": "Mieszkanie",
+      "house": "Dom",
+      "room": "Pokój",
+      "studio": "Studio"
+    },
+    "amenities": {
+      "furnished": "Umeblowane",
+      "balcony": "Balkon",
+      "elevator": "Winda",
+      "parking": "Parking",
+      "washingMachine": "Pralka",
+      "dishwasher": "Zmywarka",
+      "airConditioning": "Klimatyzacja",
+      "petsAllowed": "Zwierzęta dozwolone",
+      "smokingAllowed": "Palenie dozwolone"
+    },
+    "media": {
+      "internet": "Internet",
+      "tv": "Telewizja"
+    },
+    "contactReason": {
+      "bug": "Błąd na stronie",
+      "technical": "Problem techniczny",
+      "listing": "Pytanie o ogłoszenie",
+      "reportListing": "Zgłoszenie nieodpowiedniego ogłoszenia",
+      "reportUser": "Zgłoszenie użytkownika",
+      "account": "Problem z kontem",
+      "payment": "Problem z płatnością",
+      "partnership": "Pytanie o współpracę",
+      "suggestion": "Sugestia/Propozycja",
+      "search": "Problem z wyszukiwaniem",
+      "login": "Problem z logowaniem",
+      "terms": "Pytanie o regulamin",
+      "privacy": "Pytanie o prywatność",
+      "spam": "Spam/Oszustwo",
+      "verification": "Problem z weryfikacją",
+      "premium": "Pytanie o funkcje premium",
+      "deleteAccount": "Usunięcie konta",
+      "other": "Inne"
+    },
+    "gender": {
+      "any": "Dowolna",
+      "male": "Mężczyzna",
+      "female": "Kobieta",
+      "others": "Inne"
+    },
+    "propertiesSort": {
+      "newest": "Najnowsze",
+      "oldest": "Najstarsze",
+      "priceAsc": "Cena rosnąco",
+      "priceDesc": "Cena malejąco",
+      "sizeAsc": "Powierzchnia rosnąco",
+      "sizeDesc": "Powierzchnia malejąco"
+    },
+    "usersSort": {
+      "none": "Brak",
+      "newest": "Najnowsze",
+      "ageAsc": "Wiek rosnąco",
+      "ageDesc": "Wiek malejąco",
+      "budgetAsc": "Budżet rosnąco",
+      "budgetDesc": "Budżet malejąco"
+    },
+    "interests": {
+      "sports": "Sport",
+      "music": "Muzyka",
+      "travel": "Podróże",
+      "cooking": "Gotowanie",
+      "reading": "Czytanie",
+      "gaming": "Gry",
+      "movies": "Filmy",
+      "art": "Sztuka",
+      "photography": "Fotografia",
+      "fitness": "Fitness",
+      "dance": "Taniec",
+      "yoga": "Yoga",
+      "hiking": "Piesze wędrówki",
+      "cycling": "Rowery",
+      "technology": "Technologia"
+    },
+    "occupations": {
+      "student": "Student",
+      "worker": "Osboa pracująca",
+      "remoteWorker": "Pracownik zdalny",
+      "unemployed": "Nie pracuję"
+    },
+    "searchPreferences": {
+      "quiet": "Cicha okolica",
+      "central": "Centrum miasta",
+      "green": "Blisko parku",
+      "transport": "Dobry transport",
+      "nonSmoker": "Tylko osoby niepalące",
+      "university": "Blisko uczelni",
+      "work": "Blisko pracy",
+      "shops": "Sklepy w pobliżu",
+      "restaurants": "Restauracje w pobliżu",
+      "gym": "Siłownia w pobliżu",
+      "safe": "Bezpieczna dzielnica"
+    },
+    "searchPropertyTypes": {
+      "apartment": "Mieszkanie",
+      "house": "Dom",
+      "studio": "Kawalerka",
+      "room": "Pokój",
+      "loft": "Loft"
+    },
+    "noiseCompatibility": {
+      "veryQuiet": "Bardzo cicho",
+      "quiet": "Cicho",
+      "moderate": "Umiarkowanie",
+      "loud": "Głośno",
+      "veryLoud": "Bardzo głośno"
+    },
+    "petsCompatibility": {
+      "noPets": "Bez zwierząt",
+      "cats": "Koty",
+      "dogs": "Psy",
+      "smallPets": "Małe zwierzęta",
+      "allPets": "Wszystkie zwierzęta"
+    },
+    "status": {
+      "draft": "Szkic",
+      "active": "Aktywne",
+      "reserved": "Zarezerwowane"
+    }
   }
-},
-"fileUploaderDialog": {
-  "cancelButton": "Anuluj",
-  "saveButton": "Zapisz"
-}
 }

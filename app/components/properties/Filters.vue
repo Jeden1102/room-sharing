@@ -16,7 +16,9 @@
       "
     >
       <div class="flex items-center justify-between md:hidden">
-        <h2 class="mb-4 text-lg font-semibold">Filtry</h2>
+        <h2 class="mb-4 text-lg font-semibold">
+          {{ $t("propertiesFilters.title") }}
+        </h2>
         <button @click="filtersOpened = !filtersOpened">
           <Icon name="mage:filter" class="text-2xl" />
         </button>
@@ -26,14 +28,14 @@
       <AtomsAutocomplete
         :suggestions="filteredCities"
         @complete="searchCity"
-        label="Wpisz miasto"
+        :label="$t('propertiesFilters.city.label')"
         v-model="filters.city"
         name="city"
       />
 
       <!-- Listing Type -->
       <AtomsDropdown
-        label="Typ oferty"
+        :label="$t('propertiesFilters.listingType.label')"
         :options="listingTypeOptions"
         optionLabel="label"
         optionValue="value"
@@ -43,7 +45,7 @@
 
       <!-- Property Type -->
       <AtomsDropdown
-        label="Typ nieruchomości"
+        :label="$t('propertiesFilters.propertyType.label')"
         :options="propertyTypeOptions"
         optionLabel="label"
         optionValue="value"
@@ -54,24 +56,24 @@
       <!-- Price Range -->
       <div class="flex gap-2 md:gap-4">
         <AtomsNumber
-          label="Cena min"
+          :label="$t('propertiesFilters.priceMin.label')"
           v-model="filters.priceMin"
           name="priceMin"
         />
         <AtomsNumber
-          label="Cena max"
+          :label="$t('propertiesFilters.priceMax.label')"
           v-model="filters.priceMax"
           name="priceMax"
         />
       </div>
 
       <AtomsNumber
-        label="Min. liczba pokoi"
+        :label="$t('propertiesFilters.roomsMin.label')"
         v-model="filters.roomsMin"
         name="roomsMin"
       />
       <AtomsNumber
-        label="Min. powierzchnia (m²)"
+        :label="$t('propertiesFilters.sizeMin.label')"
         v-model="filters.sizeMin"
         name="sizeMin"
       />
@@ -85,7 +87,7 @@
           :options="[...amenitiesOptions, ...mediasOptions]"
           optionLabel="label"
           optionValue="value"
-          label="Wybierz udogodnienia"
+          :label="$t('propertiesFilters.amenities.label')"
           display="chip"
           fluid
         />
@@ -95,7 +97,7 @@
 
       <!-- Sorting (mobile only) -->
       <AtomsDropdown
-        label="Sortuj według"
+        :label="$t('propertiesFilters.sortBy.label')"
         :options="propertiesSortOptions"
         optionLabel="label"
         optionValue="value"
@@ -107,7 +109,7 @@
       <!-- Apply (mobile only) -->
       <Button
         class="mt-4 min-h-10 md:!hidden"
-        :label="`Wyświetl wyniki (${total})`"
+        :label="$t('propertiesFilters.showResults', { count: total })"
         :loading="pending"
         @click="filtersOpened = false"
       />
@@ -119,7 +121,7 @@
         v-if="anyFiltersSet"
       >
         <Icon name="fa7-solid:undo" class="text-sm" />
-        Wyczyść filtry
+        {{ $t("propertiesFilters.clearFilters") }}
       </Button>
     </div>
     <button
@@ -128,7 +130,7 @@
       v-if="anyFiltersSet"
     >
       <Icon name="fa7-solid:undo" class="text-xs" />
-      Wyczyść filtry
+      {{ $t("propertiesFilters.clearFilters") }}
     </button>
   </aside>
 </template>

@@ -12,10 +12,30 @@
       dataKey="id"
       @row-edit-save="onRowEditSave"
     >
-      <Column field="title" header="Title" sortable style="width: 25%" />
-      <Column field="city" header="City" sortable style="width: 25%" />
-      <Column field="price" header="Price" sortable style="width: 25%" />
-      <Column field="status" header="Status" sortable style="width: 25%">
+      <Column
+        field="title"
+        :header="$t('userProperties.table.title')"
+        sortable
+        style="width: 25%"
+      />
+      <Column
+        field="city"
+        :header="$t('userProperties.table.city')"
+        sortable
+        style="width: 25%"
+      />
+      <Column
+        field="price"
+        :header="$t('userProperties.table.price')"
+        sortable
+        style="width: 25%"
+      />
+      <Column
+        field="status"
+        :header="$t('userProperties.table.status')"
+        sortable
+        style="width: 25%"
+      >
         <template #editor="{ data, field }">
           <AtomsDropdown
             name="listingType"
@@ -28,7 +48,7 @@
           />
         </template>
       </Column>
-      <Column header="Actions">
+      <Column :header="$t('userProperties.table.actions')">
         <template #body="slotProps">
           <div class="flex gap-2">
             <Button asChild v-slot="buttonProps">
@@ -44,7 +64,7 @@
                   })
                 "
               >
-                Preview
+                {{ $t("userProperties.table.preview") }}
               </RouterLink>
             </Button>
 
@@ -61,7 +81,7 @@
                   })
                 "
               >
-                Edit
+                {{ $t("userProperties.table.edit") }}
               </RouterLink>
             </Button>
 
@@ -82,14 +102,14 @@
 
     <AppCta
       v-else-if="data.properties"
-      title="You don't have any properties"
-      subtitle="Feel free to create one. We are here to help you with any questions or concerns you may have."
+      :title="$t('userProperties.empty.title')"
+      :subtitle="$t('userProperties.empty.subtitle')"
       :showLogo="true"
       variant="primary"
     >
       <Button asChild v-slot="slotProps" severity="secondary">
         <RouterLink :to="$localePath('new-property')" :class="slotProps.class">
-          Create new property
+          {{ $t("userProperties.empty.createButton") }}
         </RouterLink>
       </Button>
     </AppCta>
@@ -97,20 +117,23 @@
     <Dialog
       v-model:visible="deleteModalVisible"
       modal
-      header="Confirm deletion"
+      :header="$t('userProperties.deleteDialog.header')"
       :style="{ width: '25rem' }"
     >
       <p>
-        Are you sure you want to delete
+        {{ $t("userProperties.deleteDialog.message") }}
         <strong>{{ selectedProperty?.title }}</strong
         >?
       </p>
 
       <template #footer>
         <div class="mt-4 flex justify-end gap-2">
-          <Button label="Cancel" @click="deleteModalVisible = false" />
           <Button
-            label="Delete"
+            :label="$t('userProperties.deleteDialog.cancel')"
+            @click="deleteModalVisible = false"
+          />
+          <Button
+            :label="$t('userProperties.deleteDialog.confirm')"
             severity="danger"
             :loading="isDeleting"
             @click="deleteProperty"
@@ -122,11 +145,7 @@
 </template>
 
 <script setup lang="ts">
-const statusOptions = [
-  { label: "Szkic", value: "DRAFT" },
-  { label: "Aktywne", value: "ACTIVE" },
-  { label: "Zarezerwowane", value: "RESERVED" },
-];
+const { statusOptions } = useTaxonomies();
 
 const editingRows = ref([]);
 const deleteModalVisible = ref(false);

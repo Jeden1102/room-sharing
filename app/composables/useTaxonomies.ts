@@ -1,156 +1,151 @@
 export const useTaxonomies = () => {
+  const { t } = useI18n();
+
   const listingTypeOptions = [
-    { label: "Dowolny", value: null },
-    { label: "Wynajem", value: "RENT" },
-    { label: "Sprzedaż", value: "SALE" },
-  ];
+    { label: t('taxonomies.listingType.any'), value: null },
+    { label: t('taxonomies.listingType.rent'), value: "RENT" },
+    { label: t('taxonomies.listingType.sale'), value: "SALE" },
+  ]
 
   const propertyTypeOptions = [
-    { label: "Dowolny", value: null },
-    { label: "Mieszkanie", value: "APARTMENT" },
-    { label: "Dom", value: "HOUSE" },
-    { label: "Pokój", value: "ROOM" },
-    { label: "Studio", value: "STUDIO" },
-  ];
+    { label: t('taxonomies.propertyType.any'), value: null },
+    { label: t('taxonomies.propertyType.apartment'), value: "APARTMENT" },
+    { label: t('taxonomies.propertyType.house'), value: "HOUSE" },
+    { label: t('taxonomies.propertyType.room'), value: "ROOM" },
+    { label: t('taxonomies.propertyType.studio'), value: "STUDIO" },
+  ]
 
   const amenitiesOptions = [
-    { label: "Umeblowane", value: "furnished" },
-    { label: "Balkon", value: "balcony" },
-    { label: "Winda", value: "elevator" },
-    { label: "Parking", value: "parking" },
-    { label: "Pralka", value: "washingMachine" },
-    { label: "Zmywarka", value: "dishwasher" },
-    { label: "Klimatyzacja", value: "airConditioning" },
-    { label: "Zwierzęta dozwolone", value: "petsAllowed" },
-    { label: "Palenie dozwolone", value: "smokingAllowed" },
-  ];
+    { label: t('taxonomies.amenities.furnished'), value: "furnished" },
+    { label: t('taxonomies.amenities.balcony'), value: "balcony" },
+    { label: t('taxonomies.amenities.elevator'), value: "elevator" },
+    { label: t('taxonomies.amenities.parking'), value: "parking" },
+    { label: t('taxonomies.amenities.washingMachine'), value: "washingMachine" },
+    { label: t('taxonomies.amenities.dishwasher'), value: "dishwasher" },
+    { label: t('taxonomies.amenities.airConditioning'), value: "airConditioning" },
+    { label: t('taxonomies.amenities.petsAllowed'), value: "petsAllowed" },
+    { label: t('taxonomies.amenities.smokingAllowed'), value: "smokingAllowed" },
+  ]
 
   const mediasOptions = [
-    { label: "Internet", value: "internet" },
-    { label: "Telewizja", value: "tv" },
-  ];
+    { label: t('taxonomies.media.internet'), value: "internet" },
+    { label: t('taxonomies.media.tv'), value: "tv" },
+  ]
 
   const contactReasonOptions = [
-    { label: "Błąd na stronie", value: "bug" },
-    { label: "Problem techniczny", value: "technical" },
-    { label: "Pytanie o ogłoszenie", value: "listing" },
-    { label: "Zgłoszenie nieodpowiedniego ogłoszenia", value: "reportListing" },
-    { label: "Zgłoszenie użytkownika", value: "reportUser" },
-    { label: "Problem z kontem", value: "account" },
-    { label: "Problem z płatnością", value: "payment" },
-    { label: "Pytanie o współpracę", value: "partnership" },
-    { label: "Sugestia/Propozycja", value: "suggestion" },
-    { label: "Problem z wyszukiwaniem", value: "search" },
-    { label: "Problem z logowaniem", value: "login" },
-    { label: "Pytanie o regulamin", value: "terms" },
-    { label: "Pytanie o prywatność", value: "privacy" },
-    { label: "Spam/Oszustwo", value: "spam" },
-    { label: "Problem z weryfikacją", value: "verification" },
-    { label: "Pytanie o funkcje premium", value: "premium" },
-    { label: "Usunięcie konta", value: "deleteAccount" },
-    { label: "Inne", value: "other" },
-  ];
+    { label: t('taxonomies.contactReason.bug'), value: "bug" },
+    { label: t('taxonomies.contactReason.technical'), value: "technical" },
+    { label: t('taxonomies.contactReason.listing'), value: "listing" },
+    { label: t('taxonomies.contactReason.reportListing'), value: "reportListing" },
+    { label: t('taxonomies.contactReason.reportUser'), value: "reportUser" },
+    { label: t('taxonomies.contactReason.account'), value: "account" },
+    { label: t('taxonomies.contactReason.payment'), value: "payment" },
+    { label: t('taxonomies.contactReason.partnership'), value: "partnership" },
+    { label: t('taxonomies.contactReason.suggestion'), value: "suggestion" },
+    { label: t('taxonomies.contactReason.search'), value: "search" },
+    { label: t('taxonomies.contactReason.login'), value: "login" },
+    { label: t('taxonomies.contactReason.terms'), value: "terms" },
+    { label: t('taxonomies.contactReason.privacy'), value: "privacy" },
+    { label: t('taxonomies.contactReason.spam'), value: "spam" },
+    { label: t('taxonomies.contactReason.verification'), value: "verification" },
+    { label: t('taxonomies.contactReason.premium'), value: "premium" },
+    { label: t('taxonomies.contactReason.deleteAccount'), value: "deleteAccount" },
+    { label: t('taxonomies.contactReason.other'), value: "other" },
+  ]
 
   const genderOptions = [
-    { name: "Dowolna", id: null },
-    { name: "Mężczyzna", id: "male" },
-    { name: "Kobieta", id: "female" },
-    { name: "Inne", id: "others" },
-  ];
+    { name: t('taxonomies.gender.any'), id: null },
+    { name: t('taxonomies.gender.male'), id: "male" },
+    { name: t('taxonomies.gender.female'), id: "female" },
+    { name: t('taxonomies.gender.others'), id: "others" },
+  ]
 
   const propertiesSortOptions = [
-    { label: "Najnowsze", value: "newest" },
-    { label: "Najstarsze", value: "oldest" },
-    { label: "Cena rosnąco", value: "priceAsc" },
-    { label: "Cena malejąco", value: "priceDesc" },
-    { label: "Powierzchnia rosnąco", value: "sizeAsc" },
-    { label: "Powierzchnia malejąco", value: "sizeDesc" },
-  ];
+    { label: t('taxonomies.propertiesSort.newest'), value: "newest" },
+    { label: t('taxonomies.propertiesSort.oldest'), value: "oldest" },
+    { label: t('taxonomies.propertiesSort.priceAsc'), value: "priceAsc" },
+    { label: t('taxonomies.propertiesSort.priceDesc'), value: "priceDesc" },
+    { label: t('taxonomies.propertiesSort.sizeAsc'), value: "sizeAsc" },
+    { label: t('taxonomies.propertiesSort.sizeDesc'), value: "sizeDesc" },
+  ]
 
   const usersSortOptions = [
-    { label: "Brak", value: null },
-    { label: "Najnowsze", value: "newest" },
-    { label: "Wiek rosnąco", value: "ageAsc" },
-    { label: "Wiek malejąco", value: "ageDesc" },
-    { label: "Budżet rosnąco", value: "budgetAsc" },
-    { label: "Budżet malejąco", value: "budgetDesc" },
-  ];
+    { label: t('taxonomies.usersSort.none'), value: null },
+    { label: t('taxonomies.usersSort.newest'), value: "newest" },
+    { label: t('taxonomies.usersSort.ageAsc'), value: "ageAsc" },
+    { label: t('taxonomies.usersSort.ageDesc'), value: "ageDesc" },
+    { label: t('taxonomies.usersSort.budgetAsc'), value: "budgetAsc" },
+    { label: t('taxonomies.usersSort.budgetDesc'), value: "budgetDesc" },
+  ]
 
   const interestsOptions = [
-    { name: "Sport", id: "sports" },
-    { name: "Muzyka", id: "music" },
-    { name: "Podróże", id: "travel" },
-    { name: "Gotowanie", id: "cooking" },
-    { name: "Czytanie", id: "reading" },
-    { name: "Gry", id: "gaming" },
-    { name: "Filmy", id: "movies" },
-    { name: "Sztuka", id: "art" },
-    { name: "Fotografia", id: "photography" },
-    { name: "Fitness", id: "fitness" },
-    { name: "Taniec", id: "dance" },
-    { name: "Yoga", id: "yoga" },
-    { name: "Piesze wędrówki", id: "hiking" },
-    { name: "Rowery", id: "cycling" },
-    { name: "Technologia", id: "technology" },
-  ];
+    { name: t('taxonomies.interests.sports'), id: "sports" },
+    { name: t('taxonomies.interests.music'), id: "music" },
+    { name: t('taxonomies.interests.travel'), id: "travel" },
+    { name: t('taxonomies.interests.cooking'), id: "cooking" },
+    { name: t('taxonomies.interests.reading'), id: "reading" },
+    { name: t('taxonomies.interests.gaming'), id: "gaming" },
+    { name: t('taxonomies.interests.movies'), id: "movies" },
+    { name: t('taxonomies.interests.art'), id: "art" },
+    { name: t('taxonomies.interests.photography'), id: "photography" },
+    { name: t('taxonomies.interests.fitness'), id: "fitness" },
+    { name: t('taxonomies.interests.dance'), id: "dance" },
+    { name: t('taxonomies.interests.yoga'), id: "yoga" },
+    { name: t('taxonomies.interests.hiking'), id: "hiking" },
+    { name: t('taxonomies.interests.cycling'), id: "cycling" },
+    { name: t('taxonomies.interests.technology'), id: "technology" },
+  ]
 
   const occupationsOptions = [
-    { name: "Student", id: "student" },
-    { name: "Developer", id: "developer" },
-    { name: "Designer", id: "designer" },
-    { name: "Nauczyciel", id: "teacher" },
-    { name: "Inżynier", id: "engineer" },
-    { name: "Freelancer", id: "freelancer" },
-    { name: "Marketing", id: "marketing" },
-    { name: "Sprzedaż", id: "sales" },
-    { name: "Lekarz", id: "doctor" },
-    { name: "Pielęgniarka", id: "nurse" },
-    { name: "Prawnik", id: "lawyer" },
-    { name: "Architekt", id: "architect" },
-    { name: "Manager", id: "manager" },
-    { name: "Finansista", id: "finance" },
-    { name: "Artysta", id: "artist" },
-    { name: "Przedsiębiorca", id: "entrepreneur" },
-    { name: "Pracownik zdalny", id: "remote_worker" },
-    { name: "Nie pracuję", id: "unemployed" },
-  ];
+    { name: t('taxonomies.occupations.student'), id: "student" },
+    { name: t('taxonomies.occupations.remoteWorker'), id: "remote_worker" },
+    { name: t('taxonomies.occupations.worker'), id: "worker" },
+    { name: t('taxonomies.occupations.unemployed'), id: "unemployed" },
+  ]
 
   const searchPreferencesOptions = [
-    { name: "Cicha okolica", id: "quiet" },
-    { name: "Centrum miasta", id: "central" },
-    { name: "Blisko parku", id: "green" },
-    { name: "Dobry transport", id: "transport" },
-    { name: "Blisko uczelni", id: "university" },
-    { name: "Blisko pracy", id: "work" },
-    { name: "Sklepy w pobliżu", id: "shops" },
-    { name: "Restauracje w pobliżu", id: "restaurants" },
-    { name: "Siłownia w pobliżu", id: "gym" },
-    { name: "Bezpieczna dzielnica", id: "safe" },
-  ];
+    { name: t('taxonomies.searchPreferences.quiet'), id: "quiet" },
+    { name: t('taxonomies.searchPreferences.nonSmoker'), id: "non-smoker" },
+    { name: t('taxonomies.searchPreferences.central'), id: "central" },
+    { name: t('taxonomies.searchPreferences.green'), id: "green" },
+    { name: t('taxonomies.searchPreferences.transport'), id: "transport" },
+    { name: t('taxonomies.searchPreferences.university'), id: "university" },
+    { name: t('taxonomies.searchPreferences.work'), id: "work" },
+    { name: t('taxonomies.searchPreferences.shops'), id: "shops" },
+    { name: t('taxonomies.searchPreferences.restaurants'), id: "restaurants" },
+    { name: t('taxonomies.searchPreferences.gym'), id: "gym" },
+    { name: t('taxonomies.searchPreferences.safe'), id: "safe" },
+  ]
 
   const searchPropertyTypesOptions = [
-    { name: "Mieszkanie", id: "apartment" },
-    { name: "Dom", id: "house" },
-    { name: "Kawalerka", id: "studio" },
-    { name: "Pokój", id: "room" },
-    { name: "Loft", id: "loft" },
-  ];
+    { name: t('taxonomies.searchPropertyTypes.apartment'), id: "apartment" },
+    { name: t('taxonomies.searchPropertyTypes.house'), id: "house" },
+    { name: t('taxonomies.searchPropertyTypes.studio'), id: "studio" },
+    { name: t('taxonomies.searchPropertyTypes.room'), id: "room" },
+    { name: t('taxonomies.searchPropertyTypes.loft'), id: "loft" },
+  ]
 
   const noiseCompatibilityOptions = [
-    { name: "Bardzo cicho", id: "very_quiet" },
-    { name: "Cicho", id: "quiet" },
-    { name: "Umiarkowanie", id: "moderate" },
-    { name: "Głośno", id: "loud" },
-    { name: "Bardzo głośno", id: "very_loud" },
-  ];
+    { name: t('taxonomies.noiseCompatibility.veryQuiet'), id: "very_quiet" },
+    { name: t('taxonomies.noiseCompatibility.quiet'), id: "quiet" },
+    { name: t('taxonomies.noiseCompatibility.moderate'), id: "moderate" },
+    { name: t('taxonomies.noiseCompatibility.loud'), id: "loud" },
+    { name: t('taxonomies.noiseCompatibility.veryLoud'), id: "very_loud" },
+  ]
 
   const petsCompatibilityOptions = [
-    { name: "Bez zwierząt", id: "no_pets" },
-    { name: "Koty", id: "cats" },
-    { name: "Psy", id: "dogs" },
-    { name: "Małe zwierzęta", id: "small_pets" },
-    { name: "Wszystkie zwierzęta", id: "all_pets" },
-  ];
+    { name: t('taxonomies.petsCompatibility.noPets'), id: "no_pets" },
+    { name: t('taxonomies.petsCompatibility.cats'), id: "cats" },
+    { name: t('taxonomies.petsCompatibility.dogs'), id: "dogs" },
+    { name: t('taxonomies.petsCompatibility.smallPets'), id: "small_pets" },
+    { name: t('taxonomies.petsCompatibility.allPets'), id: "all_pets" },
+  ]
+
+  const statusOptions = [
+    { label: t('taxonomies.status.draft'), value: "DRAFT" },
+    { label: t('taxonomies.status.active'), value: "ACTIVE" },
+    { label: t('taxonomies.status.reserved'), value: "RESERVED" },
+  ]
 
   return {
     listingTypeOptions,
@@ -167,5 +162,6 @@ export const useTaxonomies = () => {
     searchPropertyTypesOptions,
     noiseCompatibilityOptions,
     petsCompatibilityOptions,
+    statusOptions
   };
 };
