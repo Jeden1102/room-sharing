@@ -40,9 +40,9 @@
     </div>
     <BitsAnimatedContent :delay="0.6">
       <NuxtImg
-        src="/images/hero.png"
+        src="/images/hero.webp"
         :alt="$t('hero.imageAlt')"
-        class="rounded-lg"
+        class="image-mask rounded-lg"
         width="516"
         height="530"
         format="webp"

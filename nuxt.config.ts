@@ -177,6 +177,7 @@ export default defineNuxtConfig({
       modalTextColor: '#000',
       modalUnsavedColor: '#fff',
     },
+    isControlButtonEnabled: false,
     locales: ['en', 'pl', 'uk'],
     cookies: {
       necessary: [

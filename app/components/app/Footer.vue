@@ -136,6 +136,14 @@
               {{ $t("footer.legal.privacy") }}
             </NuxtLink>
           </li>
+          <li>
+            <button
+              @click="isModalActive = true"
+              class="footer-link cursor-pointer"
+            >
+              {{ $t("footer.legal.cookieSettings") }}
+            </button>
+          </li>
         </ul>
       </div>
     </div>
@@ -150,4 +158,6 @@
 
 <script lang="ts" setup>
 const currentYear = new Date().getFullYear();
+
+const { isModalActive } = useCookieControl();
 </script>

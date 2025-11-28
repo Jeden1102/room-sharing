@@ -1,5 +1,5 @@
 <template>
-  <main class="container flex flex-col gap-4 py-6" ref="container">
+  <main class="container flex flex-col gap-4 py-6">
     <div class="flex items-center md:mb-4 md:grid md:grid-cols-2 md:gap-8">
       <h1 class="text-xl font-medium md:text-2xl">
         {{ $t("propertiesPage.title") }}
@@ -110,8 +110,6 @@ import clsx from "clsx";
 
 const route = useRoute();
 
-const container = useTemplateRef("container");
-
 type Coord = {
   latitude: number;
   longitude: number;
@@ -160,8 +158,6 @@ const applyFilters = (newFilters: any) => {
 const onPageChange = (event: any) => {
   filters.value.page = Math.floor(event.first / event.rows) + 1;
 
-  if (container.value) {
-    container.value.scrollIntoView({ behavior: "smooth" });
-  }
+  document.body.scrollIntoView({ behavior: "smooth" });
 };
 </script>

@@ -9,7 +9,7 @@
         :gap="20"
         :responsiveOptions="responsiveOptions"
         :showNavigators="showNavigation"
-        :showIndicators="showNavigation"
+        :showIndicators="true"
         contentClass="[&>.p-carousel-viewport]:py-4 [&_.p-carousel-next-button]:!hidden [&_.p-carousel-prev-button]:!hidden lg:[&_.p-carousel-next-button]:!block lg:[&_.p-carousel-prev-button]:!block"
       >
         <template #item="slotProps">
@@ -60,3 +60,9 @@ const responsiveOptions = ref([
   },
 ]);
 </script>
+
+<style>
+.p-carousel-indicator-list:has(.p-carousel-indicator:first-child:last-child) {
+  display: none !important;
+}
+</style>
