@@ -1,12 +1,13 @@
-12.2 new elements / changes:
-13. Chat
-10. GENERAL REFACTORS/IMPROVEMNETS/TESTING
+To fix:
+1. Anys
+2. Ogólnie walidacje
 
-To add/fix:
-6. anys
 
-Others:
+Features:
+0. Chat
 1. Profile/property reporting to admins.
 2. Security configs
-
-Do przejrzenia jeszcze wszyskie walidacje
+3. Zgłaszanie profili userów
+4. Odnośniki z home/stopki do listingów
+5. Page number w listingach (fix cofania)
+6. Dostosowanie pokoji/mieszkań do sharingu

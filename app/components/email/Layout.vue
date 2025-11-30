@@ -14,7 +14,6 @@
           <div class="mb-4 border-b border-gray-200 pb-2">
             <Img
               :src="config.public.APP_PROD_URI + '/logo.png'"
-              :alt="$t('emailLayout.logoAlt')"
               width="80"
               height="63"
             />
@@ -25,7 +24,7 @@
           <div
             class="mt-6 border-t border-gray-200 pt-2 text-center text-xs text-gray-500"
           >
-            {{ $t("emailLayout.footer") }}
+            PokójZWami &copy; {{ new Date().getFullYear() }}
           </div>
         </Container>
       </Body>

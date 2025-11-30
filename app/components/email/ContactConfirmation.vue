@@ -1,10 +1,8 @@
 <template>
   <Layout>
+    <Text class="mb-4"> {{ greeting }} {{ from }} </Text>
     <Text class="mb-4">
-      {{ $t("emailContactConfirmation.greeting", { from }) }}
-    </Text>
-    <Text class="mb-4">
-      {{ $t("emailContactConfirmation.message") }}
+      {{ confirmation }}
     </Text>
   </Layout>
 </template>
@@ -15,5 +13,7 @@ import Layout from "./Layout.vue";
 
 defineProps({
   from: String,
+  greeting: String,
+  confirmation: String,
 });
 </script>

@@ -318,6 +318,13 @@ const openGallery = (index: number) => {
       zoom: true,
       fullscreen: true,
       plugins: [$lgThumbnail, $lgZoom, $lgFullscreen],
+      mobileSettings: {
+        controls: true,
+        showCloseIcon: true,
+        download: false,
+      },
+      closable: true,
+      showCloseIcon: true,
     });
   }
 
