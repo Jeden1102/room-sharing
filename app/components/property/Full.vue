@@ -43,18 +43,14 @@
     </div>
   </div>
 
-  <!-- Main Content -->
   <div class="container mx-auto max-w-6xl px-4 py-8">
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
-      <!-- Left Column - Images and Content -->
       <div class="space-y-6 lg:col-span-2">
-        <!-- Main Image Gallery -->
         <div class="grid grid-cols-2 gap-4">
-          <!-- Main Image - Full width on mobile, 2 rows on desktop -->
           <div
             class="col-span-2 row-span-1 cursor-pointer lg:row-span-2"
             :class="property.images.length === 0 && 'pointer-events-none'"
-            @click="showImage(property.mainImageIdx)"
+            @click="openGallery(property.mainImageIdx)"
           >
             <img
               :src="
@@ -68,7 +64,7 @@
 
           <div
             class="col-span-1 cursor-pointer"
-            @click="showImage(1)"
+            @click="openGallery(1)"
             v-if="property.images.length > 1"
           >
             <img
@@ -80,22 +76,24 @@
 
           <div
             class="relative col-span-1 cursor-pointer"
-            @click="showImage(2)"
+            @click="openGallery(2)"
             v-if="property.images.length > 2"
           >
             <div
               class="absolute inset-0 z-10 flex cursor-pointer flex-col items-center justify-center rounded-lg bg-black/70 text-white transition"
-              @click.stop="showAllImages"
+              @click.stop="openGallery(0)"
             >
               <i class="pi pi-camera" style="font-size: 2rem"></i>
-              <span class="font-semibold">{{
-                $t("propertyFull.gallery.showAll")
-              }}</span>
-              <span class="text-sm">{{
-                $t("propertyFull.gallery.photosCount", {
-                  count: property.images.length,
-                })
-              }}</span>
+              <span class="font-semibold">
+                {{ $t("propertyFull.gallery.showAll") }}
+              </span>
+              <span class="text-sm">
+                {{
+                  $t("propertyFull.gallery.photosCount", {
+                    count: property.images.length,
+                  })
+                }}
+              </span>
             </div>
             <img
               :src="property.images[2] || property.images[0]"
@@ -207,6 +205,7 @@
           >
             <PropertyMap :lat="property.latitude" :lng="property.longitude" />
           </div>
+
           <div class="bg-primary-600 rounded-lg p-6 text-white">
             <h3 class="mb-6 text-xl font-bold">
               {{ $t("propertyFull.contact.title") }}
@@ -262,16 +261,16 @@
     </div>
   </div>
 
-  <!-- Lightbox -->
-  <vue-easy-lightbox
-    :visible="visibleRef"
-    :imgs="property.images"
-    :index="indexRef"
-    :rotateDisabled="true"
-    :zoomDisabled="true"
-    :pinchDisabled="true"
-    @hide="onHide"
-  />
+  <div ref="galleryRef" class="hidden">
+    <a
+      v-for="(img, i) in property.images"
+      :key="i"
+      :href="img"
+      :data-lg-size="'1600-1066'"
+    >
+      <img :src="img" class="hidden" />
+    </a>
+  </div>
 
   <Button
     asChild
@@ -284,9 +283,7 @@
       :to="
         $localePath({
           name: 'properties-id-edit',
-          params: {
-            id: slugify(property.title),
-          },
+          params: { id: slugify(property.title) },
           query: { id: property.id },
         })
       "
@@ -297,26 +294,30 @@
 </template>
 
 <script setup lang="ts">
-import VueEasyLightbox from "vue-easy-lightbox";
+import { ref, computed } from "vue";
+
+const { $lightgallery, $lgThumbnail, $lgZoom, $lgFullscreen } = useNuxtApp();
 
 const { data } = useAuth();
 const props = defineProps<{ property: any }>();
 
-const visibleRef = ref(false);
-const indexRef = ref(0);
+const galleryRef = ref<HTMLElement | null>(null);
+let galleryInstance: any = null;
 
-const showImage = (index: number) => {
-  indexRef.value = index;
-  visibleRef.value = true;
-};
+const openGallery = (index: number) => {
+  if (!galleryRef.value) return;
 
-const showAllImages = () => {
-  indexRef.value = 0;
-  visibleRef.value = true;
-};
+  if (!galleryInstance) {
+    galleryInstance = $lightgallery(galleryRef.value, {
+      selector: "a",
+      thumbnail: true,
+      zoom: true,
+      fullscreen: true,
+      plugins: [$lgThumbnail, $lgZoom, $lgFullscreen],
+    });
+  }
 
-const onHide = () => {
-  visibleRef.value = false;
+  galleryInstance.openGallery(index);
 };
 
 const hasAnyAmenities = computed(() => {
@@ -332,7 +333,22 @@ const hasAnyAmenities = computed(() => {
 </script>
 
 <style>
+@import "lightgallery/css/lightgallery.css";
+@import "lightgallery/css/lg-thumbnail.css";
+@import "lightgallery/css/lg-zoom.css";
+@import "lightgallery/css/lg-fullscreen.css";
+
 .vel-modal {
   z-index: 99999;
+}
+
+.lg-outer .lg-thumb-item {
+  &.active {
+    border-color: #00509d;
+  }
+
+  &:hover {
+    border-color: #80afe6;
+  }
 }
 </style>
