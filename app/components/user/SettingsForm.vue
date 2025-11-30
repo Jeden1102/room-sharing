@@ -249,6 +249,7 @@
 <script setup lang="ts">
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { userProfileSchema } from "~/schemas/userProfileSchema";
+import imageCompression from "browser-image-compression";
 
 const formStatus = ref({ success: false, message: "", isLoading: false });
 const initialValues = ref<any>(null);
@@ -334,32 +335,43 @@ const onFormSubmit = async ({ valid, values }: any) => {
   if (!valid) return;
   formStatus.value.isLoading = true;
 
-  if (files.value && files.value.length) {
-    const formDataObj = new FormData();
-    files.value.forEach((file) => {
-      formDataObj.append("moodboardImages", file);
-    });
-
-    const response = await $fetch("/api/files", {
-      method: "POST",
-      body: formDataObj,
-    });
-
-    values.moodboardImages = [
-      ...response,
-      ...initialValues.value.moodboardImages,
-    ];
-  }
-
-  if (availableDistricts.value?.length === 0) {
-    values.districts = [];
-  }
-
-  const obligatoryFields = ["firstName", "lastName", "age", "gender", "city"];
-
-  values.profileVisible = obligatoryFields.every((field) => values[field]);
-
   try {
+    if (files.value && files.value.length) {
+      const formDataObj = new FormData();
+
+      for (const file of files.value) {
+        try {
+          const compressedFile = await imageCompression(file, {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true,
+          });
+          formDataObj.append("moodboardImages", compressedFile);
+        } catch (e) {
+          console.warn("Compression failed, sending original file", e);
+          formDataObj.append("moodboardImages", file);
+        }
+      }
+
+      const response = await $fetch("/api/files", {
+        method: "POST",
+        body: formDataObj,
+      });
+
+      values.moodboardImages = [
+        ...response,
+        ...(initialValues.value.moodboardImages || []),
+      ];
+    }
+
+    if (availableDistricts.value?.length === 0) {
+      values.districts = [];
+    }
+
+    const obligatoryFields = ["firstName", "lastName", "age", "gender", "city"];
+    values.profileVisible = obligatoryFields.every((field) => values[field]);
+
+    // aktualizacja profilu
     const { data, error } = await useFetch("/api/user/update", {
       method: "POST",
       body: values,

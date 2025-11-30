@@ -287,6 +287,7 @@
 <script setup lang="ts">
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { propertyCreateSchema } from "~/schemas/property";
+import imageCompression from "browser-image-compression";
 
 const props = defineProps<{
   property?: any;
@@ -419,6 +420,13 @@ const onSetAsPrimary = async (idx: number) => {
   });
 };
 
+const compressOptions = {
+  maxSizeMB: 1,
+  maxWidthOrHeight: 1920,
+  useWebWorker: true,
+  fileType: "image/webp",
+};
+
 const onFormSubmit = async ({ valid, values, reset }: any) => {
   if (!valid) return;
   formStatus.value.isLoading = true;
@@ -427,11 +435,23 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
   try {
     if (files.value?.length) {
       const fd = new FormData();
-      files.value.forEach((f) => fd.append("files", f));
+
+      const compressedFiles = await Promise.all(
+        files.value.map(async (f) => {
+          const compressed = await imageCompression(f, compressOptions);
+          return compressed;
+        }),
+      );
+
+      compressedFiles.forEach((compressed) => {
+        fd.append("files", compressed);
+      });
+
       const uploadRes = await $fetch("/api/files", {
         method: "POST",
         body: fd,
       });
+
       values.images = [
         ...(initialValues.value.images || []),
         ...(uploadRes || []),

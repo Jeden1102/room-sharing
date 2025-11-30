@@ -206,7 +206,10 @@
             <PropertyMap :lat="property.latitude" :lng="property.longitude" />
           </div>
 
-          <div class="bg-primary-600 rounded-lg p-6 text-white">
+          <div
+            class="card-base bg-gray-100"
+            v-if="property.phone || property.email"
+          >
             <h3 class="mb-6 text-xl font-bold">
               {{ $t("propertyFull.contact.title") }}
             </h3>
@@ -224,13 +227,13 @@
                 <div class="font-semibold">
                   {{ property.owner.firstName }} {{ property.owner.lastName }}
                 </div>
-                <div class="text-sm text-gray-300">{{ property.phone }}</div>
-                <div class="text-sm text-gray-300">{{ property.email }}</div>
+                <div class="text-sm">{{ property.phone }}</div>
+                <div class="text-sm">{{ property.email }}</div>
               </div>
             </div>
 
             <div class="space-y-3">
-              <Button asChild v-slot="slotProps" severity="secondary">
+              <Button asChild v-slot="slotProps" v-if="property.phone">
                 <a
                   :href="`tel:${property.phone}`"
                   :class="slotProps.class"
@@ -241,9 +244,10 @@
               </Button>
 
               <Button
+                v-if="property.email"
                 asChild
                 v-slot="slotProps"
-                severity="info"
+                severity="secondary"
                 variant="outline"
               >
                 <a

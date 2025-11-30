@@ -1,6 +1,4 @@
 12.2 new elements / changes:
-- new gallery / lightbox
-- do osoby dodać pole - szukam "x" ilosci osób
 13. Chat
 10. GENERAL REFACTORS/IMPROVEMNETS/TESTING
 
