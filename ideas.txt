@@ -2,6 +2,12 @@ To fix:
 1. Anys
 2. Ogólnie walidacje
 
+--
+11. Do usera dodać field do contact email
+12. Ogarnąć temat zdjęć: 1. Te size’y
+2. Po zapisie wrzucać je na tą listę pod spod 
+13. Podstrona z e-mail confjrmsiron przekierowuje na home?
+--
 
 Features:
 0. Chat

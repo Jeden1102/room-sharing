@@ -86,7 +86,11 @@
 
           <Button asChild v-slot="slotProps">
             <RouterLink
-              :to="$localePath(data?.user ? '/new-property' : '/auth/login')"
+              :to="
+                $localePath(
+                  data?.user ? '/new-property' : '/auth/login?feat=newProperty',
+                )
+              "
               :class="slotProps.class"
             >
               {{ $t("nav.addProperty") }}

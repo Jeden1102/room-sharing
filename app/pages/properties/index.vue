@@ -37,7 +37,7 @@
         :class="
           clsx(
             listingType === 'map' &&
-              'no-scrollbar hidden lg:block lg:max-h-[80vh] lg:w-100 lg:overflow-y-auto lg:px-2',
+              'hidden lg:block lg:max-h-[80vh] lg:w-120 lg:overflow-y-auto lg:px-2',
             'w-full',
           )
         "
@@ -73,15 +73,19 @@
         </p>
 
         <Paginator
-          :template="{
-            '640px': 'PrevPageLink CurrentPageReport NextPageLink',
-            '960px':
-              'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
-            '1300px':
-              'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink',
-            default:
-              'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink JumpToPageDropdown',
-          }"
+          :template="
+            listingType === 'map'
+              ? 'PrevPageLink CurrentPageReport NextPageLink'
+              : {
+                  '640px': 'PrevPageLink CurrentPageReport NextPageLink',
+                  '960px':
+                    'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
+                  '1300px':
+                    'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink',
+                  default:
+                    'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink JumpToPageDropdown',
+                }
+          "
           v-if="(propertiesData?.total || 0) > 0"
           class="mt-8"
           :rows="12"

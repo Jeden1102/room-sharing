@@ -77,6 +77,7 @@ import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { loginSchema } from "~/schemas/auth";
 
 const { signIn } = useAuth();
+const { t } = useI18n();
 
 const formStatus = ref<{
   success: boolean | null;
@@ -112,7 +113,7 @@ const onFormSubmit = async ({
 
   if (result?.error) {
     formStatus.value.success = false;
-    formStatus.value.message = result.error;
+    formStatus.value.message = t(result.error);
   } else {
     useRouter().push("/user/profile");
   }

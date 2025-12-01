@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Message v-if="Object.keys(route.query).length" class="mb-8">
+    <Message v-if="Object.keys(route.query).length" class="mb-8 px-1 py-2">
       {{ mapFeatureInfo }}
     </Message>
     <h1 class="text-3xl font-semibold">{{ $t("loginPage.title") }}</h1>
@@ -29,6 +29,7 @@ usePageSeo({
 const mapFeatureInfo = computed(() => {
   const featuresMessage = {
     bookmarks: t("loginPage.feature.bookmarks"),
+    newProperty: t("loginPage.feature.newProperty"),
   };
 
   return featuresMessage[route.query.feat as keyof typeof featuresMessage];

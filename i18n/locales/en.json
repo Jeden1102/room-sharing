@@ -331,6 +331,10 @@
     },
     "button": {
       "submit": "Send Message"
+    },
+    "response": {
+      "success": "Message sent successfully",
+      "error": "Something went wrong. Please try again."
     }
   },
   "fileUploader": {
@@ -890,7 +894,8 @@
     "title": "Welcome Back",
     "subtitle": "Good to see you again. Enter your details.",
     "feature": {
-      "bookmarks": "Log in or create an account to save listings or users that interest you."
+      "bookmarks": "Log in or create an account to save listings or users that interest you.",
+      "newProperty": "Log in or create an account to add a new property."
     }
   },
   "registerPage": {

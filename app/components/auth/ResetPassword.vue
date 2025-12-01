@@ -59,6 +59,8 @@ import { passwordResetSchema } from "~/schemas/auth";
 
 const { code } = defineProps<{ code: string }>();
 
+const { t } = useI18n();
+
 const initialValues = ref({
   password: "",
   passwordRepeat: "",
@@ -97,10 +99,10 @@ const onFormSubmit = async ({
       },
     });
     formStatus.value.success = true;
-    formStatus.value.message = res.message;
+    formStatus.value.message = t(res.message);
   } catch (error: any) {
     formStatus.value.success = false;
-    formStatus.value.message = error.data.message;
+    formStatus.value.message = t(error.data.message);
   } finally {
     formStatus.value.isLoading = false;
   }

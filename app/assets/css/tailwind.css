@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "primeicons/primeicons.css";
 
+@plugin 'tailwind-scrollbar' {
+  nocompatible: true;
+}
+
 @theme {
   --font-poppins: "Poppins", "sans-serif";
 
@@ -19,13 +23,17 @@
 
 @layer {
   html {
-    @apply scroll-smooth;
+    @apply scrollbar scrollbar-thumb-primary-400 scrollbar-track-primary-100 scrollbar-w-1 scroll-smooth;
   }
   body {
     @apply min-h-screen bg-gray-50;
     * {
-      @apply font-poppins;
+      @apply font-poppins scrollbar scrollbar-thumb-primary-400 scrollbar-track-primary-100 scrollbar-w-1;
     }
+  }
+
+  .p-message-info {
+    @apply text-primary-400!;
   }
 }
 

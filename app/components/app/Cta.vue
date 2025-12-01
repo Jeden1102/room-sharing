@@ -1,6 +1,6 @@
 <template>
   <section
-    class="card-base container mb-10 p-0 max-md:max-w-11/12 md:mb-20 md:flex md:rounded-md"
+    class="card-base container mb-10 overflow-hidden p-0 max-md:max-w-11/12 md:mb-20 md:flex md:rounded-md"
     :class="
       variant === 'primary'
         ? 'bg-primary-400 text-white'
@@ -29,12 +29,14 @@
         <slot />
       </div>
     </div>
-    <NuxtImg
-      v-if="image"
-      :src="image"
-      alt="image"
-      class="ml-auto hidden w-100 rounded-r-md object-cover md:block lg:w-120"
-    />
+    <div v-if="image" class="relative ml-auto hidden md:block">
+      <NuxtImg
+        :src="image"
+        alt="image"
+        class="h-full w-100 object-cover lg:w-120"
+        style="clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%)"
+      />
+    </div>
     <span v-if="icon" class="m-auto hidden md:block">
       <Icon
         :name="icon"

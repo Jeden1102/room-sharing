@@ -16,7 +16,7 @@ export default requireAuth(
     if (!validation.success) {
       throw createError({
         statusCode: 400,
-        statusMessage: "Validation failed",
+        statusMessage: "api.login.validationFailed",
       });
     }
 

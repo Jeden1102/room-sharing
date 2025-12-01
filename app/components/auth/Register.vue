@@ -82,6 +82,8 @@
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { registerSchema } from "~/schemas/auth";
 
+const { t } = useI18n();
+
 definePageMeta({
   unauthenticatedOnly: true,
 });
@@ -125,10 +127,10 @@ const onFormSubmit = async ({
       },
     });
     formStatus.value.success = true;
-    formStatus.value.message = res.statusMessage;
+    formStatus.value.message = t(res.statusMessage);
   } catch (error: any) {
     formStatus.value.success = false;
-    formStatus.value.message = error.data.statusMessage;
+    formStatus.value.message = t(error.data.statusMessage);
   } finally {
     formStatus.value.isLoading = false;
   }

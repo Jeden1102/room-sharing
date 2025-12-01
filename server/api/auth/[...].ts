@@ -30,7 +30,7 @@ export default NuxtAuthHandler({
           if (!validation.success) {
             throw createError({
               statusCode: 400,
-              statusMessage: "Validation failed",
+              statusMessage: "api.login.validationFailed",
             });
           }
 
@@ -40,8 +40,8 @@ export default NuxtAuthHandler({
 
           if (user && !user.emailVerified) {
             throw createError({
-              statusCode: 500,
-              statusMessage: "Email not verified",
+              statusCode: 401,
+              statusMessage: "api.login.emailNotVerified",
             });
           }
 
@@ -54,8 +54,8 @@ export default NuxtAuthHandler({
           }
 
           throw createError({
-            statusCode: 500,
-            statusMessage: "Invalid credentials",
+            statusCode: 401,
+            statusMessage: "api.login.invalidCredentials",
           });
         } catch (error) {
           console.error("Validation error:", error);

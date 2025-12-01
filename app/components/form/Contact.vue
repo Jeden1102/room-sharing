@@ -120,6 +120,8 @@
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { contactSchema } from "~/schemas/contact";
 
+const { t } = useI18n();
+
 const formStatus = ref({ success: false, message: "", isLoading: false });
 
 const { contactReasonOptions } = useTaxonomies();
@@ -139,10 +141,10 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
     if (error.value) throw new Error(error.value.message);
 
     formStatus.value.success = true;
-    formStatus.value.message = "Contact message sent.";
+    formStatus.value.message = t("contactForm.response.success");
   } catch (e: any) {
     formStatus.value.success = false;
-    formStatus.value.message = e.message || "There was an error.";
+    formStatus.value.message = e.message || t("contactForm.response.error");
   } finally {
     formStatus.value.isLoading = false;
     reset();

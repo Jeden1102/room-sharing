@@ -331,6 +331,10 @@
     },
     "button": {
       "submit": "Wyślij wiadomość"
+    },
+    "response": {
+      "success": "Wiadomość została wysłana pomyślnie",
+      "error": "Nie udało się wysłać wiadomości"
     }
   },
   "fileUploader": {
@@ -813,6 +817,11 @@
       "success": "Wiadomość została wysłana pomyślnie",
       "failed": "Nie udało się wysłać wiadomości",
       "failedToSendEmail": "Nie udało się wysłać emaila kontaktowego"
+    },
+    "login": {
+      "invalidCredentials": "Nieprawidłowe dane logowania",
+      "emailNotVerified": "Email nie został potwierdzony",
+      "validationFailed": "Walidacja nie powiodła się"
     }
   },
   "faqPage": {
@@ -890,7 +899,8 @@
     "title": "Witaj ponownie",
     "subtitle": "Miło Cię ponownie widzieć. Wprowadź swoje dane",
     "feature": {
-      "bookmarks": "Zaloguj się, lub utwórz konto, aby zapisawać ogłoszenia lub interesujących Cię użytkowników."
+      "bookmarks": "Zaloguj się, lub utwórz konto, aby zapisawać ogłoszenia lub interesujących Cię użytkowników.",
+      "newProperty": "Zaloguj się, aby korzystać z funkcji dodawania ogłoszeń."
     }
   },
   "registerPage": {

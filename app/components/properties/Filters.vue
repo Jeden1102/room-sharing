@@ -10,7 +10,7 @@
     <div
       :class="
         clsx(
-          'fixed top-0 left-full z-20 flex size-full max-h-screen w-full flex-col gap-4 overflow-y-scroll bg-white p-4 transition-all duration-300 md:static md:grid md:grid-cols-3 md:bg-transparent md:p-0 md:pt-2 lg:grid-cols-4 lg:bg-transparent md:[&>div]:w-full',
+          'fixed top-0 left-full z-20 flex size-full max-h-screen w-full flex-col gap-4 overflow-y-auto bg-white p-4 transition-all duration-300 md:static md:grid md:grid-cols-3 md:bg-transparent md:p-0 md:pt-2 lg:grid-cols-4 lg:bg-transparent md:[&>div]:w-full',
           { '!left-0': filtersOpened },
         )
       "

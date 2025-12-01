@@ -78,8 +78,6 @@ const sendContactMail = async (body: {
       },
     );
 
-    console.log(confirmationHtml, 'herew')
-
     await sendMail({
       subject: "New contact message",
       to: useRuntimeConfig().adminEmail,

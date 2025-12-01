@@ -52,6 +52,8 @@ const formStatus = ref<{
   isLoading: false,
 });
 
+const { t } = useI18n();
+
 const initialValues = ref({
   email: "",
 });
@@ -77,10 +79,10 @@ const onFormSubmit = async ({
       },
     });
     formStatus.value.success = true;
-    formStatus.value.message = res.message;
+    formStatus.value.message = t(res.message);
   } catch (error: any) {
     formStatus.value.success = false;
-    formStatus.value.message = error.data.statusMessage;
+    formStatus.value.message = t(error.data.statusMessage);
   } finally {
     formStatus.value.isLoading = false;
   }
