@@ -282,7 +282,7 @@
           <div class="text-sm text-gray-700">
             <p>
               <strong>{{ $t("userProfile.contact.email") }}:</strong>
-              {{ user.email || $t("userProfile.noData") }}
+              {{ user.contactEmail || $t("userProfile.noData") }}
             </p>
             <p>
               <strong>{{ $t("userProfile.contact.phone") }}:</strong>
@@ -297,9 +297,9 @@
               severity="secondary"
               :label="$t('userProfile.contact.sendEmail')"
               icon="pi pi-envelope"
-              v-if="user.email"
+              v-if="user.contactEmail"
             >
-              <a :href="`mailto:${user.email}`" :class="slotProps.class">
+              <a :href="`mailto:${user.contactEmail}`" :class="slotProps.class">
                 {{ $t("userProfile.contact.sendEmail") }}
               </a>
             </Button>

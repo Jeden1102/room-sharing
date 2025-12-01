@@ -610,7 +610,8 @@
     },
     "contact": {
       "legend": "Kontakt",
-      "phone": "Numer telefonu"
+      "phone": "Numer telefonu",
+      "email": "E-mail kontaktowy"
     },
     "submit": "Zapisz zmiany"
   },
@@ -972,6 +973,9 @@
     "arrayTooShort": "Wybierz przynajmniej {min} element(y/ów)",
     "arrayTooLong": "Możesz wybrać maksymalnie {max} element(y/ów)",
 
-    "customError": "Nieprawidłowa wartość"
+    "customError": "Nieprawidłowa wartość",
+
+    "invalidFileSize": "Plik jest za duży (max. {max} MB)",
+    "invalidFileLimit": "Przekroczono limit plików (max. {max})"
   }
 }

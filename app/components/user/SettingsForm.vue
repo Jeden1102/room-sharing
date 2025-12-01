@@ -213,6 +213,7 @@
         @delete="deleteImage"
         :maxFiles="5 - initialValues.moodboardImages.length"
         :form="$form"
+        :maxFileSize="5500000"
       />
     </Fieldset>
 
@@ -221,6 +222,12 @@
         <AtomsInput
           name="phone"
           :label="$t('userSettingsForm.contact.phone')"
+          :form="$form"
+        />
+
+        <AtomsInput
+          name="contactEmail"
+          :label="$t('userSettingsForm.contact.email')"
           :form="$form"
         />
       </div>

@@ -213,11 +213,12 @@
         v-model="imageUris"
         @filesSelected="onFilesSelected"
         @delete="onDeleteImage"
-        :maxFiles="20 - (initialValues?.images?.length || 0)"
+        :maxFiles="10 - (initialValues?.images?.length || 0)"
         :form="$form"
         :can-set-primary="true"
         @setAsPrimary="onSetAsPrimary"
         :primaryImageIdx="initialValues?.mainImageIdx"
+        :maxFileSize="5500000"
       />
     </Fieldset>
 
@@ -420,13 +421,6 @@ const onSetAsPrimary = async (idx: number) => {
   });
 };
 
-const compressOptions = {
-  maxSizeMB: 1,
-  maxWidthOrHeight: 1920,
-  useWebWorker: true,
-  fileType: "image/webp",
-};
-
 const onFormSubmit = async ({ valid, values, reset }: any) => {
   if (!valid) return;
   formStatus.value.isLoading = true;
@@ -436,26 +430,22 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
     if (files.value?.length) {
       const fd = new FormData();
 
-      const compressedFiles = await Promise.all(
-        files.value.map(async (f) => {
-          const compressed = await imageCompression(f, compressOptions);
-          return compressed;
-        }),
-      );
-
-      compressedFiles.forEach((compressed) => {
-        fd.append("files", compressed);
+      files.value.forEach((file) => {
+        fd.append("files", file);
       });
 
       const uploadRes = await $fetch("/api/files", {
         method: "POST",
         body: fd,
       });
-
-      values.images = [
+      const allImages = [
         ...(initialValues.value.images || []),
         ...(uploadRes || []),
       ];
+
+      values.images = allImages;
+      imageUris.value = allImages;
+      files.value = [];
     } else {
       values.images = imageUris.value || values.images || [];
     }

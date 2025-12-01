@@ -33,7 +33,7 @@ export const propertyBaseSchema = z.object({
   isShared: z.boolean().default(false),
   images: z.array(z.string()).optional().default([]),
   ownerId: z.string().optional(),
-  email: z.string().nullable().optional(),
+  email: z.email().nullable().optional(),
   phone: z.string().nullable().optional(),
   roommates: z.array(z.string()).optional().default([]),
 });

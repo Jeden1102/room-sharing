@@ -12,6 +12,7 @@ model User {
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
   email                 String   @unique
+  contactEmail          String?
   password              String?
   firstName             String?
   lastName              String?

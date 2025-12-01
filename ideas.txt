@@ -2,13 +2,6 @@ To fix:
 1. Anys
 2. Ogólnie walidacje
 
---
-11. Do usera dodać field do contact email
-12. Ogarnąć temat zdjęć: 1. Te size’y
-2. Po zapisie wrzucać je na tą listę pod spod 
-13. Podstrona z e-mail confjrmsiron przekierowuje na home?
---
-
 Features:
 0. Chat
 1. Profile/property reporting to admins.
@@ -17,3 +10,5 @@ Features:
 4. Odnośniki z home/stopki do listingów
 5. Page number w listingach (fix cofania)
 6. Dostosowanie pokoji/mieszkań do sharingu
+7. Moliwość usuwania konta
+8. Resend kodu weryfikacyjnego

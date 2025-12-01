@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-const { signOut } = useAuth();
 const { t } = useI18n();
 
 definePageMeta({
@@ -32,12 +31,11 @@ const code = route.query.code as string;
 const responseMessage = ref("");
 const isError = ref(true);
 
-if (!code) {
-  useRouter().push("/");
-}
-
 const confirmEmail = async () => {
-  signOut();
+  if (!code) {
+    responseMessage.value = t("api.confirmEmail.missingCode");
+    return;
+  }
   try {
     const response: { message: string } = await $fetch(
       "/api/auth/confirm-email",

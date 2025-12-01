@@ -1,19 +1,25 @@
 <template>
   <div class="w-full">
     <label class="mb-2 block font-medium">{{ label }}</label>
-
     <FileUpload
       :id="id"
       :name="name"
       multiple
       accept="image/*"
-      customUpload
       :showUploadButton="false"
       :showCancelButton="false"
       @select="onFileSelect"
       :fileLimit="maxFiles"
+      :maxFileSize="maxFileSize"
+      :invalidFileSizeMessage="
+        $t('validation.invalidFileSize', {
+          max: formatBytesToMB(maxFileSize || 0),
+        })
+      "
+      :invalidFileLimitMessage="
+        $t('validation.invalidFileLimit', { max: maxFiles || 0 })
+      "
     />
-
     <div
       v-if="modelValue?.length"
       class="mt-3 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4"
@@ -64,7 +70,10 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+import { ref, watch } from "vue";
+import imageCompression from "browser-image-compression";
+
+interface FileUploaderProps {
   id: string;
   name: string;
   label: string;
@@ -72,9 +81,10 @@ const props = defineProps<{
   maxFiles: number;
   primaryImageIdx?: number;
   canSetPrimary: boolean;
-}>();
+  maxFileSize?: number;
+}
 
-const primaryImgIdx = ref(props.primaryImageIdx);
+const props = defineProps<FileUploaderProps>();
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: string[]): void;
@@ -83,17 +93,114 @@ const emit = defineEmits<{
   (e: "setAsPrimary", idx: number): void;
 }>();
 
-const onFileSelect = (event: any) => {
-  emit("filesSelected", event.files);
+const primaryImgIdx = ref(props.primaryImageIdx);
+const deleteDialogVisible = ref(false);
+const imageToDelete = ref<string | null>(null);
+
+watch(
+  () => props.primaryImageIdx,
+  (newIdx) => {
+    primaryImgIdx.value = newIdx;
+  },
+);
+
+const compressOptions = {
+  maxSizeMB: 1,
+  maxWidthOrHeight: 1920,
+  useWebWorker: true,
+  fileType: "image/webp",
+};
+
+// Funkcja pomocnicza do formatowania bajtów na MB (dla komunikatu o błędzie)
+const formatBytesToMB = (bytes: number): string => {
+  if (bytes === 0) return "0";
+  return (bytes / 1048576).toFixed(1);
+};
+
+// NOWA FUNKCJA POMOCNICZA DLA LOGÓW
+const formatBytes = (bytes: number, decimals = 2) => {
+  if (bytes === 0) return "0 Bytes";
+
+  const k = 1024;
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+};
+
+const onFileSelect = async (event: any) => {
+  const filesToCompress: File[] = event.files;
+
+  if (filesToCompress.length === 0) return;
+
+  // LOGI PRZED KOMPRESJĄ - SUMA
+  const totalOriginalSize = filesToCompress.reduce(
+    (sum, file) => sum + file.size,
+    0,
+  );
+  console.log(`--- ROZPOCZĘCIE PRZETWARZANIA PLIKÓW ---`);
+  console.log(
+    `Łączna waga plików przed kompresją: ${formatBytes(totalOriginalSize)}`,
+  );
+
+  try {
+    const compressedFiles: File[] = await Promise.all(
+      filesToCompress.map(async (f) => {
+        let compressedFile = f;
+
+        // Warunek sprawdzający, czy kompresja jest potrzebna
+        if (f.size > compressOptions.maxSizeMB * 1048576) {
+          const compressed = await imageCompression(f, compressOptions);
+
+          // Tworzenie nowego obiektu File z nazwą oryginalnego pliku
+          compressedFile = new File([compressed], f.name, {
+            type: compressed.type,
+            lastModified: Date.now(),
+          }) as File;
+        }
+
+        // LOGI PORÓWNAWCZE DLA KAŻDEGO PLIKU
+        const originalSize = f.size;
+        const finalSize = compressedFile.size;
+        const reduction = ((originalSize - finalSize) / originalSize) * 100;
+
+        console.log(`[${f.name}]`);
+        console.log(`  - Rozmiar bazowy: ${formatBytes(originalSize)}`);
+        console.log(`  - Rozmiar końcowy: ${formatBytes(finalSize)}`);
+        console.log(`  - Redukcja: ${reduction.toFixed(2)}%`);
+
+        return compressedFile;
+      }),
+    );
+
+    // LOGI PO KOMPRESJI - SUMA
+    const totalCompressedSize = compressedFiles.reduce(
+      (sum, file) => sum + file.size,
+      0,
+    );
+    const totalReduction =
+      ((totalOriginalSize - totalCompressedSize) / totalOriginalSize) * 100;
+
+    console.log(`-------------------------------------------`);
+    console.log(
+      `Łączna waga plików po kompresji: ${formatBytes(totalCompressedSize)}`,
+    );
+    console.log(`SUMARYCZNA REDUKCJA: ${totalReduction.toFixed(2)}%`);
+    console.log(`-------------------------------------------`);
+
+    emit("filesSelected", compressedFiles);
+  } catch (error) {
+    console.error("Błąd podczas kompresji plików:", error);
+    emit("filesSelected", filesToCompress);
+  }
 };
 
 const handleSetAsPrimary = (idx: number) => {
   primaryImgIdx.value = idx;
   emit("setAsPrimary", idx);
 };
-
-const deleteDialogVisible = ref(false);
-const imageToDelete = ref<string | null>(null);
 
 const confirmDelete = (file: string) => {
   imageToDelete.value = file;

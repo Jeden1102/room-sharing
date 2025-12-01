@@ -19,4 +19,5 @@ export const userProfileSchema = z.object({
   moodboardImages: z.array(z.string()).optional(),
   city: z.string().nullable(),
   districts: z.array(z.string()).optional(),
+  contactEmail: z.email().nullable().optional(),
 });

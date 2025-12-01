@@ -610,7 +610,8 @@
     },
     "contact": {
       "legend": "Contact",
-      "phone": "Phone Number"
+      "phone": "Phone Number",
+      "email": "Contact e-mail"
     },
     "submit": "Save Changes"
   },
@@ -967,6 +968,8 @@
     "arrayTooShort": "Select at least {min} item(s)",
     "arrayTooLong": "You can select max {max} item(s)",
     
-    "customError": "Invalid value"
+    "customError": "Invalid value",
+    "invalidFileSize": "Selected files is too big (max. {max} MB)",
+    "invalidFileLimit": "You selected too many files (max. {max})"
   }
 }
