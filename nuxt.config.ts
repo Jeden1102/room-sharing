@@ -123,6 +123,7 @@ export default defineNuxtConfig({
   },
   security: {
     rateLimiter: false,
+    removeLoggers: false,
     headers: {
       contentSecurityPolicy: {
         'img-src': [

@@ -329,8 +329,25 @@ const onFilesSelected = (newFiles: File[]) => {
   files.value = newFiles;
 };
 
-const onDeleteImage = (uri: string) => {
+const onDeleteImage = async (uri: string) => {
   imageUris.value = imageUris.value.filter((i) => i !== uri);
+
+  try {
+    await $fetch("/api/files/delete", {
+      method: "POST",
+      body: {
+        uri,
+        entity: "property",
+        field: "images",
+        images: imageUris.value,
+        id: initialValues.value.id,
+      },
+    });
+
+    initialValues.value.images = imageUris.value;
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 const searchCity = async (event: any) => {

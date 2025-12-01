@@ -42,6 +42,9 @@ export default requireAuth(
             [field]: images,
           },
         });
+
+        const cacheStorage = useStorage("cache:properties:property");
+        await cacheStorage.removeItem(`${id}.json`.replaceAll("-", ""));
       }
 
       return { success: true, updated };
