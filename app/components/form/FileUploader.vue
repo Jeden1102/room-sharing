@@ -9,6 +9,7 @@
       :showUploadButton="false"
       :showCancelButton="false"
       @select="onFileSelect"
+      @remove="onFileRemove"
       :fileLimit="maxFiles"
       :maxFileSize="maxFileSize"
       :invalidFileSizeMessage="
@@ -96,6 +97,7 @@ const emit = defineEmits<{
 const primaryImgIdx = ref(props.primaryImageIdx);
 const deleteDialogVisible = ref(false);
 const imageToDelete = ref<string | null>(null);
+const filesInQueue = ref<File[]>([]);
 
 watch(
   () => props.primaryImageIdx,
@@ -111,13 +113,6 @@ const compressOptions = {
   fileType: "image/webp",
 };
 
-// Funkcja pomocnicza do formatowania bajtów na MB (dla komunikatu o błędzie)
-const formatBytesToMB = (bytes: number): string => {
-  if (bytes === 0) return "0";
-  return (bytes / 1048576).toFixed(1);
-};
-
-// NOWA FUNKCJA POMOCNICZA DLA LOGÓW
 const formatBytes = (bytes: number, decimals = 2) => {
   if (bytes === 0) return "0 Bytes";
 
@@ -135,7 +130,8 @@ const onFileSelect = async (event: any) => {
 
   if (filesToCompress.length === 0) return;
 
-  // LOGI PRZED KOMPRESJĄ - SUMA
+  filesInQueue.value = filesToCompress;
+
   const totalOriginalSize = filesToCompress.reduce(
     (sum, file) => sum + file.size,
     0,
@@ -150,18 +146,15 @@ const onFileSelect = async (event: any) => {
       filesToCompress.map(async (f) => {
         let compressedFile = f;
 
-        // Warunek sprawdzający, czy kompresja jest potrzebna
         if (f.size > compressOptions.maxSizeMB * 1048576) {
           const compressed = await imageCompression(f, compressOptions);
 
-          // Tworzenie nowego obiektu File z nazwą oryginalnego pliku
           compressedFile = new File([compressed], f.name, {
             type: compressed.type,
             lastModified: Date.now(),
           }) as File;
         }
 
-        // LOGI PORÓWNAWCZE DLA KAŻDEGO PLIKU
         const originalSize = f.size;
         const finalSize = compressedFile.size;
         const reduction = ((originalSize - finalSize) / originalSize) * 100;
@@ -175,7 +168,6 @@ const onFileSelect = async (event: any) => {
       }),
     );
 
-    // LOGI PO KOMPRESJI - SUMA
     const totalCompressedSize = compressedFiles.reduce(
       (sum, file) => sum + file.size,
       0,
@@ -195,6 +187,20 @@ const onFileSelect = async (event: any) => {
     console.error("Błąd podczas kompresji plików:", error);
     emit("filesSelected", filesToCompress);
   }
+};
+
+const onFileRemove = async (event: any) => {
+  const fileToRemove: File = event.file;
+
+  const index = filesInQueue.value.findIndex(
+    (f) => f.name === fileToRemove.name && f.size === fileToRemove.size,
+  );
+
+  if (index !== -1) {
+    filesInQueue.value.splice(index, 1);
+  }
+
+  await onFileSelect({ files: filesInQueue.value });
 };
 
 const handleSetAsPrimary = (idx: number) => {
