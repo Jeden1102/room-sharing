@@ -158,6 +158,7 @@ const { data: propertiesData, pending } = await useFetch<{
 }>("/api/properties", {
   query: filters,
   watch: [filters],
+  lazy: true,
 });
 
 const applyFilters = (newFilters: any) => {
