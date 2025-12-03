@@ -50,7 +50,7 @@
             )
           "
         >
-          <UserTeaserLoader
+          <PropertyTeaserLoader
             class="min-h-102.5"
             v-if="pending"
             v-for="i in 12"
@@ -167,16 +167,9 @@ const applyFilters = (newFilters: any) => {
 
 const onPageChange = (event: any) => {
   filters.value.page = Math.floor(event.first / event.rows) + 1;
-};
 
-watch(
-  () => pending.value,
-  (isPending) => {
-    if (!isPending) {
-      requestAnimationFrame(() => {
-        document.querySelector("main")?.scrollIntoView({ behavior: "smooth" });
-      });
-    }
-  },
-);
+  requestAnimationFrame(() => {
+    document.querySelector("main")?.scrollIntoView({ behavior: "smooth" });
+  });
+};
 </script>

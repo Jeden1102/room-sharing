@@ -23,10 +23,12 @@
       <div class="flex items-center justify-between">
         <div>
           <h3 class="text-lg font-semibold text-gray-900">
-            {{ user.firstName }} {{ user.lastName }}
-            <span v-if="user.age" class="ml-2 text-sm text-gray-500">{{
-              user.age
-            }}</span>
+            <NuxtLink :to="uri">
+              {{ user.firstName }} {{ user.lastName }}
+              <span v-if="user.age" class="ml-2 text-sm text-gray-500">{{
+                user.age
+              }}</span>
+            </NuxtLink>
           </h3>
           <p class="mt-2 flex items-center gap-1 text-xs text-gray-500">
             <i class="pi pi-map-marker text-gray-600"></i>
@@ -48,30 +50,18 @@
       </div>
 
       <div class="mt-auto flex items-center justify-between pt-3">
+        <Button icon="pi pi-comments" severity="secondary" rounded />
+
         <Button
           asChild
           v-slot="slotProps"
           :label="$t('userTeaser.viewProfile')"
-          size="small"
           class="rounded-full text-sm"
         >
-          <RouterLink
-            :to="
-              $localePath({
-                name: 'users-id',
-                params: {
-                  id: `${user.firstName?.toLowerCase()}-${user.lastName?.toLowerCase()}`,
-                },
-                query: { id: user.id },
-              })
-            "
-            :class="slotProps.class"
-          >
+          <RouterLink :to="uri" :class="slotProps.class">
             {{ $t("userTeaser.viewProfile") }}
           </RouterLink>
         </Button>
-
-        <Button icon="pi pi-comments" severity="secondary" rounded />
       </div>
     </div>
 
@@ -86,7 +76,10 @@
 </template>
 
 <script setup lang="ts">
+import { NuxtLink } from "#components";
 import type { Prisma } from "@prisma/client";
+
+const localePath = useLocalePath();
 
 type FullUser = Prisma.UserGetPayload<{
   include: {
@@ -107,4 +100,14 @@ const { data } = useAuth();
 const props = defineProps<{
   user: FullUser;
 }>();
+
+const uri = computed(() => {
+  return localePath({
+    name: "users-id",
+    params: {
+      id: `${props.user.firstName?.toLowerCase()}-${props.user.lastName?.toLowerCase()}`,
+    },
+    query: { id: props.user.id },
+  });
+});
 </script>

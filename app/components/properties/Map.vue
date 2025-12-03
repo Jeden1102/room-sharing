@@ -23,14 +23,13 @@
         <div v-if="propertyData && propertyData.id === marker.id">
           <PropertyTeaser :property="propertyData" class="w-72" />
         </div>
-        <UserTeaserLoader v-else />
+        <PropertyTeaserLoader v-else />
       </LPopup>
     </LMarker>
   </LMap>
 </template>
 
 <script lang="ts" setup>
-import { UserTeaserLoader } from "#components";
 import type { PropertyWithOwner } from "@/components/property/types";
 
 defineProps<{

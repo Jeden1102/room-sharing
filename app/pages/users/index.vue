@@ -95,6 +95,7 @@ const { data: usersData, pending } = await useFetch<{
 }>("/api/users", {
   query: filters,
   watch: [filters],
+  lazy: true,
 });
 
 const applyFilters = (newFilters: any) => {
@@ -103,16 +104,9 @@ const applyFilters = (newFilters: any) => {
 
 const onPageChange = (event: any) => {
   filters.value.page = Math.floor(event.first / event.rows) + 1;
-};
 
-watch(
-  () => pending.value,
-  (isPending) => {
-    if (!isPending) {
-      requestAnimationFrame(() => {
-        document.querySelector("main")?.scrollIntoView({ behavior: "smooth" });
-      });
-    }
-  },
-);
+  requestAnimationFrame(() => {
+    document.querySelector("main")?.scrollIntoView({ behavior: "smooth" });
+  });
+};
 </script>

@@ -47,7 +47,11 @@
     <!-- Content -->
     <div class="mt-auto space-y-3 p-4 pt-0">
       <div>
-        <h3 class="line-clamp-1 text-lg font-semibold">{{ property.title }}</h3>
+        <h3 class="line-clamp-1 text-lg font-semibold">
+          <NuxtLink :to="uri">
+            {{ property.title }}
+          </NuxtLink>
+        </h3>
         <p class="flex items-center text-sm text-gray-500">
           {{ property.city }}
         </p>
@@ -78,19 +82,9 @@
           {{ formatPrice(property.price) }} {{ $t("propertyTeaser.currency") }}
         </div>
         <Button asChild v-slot="slotProps">
-          <RouterLink
-            :to="
-              $localePath({
-                name: 'properties-id',
-                params: {
-                  id: slugify(property.title),
-                },
-                query: { id: property.id },
-              })
-            "
-            :class="slotProps.class"
-            >{{ $t("propertyTeaser.viewDetails") }}</RouterLink
-          >
+          <RouterLink :to="uri" :class="slotProps.class">{{
+            $t("propertyTeaser.viewDetails")
+          }}</RouterLink>
         </Button>
       </div>
     </div>
@@ -117,5 +111,17 @@ const carouselImages = computed(() => {
   const rest = imgs.filter((_: unknown, i: number) => i !== mainIdx);
 
   return [main, ...rest].slice(0, 5);
+});
+
+const localePath = useLocalePath();
+
+const uri = computed(() => {
+  return localePath({
+    name: "properties-id",
+    params: {
+      id: slugify(props.property.title),
+    },
+    query: { id: props.property.id },
+  });
 });
 </script>

@@ -36,5 +36,7 @@ usePageSeo({
   description: "seo.bookmarkedProperties.description",
 });
 
-const { data, error, pending } = await useFetch("/api/bookmark/properties");
+const { data, error, pending } = await useFetch("/api/bookmark/properties", {
+  lazy: true,
+});
 </script>

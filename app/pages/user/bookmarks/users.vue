@@ -37,5 +37,7 @@ usePageSeo({
   description: "seo.bookmarkedUsers.description",
 });
 
-const { data, error, pending } = await useFetch("/api/bookmark/users");
+const { data, error, pending } = await useFetch("/api/bookmark/users", {
+  lazy: true,
+});
 </script>
