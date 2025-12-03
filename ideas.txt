@@ -7,8 +7,6 @@ Features:
 1. Profile/property reporting to admins.
 2. Security configs
 3. Zgłaszanie profili userów
-4. Odnośniki z home/stopki do listingów
-5. Page number w listingach (fix cofania)
 6. Dostosowanie pokoji/mieszkań do sharingu
 7. Moliwość usuwania konta
 8. Resend kodu weryfikacyjnego

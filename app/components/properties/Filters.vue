@@ -118,7 +118,6 @@
         severity="secondary"
         class="flex items-center gap-2 md:!hidden"
         @click="clearFilters"
-        v-if="anyFiltersSet"
       >
         <Icon name="fa7-solid:undo" class="text-sm" />
         {{ $t("propertiesFilters.clearFilters") }}
@@ -127,7 +126,6 @@
     <button
       class="mt-2 hidden cursor-pointer items-center gap-2 pl-2 text-xs text-gray-600 md:flex"
       @click="clearFilters"
-      v-if="anyFiltersSet"
     >
       <Icon name="fa7-solid:undo" class="text-xs" />
       {{ $t("propertiesFilters.clearFilters") }}
@@ -137,11 +135,11 @@
 
 <script setup lang="ts">
 import clsx from "clsx";
-const route = useRoute();
 
 const props = defineProps<{
   total?: number;
   pending: boolean;
+  defaultFilters: any;
 }>();
 
 const emit = defineEmits(["update"]);
@@ -152,7 +150,7 @@ const debounceTimeout = ref<NodeJS.Timeout>();
 const defaultFilters = {
   listingType: null,
   type: null,
-  city: route.query.city || "",
+  city: "",
   priceMin: null,
   priceMax: null,
   roomsMin: null,
@@ -162,11 +160,7 @@ const defaultFilters = {
   sortBy: "newest",
 };
 
-const filters = reactive({ ...defaultFilters });
-
-const anyFiltersSet = computed(() => {
-  return JSON.stringify(filters) !== JSON.stringify(defaultFilters);
-});
+const filters = reactive({ ...props.defaultFilters });
 
 watch(
   () => filtersOpened.value,

@@ -45,6 +45,10 @@
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n();
+
+const { data } = useAuth();
+
 const services = [
   {
     titleKey: "services.buyAndSell.title",
@@ -52,8 +56,16 @@ const services = [
     imageAltKey: "services.buyAndSell.imageAlt",
     image: "/icons/buy-property.svg",
     actions: [
-      { labelKey: "services.buyAndSell.browse", link: "/properties" },
-      { labelKey: "services.buyAndSell.list", link: "/new-property" },
+      {
+        labelKey: "services.buyAndSell.browse",
+        link: `/properties/${slugify(t("taxonomies.propertyType.apartment"))}/${slugify(t("taxonomies.listingType.sale"))}`,
+      },
+      {
+        labelKey: "services.buyAndSell.list",
+        link: data.value?.user
+          ? "/new-property"
+          : "/auth/login?feat=newProperty",
+      },
     ],
   },
   {
@@ -62,8 +74,16 @@ const services = [
     imageAltKey: "services.rentAndLease.imageAlt",
     image: "/icons/rent-property.svg",
     actions: [
-      { labelKey: "services.rentAndLease.find", link: "/properties" },
-      { labelKey: "services.rentAndLease.rent", link: "/new-property" },
+      {
+        labelKey: "services.rentAndLease.find",
+        link: `/properties/${slugify(t("taxonomies.propertyType.apartment"))}/${slugify(t("taxonomies.listingType.rent"))}`,
+      },
+      {
+        labelKey: "services.rentAndLease.rent",
+        link: data.value?.user
+          ? "/new-property"
+          : "/auth/login?feat=newProperty",
+      },
     ],
   },
   {
@@ -72,8 +92,16 @@ const services = [
     imageAltKey: "services.shareAndColiving.imageAlt",
     image: "/icons/home-sharing.png",
     actions: [
-      { labelKey: "services.shareAndColiving.offer", link: "/new-property" },
-      { labelKey: "services.shareAndColiving.join", link: "/properties" },
+      {
+        labelKey: "services.shareAndColiving.join",
+        link: `/properties/${slugify(t("taxonomies.propertyType.room"))}/${slugify(t("taxonomies.listingType.rent"))}`,
+      },
+      {
+        labelKey: "services.shareAndColiving.offer",
+        link: data.value?.user
+          ? "/new-property"
+          : "/auth/login?feat=newProperty",
+      },
     ],
   },
 ];

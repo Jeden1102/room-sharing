@@ -28,6 +28,7 @@
         :total="propertiesData?.total"
         :pending
         class="col-span-2 ml-4 lg:ml-0"
+        :defaultFilters="filters"
       />
     </div>
 
@@ -137,9 +138,16 @@ watch(listingType, () => {
   window.dispatchEvent(new Event("resize"));
 });
 
+const uriFilters = {
+  type: route.params.filters?.[0] || null,
+  listingType: route.params.filters?.[1] || null,
+};
+
+const { getMappedKey } = useMapUriFilters();
+
 const filters = ref({
-  listingType: null,
-  type: null,
+  listingType: getMappedKey("listingType", uriFilters.listingType || null),
+  type: getMappedKey("propertyType", uriFilters.type || null),
   city: route.query.city || "",
   priceMin: null,
   priceMax: null,
@@ -148,7 +156,7 @@ const filters = ref({
   amenities: [],
   preferences: [],
   sortBy: "newest",
-  page: 1,
+  page: Number(route.query.page) || 1,
 });
 
 const { data: propertiesData, pending } = await useFetch<{
@@ -165,8 +173,17 @@ const applyFilters = (newFilters: any) => {
   filters.value = { ...filters.value, ...newFilters, page: 1 };
 };
 
+const router = useRouter();
+
 const onPageChange = (event: any) => {
   filters.value.page = Math.floor(event.first / event.rows) + 1;
+
+  router.replace({
+    query: {
+      ...route.query,
+      page: filters.value.page.toString(),
+    },
+  });
 
   requestAnimationFrame(() => {
     document.querySelector("main")?.scrollIntoView({ behavior: "smooth" });

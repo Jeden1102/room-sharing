@@ -286,7 +286,7 @@
       class="!fixed right-4 bottom-20 z-10 min-w-50 md:bottom-4"
       :to="
         $localePath({
-          name: 'properties-id-edit',
+          name: 'property-id-edit',
           params: { id: slugify(property.title) },
           query: { id: property.id },
         })

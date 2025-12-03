@@ -117,7 +117,7 @@ const localePath = useLocalePath();
 
 const uri = computed(() => {
   return localePath({
-    name: "properties-id",
+    name: "property-id",
     params: {
       id: slugify(props.property.title),
     },

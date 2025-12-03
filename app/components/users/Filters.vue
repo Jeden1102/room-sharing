@@ -116,9 +116,11 @@ const emit = defineEmits(["update"]);
 const filtersOpened = ref(false);
 const debounceTimeout = ref<NodeJS.Timeout>();
 
+const route = useRoute();
+
 const defaultFilters = {
   gender: null,
-  city: "",
+  city: route.query.city || "",
   nonSmoker: false,
   noPets: false,
   budgetMax: null,

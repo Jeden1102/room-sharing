@@ -79,14 +79,17 @@ usePageSeo({
   description: "seo.users.description",
 });
 
+const route = useRoute();
+const router = useRouter();
+
 const filters = ref({
   gender: null,
-  city: "",
+  city: route.query.city || "",
   nonSmoker: false,
   noPets: false,
   budgetMax: null,
   sortBy: "newest",
-  page: 1,
+  page: Number(route.query.page) || 1,
 });
 
 const { data: usersData, pending } = await useFetch<{
@@ -104,6 +107,13 @@ const applyFilters = (newFilters: any) => {
 
 const onPageChange = (event: any) => {
   filters.value.page = Math.floor(event.first / event.rows) + 1;
+
+  router.replace({
+    query: {
+      ...route.query,
+      page: filters.value.page.toString(),
+    },
+  });
 
   requestAnimationFrame(() => {
     document.querySelector("main")?.scrollIntoView({ behavior: "smooth" });

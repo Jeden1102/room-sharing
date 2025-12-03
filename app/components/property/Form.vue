@@ -261,7 +261,7 @@
           <RouterLink
             :to="
               $localePath({
-                name: 'properties-id',
+                name: 'property-id',
                 params: {
                   id: slugify(property.title),
                 },

@@ -56,7 +56,7 @@
                 :class="buttonProps.class"
                 :to="
                   $localePath({
-                    name: 'properties-id',
+                    name: 'property-id',
                     params: {
                       id: slugify(slotProps.data.title),
                     },
@@ -73,7 +73,7 @@
                 :class="buttonProps.class"
                 :to="
                   $localePath({
-                    name: 'properties-id-edit',
+                    name: 'property-id-edit',
                     params: {
                       id: slugify(slotProps.data.title),
                     },
