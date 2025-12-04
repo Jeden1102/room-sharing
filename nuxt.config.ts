@@ -92,6 +92,105 @@ export default defineNuxtConfig({
   },
   i18n: {
     defaultLocale: "pl",
+    customRoutes: "config",
+    pages: {
+      index: {
+        en: "/",
+        pl: "/",
+      },
+      contact: {
+        en: "/contact",
+        pl: "/kontakt",
+      },
+      "properties-filters": {
+        en: "/properties/[...filters]", 
+        pl: "/oferty/[...filters]",
+      },
+      faq: {
+        en: "/faq",
+        pl: "/faq",
+      },
+      "new-property": {
+        en: "/new-property",
+        pl: "/dodaj-oferte",
+      },
+      privacy: {
+        en: "/privacy-policy",
+        pl: "/polityka-prywatnosci",
+      },
+      terms: {
+        en: "/terms",
+        pl: "/regulamin",
+      },
+      "auth-confirm-email": {
+        en: "/auth/confirm-email",
+        pl: "/auth/potwierdz-email",
+      },
+      "auth-forgot-password": {
+        en: "/auth/forgot-password",
+        pl: "/auth/zapomnialem-hasla",
+      },
+      "auth-login": {
+        en: "/auth/login",
+        pl: "/auth/logowanie",
+      },
+      "auth-register": {
+        en: "/auth/register",
+        pl: "/auth/rejestracja",
+      },
+      "auth-reset-password": {
+        en: "/auth/reset-password",
+        pl: "/auth/resetuj-haslo",
+      },
+      "property-id": {
+        en: "/property/[[id]]",
+        pl: "/oferta/[[id]]",
+      },
+      "property-id-edit": {
+        en: "/property/[[id]]/edit",
+        pl: "/oferta/[[id]]/edytuj",
+      },
+      users: {
+        en: "/users",
+        pl: "/uzytkownicy",
+      },
+      "users-id": {
+        en: "/users/[id]",
+        pl: "/uzytkownicy/[id]",
+      },
+      user: {
+        en: "/user",
+        pl: "/profil",
+      },
+      "user-profile": {
+        en: "/user/profile",
+        pl: "/profil/dane",
+      },
+      "user-properties": {
+        en: "/user/properties",
+        pl: "/profil/moje-oferty",
+      },
+      "user-settings": {
+        en: "/user/settings",
+        pl: "/profil/ustawienia",
+      },
+      "user-chat": {
+        en: "/user/chat",
+        pl: "/profil/czat",
+      },
+      "user-bookmarks": {
+        en: "/user/bookmarks",
+        pl: "/profil/ulubione",
+      },
+      "user-bookmarks-properties": {
+        en: "/user/bookmarks/properties",
+        pl: "/profil/ulubione/oferty",
+      },
+      "user-bookmarks-users": {
+        en: "/user/bookmarks/users",
+        pl: "/profil/ulubione/uzytkownicy",
+      },
+    },
     locales: [
       { code: "en", name: "English", file: "en.json" },
       { code: "pl", name: "Polish", file: "pl.json" },

@@ -43,27 +43,27 @@ const userMenuItems = ref([
   {
     label: "Profile",
     icon: "pi pi-user",
-    command: localePath("/user/profile"),
+    command: localePath("user-profile"),
   },
   {
     label: "My properties",
     icon: "pi pi-list",
-    command: localePath("/user/properties"),
+    command: localePath("user-properties"),
   },
   {
     label: "Bookmarks",
     icon: "pi pi-bookmark",
-    command: localePath("/user/bookmarks/properties"),
+    command: localePath("user-bookmarks-properties"),
   },
   {
     label: "Chat",
     icon: "pi pi-comment",
-    command: localePath("/user/chat"),
+    command: localePath("user-chat"),
   },
   {
     label: "Settings",
     icon: "pi pi-cog",
-    command: localePath("/user/settings"),
+    command: localePath("user-settings"),
   },
 ]);
 </script>

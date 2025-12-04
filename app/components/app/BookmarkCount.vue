@@ -4,8 +4,11 @@
       :to="
         $localePath(
           data?.user
-            ? '/user/bookmarks/properties'
-            : '/auth/login?feat=bookmarks',
+            ? 'user-bookmarks-properties'
+            : {
+                name: 'auth-login',
+                query: { feat: 'bookmarks' },
+              },
         )
       "
       class="relative flex items-center"

@@ -58,13 +58,24 @@ const services = [
     actions: [
       {
         labelKey: "services.buyAndSell.browse",
-        link: `/properties/${slugify(t("taxonomies.propertyType.apartment"))}/${slugify(t("taxonomies.listingType.sale"))}`,
+        link: {
+          name: "properties-filters",
+          params: {
+            filters: [
+              slugify(t("taxonomies.propertyType.apartment")),
+              slugify(t("taxonomies.listingType.sale")),
+            ],
+          },
+        },
       },
       {
         labelKey: "services.buyAndSell.list",
         link: data.value?.user
-          ? "/new-property"
-          : "/auth/login?feat=newProperty",
+          ? "new-property"
+          : {
+              name: "auth-login",
+              query: { feat: "properties" },
+            },
       },
     ],
   },
@@ -76,13 +87,24 @@ const services = [
     actions: [
       {
         labelKey: "services.rentAndLease.find",
-        link: `/properties/${slugify(t("taxonomies.propertyType.apartment"))}/${slugify(t("taxonomies.listingType.rent"))}`,
+        link: {
+          name: "properties-filters",
+          params: {
+            filters: [
+              slugify(t("taxonomies.propertyType.apartment")),
+              slugify(t("taxonomies.listingType.rent")),
+            ],
+          },
+        },
       },
       {
         labelKey: "services.rentAndLease.rent",
         link: data.value?.user
-          ? "/new-property"
-          : "/auth/login?feat=newProperty",
+          ? "new-property"
+          : {
+              name: "auth-login",
+              query: { feat: "properties" },
+            },
       },
     ],
   },
@@ -94,13 +116,24 @@ const services = [
     actions: [
       {
         labelKey: "services.shareAndColiving.join",
-        link: `/properties/${slugify(t("taxonomies.propertyType.room"))}/${slugify(t("taxonomies.listingType.rent"))}`,
+        link: {
+          name: "properties-filters",
+          params: {
+            filters: [
+              slugify(t("taxonomies.propertyType.room")),
+              slugify(t("taxonomies.listingType.rent")),
+            ],
+          },
+        },
       },
       {
         labelKey: "services.shareAndColiving.offer",
         link: data.value?.user
-          ? "/new-property"
-          : "/auth/login?feat=newProperty",
+          ? "new-property"
+          : {
+              name: "auth-login",
+              query: { feat: "properties" },
+            },
       },
     ],
   },

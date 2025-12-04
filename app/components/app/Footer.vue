@@ -54,7 +54,7 @@
         </h3>
         <ul class="space-y-2 text-sm lg:space-y-3 lg:text-base">
           <li>
-            <NuxtLink :to="$localePath('/faq')" class="footer-link">
+            <NuxtLink :to="$localePath('faq')" class="footer-link">
               {{ $t("footer.explore.faq") }}
             </NuxtLink>
           </li>
@@ -67,32 +67,33 @@
         </h3>
         <ul class="space-y-2 text-sm lg:space-y-3 lg:text-base">
           <li>
-            <NuxtLink :to="$localePath('/properties')" class="footer-link">
+            <NuxtLink
+              :to="
+                $localePath({
+                  name: 'properties-filters',
+                  params: {
+                    filters: [slugify($t('taxonomies.propertyType.apartment'))],
+                  },
+                })
+              "
+              class="footer-link"
+            >
               {{ $t("footer.forRenters.rentApartment") }}
             </NuxtLink>
           </li>
           <li>
             <NuxtLink
-              :to="$localePath('/properties?type=room')"
+              :to="
+                $localePath({
+                  name: 'properties-filters',
+                  params: {
+                    filters: [slugify($t('taxonomies.propertyType.room'))],
+                  },
+                })
+              "
               class="footer-link"
             >
               {{ $t("footer.forRenters.findRoom") }}
-            </NuxtLink>
-          </li>
-          <li>
-            <NuxtLink
-              :to="$localePath('/properties?shared=true')"
-              class="footer-link"
-            >
-              {{ $t("footer.forRenters.shareApartment") }}
-            </NuxtLink>
-          </li>
-          <li>
-            <NuxtLink
-              :to="$localePath('/properties?category=student')"
-              class="footer-link"
-            >
-              {{ $t("footer.forRenters.studentHousing") }}
             </NuxtLink>
           </li>
         </ul>
@@ -104,17 +105,12 @@
         </h3>
         <ul class="space-y-2 text-sm lg:space-y-3 lg:text-base">
           <li>
-            <NuxtLink :to="$localePath('/new-property')" class="footer-link">
+            <NuxtLink :to="$localePath('new-property')" class="footer-link">
               {{ $t("footer.forOwners.listProperty") }}
             </NuxtLink>
           </li>
           <li>
-            <NuxtLink :to="$localePath('/rent-out')" class="footer-link">
-              {{ $t("footer.forOwners.rentOut") }}
-            </NuxtLink>
-          </li>
-          <li>
-            <NuxtLink :to="$localePath('/users')" class="footer-link">
+            <NuxtLink :to="$localePath('users')" class="footer-link">
               {{ $t("footer.forOwners.findTenant") }}
             </NuxtLink>
           </li>
@@ -127,12 +123,12 @@
         </h3>
         <ul class="space-y-2 text-sm lg:space-y-3 lg:text-base">
           <li>
-            <NuxtLink :to="$localePath('/terms')" class="footer-link">
+            <NuxtLink :to="$localePath('terms')" class="footer-link">
               {{ $t("footer.legal.terms") }}
             </NuxtLink>
           </li>
           <li>
-            <NuxtLink :to="$localePath('/privacy')" class="footer-link">
+            <NuxtLink :to="$localePath('privacy')" class="footer-link">
               {{ $t("footer.legal.privacy") }}
             </NuxtLink>
           </li>

@@ -38,7 +38,7 @@
         >
       </div>
       <NuxtLink
-        :to="$localePath('/auth/forgot-password')"
+        :to="$localePath('auth-forgot-password')"
         class="text-primary-600 text-sm font-semibold"
       >
         {{ $t("login.forgotPassword") }}
@@ -61,7 +61,7 @@
         <span>
           {{ $t("login.noAccount") }}
           <NuxtLink
-            :to="$localePath('/auth/register')"
+            :to="$localePath('auth-register')"
             class="text-primary-600 font-semibold"
           >
             {{ $t("login.registerLink") }}
@@ -115,7 +115,7 @@ const onFormSubmit = async ({
     formStatus.value.success = false;
     formStatus.value.message = t(result.error);
   } else {
-    useRouter().push("/user/profile");
+    useRouter().push("user-profile");
   }
 };
 </script>

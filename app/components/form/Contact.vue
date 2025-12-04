@@ -87,11 +87,11 @@
             <Checkbox id="terms" name="terms" binary />
             <label for="terms">
               {{ $t("contactForm.terms.prefix") }}
-              <NuxtLink :to="$localePath('/terms')" class="underline">{{
+              <NuxtLink :to="$localePath('terms')" class="underline">{{
                 $t("contactForm.terms.termsLink")
               }}</NuxtLink>
               {{ $t("contactForm.terms.and") }}
-              <NuxtLink :to="$localePath('/privacy-policy')" class="underline">
+              <NuxtLink :to="$localePath('privacy-policy')" class="underline">
                 {{ $t("contactForm.terms.privacyLink") }}
               </NuxtLink>
             </label>

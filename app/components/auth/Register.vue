@@ -67,7 +67,7 @@
         <span>
           {{ $t("register.hasAccount") }}
           <NuxtLink
-            :to="$localePath('/auth/login')"
+            :to="$localePath('auth-login')"
             class="text-primary-600 font-semibold"
           >
             {{ $t("register.loginLink") }}

@@ -49,25 +49,37 @@ const cities = [
   {
     nameKey: "cities.list.warszawa",
     image: "/images/warszawa.jpg",
-    link: localePath("/properties?city=Warszawa"),
+    link: localePath({
+      name: "properties",
+      query: { city: "Warszawa" },
+    }),
     class: "md:w-[calc(30%-12px)]",
   },
   {
     nameKey: "cities.list.krakow",
     image: "/images/krakow.jpg",
-    link: localePath("/properties?city=Kraków"),
+    link: localePath({
+      name: "properties",
+      query: { city: "Kraków" },
+    }),
     class: "md:w-[calc(70%-12px)]",
   },
   {
     nameKey: "cities.list.gdansk",
     image: "/images/gdansk.jpg",
-    link: localePath("/properties?city=Gdańsk"),
+    link: localePath({
+      name: "properties",
+      query: { city: "Gdańsk" },
+    }),
     class: "md:w-[calc(55%-12px)]",
   },
   {
     nameKey: "cities.list.wroclaw",
     image: "/images/wroclaw.jpg",
-    link: localePath("/properties?city=Wrocław"),
+    link: localePath({
+      name: "properties",
+      query: { city: "Wrocław" },
+    }),
     class: "md:w-[calc(45%-12px)]",
   },
 ];

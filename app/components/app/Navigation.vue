@@ -62,7 +62,7 @@
           <template v-if="!data?.user">
             <Button asChild v-slot="slotProps" severity="secondary">
               <RouterLink
-                :to="$localePath('/auth/login')"
+                :to="$localePath('auth-login')"
                 :class="slotProps.class"
               >
                 {{ $t("nav.login") }}
@@ -88,7 +88,7 @@
             <RouterLink
               :to="
                 $localePath(
-                  data?.user ? '/new-property' : '/auth/login?feat=newProperty',
+                  data?.user ? 'new-property' : 'auth-login?feat=newProperty',
                 )
               "
               :class="slotProps.class"
@@ -139,7 +139,7 @@ const userMenuItems = computed(() => [
   {
     label: t("nav.profile"),
     icon: "pi pi-user",
-    command: () => navigateTo(localePath("/user/profile")),
+    command: () => navigateTo(localePath("user-profile")),
   },
   {
     label: t("nav.logout"),

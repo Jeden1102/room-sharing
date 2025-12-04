@@ -41,23 +41,28 @@ const links = [
   {
     icon: "pi pi-plus",
     to: localePath(
-      data.value?.user ? "/new-property" : "/auth/login?feat=newProperty",
+      data.value?.user
+        ? "new-property"
+        : {
+            name: "auth-login",
+            query: { feat: "properties" },
+          },
     ),
     title: "Add new property",
   },
   {
     icon: "pi pi-search",
-    to: localePath("/properties"),
+    to: localePath("properties"),
     title: "Properties",
   },
   {
     icon: "pi pi-comment",
-    to: localePath("/user/chat"),
+    to: localePath("user-chat"),
     title: "Chat",
   },
   {
     icon: "pi pi-user",
-    to: localePath(data.value?.user ? "/user/profile" : "/auth/login"),
+    to: localePath(data.value?.user ? "user-profile" : "auth-login"),
     title: "Profile",
   },
 ];

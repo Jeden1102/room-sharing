@@ -28,7 +28,12 @@ const isBookmarked = ref(props.initialBookmarked ?? false);
 
 const handleBookmarkClick = async () => {
   if (!data.value) {
-    return router.push(localePath("/auth/login?feat=bookmarks"));
+    return router.push(
+      localePath({
+        name: "auth-login",
+        query: { feat: "bookmarks" },
+      }),
+    );
   }
 
   const success = await toggleBookmark(

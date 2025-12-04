@@ -38,11 +38,11 @@ usePageSeo({
 const userMenuItems = ref([
   {
     label: "Bookmarked properties",
-    command: localePath("/user/bookmarks/properties"),
+    command: localePath("user-bookmarks-properties"),
   },
   {
     label: "Bookmarked users",
-    command: localePath("/user/bookmarks/users"),
+    command: localePath("user-bookmarks-users"),
   },
 ]);
 </script>
