@@ -52,7 +52,7 @@ const links = [
   },
   {
     icon: "pi pi-search",
-    to: localePath("properties"),
+    to: localePath("properties-filters"),
     title: "Properties",
   },
   {

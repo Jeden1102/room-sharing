@@ -55,6 +55,10 @@ model User {
   bookmarkedProperties PropertyBookmark[] @relation("UserPropertyBookmarks")
   bookmarkedByUsers    UserBookmark[]     @relation("BookmarkTargetUser")
   bookmarkedUsers      UserBookmark[]     @relation("BookmarkOwnerUser")
+
+  // Reports
+  reportsFiled   Report[] @relation("ReportsFiled")
+  reportsAgainst Report[] @relation("ReportsAgainstUser")
 }
 
 model Property {
@@ -101,6 +105,9 @@ model Property {
 
   // Bookmarks
   bookmarkedBy PropertyBookmark[] @relation("PropertyBookmarks")
+
+  // Reports
+  reports Report[] @relation("ReportsAgainstProperty")
 }
 
 model PropertyBookmark {
@@ -137,6 +144,31 @@ model Message {
   receiverId String
   receiver   User     @relation("MessagesReceived", fields: [receiverId], references: [id])
   sender     User     @relation("MessagesSent", fields: [senderId], references: [id])
+}
+
+model Report {
+  id          String       @id @default(uuid())
+  createdAt   DateTime     @default(now())
+  reason      ReportReason
+  description String?
+
+  reporterId String
+  reporter   User   @relation("ReportsFiled", fields: [reporterId], references: [id])
+
+  reportedUserId String?
+  reportedUser   User?   @relation("ReportsAgainstUser", fields: [reportedUserId], references: [id])
+
+  reportedPropertyId String?
+  reportedProperty   Property? @relation("ReportsAgainstProperty", fields: [reportedPropertyId], references: [id])
+}
+
+enum ReportReason {
+  SPAM
+  SCAM
+  INAPPROPRIATE_BEHAVIOR
+  FAKE_PROFILE
+  MISLEADING_INFORMATION
+  OTHER
 }
 
 enum PropertyStatus {

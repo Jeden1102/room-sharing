@@ -977,5 +977,22 @@
 
     "invalidFileSize": "Plik jest za duży (max. {max} MB)",
     "invalidFileLimit": "Przekroczono limit plików (max. {max})"
+  },
+  "entityReport": {
+    "title": "Zgłoś",
+    "reason": "Powód zgłoszenia",
+    "description": "Opis",
+    "send": "Wyslij zgłoszenie",
+    "cancel": "Anuluj",
+    "success": "Zgłoszenie zostało wysłane",
+    "error": "Błąd wysyłania zgłoszenia",
+    "reportReasons": {
+      "SPAM": "Spam",
+      "SCAM": "Oszustwo",
+      "INAPPROPRIATE_BEHAVIOR": "Nieodpowiednie zachowanie",
+      "FAKE_PROFILE": "Fałszywy profil",
+      "MISLEADING_INFORMATION": "Wprowadzające w błąd informacje",
+      "OTHER": "Inne"
+    }
   }
 }

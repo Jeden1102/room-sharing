@@ -147,6 +147,15 @@ export const useTaxonomies = () => {
     { label: t('taxonomies.status.reserved'), value: "RESERVED" },
   ]
 
+  const reportOptions = [
+    { label: t("entityReport.reportReasons.SPAM"), value: "SPAM" },
+    { label: t("entityReport.reportReasons.SCAM"), value: "SCAM" },
+    { label: t("entityReport.reportReasons.INAPPROPRIATE_BEHAVIOR"), value: "INAPPROPRIATE_BEHAVIOR" },
+    { label: t("entityReport.reportReasons.FAKE_PROFILE"), value: "FAKE_PROFILE" },
+    { label: t("entityReport.reportReasons.MISLEADING_INFORMATION"), value: "MISLEADING_INFORMATION" },
+    { label: t("entityReport.reportReasons.OTHER"), value: "OTHER" }
+  ];
+
   return {
     listingTypeOptions,
     propertyTypeOptions,
@@ -162,6 +171,7 @@ export const useTaxonomies = () => {
     searchPropertyTypesOptions,
     noiseCompatibilityOptions,
     petsCompatibilityOptions,
-    statusOptions
+    statusOptions,
+    reportOptions
   };
 };

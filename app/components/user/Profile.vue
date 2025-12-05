@@ -317,6 +317,14 @@
           </div>
         </AppCard>
       </div>
+
+      <Divider />
+
+      <div class="flex items-center justify-between">
+        <span class="text-sm text-gray-600">ID: {{ user.id }}</span>
+
+        <AppEntityReport entity="user" :entity-id="user.id" />
+      </div>
     </div>
   </div>
 </template>

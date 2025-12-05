@@ -5,6 +5,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
   }
 
   if (to.meta.unauthenticatedOnly && status.value === "authenticated") {
-    return navigateTo("/user/profile");
+    return navigateTo("/");
   }
 });

@@ -195,6 +195,14 @@
             />
           </div>
         </AppCard>
+
+        <Divider />
+
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-600">ID: {{ property.id }}</span>
+
+          <AppEntityReport entity="property" :entity-id="property.id" />
+        </div>
       </div>
 
       <div class="lg:col-span-1">
