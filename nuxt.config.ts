@@ -331,9 +331,5 @@ export default defineNuxtConfig({
       plugins: [vue()],
     },
     compressPublicAssets: true,
-    prerender: {
-      crawlLinks: true,
-      routes: ['/']
-    }
   }
 });
