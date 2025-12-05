@@ -50,8 +50,8 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/i18n",
     "@sidebase/nuxt-auth",
-    "nuxt-nodemailer",
-    "nuxt-file-storage",
+    ['nuxt-nodemailer', { client: false }],
+    ['nuxt-file-storage', { server: true, client: false }],
     "@nuxt/icon",
     "@nuxtjs/seo",
     "nuxt-security",
@@ -221,8 +221,6 @@ export default defineNuxtConfig({
     },
   },
   security: {
-    rateLimiter: false,
-    removeLoggers: false,
     headers: {
       contentSecurityPolicy: {
         'img-src': [
@@ -333,5 +331,9 @@ export default defineNuxtConfig({
       plugins: [vue()],
     },
     compressPublicAssets: true,
+    prerender: {
+      crawlLinks: true,
+      routes: ['/']
+    }
   }
 });

@@ -19,7 +19,7 @@
       hydrate-on-visible
       :title="$t('cta.connectPeople.title')"
       :subtitle="$t('cta.connectPeople.subtitle')"
-      icon="fluent:people-community-add-20-regular"
+      gif="/gifs/bubble-chat.gif"
       :showLogo="true"
       variant="primary"
     >
@@ -42,7 +42,7 @@
       hydrate-on-visible
       :title="$t('cta.moreQuestions.title')"
       :subtitle="$t('cta.moreQuestions.subtitle')"
-      icon="material-symbols-light:live-help-outline-rounded"
+      gif="/gifs/faq.gif"
     >
       <Button asChild v-slot="slotProps" severity="primary">
         <RouterLink :to="$localePath('faq')" :class="slotProps.class">

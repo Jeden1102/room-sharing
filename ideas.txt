@@ -4,6 +4,5 @@ To fix:
 
 Features:
 0. Chat
-2. Security configs
 6. Dostosowanie pokoji/mieszkań do sharingu
 7. Moliwość usuwania konta

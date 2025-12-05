@@ -1,32 +1,46 @@
 <template>
   <section
-    class="card-base container mb-10 overflow-hidden p-0 max-md:max-w-11/12 md:mb-20 md:flex md:rounded-md"
+    class="card-base container mb-10 overflow-hidden p-0 max-xl:max-w-11/12 md:mb-20 md:flex md:rounded-md"
     :class="
       variant === 'primary'
         ? 'bg-primary-400 text-white'
         : 'bg-gray-100 text-gray-800'
     "
   >
-    <div class="flex flex-col gap-4 p-8 lg:gap-6 lg:p-12">
-      <NuxtImg
-        class="brightness-0 invert-100"
-        src="/logo.png"
-        width="80"
-        height="63"
-        alt="logo"
-        v-if="showLogo"
-      />
-      <h2 class="text-2xl font-medium lg:text-3xl">
-        {{ title }}
-      </h2>
-      <p
-        class="font-light"
-        :class="variant === 'primary' ? 'text-gray-200' : 'text-gray-600'"
-      >
-        {{ subtitle }}
-      </p>
-      <div class="mt-4 flex gap-4 lg:mt-6">
-        <slot />
+    <div
+      class="flex w-full flex-col-reverse gap-4 p-8 md:flex-row md:items-center md:justify-between lg:gap-6 lg:p-12 xl:gap-20"
+    >
+      <div class="flex flex-col gap-4">
+        <NuxtImg
+          class="hidden brightness-0 invert-100 md:block"
+          src="/logo.png"
+          width="80"
+          height="63"
+          alt="logo"
+          v-if="showLogo"
+        />
+        <h2 class="text-2xl font-medium lg:text-3xl">
+          {{ title }}
+        </h2>
+        <p
+          class="font-light"
+          :class="variant === 'primary' ? 'text-gray-200' : 'text-gray-600'"
+        >
+          {{ subtitle }}
+        </p>
+        <div class="mt-4 flex gap-4 lg:mt-6">
+          <slot />
+        </div>
+      </div>
+
+      <div v-if="icon || gif">
+        <Icon
+          v-if="icon"
+          :name="icon"
+          class="text-8xl"
+          :class="variant === 'primary' ? 'text-gray-200' : 'text-gray-600'"
+        />
+        <NuxtImg v-if="gif" :src="gif" class="size-40 object-cover" />
       </div>
     </div>
     <div v-if="image" class="relative ml-auto hidden md:block">
@@ -37,13 +51,6 @@
         style="clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%)"
       />
     </div>
-    <span v-if="icon" class="m-auto hidden md:block">
-      <Icon
-        :name="icon"
-        class="mr-20 text-8xl"
-        :class="variant === 'primary' ? 'text-gray-200' : 'text-gray-600'"
-      />
-    </span>
   </section>
 </template>
 
@@ -53,6 +60,7 @@ defineProps<{
   subtitle: string;
   image?: string;
   icon?: string;
+  gif?: string;
   showLogo?: boolean;
   variant?: "primary" | "secondary";
 }>();

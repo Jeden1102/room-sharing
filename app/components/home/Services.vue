@@ -11,10 +11,11 @@
         :key="service.titleKey"
         class="overflow-hidden rounded-2xl pt-6 shadow-md"
       >
-        <img
+        <NuxtImg
           :src="service.image"
           :alt="$t(service.imageAltKey)"
-          class="mx-auto size-20 object-cover"
+          loading="lazy"
+          class="mx-auto size-28 object-cover"
         />
 
         <div class="space-y-4 p-6">
@@ -54,7 +55,7 @@ const services = [
     titleKey: "services.buyAndSell.title",
     descriptionKey: "services.buyAndSell.description",
     imageAltKey: "services.buyAndSell.imageAlt",
-    image: "/icons/buy-property.svg",
+    image: "/gifs/buy-a-house.gif",
     actions: [
       {
         labelKey: "services.buyAndSell.browse",
@@ -83,7 +84,7 @@ const services = [
     titleKey: "services.rentAndLease.title",
     descriptionKey: "services.rentAndLease.description",
     imageAltKey: "services.rentAndLease.imageAlt",
-    image: "/icons/rent-property.svg",
+    image: "/gifs/lease.gif",
     actions: [
       {
         labelKey: "services.rentAndLease.find",
@@ -112,7 +113,7 @@ const services = [
     titleKey: "services.shareAndColiving.title",
     descriptionKey: "services.shareAndColiving.description",
     imageAltKey: "services.shareAndColiving.imageAlt",
-    image: "/icons/home-sharing.png",
+    image: "/gifs/living-together.gif",
     actions: [
       {
         labelKey: "services.shareAndColiving.join",
