@@ -1,5 +1,5 @@
 <template>
-  <section class="container mb-30">
+  <section class="container-spacing container">
     <AppSectionTitle
       :title="$t('cities.title')"
       :subtitle="$t('cities.subtitle')"
@@ -50,7 +50,7 @@ const cities = [
     nameKey: "cities.list.warszawa",
     image: "/images/warszawa.jpg",
     link: localePath({
-      name: "properties",
+      name: "properties-filters",
       query: { city: "Warszawa" },
     }),
     class: "md:w-[calc(30%-12px)]",
@@ -59,7 +59,7 @@ const cities = [
     nameKey: "cities.list.krakow",
     image: "/images/krakow.jpg",
     link: localePath({
-      name: "properties",
+      name: "properties-filters",
       query: { city: "Kraków" },
     }),
     class: "md:w-[calc(70%-12px)]",
@@ -68,7 +68,7 @@ const cities = [
     nameKey: "cities.list.gdansk",
     image: "/images/gdansk.jpg",
     link: localePath({
-      name: "properties",
+      name: "properties-filters",
       query: { city: "Gdańsk" },
     }),
     class: "md:w-[calc(55%-12px)]",
@@ -77,7 +77,7 @@ const cities = [
     nameKey: "cities.list.wroclaw",
     image: "/images/wroclaw.jpg",
     link: localePath({
-      name: "properties",
+      name: "properties-filters",
       query: { city: "Wrocław" },
     }),
     class: "md:w-[calc(45%-12px)]",

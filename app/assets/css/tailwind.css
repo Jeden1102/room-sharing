@@ -38,7 +38,10 @@
 }
 
 @utility container {
-  @apply mx-auto max-w-325 px-4;
+  @apply mx-auto w-[calc(100%-2rem)] max-w-325;
+}
+@utility container-spacing {
+  @apply mb-16 lg:mb-24;
 }
 
 @utility nav-link {

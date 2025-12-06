@@ -1,6 +1,6 @@
 <template>
   <section
-    class="card-base container mb-10 overflow-hidden p-0 max-xl:max-w-11/12 md:mb-20 md:flex md:rounded-md"
+    class="card-base container-spacing container overflow-hidden p-0 md:flex md:rounded-md"
     :class="
       variant === 'primary'
         ? 'bg-primary-400 text-white'

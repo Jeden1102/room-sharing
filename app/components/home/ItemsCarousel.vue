@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <section class="container mb-30">
+    <section class="container-spacing container">
       <AppSectionTitle :title :subtitle />
       <Carousel
         :value="items"
