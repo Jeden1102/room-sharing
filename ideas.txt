@@ -3,7 +3,6 @@ To fix:
 2. Ogólnie walidacje
 5. Clustery
 6. Ograniczenie ilości ładowanych danych
-9. W zgłaszaniu dodać checkox + info o tym, by było przemyślane/legit. //
 10. Do ofert/userów dodać datę dodania/dołączenia. //
 
 Features:

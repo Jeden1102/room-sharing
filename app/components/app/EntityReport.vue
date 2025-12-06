@@ -57,6 +57,12 @@
           </Message>
         </div>
 
+        <p class="text-sm text-gray-500">
+          {{ $t("entityReport.reportConfirmation") }}
+        </p>
+
+        <FormTerms />
+
         <div class="flex gap-2">
           <Button
             type="submit"
@@ -111,11 +117,13 @@ const formStatus = ref({
   success: false,
   message: "",
   isLoading: false,
+  terms: false,
 });
 
 const reportSchema = z.object({
   reason: z.string(),
   description: z.string().max(2048),
+  terms: z.boolean(),
 });
 
 const resolver = ref(zodResolver(reportSchema));

@@ -982,5 +982,23 @@
     "404": "Whoops, the page you're looking for can't be found",
     "500": "Whoops, something went wrong on our side",
     "goHome": "Take me home"
+  },
+  "entityReport": {
+    "title": "Report",
+    "reason": "Reason for Report",
+    "description": "Description",
+    "send": "Send Report",
+    "cancel": "Cancel",
+    "success": "The report has been sent",
+    "error": "Error sending the report",
+    "reportReasons": {
+      "SPAM": "Spam",
+      "SCAM": "Scam",
+      "INAPPROPRIATE_BEHAVIOR": "Inappropriate Behavior",
+      "FAKE_PROFILE": "Fake Profile",
+      "MISLEADING_INFORMATION": "Misleading Information",
+      "OTHER": "Other"
+    },
+    "reportConfirmation": "I confirm this report is being submitted in good faith. I declare that I genuinely believe the reported content (user/listing) is inappropriate, harmful, or violates the guidelines."
   }
 }

@@ -998,7 +998,8 @@
       "FAKE_PROFILE": "Fałszywy profil",
       "MISLEADING_INFORMATION": "Wprowadzające w błąd informacje",
       "OTHER": "Inne"
-    }
+    },
+    "reportConfirmation": "Potwierdzam, że to zgłoszenie jest składane w dobrej wierze. Oświadczam, że uważam zgłaszaną treść (użytkownika/ogłoszenie) za faktycznie nieodpowiednią, szkodliwą lub naruszającą zasady."
   },
   "error": {
     "403": "Uuupsss, nie masz dostępu do tej strony",
