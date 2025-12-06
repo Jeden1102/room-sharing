@@ -437,6 +437,11 @@
       "edit": "Save Changes",
       "add": "Add Listing",
       "preview": "Preview Listing"
+    },
+    "response": {
+      "edit": "Offer edited successfully",
+      "add": "Offer created successfully",
+      "error": "There was an error creating the offer"
     }
   },
   "propertyFull": {
@@ -971,5 +976,11 @@
     "customError": "Invalid value",
     "invalidFileSize": "Selected files is too big (max. {max} MB)",
     "invalidFileLimit": "You selected too many files (max. {max})"
+  },
+  "error": {
+    "403": "Whoops, you don't have access to this page",
+    "404": "Whoops, the page you're looking for can't be found",
+    "500": "Whoops, something went wrong on our side",
+    "goHome": "Take me home"
   }
 }

@@ -4,10 +4,10 @@
     <div class="container mt-4 lg:mt-12">
       <LazyHomeItemsCarousel
         hydrate-on-visible
-        v-if="data && data.similarProperties"
+        v-if="propertyData && propertyData.similarProperties"
         :title="$t('propertyPage.similar.title')"
         :subtitle="$t('propertyPage.similar.subtitle')"
-        :items="data?.similarProperties"
+        :items="propertyData?.similarProperties"
         :showNavigation="false"
         entity="property"
       />
@@ -24,25 +24,31 @@ definePageMeta({
   auth: false,
 });
 
-usePageSeo({
-  title: "seo.property.title",
-  description: "seo.property.description",
-});
-
-const { data, error } = await useFetch<{
+const { data: propertyData, error } = await useFetch<{
   property: PropertyWithOwner;
   similarProperties: PropertyWithOwner[];
 }>(`/api/property/${route.query.id}?getSimilar=true`, {
   cache: "no-cache",
 });
 
-if (error.value || !data.value?.property) {
+const fetchError = error.value;
+
+if (fetchError || !propertyData.value?.property) {
+  const statusCode = fetchError?.statusCode || 404;
+  const statusMessage = fetchError?.statusMessage || "Property not found";
+
   throw createError({
-    statusCode: 404,
-    statusMessage: "Property not found",
+    statusCode: statusCode,
+    statusMessage: statusMessage,
     fatal: true,
   });
 }
 
-const property = computed(() => data.value?.property || null);
+const property = computed(() => propertyData.value?.property || null);
+
+usePageSeo({
+  title: property.value?.title || "seo.property.title",
+  description: property.value?.description || "seo.property.description",
+  image: property.value?.images[0],
+});
 </script>

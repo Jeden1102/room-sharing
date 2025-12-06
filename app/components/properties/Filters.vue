@@ -116,7 +116,7 @@
 
       <Button
         severity="secondary"
-        class="flex items-center gap-2 md:!hidden"
+        class="flex min-h-10 items-center gap-2 md:!hidden"
         @click="clearFilters"
       >
         <Icon name="fa7-solid:undo" class="text-sm" />

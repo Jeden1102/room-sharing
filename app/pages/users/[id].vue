@@ -17,11 +17,6 @@
 <script setup lang="ts">
 const route = useRoute();
 
-usePageSeo({
-  title: "seo.user.title",
-  description: "seo.user.description",
-});
-
 const { data: userData, error } = await useFetch(
   `/api/users/${route.query.id}?getSimilar=true`,
   {
@@ -38,4 +33,10 @@ if (error.value || !userData.value?.user) {
 }
 
 const user = computed(() => userData.value?.user || null);
+
+usePageSeo({
+  title: user.value?.firstName + " " + user.value?.lastName || "seo.user.title",
+  description: user.value?.description || "seo.user.description",
+  image: user.value?.profileImage,
+});
 </script>

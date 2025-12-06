@@ -24,7 +24,7 @@ export default session(defineEventHandler(async (event) => {
     const take = Number(limit) || 12;
     const skip = (Number(page) - 1) * take;
 
-    const where: any = { status: "ACTIVE" };
+    const where: any = { status: { not: "DRAFT" } };
 
     // Basic filters
     if (listingType) where.listingType = listingType;

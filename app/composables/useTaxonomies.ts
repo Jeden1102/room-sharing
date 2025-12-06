@@ -1,3 +1,5 @@
+import { useI18n } from 'vue-i18n';
+
 export const useTaxonomies = () => {
   const { t } = useI18n();
 
@@ -156,6 +158,37 @@ export const useTaxonomies = () => {
     { label: t("entityReport.reportReasons.OTHER"), value: "OTHER" }
   ];
 
+  const allTaxonomies = {
+    listingTypeOptions,
+    propertyTypeOptions,
+    amenitiesOptions,
+    mediasOptions,
+    contactReasonOptions,
+    genderOptions,
+    propertiesSortOptions,
+    usersSortOptions,
+    interestsOptions,
+    occupationsOptions,
+    searchPreferencesOptions,
+    searchPropertyTypesOptions,
+    noiseCompatibilityOptions,
+    petsCompatibilityOptions,
+    statusOptions,
+    reportOptions,
+  };
+
+  const mapTaxonomyLabel = (taxonomyKey: keyof typeof allTaxonomies, value: string | null): string => {
+    const optionsArray = allTaxonomies[taxonomyKey];
+
+    if (!optionsArray) {
+      return '';
+    }
+
+    const foundOption: any = optionsArray.find((option: any) => option.value === value || option.id === value);
+
+    return foundOption ? foundOption.label : '';
+  }
+
   return {
     listingTypeOptions,
     propertyTypeOptions,
@@ -172,6 +205,7 @@ export const useTaxonomies = () => {
     noiseCompatibilityOptions,
     petsCompatibilityOptions,
     statusOptions,
-    reportOptions
+    reportOptions,
+    mapTaxonomyLabel
   };
 };

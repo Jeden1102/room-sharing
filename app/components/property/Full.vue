@@ -4,7 +4,7 @@
       <div class="flex items-end justify-between">
         <div>
           <Badge>
-            {{ property.listingType }}
+            {{ mapTaxonomyLabel("listingTypeOptions", property.listingType) }}
           </Badge>
           <AppHeading class="my-2">
             {{ property.title }}
@@ -309,6 +309,8 @@
 import { ref, computed } from "vue";
 
 const { $lightgallery, $lgThumbnail, $lgZoom, $lgFullscreen } = useNuxtApp();
+
+const { mapTaxonomyLabel } = useTaxonomies();
 
 const { data } = useAuth();
 const props = defineProps<{ property: any }>();

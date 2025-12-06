@@ -88,7 +88,7 @@
                 }
           "
           v-if="(propertiesData?.total || 0) > 0"
-          class="mt-8"
+          class="mt-8 [&>div]:!bg-transparent"
           :rows="12"
           :totalRecords="propertiesData?.total"
           :first="(filters.page - 1) * 12"

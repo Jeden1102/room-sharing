@@ -13,7 +13,9 @@
         {{ message }}
       </p>
 
-      <Button class="w-fit" @click="handleError">Go home</Button>
+      <Button class="w-fit" @click="handleError">{{
+        $t("error.goHome")
+      }}</Button>
     </div>
   </NuxtLayout>
 </template>
@@ -34,9 +36,11 @@ const props = defineProps({ error: Object as () => NuxtError });
 
 const handleError = () => clearError({ redirect: "/" });
 
+const { t } = useI18n();
+
 const errorMessages: Record<number, string> = {
-  403: "Whoops! You don't have permission to access this page",
-  404: "Whoops! The page you are looking for does not exist",
+  403: t("error.403"),
+  404: t("error.404"),
 };
 
 const errorImages: Record<number, string> = {
@@ -45,10 +49,7 @@ const errorImages: Record<number, string> = {
 };
 
 const message = computed(() => {
-  return (
-    errorMessages[props.error?.statusCode ?? 0] ||
-    "Whoops! Something went wrong"
-  );
+  return errorMessages[props.error?.statusCode ?? 0] || t("error.404");
 });
 
 const image = computed(() => {

@@ -35,6 +35,16 @@
       <p class="mt-1.5 text-sm font-light" v-if="!property">
         {{ $t("propertyForm.addBasicInfo") }}
       </p>
+      <AtomsDropdown
+        class="mt-4"
+        v-if="property"
+        name="status"
+        label="Status"
+        :options="statusOptions"
+        optionLabel="label"
+        optionValue="value"
+        :form="$form"
+      />
     </Message>
 
     <Fieldset :legend="$t('propertyForm.basicData.legend')">
@@ -288,7 +298,6 @@
 <script setup lang="ts">
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { propertyCreateSchema } from "~/schemas/property";
-import imageCompression from "browser-image-compression";
 
 const props = defineProps<{
   property?: any;
@@ -312,6 +321,7 @@ const {
   listingTypeOptions,
   amenitiesOptions,
   mediasOptions,
+  statusOptions,
 } = useTaxonomies();
 
 const typeOptions = computed(() => {
@@ -438,6 +448,10 @@ const onSetAsPrimary = async (idx: number) => {
   });
 };
 
+const router = useRouter();
+const localePath = useLocalePath();
+const { t } = useI18n();
+
 const onFormSubmit = async ({ valid, values, reset }: any) => {
   if (!valid) return;
   formStatus.value.isLoading = true;
@@ -473,25 +487,41 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
       values.district = null;
     }
 
-    const { data, error } = await useFetch(apiUri.value, {
-      method: "POST",
-      body: values,
-    });
+    const { data, error }: { data: any; error: any } = await useFetch(
+      apiUri.value,
+      {
+        method: "POST",
+        body: values,
+      },
+    );
 
-    if (error.value) throw new Error(error.value.message || "Błąd serwera");
+    if (error.value)
+      throw new Error(error.value.message || t("propertyForm.response.error"));
 
     formStatus.value.success = true;
     formStatus.value.message = props.property
-      ? "Zaktualizowano ofertę"
-      : "Oferta dodana pomyślnie";
+      ? t("propertyForm.response.edit")
+      : t("propertyForm.response.add");
 
     if (!props.property) {
       reset();
+
+      const newProperty = data.value.property;
+
+      router.push(
+        localePath({
+          name: "property-id",
+          params: {
+            id: slugify(newProperty.title),
+          },
+          query: { id: newProperty.id },
+        }),
+      );
     }
   } catch (err: any) {
     console.error(err);
     formStatus.value.success = false;
-    formStatus.value.message = err?.message || "Błąd zapisu";
+    formStatus.value.message = err?.message || t("propertyForm.response.error");
   } finally {
     formStatus.value.isLoading = false;
   }

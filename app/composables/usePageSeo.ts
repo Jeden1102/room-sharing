@@ -11,7 +11,7 @@ export default function usePageSeo({
   const config = useRuntimeConfig();
 
   const imageUrl = image
-    ? config.public.APP_BASE_URI + image
+    ? image
     : config.public.APP_BASE_URI + "/images/hero.png";
 
   return useSeoMeta({

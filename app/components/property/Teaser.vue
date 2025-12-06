@@ -31,9 +31,15 @@
 
       <!-- Badges + Bookmark -->
       <Badge
-        :value="property.listingType"
+        :value="mapTaxonomyLabel('listingTypeOptions', property.listingType)"
         class="absolute top-4 left-4"
         v-if="variant === 'large'"
+      />
+      <Badge
+        :value="mapTaxonomyLabel('statusOptions', property.status)"
+        severity="secondary"
+        class="absolute top-12 left-4"
+        v-if="property.status === 'RESERVED'"
       />
       <AppEntityBookmark
         v-if="variant === 'large' && property.ownerId !== data?.user?.id"
@@ -99,6 +105,8 @@ const props = defineProps<{
   noCarousel?: boolean;
   variant?: "small" | "large";
 }>();
+
+const { mapTaxonomyLabel } = useTaxonomies();
 
 const carouselImages = computed(() => {
   const imgs = props.property?.images || [];

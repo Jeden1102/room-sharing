@@ -437,6 +437,11 @@
       "edit": "Zapisz zmiany",
       "add": "Dodaj ofertę",
       "preview": "Podgląd oferty"
+    },
+    "response": {
+      "edit": "Oferta została zaktualizowana pomyślnie",
+      "add": "Oferta została utworzona pomyślnie",
+      "error": "Wystąpił błąd podczas tworzenia oferty"
     }
   },
   "propertyFull": {
@@ -994,5 +999,11 @@
       "MISLEADING_INFORMATION": "Wprowadzające w błąd informacje",
       "OTHER": "Inne"
     }
+  },
+  "error": {
+    "403": "Uuupsss, nie masz dostępu do tej strony",
+    "404": "Uuupsss, strona, która szukasz nie została znaleziona",
+    "500": "Uuupsss, cos poszło nie tak",
+    "goHome": "Wróć do strony głównej"
   }
 }

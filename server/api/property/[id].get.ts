@@ -1,6 +1,5 @@
 import prisma from "~~/lib/prisma";
 import { session } from "../middleware/session"
-
 import type { PropertyWithOwner } from "@/components/property/types"
 
 export default session(defineCachedEventHandler(
@@ -16,11 +15,18 @@ export default session(defineCachedEventHandler(
           owner: true
         }
       });
+      
 
       if (!property) {
+         throw createError({ statusCode: 404, statusMessage: "Property not found" });
+      }
+
+      const isOwner = userId && property.ownerId === userId;
+      
+      if (property.status === 'DRAFT' && !isOwner) {
         throw createError({
-          statusCode: 404,
-          statusMessage: "Property not found",
+          statusCode: 403,
+          statusMessage: "Forbidden: You do not have permission to view this property.",
         });
       }
 
@@ -87,6 +93,9 @@ export default session(defineCachedEventHandler(
         ...(getSimilar && { similarProperties })
       };
     } catch (error) {
+      if (error.statusCode === 403 || error.statusCode === 404) {
+          throw error;
+      }
       console.error(error);
       throw createError({
         statusCode: 500,
@@ -99,5 +108,19 @@ export default session(defineCachedEventHandler(
     group: "properties",
     name: "property",
     getKey: (event) => event?.context?.params?.id || '',
+    shouldBypassCache: async (event) => {
+      const id = event.context.params?.id;
+      if (!id) return true;
+      
+      try {
+        const property = await prisma.property.findUnique({
+          where: { id },
+          select: { status: true } 
+        });
+        return property?.status === 'DRAFT'; 
+      } catch (e) {
+        return true; 
+      }
+    }
   },
 ));
