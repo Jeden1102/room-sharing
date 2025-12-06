@@ -1,7 +1,7 @@
 <template>
   <div>
     <FloatLabel variant="on">
-      <InputText :id="name" :name fluid />
+      <InputText :id="name" :name fluid :type />
       <label :for="name">{{ label }}</label>
     </FloatLabel>
     <Message
@@ -20,6 +20,7 @@ const props = defineProps<{
   name: string;
   label: string;
   form: any;
+  type?: "text" | "email" | "password";
 }>();
 
 const fieldState = computed(() => props.form?.[props.name]);

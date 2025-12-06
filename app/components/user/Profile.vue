@@ -320,6 +320,11 @@
 
       <Divider />
 
+      <p class="text-sm text-gray-600">
+        {{ $t("userProfile.createdAt") }}
+        <span class="font-medium">{{ formatDate(user.createdAt) }}</span>
+      </p>
+
       <div class="flex items-center justify-between">
         <span class="text-sm text-gray-600">ID: {{ user.id }}</span>
 

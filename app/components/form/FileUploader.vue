@@ -113,33 +113,12 @@ const compressOptions = {
   fileType: "image/webp",
 };
 
-const formatBytes = (bytes: number, decimals = 2) => {
-  if (bytes === 0) return "0 Bytes";
-
-  const k = 1024;
-  const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
-
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
-};
-
 const onFileSelect = async (event: any) => {
   const filesToCompress: File[] = event.files;
 
   if (filesToCompress.length === 0) return;
 
   filesInQueue.value = filesToCompress;
-
-  const totalOriginalSize = filesToCompress.reduce(
-    (sum, file) => sum + file.size,
-    0,
-  );
-  console.log(`--- ROZPOCZĘCIE PRZETWARZANIA PLIKÓW ---`);
-  console.log(
-    `Łączna waga plików przed kompresją: ${formatBytes(totalOriginalSize)}`,
-  );
 
   try {
     const compressedFiles: File[] = await Promise.all(
@@ -155,32 +134,9 @@ const onFileSelect = async (event: any) => {
           }) as File;
         }
 
-        const originalSize = f.size;
-        const finalSize = compressedFile.size;
-        const reduction = ((originalSize - finalSize) / originalSize) * 100;
-
-        console.log(`[${f.name}]`);
-        console.log(`  - Rozmiar bazowy: ${formatBytes(originalSize)}`);
-        console.log(`  - Rozmiar końcowy: ${formatBytes(finalSize)}`);
-        console.log(`  - Redukcja: ${reduction.toFixed(2)}%`);
-
         return compressedFile;
       }),
     );
-
-    const totalCompressedSize = compressedFiles.reduce(
-      (sum, file) => sum + file.size,
-      0,
-    );
-    const totalReduction =
-      ((totalOriginalSize - totalCompressedSize) / totalOriginalSize) * 100;
-
-    console.log(`-------------------------------------------`);
-    console.log(
-      `Łączna waga plików po kompresji: ${formatBytes(totalCompressedSize)}`,
-    );
-    console.log(`SUMARYCZNA REDUKCJA: ${totalReduction.toFixed(2)}%`);
-    console.log(`-------------------------------------------`);
 
     emit("filesSelected", compressedFiles);
   } catch (error) {

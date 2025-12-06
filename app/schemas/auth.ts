@@ -37,3 +37,19 @@ export const passwordResetSchema = z
 export const forgotPasswordSchema = z.object({
   email: z.string().email(),
 });
+
+export const newPasswordSchema = z
+  .object({
+    oldPassword: z
+    .string()
+    .min(8),
+    password: z
+      .string()
+      .min(8),
+    passwordRepeat: z
+      .string()
+      .min(8),
+  })
+  .refine((data) => data.password === data.passwordRepeat, {
+    path: ["passwordRepeat"],
+  });

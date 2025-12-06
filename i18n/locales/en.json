@@ -95,6 +95,10 @@
     "privacyPolicy": {
       "title": "Privacy Policy",
       "description": "Learn how we process your data while you use the apartment and room rental platform."
+    },
+    "userSecurity": {
+      "title": "Account Security",
+      "description": "Change account details, set rental preferences, manage notifications, and privacy."
     }
   },
   "cookies": {
@@ -479,7 +483,8 @@
       "call": "Call",
       "sendEmail": "Send Email"
     },
-    "editButton": "Edit Listing"
+    "editButton": "Edit Listing",
+    "publicationDate": "Publication date:"
   },
   "propertyTeaser": {
     "imageAlt": "Property image",
@@ -542,7 +547,8 @@
       "phone": "Phone",
       "sendEmail": "Send Email",
       "call": "Call"
-    }
+    },
+    "createdAt": "Join date:"
   },
   "userProperties": {
     "table": {
@@ -1000,5 +1006,26 @@
       "OTHER": "Other"
     },
     "reportConfirmation": "I confirm this report is being submitted in good faith. I declare that I genuinely believe the reported content (user/listing) is inappropriate, harmful, or violates the guidelines."
+  },
+  "userSecurityForm": {
+    "passwordReset": {
+      "legend": "Password Reset",
+      "password": "New Password",
+      "passwordRepeat": "Repeat New Password",
+      "oldPassword": "Current Password",
+      "submit": "Change Password",
+      "success": "Password has been successfully changed",
+      "error": "Error changing password",
+      "invalidOldPassword": "Invalid current password"
+    },
+    "accountDeletion": {
+      "legend": "Account Deletion",
+      "warning": "Account deletion is irreversible. All your listings and comments will be permanently removed along with your account. Are you sure you want to proceed?",
+      "openDialog": "Delete Account",
+      "dialogHeader": "Delete Account",
+      "cancel": "Cancel",
+      "confirm": "Confirm Deletion",
+      "password": "Password"
+    }
   }
 }

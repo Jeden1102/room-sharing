@@ -153,7 +153,6 @@ const onSubmit = async ({ valid, values, reset }: any) => {
 
     reset();
   } catch (e: any) {
-    console.log(e, "here");
     formStatus.value.success = false;
     formStatus.value.message = t("entityReport.error");
   } finally {

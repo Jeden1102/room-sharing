@@ -61,9 +61,14 @@ const userMenuItems = ref([
     command: localePath("user-chat"),
   },
   {
-    label: "Settings",
-    icon: "pi pi-cog",
+    label: "User Settings",
+    icon: "pi pi-user-edit",
     command: localePath("user-settings"),
+  },
+  {
+    label: "User Security",
+    icon: "pi pi-cog",
+    command: localePath("user-security"),
   },
 ]);
 </script>

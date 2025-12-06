@@ -198,6 +198,10 @@
 
         <Divider />
 
+        <p class="text-sm text-gray-600">
+          {{ $t("propertyFull.publicationDate") }}
+          <span class="font-medium">{{ formatDate(property.createdAt) }}</span>
+        </p>
         <div class="flex items-center justify-between">
           <span class="text-sm text-gray-600">ID: {{ property.id }}</span>
 

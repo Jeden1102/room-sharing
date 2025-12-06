@@ -95,6 +95,10 @@
     "privacyPolicy": {
       "title": "Polityka prywatności",
       "description": "Dowiedz się, jak przetwarzamy Twoje dane podczas korzystania z platformy wynajmu mieszkań i pokoi."
+    },
+    "userSecurity": {
+      "title": "Ustawienia konta",
+      "description": "Zmień dane konta, ustaw preferencje wynajmu, powiadomienia i prywatność."
     }
   },
   "cookies": {
@@ -479,7 +483,8 @@
       "call": "Zadzwoń",
       "sendEmail": "Wyślij e-mail"
     },
-    "editButton": "Edytuj ogłoszenie"
+    "editButton": "Edytuj ogłoszenie",
+    "publicationDate": "Data publikacji:"
   },
   "propertyTeaser": {
     "imageAlt": "Zdjęcie nieruchomości",
@@ -542,7 +547,8 @@
       "phone": "Telefon",
       "sendEmail": "Wyślij e-mail",
       "call": "Zadzwoń"
-    }
+    },
+    "createdAt": "Data dołączenia:"
   },
   "userProperties": {
     "table": {
@@ -1002,9 +1008,30 @@
     "reportConfirmation": "Potwierdzam, że to zgłoszenie jest składane w dobrej wierze. Oświadczam, że uważam zgłaszaną treść (użytkownika/ogłoszenie) za faktycznie nieodpowiednią, szkodliwą lub naruszającą zasady."
   },
   "error": {
-    "403": "Uuupsss, nie masz dostępu do tej strony",
-    "404": "Uuupsss, strona, która szukasz nie została znaleziona",
-    "500": "Uuupsss, cos poszło nie tak",
+    "403": "Whoopss...nie masz dostępu do tej strony",
+    "404": "Whoopss...strona, której szukasz nie została znaleziona",
+    "500": "Whoopss...cos poszło nie tak",
     "goHome": "Wróć do strony głównej"
+  },
+  "userSecurityForm": {
+    "passwordReset": {
+      "legend": "Zmiana hasła",
+      "password": "Nowe hasło",
+      "passwordRepeat": "Powtórzenie nowego hasła",
+      "oldPassword": "Stare hasło",
+      "submit": "Zmień hasło",
+      "success": "Hasło zostało zmienione",
+      "error": "Błąd zmiany hasła",
+      "invalidOldPassword": "Nieprawidłowe stare hasło"
+    },
+    "accountDeletion": {
+      "legend": "Usuwanie konta",
+      "warning": "Akcja usuwania konta jest nieodwracalna. Wraz z usunąciem konta usuniesz także wszystkie swoje ogłoszenia i komentarze. Czy na pewno chcesz kontynuować?",
+      "openDialog": "Usuń konto",
+      "dialogHeader": "Usuwanie konta",
+      "cancel": "Anuluj",
+      "confirm": "Potwierdź usunęcie",
+      "password": "Hasło"
+    }
   }
 }

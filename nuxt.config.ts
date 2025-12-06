@@ -122,10 +122,6 @@ export default defineNuxtConfig({
         en: "/terms",
         pl: "/regulamin",
       },
-      "auth-confirm-email": {
-        en: "/auth/confirm-email",
-        pl: "/auth/potwierdz-email",
-      },
       "auth-forgot-password": {
         en: "/auth/forgot-password",
         pl: "/auth/zapomnialem-hasla",

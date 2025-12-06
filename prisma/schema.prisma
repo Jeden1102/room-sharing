@@ -44,19 +44,16 @@ model User {
   noiseCompatibility  String[] @default([])
   petsCompatibility   String[] @default([])
 
-  // Relations
   messagesReceived Message[]  @relation("MessagesReceived")
   messagesSent     Message[]  @relation("MessagesSent")
   properties       Property[]
 
   roommateInProperties Property[] @relation("PropertyRoommates")
 
-  // Bookmarks
   bookmarkedProperties PropertyBookmark[] @relation("UserPropertyBookmarks")
   bookmarkedByUsers    UserBookmark[]     @relation("BookmarkTargetUser")
   bookmarkedUsers      UserBookmark[]     @relation("BookmarkOwnerUser")
 
-  // Reports
   reportsFiled   Report[] @relation("ReportsFiled")
   reportsAgainst Report[] @relation("ReportsAgainstUser")
 }
@@ -100,13 +97,11 @@ model Property {
   ownerId         String
   email           String?
   phone           String?
-  owner           User           @relation(fields: [ownerId], references: [id])
+  owner           User           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   roommates       User[]         @relation("PropertyRoommates")
 
-  // Bookmarks
   bookmarkedBy PropertyBookmark[] @relation("PropertyBookmarks")
 
-  // Reports
   reports Report[] @relation("ReportsAgainstProperty")
 }
 
@@ -117,7 +112,7 @@ model PropertyBookmark {
   userId     String
   propertyId String
 
-  user     User     @relation("UserPropertyBookmarks", fields: [userId], references: [id])
+  user     User     @relation("UserPropertyBookmarks", fields: [userId], references: [id], onDelete: Cascade)
   property Property @relation("PropertyBookmarks", fields: [propertyId], references: [id])
 
   @@unique([userId, propertyId])
@@ -127,11 +122,11 @@ model UserBookmark {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
 
-  userId   String // who bookmarked
-  targetId String // who was bookmarked
+  userId   String
+  targetId String
 
-  user   User @relation("BookmarkOwnerUser", fields: [userId], references: [id])
-  target User @relation("BookmarkTargetUser", fields: [targetId], references: [id])
+  user   User @relation("BookmarkOwnerUser", fields: [userId], references: [id], onDelete: Cascade)
+  target User @relation("BookmarkTargetUser", fields: [targetId], references: [id], onDelete: Cascade)
 
   @@unique([userId, targetId])
 }
@@ -142,8 +137,8 @@ model Message {
   content    String
   senderId   String
   receiverId String
-  receiver   User     @relation("MessagesReceived", fields: [receiverId], references: [id])
-  sender     User     @relation("MessagesSent", fields: [senderId], references: [id])
+  receiver   User     @relation("MessagesReceived", fields: [receiverId], references: [id], onDelete: Cascade)
+  sender     User     @relation("MessagesSent", fields: [senderId], references: [id], onDelete: Cascade)
 }
 
 model Report {
@@ -153,7 +148,7 @@ model Report {
   description String?
 
   reporterId String
-  reporter   User   @relation("ReportsFiled", fields: [reporterId], references: [id])
+  reporter   User   @relation("ReportsFiled", fields: [reporterId], references: [id], onDelete: Cascade)
 
   reportedUserId String?
   reportedUser   User?   @relation("ReportsAgainstUser", fields: [reportedUserId], references: [id])

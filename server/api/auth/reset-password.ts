@@ -46,7 +46,6 @@ export default defineEventHandler(async (event) => {
       message: "api.resetPassword.success",
     };
   } catch (error) {
-    console.log(error);
     throw createError({
       statusCode: 500,
       statusMessage: "api.resetPassword.failed",

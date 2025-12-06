@@ -378,7 +378,6 @@ const onFormSubmit = async ({ valid, values }: any) => {
     const obligatoryFields = ["firstName", "lastName", "age", "gender", "city"];
     values.profileVisible = obligatoryFields.every((field) => values[field]);
 
-    // aktualizacja profilu
     const { data, error } = await useFetch("/api/user/update", {
       method: "POST",
       body: values,

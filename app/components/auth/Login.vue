@@ -96,6 +96,8 @@ const initialValues = ref({
 
 const resolver = ref(zodResolver(loginSchema));
 
+const localePath = useLocalePath();
+
 const onFormSubmit = async ({
   valid,
   values,
@@ -115,7 +117,7 @@ const onFormSubmit = async ({
     formStatus.value.success = false;
     formStatus.value.message = t(result.error);
   } else {
-    useRouter().push("user-profile");
+    useRouter().push(localePath("user-profile"));
   }
 };
 </script>
