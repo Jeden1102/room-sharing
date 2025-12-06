@@ -12,6 +12,12 @@
         class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"
       ></div>
 
+      <Tag
+        :value="user.gender"
+        severity="info"
+        class="absolute right-2 bottom-2 text-xs font-medium"
+      />
+
       <img
         :src="user.profileImage || '/images/user/avatar-placeholder.webp'"
         :alt="$t('userTeaser.avatarAlt')"
@@ -38,7 +44,6 @@
             >
           </p>
         </div>
-        <Tag :value="user.gender" severity="info" class="text-xs font-medium" />
       </div>
 
       <div class="flex flex-wrap gap-2 text-xs text-gray-600">

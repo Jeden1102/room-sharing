@@ -17,7 +17,7 @@
 
       <span
         v-if="store.count > 0"
-        class="bg-primary-400 absolute -top-4 -right-3 rounded-full px-1.5 py-0.5 text-xs text-white"
+        class="bg-primary-400 absolute -top-4 -right-3 grid size-5 place-items-center rounded-full text-xs text-white"
       >
         {{ store.count }}
       </span>

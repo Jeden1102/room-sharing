@@ -29,7 +29,7 @@
               '!pointer-events-auto z-20 translate-y-0 opacity-100':
                 isMenuOpened,
             },
-            'pointer-events-none absolute top-20 left-0 z-10 flex size-full w-full -translate-y-4 flex-col justify-between bg-white p-4 opacity-0 transition-all duration-300 lg:pointer-events-auto lg:static lg:translate-y-0 lg:flex-row lg:items-center lg:p-0 lg:opacity-100',
+            'pointer-events-none absolute top-20 left-0 z-10 flex size-full w-full -translate-y-4 flex-col justify-between bg-white/90 p-4 opacity-0 backdrop-blur-sm transition-all duration-300 lg:pointer-events-auto lg:static lg:translate-y-0 lg:flex-row lg:items-center lg:p-0 lg:opacity-100',
           )
         "
       >
@@ -88,7 +88,7 @@
             <RouterLink
               :to="
                 $localePath(
-                  data?.user ? 'new-property' : 'auth-login?feat=newProperty',
+                  data?.user ? 'new-property' : 'auth-login?feat=properties',
                 )
               "
               :class="slotProps.class"

@@ -19,7 +19,10 @@
         variant="primary"
       >
         <Button asChild v-slot="slotProps" severity="secondary">
-          <RouterLink :to="$localePath('properties')" :class="slotProps.class">
+          <RouterLink
+            :to="$localePath('properties-filters')"
+            :class="slotProps.class"
+          >
             {{ $t("userBookmarksPage.empty.button") }}
           </RouterLink>
         </Button>

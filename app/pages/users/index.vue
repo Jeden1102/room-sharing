@@ -49,7 +49,7 @@
             'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink JumpToPageDropdown',
         }"
         v-if="(usersData?.total || 0) > 0"
-        class="mt-8"
+        class="mt-8 [&>div]:!bg-transparent"
         :rows="12"
         :totalRecords="usersData?.total"
         :first="(filters.page - 1) * 12"

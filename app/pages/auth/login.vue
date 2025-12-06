@@ -29,7 +29,7 @@ usePageSeo({
 const mapFeatureInfo = computed(() => {
   const featuresMessage = {
     bookmarks: t("loginPage.feature.bookmarks"),
-    newProperty: t("loginPage.feature.newProperty"),
+    properties: t("loginPage.feature.newProperty"),
   };
 
   return featuresMessage[route.query.feat as keyof typeof featuresMessage];

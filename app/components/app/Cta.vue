@@ -40,7 +40,11 @@
           class="text-8xl"
           :class="variant === 'primary' ? 'text-gray-200' : 'text-gray-600'"
         />
-        <NuxtImg v-if="gif" :src="gif" class="size-40 object-cover" />
+        <NuxtImg
+          v-if="gif"
+          :src="gif"
+          class="size-28 object-cover lg:size-40"
+        />
       </div>
     </div>
     <div v-if="image" class="relative ml-auto hidden md:block">

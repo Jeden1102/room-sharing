@@ -20,7 +20,7 @@
       <BitsAnimatedContent :delay="0.6">
         <Button asChild v-slot="slotProps">
           <RouterLink
-            :to="$localePath('properties')"
+            :to="$localePath('properties-filters')"
             :class="slotProps.class"
             class="w-fit"
           >
