@@ -6,35 +6,22 @@
     class="flex w-full flex-col gap-6"
   >
     <Fieldset :legend="$t('contactForm.legend')">
-      <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-3">
         <div>
-          <FloatLabel variant="on">
-            <InputText id="name" name="name" fluid />
-            <label for="name">{{ $t("contactForm.name.label") }}</label>
-          </FloatLabel>
-          <Message
-            v-if="$form.name?.invalid"
-            severity="error"
-            size="small"
-            variant="simple"
-          >
-            {{ $form.name.error.message }}
-          </Message>
+          <AtomsInput
+            name="name"
+            :label="$t('contactForm.name.label')"
+            :form="$form"
+          />
         </div>
 
         <div>
-          <FloatLabel variant="on">
-            <InputText id="email" name="email" fluid />
-            <label for="email">{{ $t("contactForm.email.label") }}</label>
-          </FloatLabel>
-          <Message
-            v-if="$form.email?.invalid"
-            severity="error"
-            size="small"
-            variant="simple"
-          >
-            {{ $form.email.error.message }}
-          </Message>
+          <AtomsInput
+            name="email"
+            type="email"
+            :label="$t('contactForm.email.label')"
+            :form="$form"
+          />
         </div>
 
         <div>

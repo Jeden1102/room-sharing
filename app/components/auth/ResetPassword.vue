@@ -8,34 +8,20 @@
       class="flex w-full flex-col gap-4"
     >
       <div class="flex flex-col gap-1">
-        <InputText
+        <AtomsInput
           name="password"
+          :label="$t('resetPassword.password.placeholder')"
+          :form="$form"
           type="password"
-          :placeholder="$t('resetPassword.password.placeholder')"
-          fluid
         />
-        <Message
-          v-if="$form.password?.invalid"
-          severity="error"
-          size="small"
-          variant="simple"
-          >{{ $form.password.error.message }}</Message
-        >
       </div>
       <div class="flex flex-col gap-1">
-        <InputText
+        <AtomsInput
           name="passwordRepeat"
+          :label="$t('resetPassword.passwordRepeat.placeholder')"
+          :form="$form"
           type="password"
-          :placeholder="$t('resetPassword.passwordRepeat.placeholder')"
-          fluid
         />
-        <Message
-          v-if="$form.passwordRepeat?.invalid"
-          severity="error"
-          size="small"
-          variant="simple"
-          >{{ $form.passwordRepeat.error.message }}</Message
-        >
       </div>
       <Button
         type="submit"

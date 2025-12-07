@@ -8,34 +8,20 @@
       class="flex w-full flex-col gap-4"
     >
       <div class="flex flex-col gap-1">
-        <InputText
+        <AtomsInput
           name="email"
+          :label="$t('login.email.placeholder')"
+          :form="$form"
           type="email"
-          :placeholder="$t('login.email.placeholder')"
-          fluid
         />
-        <Message
-          v-if="$form.email?.invalid"
-          severity="error"
-          size="small"
-          variant="simple"
-          >{{ $form.email.error.message }}</Message
-        >
       </div>
       <div class="flex flex-col gap-1">
-        <InputText
+        <AtomsInput
           name="password"
+          :label="$t('login.password.placeholder')"
+          :form="$form"
           type="password"
-          :placeholder="$t('login.password.placeholder')"
-          fluid
         />
-        <Message
-          v-if="$form.password?.invalid"
-          severity="error"
-          size="small"
-          variant="simple"
-          >{{ $form.password.error.message }}</Message
-        >
       </div>
       <NuxtLink
         :to="$localePath('auth-forgot-password')"

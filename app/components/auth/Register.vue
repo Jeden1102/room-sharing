@@ -8,49 +8,28 @@
       class="flex w-full flex-col gap-4"
     >
       <div class="flex flex-col gap-1">
-        <InputText
+        <AtomsInput
           name="email"
+          :label="$t('register.email.placeholder')"
+          :form="$form"
           type="email"
-          :placeholder="$t('register.email.placeholder')"
-          fluid
         />
-        <Message
-          v-if="$form.email?.invalid"
-          severity="error"
-          size="small"
-          variant="simple"
-          >{{ $form.email.error.message }}</Message
-        >
       </div>
       <div class="flex flex-col gap-1">
-        <InputText
+        <AtomsInput
           name="password"
+          :label="$t('register.password.placeholder')"
+          :form="$form"
           type="password"
-          :placeholder="$t('register.password.placeholder')"
-          fluid
         />
-        <Message
-          v-if="$form.password?.invalid"
-          severity="error"
-          size="small"
-          variant="simple"
-          >{{ $form.password.error.message }}</Message
-        >
       </div>
       <div class="flex flex-col gap-1">
-        <InputText
+        <AtomsInput
           name="passwordRepeat"
+          :label="$t('register.passwordRepeat.placeholder')"
+          :form="$form"
           type="password"
-          :placeholder="$t('register.passwordRepeat.placeholder')"
-          fluid
         />
-        <Message
-          v-if="$form.passwordRepeat?.invalid"
-          severity="error"
-          size="small"
-          variant="simple"
-          >{{ $form.passwordRepeat.error.message }}</Message
-        >
       </div>
       <Button
         type="submit"

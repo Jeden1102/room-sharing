@@ -8,19 +8,12 @@
       class="flex w-full flex-col gap-4"
     >
       <div class="flex flex-col gap-1">
-        <InputText
+        <AtomsInput
           name="email"
+          :label="$t('forgotPassword.email.placeholder')"
+          :form="$form"
           type="email"
-          :placeholder="$t('forgotPassword.email.placeholder')"
-          fluid
         />
-        <Message
-          v-if="$form.email?.invalid"
-          severity="error"
-          size="small"
-          variant="simple"
-          >{{ $form.email.error.message }}</Message
-        >
       </div>
       <Button
         class="w-fit"
