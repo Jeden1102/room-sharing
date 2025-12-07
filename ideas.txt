@@ -1,9 +1,6 @@
 To fix:
 1. Anys
 2. Ogólnie walidacje
-5. Clustery
-6. Ograniczenie ilości ładowanych danych
-8. File uploader - pliki iphone //
 
 Features:
 0. Chat

@@ -88,7 +88,12 @@
             <RouterLink
               :to="
                 $localePath(
-                  data?.user ? 'new-property' : 'auth-login?feat=properties',
+                  data?.user
+                    ? 'new-property'
+                    : {
+                        name: 'auth-login',
+                        query: { feat: 'properties' },
+                      },
                 )
               "
               :class="slotProps.class"

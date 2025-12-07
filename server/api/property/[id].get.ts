@@ -12,7 +12,14 @@ export default session(defineCachedEventHandler(
       const property: PropertyWithOwner | null = await prisma.property.findUnique({
         where: { id },
         include: {
-          owner: true
+          owner: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              profileImage: true
+            }
+          }
         }
       });
       
@@ -54,10 +61,22 @@ export default session(defineCachedEventHandler(
           where: {
             city: property.city,
             id: { not: id },
-            status: 'ACTIVE'
+            status: {not: 'DRAFT'}
           },
-          include: {
-            owner: true
+          select: {
+            id: true,
+            status: true,
+            title: true,
+            price: true,
+            city: true,
+            district: true,
+            sizeM2: true,
+            rooms: true,
+            floor: true,
+            images: true,
+            type: true,
+            listingType: true,
+            mainImageIdx: true,
           },
           take: 3,
           orderBy: {
@@ -92,7 +111,7 @@ export default session(defineCachedEventHandler(
         property: propertyWithBookmark,
         ...(getSimilar && { similarProperties })
       };
-    } catch (error) {
+    } catch (error: any) {
       if (error.statusCode === 403 || error.statusCode === 404) {
           throw error;
       }

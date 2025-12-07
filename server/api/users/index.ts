@@ -47,6 +47,18 @@ export default session(defineEventHandler(async (event) => {
         orderBy,
         skip,
         take,
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          age: true,
+          city: true,
+          gender: true,
+          profileImage: true,
+          bgImage: true,
+          districts: true,
+          budgetMax: true,
+        }
       }),
       prisma.user.count({ where }),
     ]);

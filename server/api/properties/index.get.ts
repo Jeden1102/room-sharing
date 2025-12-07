@@ -91,6 +91,21 @@ export default session(defineEventHandler(async (event) => {
         orderBy,
         skip,
         take,
+        select: {
+          id: true,
+          status: true,
+          title: true,
+          price: true,
+          city: true,
+          district: true,
+          sizeM2: true,
+          rooms: true,
+          floor: true,
+          images: true,
+          type: true,
+          listingType: true,
+          mainImageIdx: true,
+        }
       }),
       prisma.property.count({ where }),
     ]);
