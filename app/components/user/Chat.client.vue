@@ -15,12 +15,10 @@ const route = useRoute();
 const conversationId = route.params.id;
 const { data: userData } = useAuth();
 
-const config = useRuntimeConfig();
-
 const userId = userData.value?.user?.id;
 
 const { status, data, send, open, close } = useWebSocket(
-  `${config.public.APP_BASE_URI}/api/ws/chat?conversationId=${conversationId}&userId=${userId}`,
+  `wss://${location.host}/api/ws/chat?conversationId=${conversationId}&userId=${userId}`,
 );
 
 const history = ref<any[]>([]);
