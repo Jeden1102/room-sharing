@@ -194,8 +194,10 @@ export default defineNuxtConfig({
     ],
   },
   image: {
-    format: ["webp"],
-  },
+    provider: 'ipx',
+    dir: 'public', 
+    format: ['webp']
+  },  
   auth: {
     isEnabled: true,
     disableServerSideAuth: false,

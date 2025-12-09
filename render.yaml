@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: nuxt-app
+    env: node
+    region: frankfurt
+    plan: free
+    buildCommand: "npm install && npx prisma generate && npm run build"
+    startCommand: "npm run start"
+    envVars:
+      NITRO_PORT: 10000
+      HOST: 0.0.0.0
+      PORT: 10000
