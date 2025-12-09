@@ -19,9 +19,12 @@ const userId = userData.value?.user?.id;
 
 const config = useRuntimeConfig();
 
-const { status, data, send, open, close } = useWebSocket(
-  `${config.public.APP_BASE_URI}/api/ws/chat?conversationId=${conversationId}&userId=${userId}`,
-);
+const wsProtocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+const wsHost = window.location.host;
+
+const wsUrl = `${wsProtocol}//${wsHost}/api/ws/chat?conversationId=${conversationId}&userId=${userId}`;
+
+const { status, data, send, open, close } = useWebSocket(wsUrl);
 
 const history = ref<any[]>([]);
 watch(data, (newValue) => {
