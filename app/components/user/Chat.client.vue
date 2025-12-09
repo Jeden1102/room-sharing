@@ -20,7 +20,7 @@ const userId = userData.value?.user?.id;
 const config = useRuntimeConfig();
 
 const { status, data, send, open, close } = useWebSocket(
-  `${config.public.baseURL}/api/ws/chat?conversationId=${conversationId}&userId=${userId}`,
+  `${config.public.APP_BASE_URI}/api/ws/chat?conversationId=${conversationId}&userId=${userId}`,
 );
 
 const history = ref<any[]>([]);
