@@ -57,7 +57,8 @@ export default defineNuxtConfig({
     "nuxt-security",
     "nuxt-easy-lightbox",
     ['@nuxtjs/leaflet', { ssr: false }],
-    "@dargmuesli/nuxt-cookie-control"
+    "@dargmuesli/nuxt-cookie-control",
+    '@vueuse/nuxt',
   ],
   routeRules: {
     '/': { prerender: true },
@@ -327,5 +328,8 @@ export default defineNuxtConfig({
       plugins: [vue()],
     },
     compressPublicAssets: true,
+    experimental: {
+      websocket: true
+    }
   }
 });

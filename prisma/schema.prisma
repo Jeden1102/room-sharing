@@ -44,9 +44,11 @@ model User {
   noiseCompatibility  String[] @default([])
   petsCompatibility   String[] @default([])
 
-  messagesReceived Message[]  @relation("MessagesReceived")
-  messagesSent     Message[]  @relation("MessagesSent")
-  properties       Property[]
+  messagesSent Message[] @relation("MessagesSent")
+
+  conversations ConversationParticipant[]
+
+  properties Property[]
 
   roommateInProperties Property[] @relation("PropertyRoommates")
 
@@ -131,14 +133,46 @@ model UserBookmark {
   @@unique([userId, targetId])
 }
 
+model Conversation {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userAId String
+  userBId String
+
+  messages     Message[]
+  participants ConversationParticipant[]
+
+  @@unique([userAId, userBId], name: "UniqueConversationPair")
+}
+
+model ConversationParticipant {
+  id String @id @default(uuid())
+
+  conversationId String
+  userId         String
+
+  unreadCount       Int     @default(0)
+  lastReadMessageId String?
+
+  conversation Conversation @relation(fields: [conversationId], references: [id])
+  user         User         @relation(fields: [userId], references: [id])
+
+  @@unique([conversationId, userId])
+}
+
 model Message {
-  id         String   @id @default(uuid())
-  createdAt  DateTime @default(now())
-  content    String
-  senderId   String
-  receiverId String
-  receiver   User     @relation("MessagesReceived", fields: [receiverId], references: [id], onDelete: Cascade)
-  sender     User     @relation("MessagesSent", fields: [senderId], references: [id], onDelete: Cascade)
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  content   String
+  isRead    Boolean  @default(false)
+
+  senderId String
+  sender   User   @relation("MessagesSent", fields: [senderId], references: [id], onDelete: Cascade)
+
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 }
 
 model Report {

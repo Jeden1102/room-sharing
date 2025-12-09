@@ -55,7 +55,7 @@
       </div>
 
       <div class="mt-auto flex items-center justify-between pt-3">
-        <Button icon="pi pi-comments" severity="secondary" rounded />
+        <AppChatButton :target-user-id="user.id" />
 
         <Button
           asChild
@@ -81,10 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import { NuxtLink } from "#components";
 import type { Prisma } from "@prisma/client";
-
-const localePath = useLocalePath();
 
 type FullUser = Prisma.UserGetPayload<{
   include: {
@@ -100,11 +97,12 @@ type FullUser = Prisma.UserGetPayload<{
   isBookmarked?: boolean;
 };
 
-const { data } = useAuth();
-
 const props = defineProps<{
   user: FullUser;
 }>();
+
+const localePath = useLocalePath();
+const { data } = useAuth();
 
 const uri = computed(() => {
   return localePath({

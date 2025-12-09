@@ -33,6 +33,8 @@
     "@vue-email/img": "^0.0.3",
     "@vue-email/render": "^0.0.9",
     "@vue-email/tailwind": "^0.2.0",
+    "@vueuse/core": "^14.1.0",
+    "@vueuse/nuxt": "^14.1.0",
     "bcrypt": "^6.0.0",
     "browser-image-compression": "^2.0.2",
     "clsx": "^2.1.1",

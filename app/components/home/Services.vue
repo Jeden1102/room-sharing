@@ -16,6 +16,8 @@
           :alt="$t(service.imageAltKey)"
           loading="lazy"
           class="mx-auto size-28 object-cover"
+          width="300"
+          height="300"
         />
 
         <div class="space-y-4 p-6">
