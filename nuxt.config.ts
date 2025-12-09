@@ -61,7 +61,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
   ],
   routeRules: {
-    '/': { prerender: true },
+    '/**': { prerender: false }
   },
   fileStorage: {
     mount: process.cwd() + "/public/uploads",
@@ -194,10 +194,8 @@ export default defineNuxtConfig({
     ],
   },
   image: {
-    provider: 'ipx',
-    dir: 'public', 
-    format: ['webp']
-  },  
+    format: ["webp"],
+  },
   auth: {
     isEnabled: true,
     disableServerSideAuth: false,
