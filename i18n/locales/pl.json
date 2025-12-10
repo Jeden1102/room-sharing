@@ -1044,6 +1044,10 @@
       "placeholder": "Wyszukaj",
       "noResults": "Brak wyników"
     },
-    "error": "Błąd pobierania wiadomości"
+    "error": "Błąd pobierania wiadomości",
+    "conversation": {
+      "start": "Rozpocznij konwersację, wysyłając pierwszą wiadomość!",
+      "placeholder": "Wiadomość"
+    }
   }
 }

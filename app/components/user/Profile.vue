@@ -51,7 +51,7 @@
           </div>
 
           <div class="mt-auto flex gap-2">
-            <AppChatButton :target-user-id="user.id" />
+            <ChatInitButton :target-user-id="user.id" />
             <AppEntityBookmark
               entity-type="user"
               :entity-id="user.id"

@@ -1038,6 +1038,10 @@
       "placeholder": "Search",
       "noResults": "No results found"
     },
-    "error": "Error fetching messages"
+    "error": "Error fetching messages",
+    "conversation": {
+      "start": "Start a conversation",
+      "placeholder": "Message"
+    }
   }
 }

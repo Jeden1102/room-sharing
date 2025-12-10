@@ -6,6 +6,7 @@
     :disabled="isProcessing"
     :loading="isProcessing"
     @click.prevent="startChat"
+    v-if="targetUserId !== authData?.user?.id"
   />
 </template>
 

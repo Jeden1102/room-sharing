@@ -55,7 +55,7 @@
       </div>
 
       <div class="mt-auto flex items-center justify-between pt-3">
-        <AppChatButton :target-user-id="user.id" />
+        <ChatInitButton :target-user-id="user.id" />
 
         <Button
           asChild
