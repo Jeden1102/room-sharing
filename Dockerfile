@@ -9,7 +9,7 @@ RUN npm install
 
 RUN npm run build 
 
-FROM node:lts-alpine
+FROM node:lts 
 
 WORKDIR /app
 
