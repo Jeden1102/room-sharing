@@ -1027,5 +1027,17 @@
       "confirm": "Confirm Deletion",
       "password": "Password"
     }
+  },
+  "userChatPage": {
+    "empty": {
+      "title": "You haven't started a conversation yet",
+      "subtitle": "Find other users to start conversations.",
+      "button": "Find flatmates" 
+    },
+    "search": {
+      "placeholder": "Search",
+      "noResults": "No results found"
+    },
+    "error": "Error fetching messages"
   }
 }

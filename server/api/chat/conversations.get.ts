@@ -8,6 +8,11 @@ export default requireAuth(
     const userParticipants = await prisma.conversationParticipant.findMany({
       where: {
         userId: userId,
+        conversation: {
+          messages: {
+            some: {},
+          },
+        },
       },
       select: {
         conversationId: true,
@@ -44,14 +49,9 @@ export default requireAuth(
           },
         },
       },
-      orderBy: { 
-        conversation: { 
-          updatedAt: 'desc'
-        }
-      },
     });
 
-    const conversations = userParticipants.map(p => {
+    let conversations = userParticipants.map(p => {
         const otherParticipant = p.conversation.participants[0]?.user;
         const lastMessage = p.conversation.messages[0];
 
@@ -72,6 +72,12 @@ export default requireAuth(
         };
     });
 
+    conversations.sort((a, b) => {
+      const dateA = new Date(a.lastMessage.createdAt).getTime();
+      const dateB = new Date(b.lastMessage.createdAt).getTime();
+
+      return dateB - dateA;
+    });
 
     return {
       success: true,

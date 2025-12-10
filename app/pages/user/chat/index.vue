@@ -1,94 +1,96 @@
 <template>
-  <div class="p-6">
-    <h1 class="mb-6 text-2xl font-bold">Chats</h1>
-
-    <div v-if="pending" class="p-8 text-center">
-      <i class="pi pi-spin pi-spinner text-primary-500 text-4xl"></i>
-    </div>
-
-    <div v-else-if="error" class="p-8 text-center text-red-500">
-      Błąd ładowania konwersacji: {{ error.message }}
-    </div>
-
-    <div
-      v-else-if="conversationData.length === 0"
-      class="p-8 text-center text-gray-500"
-    >
-      Nie masz jeszcze żadnych aktywnych konwersacji.
-    </div>
-
-    <div v-else class="space-y-4">
-      <NuxtLink
-        v-for="conv in conversationData.conversations"
-        :key="conv.conversationId"
-        :to="
-          localePath({
-            name: 'user-chat-id',
-            params: { id: conv.conversationId },
-          })
-        "
-        class="hover:bg-surface-50 border-surface-200 flex items-center rounded-lg border-b p-3 transition duration-150"
-      >
-        <Avatar
-          :image="
-            conv.otherUser?.profileImage ||
-            '/images/user/avatar-placeholder.webp'
-          "
-          :label="conv.otherUser?.firstName?.charAt(0)"
-          shape="circle"
-          class="mr-4"
+  <div>
+    <div class="relative mb-4 w-full">
+      <IconField iconPosition="left" class="w-full">
+        <InputIcon class="pi pi-search" />
+        <InputText
+          v-model="searchTerm"
+          :placeholder="$t('userChatPage.search.placeholder')"
+          class="w-full pr-10"
+          aria-label="Wyszukaj konwersację"
         />
-        <div class="min-w-0 flex-1">
-          <p class="truncate text-base font-semibold text-gray-900">
-            {{ conv.otherUser?.firstName }}
-          </p>
-          <p class="truncate text-sm text-gray-500">
-            {{ getLastMessage(conv) }}
-          </p>
-        </div>
-        <div class="ml-4 flex flex-col items-end">
-          <Tag
-            v-if="conv.unreadCount > 0"
-            :value="conv.unreadCount"
-            severity="danger"
-            class="mb-1"
-          />
-          <span class="text-xs text-gray-400">
-            {{ formatTime(conv.updatedAt) }}
-          </span>
-        </div>
-      </NuxtLink>
+      </IconField>
+
+      <i
+        v-if="searchTerm"
+        class="pi pi-times absolute top-1/2 right-3 z-10 -translate-y-1/2 cursor-pointer"
+        @click="clearSearch"
+      ></i>
+    </div>
+
+    <div v-if="pending" class="flex flex-col gap-4">
+      <ChatConversationTeaserLoader v-for="i in 6" :key="i" />
+    </div>
+
+    <AppCta
+      v-else-if="conversationData.conversations.length === 0"
+      :title="$t('userChatPage.empty.title')"
+      :subtitle="$t('userChatPage.empty.subtitle')"
+      :showLogo="true"
+      variant="primary"
+    >
+      <Button asChild v-slot="slotProps" severity="secondary">
+        <RouterLink :to="$localePath('users')" :class="slotProps.class">
+          {{ $t("userChatPage.empty.button") }}
+        </RouterLink>
+      </Button>
+    </AppCta>
+
+    <p
+      v-else-if="filteredConversations.length === 0"
+      class="text-center text-gray-500"
+    >
+      {{ $t("userChatPage.search.noResults") }}
+    </p>
+
+    <div v-else>
+      <ChatConversationTeaser
+        v-for="conv in filteredConversations"
+        :key="conv.conversationId"
+        :conversation="conv"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useAuth } from "#imports";
-import { useLocalePath } from "#i18n";
-
 usePageSeo({ title: "seo.chat.title", description: "seo.chat.description" });
 
-const localePath = useLocalePath();
+const { data: conversationData, pending } = useFetch(
+  `/api/chat/conversations`,
+  {
+    method: "GET",
+  },
+);
 
-const {
-  data: conversationData,
-  pending,
-  error,
-} = useFetch(`/api/chat/conversations`, {
-  method: "GET",
-});
+const searchTerm = ref("");
 
-function getLastMessage(conv: any): string {
-  return conv.lastMessage
-    ? conv.lastMessage.content.substring(0, 40) + "..."
-    : "Rozpocznij konwersację.";
-}
+const clearSearch = () => {
+  searchTerm.value = "";
+};
 
-function formatTime(date: string) {
-  if (!date) return "";
-  return new Date(date).toLocaleTimeString("pl-PL", {
-    hour: "2-digit",
-    minute: "2-digit",
+const filteredConversations = computed(() => {
+  if (pending.value || !conversationData.value?.conversations) {
+    return [];
+  }
+
+  const conversations = conversationData.value.conversations;
+  const term = searchTerm.value.toLowerCase().trim();
+
+  if (!term) {
+    return conversations;
+  }
+
+  return conversations.filter((conv: any) => {
+    const otherUser = conv.otherUser;
+
+    if (!otherUser || !otherUser.firstName) {
+      return false;
+    }
+
+    const firstName = otherUser.firstName.toLowerCase();
+
+    return firstName.includes(term);
   });
-}
+});
 </script>

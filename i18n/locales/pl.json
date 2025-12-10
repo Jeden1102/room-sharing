@@ -1033,5 +1033,17 @@
       "confirm": "Potwierdź usunęcie",
       "password": "Hasło"
     }
+  },
+  "userChatPage": {
+    "empty": {
+      "title": "Nie rozpocząłeś jeszcze konwersacji",
+      "subtitle": "Znajdź innych użytkowników, aby rozpocząć konwersacje.",
+      "button": "Znajdź współlokatorów"
+    },
+    "search": {
+      "placeholder": "Wyszukaj",
+      "noResults": "Brak wyników"
+    },
+    "error": "Błąd pobierania wiadomości"
   }
 }
