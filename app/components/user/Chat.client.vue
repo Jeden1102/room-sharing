@@ -60,6 +60,7 @@
           v-model="message"
           :placeholder="$t('userChatPage.conversation.placeholder')"
           class="w-full pr-10"
+          @blur="handleBlur"
         />
         <Button type="submit" :disabled="!message.trim()">
           <Icon name="iconamoon:send-fill" />
@@ -172,6 +173,10 @@ const handleScroll = () => {
       loadMoreMessages();
     }
   }
+};
+
+const handleBlur = () => {
+  window.scrollTo(0, 0);
 };
 
 const { data: conversationData, pending } = useFetch(
