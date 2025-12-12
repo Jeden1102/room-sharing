@@ -54,7 +54,6 @@ export default defineNuxtConfig({
     ['nuxt-file-storage', { server: true, client: false }],
     "@nuxt/icon",
     "@nuxtjs/seo",
-    "nuxt-security",
     "nuxt-easy-lightbox",
     ['@nuxtjs/leaflet', { ssr: false }],
     "@dargmuesli/nuxt-cookie-control",
@@ -216,22 +215,6 @@ export default defineNuxtConfig({
       enablePeriodically: 60000, // 1 minute
       enableOnWindowFocus: true,
     },
-  },
-  security: {
-    headers: {
-      contentSecurityPolicy: {
-        'img-src': [
-          "'self'",
-          'data:',
-          'blob:',
-          'https://*.vercel-storage.com',
-          'https://*.openstreetmap.org',
-          'https://*.basemaps.cartocdn.com',
-          'https://*.stadiamaps.com',
-          '*'
-        ]
-      }
-    }
   },
   nodemailer: {
     from: '"Rooms" <dev@dominikraducki.pl>',
