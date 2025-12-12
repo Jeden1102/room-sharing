@@ -13,12 +13,21 @@
           <Icon name="ic:sharp-arrow-back-ios-new" class="text-xl" />
         </NuxtLink>
 
-        <span
+        <NuxtLink
+          :to="
+            localePath({
+              name: 'users-id',
+              params: {
+                id: `${otherUser.firstName?.toLowerCase()}`,
+              },
+              query: { id: otherUser.id },
+            })
+          "
           v-if="otherUser"
           class="rounded-xl bg-white/70 px-3 py-2 text-lg font-medium shadow-md backdrop-blur-sm"
         >
           {{ otherUser.firstName }}
-        </span>
+        </NuxtLink>
 
         <div class="w-6"></div>
       </div>
