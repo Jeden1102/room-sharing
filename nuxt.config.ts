@@ -301,12 +301,6 @@ export default defineNuxtConfig({
     }
   },
   nitro: {
-    preset: 'vercel',
-    vercel: {
-      functions: {
-        maxDuration: 10,
-      },
-    },
     rollupConfig: {
       plugins: [vue()],
     },
