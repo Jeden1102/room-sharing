@@ -10,7 +10,9 @@
         'bg-primary-100 text-primary-400 rounded-tl-none': !isSender,
       }"
     >
-      <p class="text-sm break-words">{{ message.content }}</p>
+      <div class="text-sm break-words whitespace-pre-wrap">
+        {{ message.content }}
+      </div>
 
       <div class="mt-1 text-right text-xs opacity-75">
         {{ formatTime(message.createdAt) }}

@@ -1,8 +1,12 @@
 <template>
   <div
-    class="container flex max-w-screen-lg flex-col py-6 md:flex-row lg:gap-6"
+    class="container flex max-w-screen-lg flex-col md:flex-row lg:gap-6"
+    :class="isChatPage ? 'py-0' : 'py-6'"
   >
-    <nav class="flex gap-2 p-4 md:flex-col md:py-0">
+    <nav
+      class="flex gap-2 p-4 md:flex-col md:py-0"
+      :class="isChatPage && 'hidden md:flex'"
+    >
       <Button
         v-for="item in userMenuItems"
         asChild
@@ -29,6 +33,8 @@
 <script lang="ts" setup>
 const route = useRoute();
 const localePath = useLocalePath();
+
+const isChatPage = computed(() => route.name?.includes("user-chat-id"));
 
 definePageMeta({
   auth: true,

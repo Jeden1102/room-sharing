@@ -1,23 +1,27 @@
 <template>
-  <div class="flex max-h-[80vh] flex-col">
+  <div class="flex h-screen flex-col">
     <div
-      class="sticky top-0 z-10 flex items-center justify-between bg-white p-2"
-    >
-      <NuxtLink :to="localePath('user-chat')" class="flex items-center">
-        <Icon name="ic:sharp-arrow-back-ios-new" class="text-xl" />
-      </NuxtLink>
-
-      <span v-if="otherUser" class="text-lg font-medium">
-        {{ otherUser.firstName }}
-      </span>
-
-      <div class="w-6"></div>
-    </div>
-    <div
-      class="no-scrollbar flex-grow overflow-y-auto p-4"
+      class="no-scrollbar flex-grow overflow-y-auto md:max-h-150"
       ref="chatContainer"
       @scroll="handleScroll"
     >
+      <div class="sticky top-0 z-10 flex items-center justify-between p-2">
+        <NuxtLink
+          :to="localePath('user-chat')"
+          class="flex items-center rounded-xl bg-white/70 p-3 shadow-md backdrop-blur-sm"
+        >
+          <Icon name="ic:sharp-arrow-back-ios-new" class="text-xl" />
+        </NuxtLink>
+
+        <span
+          v-if="otherUser"
+          class="rounded-xl bg-white/70 px-3 py-2 text-lg font-medium shadow-md backdrop-blur-sm"
+        >
+          {{ otherUser.firstName }}
+        </span>
+
+        <div class="w-6"></div>
+      </div>
       <div v-if="pending">
         <Skeleton
           width="12rem"
@@ -41,10 +45,9 @@
         :current-user-id="userId"
       />
     </div>
-
-    <div class="p-4">
+    <div class="py-4">
       <form @submit.prevent="sendData" class="flex gap-2">
-        <InputText
+        <TextArea
           v-model="message"
           :placeholder="$t('userChatPage.conversation.placeholder')"
           class="w-full pr-10"
