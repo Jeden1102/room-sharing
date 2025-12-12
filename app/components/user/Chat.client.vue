@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-screen flex-col">
+  <div class="flex h-dvh flex-col">
     <div
       class="no-scrollbar flex-grow overflow-y-auto md:max-h-150"
       ref="chatContainer"
