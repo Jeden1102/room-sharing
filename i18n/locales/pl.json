@@ -1047,7 +1047,8 @@
     "error": "Błąd pobierania wiadomości",
     "conversation": {
       "start": "Rozpocznij konwersację, wysyłając pierwszą wiadomość!",
-      "placeholder": "Wiadomość"
+      "placeholder": "Wiadomość",
+      "typing": "pisze..."
     }
   }
 }

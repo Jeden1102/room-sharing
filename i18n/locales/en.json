@@ -1041,7 +1041,8 @@
     "error": "Error fetching messages",
     "conversation": {
       "start": "Start a conversation",
-      "placeholder": "Message"
+      "placeholder": "Message",
+      "typing": "typing..."
     }
   }
 }

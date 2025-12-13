@@ -140,7 +140,7 @@ const onFileSelect = async (event: any) => {
 
     emit("filesSelected", compressedFiles);
   } catch (error) {
-    console.error("Błąd podczas kompresji plików:", error);
+    console.error("Files could not be compressed", error);
     emit("filesSelected", filesToCompress);
   }
 };

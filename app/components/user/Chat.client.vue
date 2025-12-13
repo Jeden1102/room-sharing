@@ -14,31 +14,30 @@
         </NuxtLink>
 
         <NuxtLink
+          v-if="otherUser"
           :to="
             localePath({
               name: 'users-id',
-              params: {
-                id: `${otherUser.firstName?.toLowerCase()}`,
-              },
+              params: { id: otherUser.firstName?.toLowerCase() },
               query: { id: otherUser.id },
             })
           "
-          v-if="otherUser"
           class="rounded-xl bg-white/70 px-3 py-2 text-lg font-medium shadow-md backdrop-blur-sm"
         >
           {{ otherUser.firstName }}
         </NuxtLink>
-
         <div class="w-6"></div>
       </div>
-      <div v-if="pending">
+
+      <div v-if="pending && history.length === 0" class="p-4">
         <Skeleton
           width="12rem"
           height="3rem"
           class="mb-2"
           :class="{ 'ml-auto': i % 2 === 0 }"
           v-for="i in 10"
-        ></Skeleton>
+          :key="i"
+        />
       </div>
       <div
         v-else-if="history.length === 0"
@@ -54,13 +53,22 @@
         :current-user-id="userId"
       />
     </div>
-    <div class="py-4">
-      <form @submit.prevent="sendData" class="flex gap-2">
+
+    <div class="relative p-2 pt-5">
+      <div
+        v-if="isOtherUserTyping"
+        class="absolute top-0.5 left-2 animate-pulse text-xs text-gray-400 italic"
+      >
+        {{ otherUser?.firstName }}
+        {{ $t("userChatPage.conversation.typing") }}...
+      </div>
+      <form @submit.prevent="handleSendMessage" class="flex gap-2">
         <TextArea
           v-model="message"
           :placeholder="$t('userChatPage.conversation.placeholder')"
           class="w-full pr-10"
           @blur="handleBlur"
+          @keydown.enter.exact.prevent="handleSendMessage"
         />
         <Button type="submit" :disabled="!message.trim()">
           <Icon name="iconamoon:send-fill" />
@@ -71,60 +79,48 @@
 </template>
 
 <script setup lang="ts">
-interface User {
-  id: string;
-  firstName: string;
-  profileImage: string;
-}
-
 const route = useRoute();
-const conversationId = route.params.id;
-const { data: userData } = useAuth();
 const localePath = useLocalePath();
+const conversationId = route.params.id as string;
 
-const userId = userData.value?.user?.id;
+const {
+  userId,
+  history,
+  otherUser,
+  isOtherUserTyping,
+  sendMessage,
+  sendTypingStatus,
+  loadingMore,
+  hasMore,
+  cursorId,
+} = useChat(conversationId);
 
 const chatContainer = ref<HTMLElement | null>(null);
-const loadingMore = ref(false);
-const hasMore = ref(true);
-const cursorId = ref<string | null>(null);
-const otherUser = ref<User | null>(null);
+const message = ref("");
+const isTypingLocal = ref(false);
+let typingTimeout: NodeJS.Timeout;
 
-const wsProtocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-const wsHost = window.location.host;
-
-const wsUrl = `${wsProtocol}//${wsHost}/api/ws/chat?conversationId=${conversationId}&userId=${userId}`;
-
-const { status, data, send, open, close } = useWebSocket(wsUrl);
-const history = ref<any[]>([]);
-
-watch(data, (newValue) => {
-  try {
-    const newMessage = JSON.parse(newValue);
-
-    if (newMessage.senderId === userId) return;
-
-    history.value.push(newMessage);
-    nextTick(scrollToBottom);
-  } catch (e) {
-    console.error("Błąd parsowania:", e);
+watch(message, (newVal) => {
+  if (newVal.length > 0 && !isTypingLocal.value) {
+    isTypingLocal.value = true;
+    sendTypingStatus(true);
   }
+
+  clearTimeout(typingTimeout);
+  typingTimeout = setTimeout(() => {
+    if (isTypingLocal.value) {
+      isTypingLocal.value = false;
+      sendTypingStatus(false);
+    }
+  }, 2500);
 });
 
-const message = ref("");
-function sendData() {
-  if (!message.value.trim() || !send) return;
-
-  history.value.push({
-    senderId: userId,
-    content: message.value,
-    createdAt: new Date().toISOString(),
-  });
-
-  send(message.value);
+const handleSendMessage = () => {
+  if (!message.value.trim()) return;
+  sendMessage(message.value);
   message.value = "";
   nextTick(scrollToBottom);
-}
+};
 
 const scrollToBottom = () => {
   if (chatContainer.value) {
@@ -134,100 +130,55 @@ const scrollToBottom = () => {
 
 const loadMoreMessages = async () => {
   if (loadingMore.value || !hasMore.value) return;
-
   loadingMore.value = true;
-
   const oldScrollHeight = chatContainer.value?.scrollHeight || 0;
 
   try {
     const url = `/api/chat/conversation/by-id/${conversationId}${cursorId.value ? `?cursor=${cursorId.value}` : ""}`;
-
-    const response = await $fetch<{
-      success: boolean;
-      conversation: {
-        messages: any[];
-        participants: { userId: string; user: User }[];
-      };
-      hasMore: boolean;
-    }>(url);
-
+    const response = await $fetch<any>(url);
     const newMessages = response?.conversation?.messages;
 
-    if (newMessages && newMessages.length > 0) {
+    if (newMessages?.length > 0) {
       history.value = [...newMessages, ...history.value];
       cursorId.value = newMessages[0].id;
-
       await nextTick();
-      const newScrollHeight = chatContainer.value?.scrollHeight || 0;
-      const scrollDifference = newScrollHeight - oldScrollHeight;
-
       if (chatContainer.value) {
-        chatContainer.value.scrollTop = scrollDifference;
+        chatContainer.value.scrollTop =
+          chatContainer.value.scrollHeight - oldScrollHeight;
       }
     }
-
     hasMore.value = response?.hasMore || false;
-  } catch (e) {
-    console.error("Błąd ładowania starszych wiadomości:", e);
   } finally {
     loadingMore.value = false;
   }
 };
 
 const handleScroll = () => {
-  if (chatContainer.value && hasMore.value && !loadingMore.value) {
-    if (chatContainer.value.scrollTop < 5) {
-      loadMoreMessages();
-    }
+  if (chatContainer.value && chatContainer.value.scrollTop < 5) {
+    loadMoreMessages();
   }
 };
 
-const handleBlur = () => {
-  window.scrollTo(0, 0);
-};
+const handleBlur = () => window.scrollTo(0, 0);
 
-const { data: conversationData, pending } = useFetch(
+const { data: conversationData, pending } = useFetch<any>(
   `/api/chat/conversation/by-id/${conversationId}`,
-  {
-    method: "GET",
-  },
 );
 
 watch(
   conversationData,
-  (newValue) => {
-    if (newValue?.conversation?.messages) {
-      history.value = newValue.conversation.messages;
-
-      const participants = newValue.conversation.participants;
-      if (participants) {
-        const otherParticipantData = participants.find(
-          (p) => p.userId !== userId,
-        );
-        if (otherParticipantData?.user) {
-          otherUser.value = otherParticipantData.user as User;
-        }
-      }
-
-      if (history.value.length > 0) {
-        cursorId.value = history.value[history.value.length - 1].id;
-      }
-
-      hasMore.value = newValue.hasMore || false;
-
-      nextTick(() => {
-        scrollToBottom();
-      });
+  (nv) => {
+    if (nv?.conversation) {
+      history.value = nv.conversation.messages || [];
+      const p = nv.conversation.participants?.find(
+        (p: any) => p.userId !== userId,
+      );
+      if (p?.user) otherUser.value = p.user;
+      if (history.value.length > 0) cursorId.value = history.value[0].id;
+      hasMore.value = nv.hasMore || false;
+      nextTick(scrollToBottom);
     }
   },
   { immediate: true },
 );
-
-onMounted(() => {
-  chatContainer.value?.addEventListener("scroll", handleScroll);
-});
-
-onUnmounted(() => {
-  chatContainer.value?.removeEventListener("scroll", handleScroll);
-});
 </script>

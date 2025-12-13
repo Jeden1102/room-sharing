@@ -171,7 +171,7 @@ const onRowEditSave = async (event: any) => {
       await refresh();
     }
   } catch (error: any) {
-    console.error("Błąd aktualizacji:", error);
+    console.error("Upate property error", error);
   }
 };
 
@@ -194,7 +194,7 @@ const deleteProperty = async () => {
     selectedProperty.value = null;
     await refresh();
   } catch (error) {
-    console.error("Błąd usuwania:", error);
+    console.error("Error deleting property", error);
   } finally {
     isDeleting.value = false;
   }

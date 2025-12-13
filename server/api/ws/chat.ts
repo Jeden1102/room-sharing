@@ -1,15 +1,32 @@
 import prisma from '~~/lib/prisma'
+import { getWsSession } from '~~/server/utils/ws-auth'
 
 const activeUsersInConversations = new Map<string, Set<string>>()
 
 export default defineWebSocketHandler({
   async open(peer) {
-    const url = new URL(peer.request.url!, 'http://localhost')
+    const url = new URL(peer.request.url!)
     const conversationId = url.searchParams.get('conversationId')
-    const userId = url.searchParams.get('userId')
 
-    if (!conversationId || !userId) {
-      peer.close()
+    if (!conversationId) {
+      peer.close(1008, 'Missing conversationId')
+      return
+    }
+
+    const session = await getWsSession(peer)
+    const userId = session?.user?.id
+
+    if (!userId) {
+      peer.close(1008, 'Unauthorized')
+      return
+    }
+
+    const isParticipant = await prisma.conversationParticipant.findFirst({
+      where: { conversationId, userId }
+    })
+
+    if (!isParticipant) {
+      peer.close(1008, 'Forbidden')
       return
     }
 
@@ -29,12 +46,28 @@ export default defineWebSocketHandler({
 
   async message(peer, message) {
     const { conversationId, userId } = peer.data
-    const text = message.text()
-    
-    if (conversationId) {
+    const rawMessage = message.text()
+
+    let parsed;
+    try {
+      parsed = JSON.parse(rawMessage)
+    } catch (e) {
+      parsed = { type: 'text', content: rawMessage }
+    }
+
+    if (parsed.type === 'typing') {
+      peer.publish(conversationId, JSON.stringify({
+        type: 'typing',
+        userId: userId,
+        isTyping: parsed.isTyping
+      }))
+      return
+    }
+
+    if (parsed.type === 'text' && conversationId) {
       const newMessage = await prisma.message.create({
         data: {
-          content: text,
+          content: parsed.content,
           senderId: userId,
           conversationId: conversationId,
         },
@@ -43,7 +76,10 @@ export default defineWebSocketHandler({
         }
       })
 
-      peer.publish(conversationId, JSON.stringify(newMessage))
+      peer.publish(conversationId, JSON.stringify({
+        type: 'message',
+        ...newMessage
+      }))
 
       const onlineInChat = activeUsersInConversations.get(conversationId) || new Set()
 
@@ -69,6 +105,12 @@ export default defineWebSocketHandler({
           activeUsersInConversations.delete(conversationId)
         }
       }
+      
+      peer.publish(conversationId, JSON.stringify({
+        type: 'typing',
+        userId: userId,
+        isTyping: false
+      }))
     }
   },
 
