@@ -26,9 +26,16 @@ export default defineWebSocketHandler({
   },
 
   async message(peer, message) {
+    const text = message.text();
+
+    if (text === 'system_ping') {
+      peer.send(JSON.stringify({ _isSystem: true, status: 'sent', id: -1 }));
+      return
+    }
+
     const {conversationId, userId } = peer.data
 
-    if (conversationId) {
+    if (conversationId){
       const newMessage = await prisma.message.create({
         data: {
           content: message.text(),
