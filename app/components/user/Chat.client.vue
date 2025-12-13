@@ -99,9 +99,18 @@ const { status, data, send, open, close } = useWebSocket(wsUrl);
 const history = ref<any[]>([]);
 
 watch(data, (newValue) => {
-  const newMessage = JSON.parse(newValue);
-  history.value.push(newMessage);
-  nextTick(scrollToBottom);
+  try {
+    const newMessage = JSON.parse(newValue);
+
+    if (newMessage._isSystem) return;
+
+    if (newMessage.senderId === userId) return;
+
+    history.value.push(newMessage);
+    nextTick(scrollToBottom);
+  } catch (e) {
+    console.error("Błąd parsowania:", e);
+  }
 });
 
 const message = ref("");

@@ -1,4 +1,3 @@
-import type { Peer, Message } from 'crossws'
 import prisma from '~~/lib/prisma'
 
 export default defineWebSocketHandler({
@@ -26,19 +25,10 @@ export default defineWebSocketHandler({
     peer.publish(conversationId, 'Another user joined the chat')
   },
 
-  close(peer) {
-    console.log('WS closed', peer.data)
-  },
-
-  error(peer, error) {
-    console.log('WS error', error)
-  },
-
   async message(peer, message) {
     const {conversationId, userId } = peer.data
 
     if (conversationId) {
-
       const newMessage = await prisma.message.create({
         data: {
           content: message.text(),
@@ -51,6 +41,7 @@ export default defineWebSocketHandler({
       })
 
       peer.publish(conversationId, JSON.stringify(newMessage))
+      peer.send(JSON.stringify({ _isSystem: true, status: 'sent', id: newMessage.id }));
 
       await prisma.conversationParticipant.updateMany({
         where: {
@@ -63,4 +54,12 @@ export default defineWebSocketHandler({
       })
     }
   },
+
+  close(peer) {
+    console.log('--- TEST WS: CLOSED ---');
+  },
+
+  error(peer, error) {
+    console.error('--- TEST WS: ERROR ---', error);
+  }
 })
