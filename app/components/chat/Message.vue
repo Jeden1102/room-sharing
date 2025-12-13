@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="message.content !== 'ping_connection'"
     class="mb-3 flex"
     :class="{ 'justify-end': isSender, 'justify-start': !isSender }"
   >

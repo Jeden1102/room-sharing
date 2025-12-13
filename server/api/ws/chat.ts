@@ -1,44 +1,40 @@
 import prisma from '~~/lib/prisma'
 
+const activeUsersInConversations = new Map<string, Set<string>>()
+
 export default defineWebSocketHandler({
   async open(peer) {
-    const url = new URL(peer.request.url!)
+    const url = new URL(peer.request.url!, 'http://localhost')
     const conversationId = url.searchParams.get('conversationId')
     const userId = url.searchParams.get('userId')
 
     if (!conversationId || !userId) {
-      peer.send('Missing conversationId')
       peer.close()
       return
     }
 
-    const conversation = await prisma.conversation.findUnique({
-      where: { id: conversationId },
-      include: {
-        participants: true,
-      },
-    })
-
     peer.data = { conversationId, userId }
-
     peer.subscribe(conversationId)
-    peer.publish(conversationId, 'Another user joined the chat')
+
+    if (!activeUsersInConversations.has(conversationId)) {
+      activeUsersInConversations.set(conversationId, new Set())
+    }
+    activeUsersInConversations.get(conversationId)!.add(userId)
+
+    await prisma.conversationParticipant.updateMany({
+      where: { conversationId, userId },
+      data: { unreadCount: 0 }
+    })
   },
 
   async message(peer, message) {
-    const text = message.text();
-
-    if (text === 'system_ping') {
-      peer.send(JSON.stringify({ _isSystem: true, status: 'sent', id: -1 }));
-      return
-    }
-
-    const {conversationId, userId } = peer.data
-
-    if (conversationId){
+    const { conversationId, userId } = peer.data
+    const text = message.text()
+    
+    if (conversationId) {
       const newMessage = await prisma.message.create({
         data: {
-          content: message.text(),
+          content: text,
           senderId: userId,
           conversationId: conversationId,
         },
@@ -48,25 +44,35 @@ export default defineWebSocketHandler({
       })
 
       peer.publish(conversationId, JSON.stringify(newMessage))
-      peer.send(JSON.stringify({ _isSystem: true, status: 'sent', id: newMessage.id }));
+
+      const onlineInChat = activeUsersInConversations.get(conversationId) || new Set()
 
       await prisma.conversationParticipant.updateMany({
         where: {
-          conversationId: conversationId,
-          userId: { not: userId },
+          conversationId,
+          userId: { 
+            notIn: [userId, ...Array.from(onlineInChat)] 
+          },
         },
-        data: {
-          unreadCount: { increment: 1 },
-        },
+        data: { unreadCount: { increment: 1 } },
       })
     }
   },
 
   close(peer) {
-    console.log('--- TEST WS: CLOSED ---');
+    const { conversationId, userId } = peer.data
+    if (conversationId && userId) {
+      const users = activeUsersInConversations.get(conversationId)
+      if (users) {
+        users.delete(userId)
+        if (users.size === 0) {
+          activeUsersInConversations.delete(conversationId)
+        }
+      }
+    }
   },
 
   error(peer, error) {
-    console.error('--- TEST WS: ERROR ---', error);
+    console.error('WS ERROR:', error)
   }
 })

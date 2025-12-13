@@ -57,16 +57,6 @@ export default requireAuth(
         }
       });
     }
-    
-    await prisma.conversationParticipant.updateMany({
-        where: {
-            conversationId: conversation.id,
-            userId: currentUserId,
-        },
-        data: {
-            unreadCount: 0,
-        },
-    });
 
     return {
       success: true,

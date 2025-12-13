@@ -95,19 +95,12 @@ const wsHost = window.location.host;
 
 const wsUrl = `${wsProtocol}//${wsHost}/api/ws/chat?conversationId=${conversationId}&userId=${userId}`;
 
-const { status, data, send, open, close } = useWebSocket(wsUrl, {
-  heartbeat: {
-    interval: 5000,
-    message: "system_ping",
-  },
-});
+const { status, data, send, open, close } = useWebSocket(wsUrl);
 const history = ref<any[]>([]);
 
 watch(data, (newValue) => {
   try {
     const newMessage = JSON.parse(newValue);
-
-    if (newMessage._isSystem) return;
 
     if (newMessage.senderId === userId) return;
 
