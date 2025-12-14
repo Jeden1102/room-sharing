@@ -15,9 +15,17 @@
       <RouterLink
         :to="$localePath(link.to)"
         :class="slotProps.class"
+        class="overflow-visible!"
         :title="link.title"
       >
         <span :class="link.icon"></span>
+
+        <span
+          v-if="link.badgeValue && link.badgeValue.value > 0"
+          class="bg-primary-400 absolute -top-1 right-0 grid size-5 place-items-center rounded-full text-xs text-white"
+        >
+          {{ link.badgeValue }}
+        </span>
       </RouterLink>
     </Button>
   </nav>
@@ -27,6 +35,8 @@
 const route = useRoute();
 const { data } = useAuth();
 const localePath = useLocalePath();
+
+const { unreadCount } = useNotifications();
 
 const isActive = (path: string) => {
   return route.path === localePath(path);
@@ -56,9 +66,10 @@ const links = [
     title: "Properties",
   },
   {
-    icon: "pi pi-comment",
+    icon: "pi pi-comments",
     to: localePath("user-chat"),
     title: "Chat",
+    badgeValue: unreadCount,
   },
   {
     icon: "pi pi-user",

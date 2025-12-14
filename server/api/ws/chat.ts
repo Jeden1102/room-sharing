@@ -48,6 +48,8 @@ export default defineWebSocketHandler({
     const { conversationId, userId } = peer.data
     const rawMessage = message.text()
 
+    if (rawMessage === "ping_connection") return
+
     let parsed;
     try {
       parsed = JSON.parse(rawMessage)
@@ -82,6 +84,19 @@ export default defineWebSocketHandler({
       }))
 
       const onlineInChat = activeUsersInConversations.get(conversationId) || new Set()
+      
+      const allParticipants = await prisma.conversationParticipant.findMany({
+        where: { conversationId }
+      })
+
+      for (const participant of allParticipants) {
+        if (participant.userId !== userId && !onlineInChat.has(participant.userId)) {
+          peer.publish(`user_${participant.userId}`, JSON.stringify({
+            type: 'notification',
+            conversationId: conversationId
+          }))
+        }
+      }
 
       await prisma.conversationParticipant.updateMany({
         where: {

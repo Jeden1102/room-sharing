@@ -81,6 +81,7 @@
 const route = useRoute();
 const localePath = useLocalePath();
 const conversationId = route.params.id as string;
+const { fetchInitialCount } = useNotifications();
 
 const {
   userId,
@@ -177,6 +178,7 @@ watch(
   conversationData,
   (nv) => {
     if (nv?.conversation) {
+      fetchInitialCount();
       history.value = nv.conversation.messages || [];
       const p = nv.conversation.participants?.find(
         (p: any) => p.userId !== userId,

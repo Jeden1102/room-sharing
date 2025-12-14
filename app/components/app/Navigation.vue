@@ -84,6 +84,22 @@
             <Menu ref="userMenu" :model="userMenuItems" :popup="true" />
           </template>
 
+          <Button asChild rounded severity="secondary" v-if="data?.user">
+            <RouterLink
+              :to="$localePath('user-chat')"
+              class="relative flex items-center"
+            >
+              <span class="pi pi-comments text-xl"></span>
+
+              <span
+                v-if="unreadCount > 0"
+                class="bg-primary-400 absolute -top-4 -right-3 grid size-5 place-items-center rounded-full text-xs text-white"
+              >
+                {{ unreadCount }}
+              </span>
+            </RouterLink>
+          </Button>
+
           <Button asChild v-slot="slotProps">
             <RouterLink
               :to="
@@ -121,6 +137,11 @@ const localePath = useLocalePath();
 const userMenu = ref();
 const userButton = ref();
 const route = useRoute();
+const { unreadCount, fetchInitialCount } = useNotifications();
+
+onMounted(() => {
+  fetchInitialCount();
+});
 
 watch(
   () => route.path,
