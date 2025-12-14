@@ -4,10 +4,10 @@
     :class="{ 'justify-end': isSender, 'justify-start': !isSender }"
   >
     <div
-      class="max-w-xs rounded-xl px-4 py-2 shadow-md lg:max-w-md"
+      class="max-w-xs rounded-xl px-4 py-2 shadow-sm lg:max-w-md"
       :class="{
         'bg-primary-400 rounded-br-none text-white': isSender,
-        'bg-primary-100 text-primary-400 rounded-tl-none': !isSender,
+        'bg-primary-50 text-primary-400 rounded-tl-none': !isSender,
       }"
     >
       <div class="text-sm break-words whitespace-pre-wrap">

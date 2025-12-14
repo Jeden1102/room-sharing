@@ -12,7 +12,6 @@
         >
           <Icon name="ic:sharp-arrow-back-ios-new" class="text-xl" />
         </NuxtLink>
-
         <NuxtLink
           v-if="otherUser"
           :to="
@@ -100,6 +99,22 @@ const message = ref("");
 const isTypingLocal = ref(false);
 let typingTimeout: NodeJS.Timeout;
 
+const scrollToBottom = () => {
+  if (chatContainer.value) {
+    chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
+  }
+};
+
+watch(
+  () => history.value.length,
+  async (newVal, oldVal) => {
+    if (newVal > oldVal && !loadingMore.value) {
+      await nextTick();
+      scrollToBottom();
+    }
+  },
+);
+
 watch(message, (newVal) => {
   if (newVal.length > 0 && !isTypingLocal.value) {
     isTypingLocal.value = true;
@@ -119,13 +134,6 @@ const handleSendMessage = () => {
   if (!message.value.trim()) return;
   sendMessage(message.value);
   message.value = "";
-  nextTick(scrollToBottom);
-};
-
-const scrollToBottom = () => {
-  if (chatContainer.value) {
-    chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
-  }
 };
 
 const loadMoreMessages = async () => {
