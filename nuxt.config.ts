@@ -58,6 +58,7 @@ export default defineNuxtConfig({
     ['@nuxtjs/leaflet', { ssr: false }],
     "@dargmuesli/nuxt-cookie-control",
     '@vueuse/nuxt',
+    "nuxt-security"
   ],
   routeRules: {
     '/': { isr: 3600 },
@@ -69,6 +70,22 @@ export default defineNuxtConfig({
   },
   fileStorage: {
     mount: process.cwd() + "/public/uploads",
+  },
+  security: {
+    headers: {
+      contentSecurityPolicy: {
+        'img-src': [
+          "'self'",
+          'data:',
+          'blob:',
+          'https://*.vercel-storage.com',
+          'https://*.openstreetmap.org',
+          'https://*.basemaps.cartocdn.com',
+          'https://*.stadiamaps.com',
+          '*'
+        ]
+      }
+    }
   },
   fonts: {
     defaults: {
