@@ -60,7 +60,12 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
   ],
   routeRules: {
-    '/**': { prerender: false }
+    '/': { isr: 3600 },
+    '/en': { isr: 3600 },
+    '/oferty': { isr: 60 },
+    '/uzytkownicy': { isr: 60 },
+    '/en/users': { isr: 60 },
+    '/en/properties': { isr: 60 },
   },
   fileStorage: {
     mount: process.cwd() + "/public/uploads",
