@@ -80,9 +80,6 @@
             :label="$t('propertyForm.basicData.price')"
             :form="$form"
           />
-          <span class="text-xs text-gray-500">
-            {{ $t("propertyForm.basicData.priceHint") }}
-          </span>
         </div>
         <AtomsNumber
           name="deposit"
@@ -187,19 +184,6 @@
           v-for="amenity in amenitiesOptions"
           :key="amenity.value"
         />
-      </div>
-
-      <div class="mt-2">
-        <div class="flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
-          <AtomsCheckbox
-            name="isShared"
-            :label="$t('propertyForm.amenities.isShared')"
-            :form="$form"
-          />
-          <p class="text-muted text-sm">
-            {{ $t("propertyForm.amenities.isSharedHint") }}
-          </p>
-        </div>
       </div>
     </Fieldset>
 

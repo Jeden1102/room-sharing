@@ -1,161 +1,246 @@
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 
 export const useTaxonomies = () => {
   const { t } = useI18n();
 
   const listingTypeOptions = [
-    { label: t('taxonomies.listingType.any'), value: null },
-    { label: t('taxonomies.listingType.rent'), value: "RENT" },
-    { label: t('taxonomies.listingType.sale'), value: "SALE" },
-  ]
+    { label: t("taxonomies.listingType.any"), value: null },
+    { label: t("taxonomies.listingType.rent"), value: "RENT" },
+    { label: t("taxonomies.listingType.sale"), value: "SALE" },
+  ];
 
   const propertyTypeOptions = [
-    { label: t('taxonomies.propertyType.any'), value: null },
-    { label: t('taxonomies.propertyType.apartment'), value: "APARTMENT" },
-    { label: t('taxonomies.propertyType.house'), value: "HOUSE" },
-    { label: t('taxonomies.propertyType.room'), value: "ROOM" },
-    { label: t('taxonomies.propertyType.studio'), value: "STUDIO" },
-  ]
+    { label: t("taxonomies.propertyType.any"), value: null },
+    { label: t("taxonomies.propertyType.apartment"), value: "APARTMENT" },
+    { label: t("taxonomies.propertyType.house"), value: "HOUSE" },
+    { label: t("taxonomies.propertyType.room"), value: "ROOM" },
+    { label: t("taxonomies.propertyType.studio"), value: "STUDIO" },
+    { label: t("taxonomies.propertyType.loft"), value: "LOFT" },
+  ];
 
   const amenitiesOptions = [
-    { label: t('taxonomies.amenities.furnished'), value: "furnished" },
-    { label: t('taxonomies.amenities.balcony'), value: "balcony" },
-    { label: t('taxonomies.amenities.elevator'), value: "elevator" },
-    { label: t('taxonomies.amenities.parking'), value: "parking" },
-    { label: t('taxonomies.amenities.washingMachine'), value: "washingMachine" },
-    { label: t('taxonomies.amenities.dishwasher'), value: "dishwasher" },
-    { label: t('taxonomies.amenities.airConditioning'), value: "airConditioning" },
-    { label: t('taxonomies.amenities.petsAllowed'), value: "petsAllowed" },
-    { label: t('taxonomies.amenities.smokingAllowed'), value: "smokingAllowed" },
-  ]
+    { label: t("taxonomies.amenities.furnished"), value: "furnished" },
+    { label: t("taxonomies.amenities.balcony"), value: "balcony" },
+    { label: t("taxonomies.amenities.elevator"), value: "elevator" },
+    { label: t("taxonomies.amenities.parking"), value: "parking" },
+    {
+      label: t("taxonomies.amenities.washingMachine"),
+      value: "washingMachine",
+    },
+    { label: t("taxonomies.amenities.dryer"), value: "dryer" },
+    { label: t("taxonomies.amenities.dishwasher"), value: "dishwasher" },
+    {
+      label: t("taxonomies.amenities.airConditioning"),
+      value: "airConditioning",
+    },
+    { label: t("taxonomies.amenities.petsAllowed"), value: "petsAllowed" },
+    {
+      label: t("taxonomies.amenities.smokingAllowed"),
+      value: "smokingAllowed",
+    },
+    { label: t("taxonomies.amenities.desk"), value: "desk" },
+    {
+      label: t("taxonomies.amenities.separateKitchen"),
+      value: "separateKitchen",
+    },
+    {
+      label: t("taxonomies.amenities.separateToilet"),
+      value: "separateToilet",
+    },
+    { label: t("taxonomies.amenities.garden"), value: "garden" },
+    { label: t("taxonomies.amenities.gymInBuilding"), value: "gymInBuilding" },
+  ];
 
   const mediasOptions = [
-    { label: t('taxonomies.media.internet'), value: "internet" },
-    { label: t('taxonomies.media.tv'), value: "tv" },
-  ]
+    { label: t("taxonomies.media.internet"), value: "internet" },
+    { label: t("taxonomies.media.tv"), value: "tv" },
+    { label: t("taxonomies.media.gas"), value: "gas" },
+    { label: t("taxonomies.media.electricity"), value: "electricity" },
+    { label: t("taxonomies.media.water"), value: "water" },
+    { label: t("taxonomies.media.heatingCity"), value: "heatingCity" },
+  ];
 
   const contactReasonOptions = [
-    { label: t('taxonomies.contactReason.bug'), value: "bug" },
-    { label: t('taxonomies.contactReason.technical'), value: "technical" },
-    { label: t('taxonomies.contactReason.listing'), value: "listing" },
-    { label: t('taxonomies.contactReason.reportListing'), value: "reportListing" },
-    { label: t('taxonomies.contactReason.reportUser'), value: "reportUser" },
-    { label: t('taxonomies.contactReason.account'), value: "account" },
-    { label: t('taxonomies.contactReason.payment'), value: "payment" },
-    { label: t('taxonomies.contactReason.partnership'), value: "partnership" },
-    { label: t('taxonomies.contactReason.suggestion'), value: "suggestion" },
-    { label: t('taxonomies.contactReason.search'), value: "search" },
-    { label: t('taxonomies.contactReason.login'), value: "login" },
-    { label: t('taxonomies.contactReason.terms'), value: "terms" },
-    { label: t('taxonomies.contactReason.privacy'), value: "privacy" },
-    { label: t('taxonomies.contactReason.spam'), value: "spam" },
-    { label: t('taxonomies.contactReason.verification'), value: "verification" },
-    { label: t('taxonomies.contactReason.premium'), value: "premium" },
-    { label: t('taxonomies.contactReason.deleteAccount'), value: "deleteAccount" },
-    { label: t('taxonomies.contactReason.other'), value: "other" },
-  ]
+    { label: t("taxonomies.contactReason.bug"), value: "bug" },
+    { label: t("taxonomies.contactReason.technical"), value: "technical" },
+    { label: t("taxonomies.contactReason.listing"), value: "listing" },
+    {
+      label: t("taxonomies.contactReason.reportListing"),
+      value: "reportListing",
+    },
+    { label: t("taxonomies.contactReason.reportUser"), value: "reportUser" },
+    { label: t("taxonomies.contactReason.account"), value: "account" },
+    { label: t("taxonomies.contactReason.payment"), value: "payment" },
+    { label: t("taxonomies.contactReason.partnership"), value: "partnership" },
+    { label: t("taxonomies.contactReason.suggestion"), value: "suggestion" },
+    { label: t("taxonomies.contactReason.search"), value: "search" },
+    { label: t("taxonomies.contactReason.login"), value: "login" },
+    { label: t("taxonomies.contactReason.terms"), value: "terms" },
+    { label: t("taxonomies.contactReason.privacy"), value: "privacy" },
+    { label: t("taxonomies.contactReason.spam"), value: "spam" },
+    {
+      label: t("taxonomies.contactReason.verification"),
+      value: "verification",
+    },
+    { label: t("taxonomies.contactReason.premium"), value: "premium" },
+    {
+      label: t("taxonomies.contactReason.deleteAccount"),
+      value: "deleteAccount",
+    },
+    { label: t("taxonomies.contactReason.other"), value: "other" },
+  ];
 
   const genderOptions = [
-    { name: t('taxonomies.gender.any'), id: null },
-    { name: t('taxonomies.gender.male'), id: "male" },
-    { name: t('taxonomies.gender.female'), id: "female" },
-    { name: t('taxonomies.gender.others'), id: "others" },
-  ]
+    { label: t("taxonomies.gender.any"), value: null },
+    { label: t("taxonomies.gender.male"), value: "male" },
+    { label: t("taxonomies.gender.female"), value: "female" },
+    { label: t("taxonomies.gender.others"), value: "others" },
+  ];
 
   const propertiesSortOptions = [
-    { label: t('taxonomies.propertiesSort.newest'), value: "newest" },
-    { label: t('taxonomies.propertiesSort.oldest'), value: "oldest" },
-    { label: t('taxonomies.propertiesSort.priceAsc'), value: "priceAsc" },
-    { label: t('taxonomies.propertiesSort.priceDesc'), value: "priceDesc" },
-    { label: t('taxonomies.propertiesSort.sizeAsc'), value: "sizeAsc" },
-    { label: t('taxonomies.propertiesSort.sizeDesc'), value: "sizeDesc" },
-  ]
+    { label: t("taxonomies.propertiesSort.newest"), value: "newest" },
+    { label: t("taxonomies.propertiesSort.oldest"), value: "oldest" },
+    { label: t("taxonomies.propertiesSort.priceAsc"), value: "priceAsc" },
+    { label: t("taxonomies.propertiesSort.priceDesc"), value: "priceDesc" },
+    { label: t("taxonomies.propertiesSort.sizeAsc"), value: "sizeAsc" },
+    { label: t("taxonomies.propertiesSort.sizeDesc"), value: "sizeDesc" },
+  ];
 
   const usersSortOptions = [
-    { label: t('taxonomies.usersSort.none'), value: null },
-    { label: t('taxonomies.usersSort.newest'), value: "newest" },
-    { label: t('taxonomies.usersSort.ageAsc'), value: "ageAsc" },
-    { label: t('taxonomies.usersSort.ageDesc'), value: "ageDesc" },
-    { label: t('taxonomies.usersSort.budgetAsc'), value: "budgetAsc" },
-    { label: t('taxonomies.usersSort.budgetDesc'), value: "budgetDesc" },
-  ]
+    { label: t("taxonomies.usersSort.none"), value: null },
+    { label: t("taxonomies.usersSort.newest"), value: "newest" },
+    { label: t("taxonomies.usersSort.ageAsc"), value: "ageAsc" },
+    { label: t("taxonomies.usersSort.ageDesc"), value: "ageDesc" },
+    { label: t("taxonomies.usersSort.budgetAsc"), value: "budgetAsc" },
+    { label: t("taxonomies.usersSort.budgetDesc"), value: "budgetDesc" },
+  ];
 
   const interestsOptions = [
-    { name: t('taxonomies.interests.sports'), id: "sports" },
-    { name: t('taxonomies.interests.music'), id: "music" },
-    { name: t('taxonomies.interests.travel'), id: "travel" },
-    { name: t('taxonomies.interests.cooking'), id: "cooking" },
-    { name: t('taxonomies.interests.reading'), id: "reading" },
-    { name: t('taxonomies.interests.gaming'), id: "gaming" },
-    { name: t('taxonomies.interests.movies'), id: "movies" },
-    { name: t('taxonomies.interests.art'), id: "art" },
-    { name: t('taxonomies.interests.photography'), id: "photography" },
-    { name: t('taxonomies.interests.fitness'), id: "fitness" },
-    { name: t('taxonomies.interests.dance'), id: "dance" },
-    { name: t('taxonomies.interests.yoga'), id: "yoga" },
-    { name: t('taxonomies.interests.hiking'), id: "hiking" },
-    { name: t('taxonomies.interests.cycling'), id: "cycling" },
-    { name: t('taxonomies.interests.technology'), id: "technology" },
-  ]
+    { label: t("taxonomies.interests.sports"), value: "sports" },
+    { label: t("taxonomies.interests.music"), value: "music" },
+    { label: t("taxonomies.interests.travel"), value: "travel" },
+    { label: t("taxonomies.interests.cooking"), value: "cooking" },
+    { label: t("taxonomies.interests.reading"), value: "reading" },
+    { label: t("taxonomies.interests.gaming"), value: "gaming" },
+    { label: t("taxonomies.interests.movies"), value: "movies" },
+    { label: t("taxonomies.interests.art"), value: "art" },
+    { label: t("taxonomies.interests.photography"), value: "photography" },
+    { label: t("taxonomies.interests.fitness"), value: "fitness" },
+    { label: t("taxonomies.interests.dance"), value: "dance" },
+    { label: t("taxonomies.interests.yoga"), value: "yoga" },
+    { label: t("taxonomies.interests.hiking"), value: "hiking" },
+    { label: t("taxonomies.interests.cycling"), value: "cycling" },
+    { label: t("taxonomies.interests.technology"), value: "technology" },
+  ];
 
   const occupationsOptions = [
-    { name: t('taxonomies.occupations.student'), id: "student" },
-    { name: t('taxonomies.occupations.remoteWorker'), id: "remote_worker" },
-    { name: t('taxonomies.occupations.worker'), id: "worker" },
-    { name: t('taxonomies.occupations.unemployed'), id: "unemployed" },
-  ]
+    { label: t("taxonomies.occupations.student"), value: "student" },
+    { label: t("taxonomies.occupations.remoteWorker"), value: "remote_worker" },
+    { label: t("taxonomies.occupations.worker"), value: "worker" },
+    { label: t("taxonomies.occupations.unemployed"), value: "unemployed" },
+  ];
+
+  const lifestyleOptions = [
+    { label: t("taxonomies.lifestyle.partyFriendly"), value: "partyFriendly" },
+    { label: t("taxonomies.lifestyle.studyOriented"), value: "studyOriented" },
+    { label: t("taxonomies.lifestyle.earlyBird"), value: "earlyBird" },
+    { label: t("taxonomies.lifestyle.nightOwl"), value: "nightOwl" },
+    { label: t("taxonomies.lifestyle.veganFriendly"), value: "veganFriendly" },
+    { label: t("taxonomies.lifestyle.lgbtFriendly"), value: "lgbtFriendly" },
+  ];
+
+  const guestRulesOptions = [
+    { label: t("taxonomies.guestRules.noGuests"), value: "noGuests" },
+    { label: t("taxonomies.guestRules.occasional"), value: "occasional" },
+    {
+      label: t("taxonomies.guestRules.overnightAllowed"),
+      value: "overnightAllowed",
+    },
+  ];
+
+  const roomAvailabilityOptions = [
+    { label: t("taxonomies.roomAvailability.single"), value: "SINGLE" },
+    { label: t("taxonomies.roomAvailability.double"), value: "DOUBLE" },
+    {
+      label: t("taxonomies.roomAvailability.placeInDouble"),
+      value: "PLACE_IN_DOUBLE",
+    },
+  ];
 
   const searchPreferencesOptions = [
-    { name: t('taxonomies.searchPreferences.quiet'), id: "quiet" },
-    { name: t('taxonomies.searchPreferences.nonSmoker'), id: "non-smoker" },
-    { name: t('taxonomies.searchPreferences.central'), id: "central" },
-    { name: t('taxonomies.searchPreferences.green'), id: "green" },
-    { name: t('taxonomies.searchPreferences.transport'), id: "transport" },
-    { name: t('taxonomies.searchPreferences.university'), id: "university" },
-    { name: t('taxonomies.searchPreferences.work'), id: "work" },
-    { name: t('taxonomies.searchPreferences.shops'), id: "shops" },
-    { name: t('taxonomies.searchPreferences.restaurants'), id: "restaurants" },
-    { name: t('taxonomies.searchPreferences.gym'), id: "gym" },
-    { name: t('taxonomies.searchPreferences.safe'), id: "safe" },
-  ]
+    { label: t("taxonomies.searchPreferences.quiet"), value: "quiet" },
+    { label: t("taxonomies.searchPreferences.nonSmoker"), value: "non-smoker" },
+    { label: t("taxonomies.searchPreferences.central"), value: "central" },
+    { label: t("taxonomies.searchPreferences.green"), value: "green" },
+    { label: t("taxonomies.searchPreferences.transport"), value: "transport" },
+    {
+      label: t("taxonomies.searchPreferences.university"),
+      value: "university",
+    },
+    { label: t("taxonomies.searchPreferences.work"), value: "work" },
+    { label: t("taxonomies.searchPreferences.shops"), value: "shops" },
+    {
+      label: t("taxonomies.searchPreferences.restaurants"),
+      value: "restaurants",
+    },
+    { label: t("taxonomies.searchPreferences.gym"), value: "gym" },
+    { label: t("taxonomies.searchPreferences.safe"), value: "safe" },
+  ];
 
   const searchPropertyTypesOptions = [
-    { name: t('taxonomies.searchPropertyTypes.apartment'), id: "apartment" },
-    { name: t('taxonomies.searchPropertyTypes.house'), id: "house" },
-    { name: t('taxonomies.searchPropertyTypes.studio'), id: "studio" },
-    { name: t('taxonomies.searchPropertyTypes.room'), id: "room" },
-    { name: t('taxonomies.searchPropertyTypes.loft'), id: "loft" },
-  ]
+    {
+      label: t("taxonomies.searchPropertyTypes.apartment"),
+      value: "apartment",
+    },
+    { label: t("taxonomies.searchPropertyTypes.house"), value: "house" },
+    { label: t("taxonomies.searchPropertyTypes.studio"), value: "studio" },
+    { label: t("taxonomies.searchPropertyTypes.room"), value: "room" },
+    { label: t("taxonomies.searchPropertyTypes.loft"), value: "loft" },
+  ];
 
   const noiseCompatibilityOptions = [
-    { name: t('taxonomies.noiseCompatibility.veryQuiet'), id: "very_quiet" },
-    { name: t('taxonomies.noiseCompatibility.quiet'), id: "quiet" },
-    { name: t('taxonomies.noiseCompatibility.moderate'), id: "moderate" },
-    { name: t('taxonomies.noiseCompatibility.loud'), id: "loud" },
-    { name: t('taxonomies.noiseCompatibility.veryLoud'), id: "very_loud" },
-  ]
+    {
+      label: t("taxonomies.noiseCompatibility.veryQuiet"),
+      value: "very_quiet",
+    },
+    { label: t("taxonomies.noiseCompatibility.quiet"), value: "quiet" },
+    { label: t("taxonomies.noiseCompatibility.moderate"), value: "moderate" },
+    { label: t("taxonomies.noiseCompatibility.loud"), value: "loud" },
+    { label: t("taxonomies.noiseCompatibility.veryLoud"), value: "very_loud" },
+  ];
 
   const petsCompatibilityOptions = [
-    { name: t('taxonomies.petsCompatibility.noPets'), id: "no_pets" },
-    { name: t('taxonomies.petsCompatibility.cats'), id: "cats" },
-    { name: t('taxonomies.petsCompatibility.dogs'), id: "dogs" },
-    { name: t('taxonomies.petsCompatibility.smallPets'), id: "small_pets" },
-    { name: t('taxonomies.petsCompatibility.allPets'), id: "all_pets" },
-  ]
+    { label: t("taxonomies.petsCompatibility.noPets"), value: "no_pets" },
+    { label: t("taxonomies.petsCompatibility.cats"), value: "cats" },
+    { label: t("taxonomies.petsCompatibility.dogs"), value: "dogs" },
+    { label: t("taxonomies.petsCompatibility.smallPets"), value: "small_pets" },
+    { label: t("taxonomies.petsCompatibility.allPets"), value: "all_pets" },
+  ];
 
   const statusOptions = [
-    { label: t('taxonomies.status.draft'), value: "DRAFT" },
-    { label: t('taxonomies.status.active'), value: "ACTIVE" },
-    { label: t('taxonomies.status.reserved'), value: "RESERVED" },
-  ]
+    { label: t("taxonomies.status.draft"), value: "DRAFT" },
+    { label: t("taxonomies.status.active"), value: "ACTIVE" },
+    { label: t("taxonomies.status.reserved"), value: "RESERVED" },
+    { label: t("taxonomies.status.archived"), value: "ARCHIVED" },
+    { label: t("taxonomies.status.expired"), value: "EXPIRED" },
+  ];
 
   const reportOptions = [
     { label: t("entityReport.reportReasons.SPAM"), value: "SPAM" },
     { label: t("entityReport.reportReasons.SCAM"), value: "SCAM" },
-    { label: t("entityReport.reportReasons.INAPPROPRIATE_BEHAVIOR"), value: "INAPPROPRIATE_BEHAVIOR" },
-    { label: t("entityReport.reportReasons.FAKE_PROFILE"), value: "FAKE_PROFILE" },
-    { label: t("entityReport.reportReasons.MISLEADING_INFORMATION"), value: "MISLEADING_INFORMATION" },
-    { label: t("entityReport.reportReasons.OTHER"), value: "OTHER" }
+    {
+      label: t("entityReport.reportReasons.INAPPROPRIATE_BEHAVIOR"),
+      value: "INAPPROPRIATE_BEHAVIOR",
+    },
+    {
+      label: t("entityReport.reportReasons.FAKE_PROFILE"),
+      value: "FAKE_PROFILE",
+    },
+    {
+      label: t("entityReport.reportReasons.MISLEADING_INFORMATION"),
+      value: "MISLEADING_INFORMATION",
+    },
+    { label: t("entityReport.reportReasons.OTHER"), value: "OTHER" },
   ];
 
   const allTaxonomies = {
@@ -169,6 +254,9 @@ export const useTaxonomies = () => {
     usersSortOptions,
     interestsOptions,
     occupationsOptions,
+    lifestyleOptions,
+    guestRulesOptions,
+    roomAvailabilityOptions,
     searchPreferencesOptions,
     searchPropertyTypesOptions,
     noiseCompatibilityOptions,
@@ -177,17 +265,22 @@ export const useTaxonomies = () => {
     reportOptions,
   };
 
-  const mapTaxonomyLabel = (taxonomyKey: keyof typeof allTaxonomies, value: string | null): string => {
+  const mapTaxonomyLabel = (
+    taxonomyKey: keyof typeof allTaxonomies,
+    value: string | null,
+  ): string => {
     const optionsArray = allTaxonomies[taxonomyKey];
 
     if (!optionsArray) {
-      return '';
+      return "";
     }
 
-    const foundOption: any = optionsArray.find((option: any) => option.value === value || option.id === value);
+    const foundOption: any = optionsArray.find(
+      (option: any) => option.value === value,
+    );
 
-    return foundOption ? foundOption.label : '';
-  }
+    return foundOption ? foundOption.label : "";
+  };
 
   return {
     listingTypeOptions,
@@ -200,12 +293,15 @@ export const useTaxonomies = () => {
     usersSortOptions,
     interestsOptions,
     occupationsOptions,
+    lifestyleOptions,
+    guestRulesOptions,
+    roomAvailabilityOptions,
     searchPreferencesOptions,
     searchPropertyTypesOptions,
     noiseCompatibilityOptions,
     petsCompatibilityOptions,
     statusOptions,
     reportOptions,
-    mapTaxonomyLabel
+    mapTaxonomyLabel,
   };
 };

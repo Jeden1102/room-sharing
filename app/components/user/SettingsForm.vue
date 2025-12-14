@@ -57,8 +57,8 @@
             name="gender"
             :label="$t('userSettingsForm.general.gender')"
             :options="genderOptions"
-            optionLabel="name"
-            optionValue="id"
+            optionLabel="label"
+            optionValue="value"
             :form="$form"
           />
         </div>
@@ -68,8 +68,8 @@
             name="interests"
             :label="$t('userSettingsForm.general.interests')"
             :options="taxonomies.interestsOptions"
-            optionLabel="name"
-            optionValue="id"
+            optionLabel="label"
+            optionValue="value"
             :placeholder="$t('userSettingsForm.general.interestsPlaceholder')"
             :form="$form"
           />
@@ -78,8 +78,8 @@
             name="occupations"
             :label="$t('userSettingsForm.general.occupation')"
             :options="taxonomies.occupationsOptions"
-            optionLabel="name"
-            optionValue="id"
+            optionLabel="label"
+            optionValue="value"
             :placeholder="$t('userSettingsForm.general.occupationPlaceholder')"
             :form="$form"
           />
@@ -150,8 +150,8 @@
           name="searchPreferences"
           :label="$t('userSettingsForm.searchPreferences.preferences')"
           :options="taxonomies.searchPreferencesOptions"
-          optionLabel="name"
-          optionValue="id"
+          optionLabel="label"
+          optionValue="value"
           :placeholder="
             $t('userSettingsForm.searchPreferences.preferencesPlaceholder')
           "
@@ -162,8 +162,8 @@
           name="searchPropertyTypes"
           :label="$t('userSettingsForm.searchPreferences.propertyType')"
           :options="taxonomies.searchPropertyTypesOptions"
-          optionLabel="name"
-          optionValue="id"
+          optionLabel="label"
+          optionValue="value"
           :placeholder="
             $t('userSettingsForm.searchPreferences.propertyTypePlaceholder')
           "
@@ -184,8 +184,8 @@
           name="noiseCompatibility"
           :label="$t('userSettingsForm.compatibility.noise')"
           :options="taxonomies.noiseCompatibilityOptions"
-          optionLabel="name"
-          optionValue="id"
+          optionLabel="label"
+          optionValue="value"
           :placeholder="$t('userSettingsForm.compatibility.noisePlaceholder')"
           :form="$form"
         />
@@ -194,8 +194,8 @@
           name="petsCompatibility"
           :label="$t('userSettingsForm.compatibility.pets')"
           :options="taxonomies.petsCompatibilityOptions"
-          optionLabel="name"
-          optionValue="id"
+          optionLabel="label"
+          optionValue="value"
           :placeholder="$t('userSettingsForm.compatibility.petsPlaceholder')"
           :form="$form"
         />

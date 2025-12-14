@@ -14,7 +14,6 @@
         <NuxtImg
           :src="service.image"
           :alt="$t(service.imageAltKey)"
-          loading="lazy"
           class="mx-auto size-28 object-cover"
           width="300"
           height="300"

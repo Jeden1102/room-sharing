@@ -670,7 +670,8 @@
       "apartment": "Apartment",
       "house": "House",
       "room": "Room",
-      "studio": "Studio"
+      "studio": "Studio",
+      "loft": "Loft"
     },
     "amenities": {
       "furnished": "Furnished",
@@ -681,7 +682,13 @@
       "dishwasher": "Dishwasher",
       "airConditioning": "Air Conditioning",
       "petsAllowed": "Pets Allowed",
-      "smokingAllowed": "Smoking Allowed"
+      "smokingAllowed": "Smoking Allowed",
+      "dryer": "Dryer",
+      "desk": "Desk",
+      "separateKitchen": "Separate Kitchen",
+      "separateToilet": "Separate Toilet",
+      "garden": "Garden",
+      "gymInBuilding": "Gyym in Building"
     },
     "media": {
       "internet": "Internet",

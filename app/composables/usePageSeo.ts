@@ -10,9 +10,15 @@ export default function usePageSeo({
   const { t } = useI18n();
   const config = useRuntimeConfig();
 
-  const imageUrl = image
-    ? image
-    : config.public.APP_BASE_URI + "/images/hero.png";
+  let imageUrl = config.public.APP_BASE_URI + "/images/hero.png";
+
+  if (image) {
+    if (image.includes('vercel-storage.com')) {
+      imageUrl = `https://wsrv.nl/?url=${encodeURIComponent(image)}&w=1200&h=630&fit=cover&q=90`;
+    } else {
+      imageUrl = image;
+    }
+  }
 
   return useSeoMeta({
     title: t(title),

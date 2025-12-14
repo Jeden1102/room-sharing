@@ -2,6 +2,8 @@ To fix:
 1. Anys
 2. Ogólnie walidacje
 
-Features:
-0. Chat
-6. Dostosowanie pokoji/mieszkań do sharingu
+
+--- TESTY ---
+
+1. Logiki usunięcie usera / propertiesa.
+2. Stress testy.

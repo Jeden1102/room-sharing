@@ -670,7 +670,8 @@
       "apartment": "Mieszkanie",
       "house": "Dom",
       "room": "Pokój",
-      "studio": "Studio"
+      "studio": "Studio",
+      "loft": "Loft"
     },
     "amenities": {
       "furnished": "Umeblowane",
@@ -681,11 +682,21 @@
       "dishwasher": "Zmywarka",
       "airConditioning": "Klimatyzacja",
       "petsAllowed": "Zwierzęta dozwolone",
-      "smokingAllowed": "Palenie dozwolone"
+      "smokingAllowed": "Palenie dozwolone",
+      "dryer": "Suszarka",
+      "desk": "Biurko",
+      "separateKitchen": "Oddzielna kuchnia",
+      "separateToilet": "Oddzielna toaleta",
+      "garden": "Ogród",
+      "gymInBuilding": "Siłownia w budynku"
     },
     "media": {
       "internet": "Internet",
-      "tv": "Telewizja"
+      "tv": "Telewizja",
+      "gas": "Gaz",
+      "electricity": "Elektryczność",
+      "water": "Woda",
+      "heatingCity": "Ogrzewanie miejskie"
     },
     "contactReason": {
       "bug": "Błąd na stronie",
@@ -748,7 +759,7 @@
     },
     "occupations": {
       "student": "Student",
-      "worker": "Osboa pracująca",
+      "worker": "Osoba pracująca",
       "remoteWorker": "Pracownik zdalny",
       "unemployed": "Nie pracuję"
     },
