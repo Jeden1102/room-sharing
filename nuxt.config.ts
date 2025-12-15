@@ -61,8 +61,8 @@ export default defineNuxtConfig({
     "nuxt-security"
   ],
   routeRules: {
-    '/': { isr: 3600 },
-    '/en': { isr: 3600 },
+    '/': { swr: 3600 },
+    '/en': { swr: 3600 },
     '/oferty': { isr: 60 },
     '/uzytkownicy': { isr: 60 },
     '/en/users': { isr: 60 },
@@ -219,7 +219,7 @@ export default defineNuxtConfig({
   },
   auth: {
     isEnabled: true,
-    disableServerSideAuth: false,
+    disableServerSideAuth: true,
     originEnvKey: "AUTH_ORIGIN",
     baseURL: process.env.BASE_URL,
     provider: {
@@ -235,7 +235,6 @@ export default defineNuxtConfig({
     },
     sessionRefresh: {
       enablePeriodically: 60000, // 1 minute
-      enableOnWindowFocus: true,
     },
   },
   nodemailer: {
@@ -327,6 +326,7 @@ export default defineNuxtConfig({
       plugins: [vue()],
     },
     compressPublicAssets: true,
+    minify: true,
     experimental: {
       websocket: true
     }

@@ -4,9 +4,11 @@ export const useBookmarksStore = defineStore("bookmarks", () => {
   const count = ref(0);
   const loaded = ref(false);
 
-  const load = async () => {
+  const load = async (isLogged : boolean) => {
     if (process.server) return; 
     if (loaded.value) return;
+
+    if (!isLogged) return 0;
 
     try {
       const data: { count: number } = await $fetch("/api/bookmark/count");

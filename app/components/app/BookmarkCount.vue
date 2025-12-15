@@ -30,5 +30,5 @@ const { data } = useAuth();
 import { useBookmarksStore } from "~/stores/bookmarks";
 
 const store = useBookmarksStore();
-store.load();
+store.load(!!data.value.user);
 </script>
