@@ -61,12 +61,12 @@ export default defineNuxtConfig({
     "nuxt-security",
   ],
   routeRules: {
-    "/": { prerender: true, isr: 3600 },
-    "/en": { prerender: true, isr: 3600 },
-    "/oferty": { isr: 60 },
-    "/uzytkownicy": { isr: 60 },
-    "/en/users": { isr: 60 },
-    "/en/properties": { isr: 60 },
+    "/": { prerender: true, headers: { 'Cache-Control': 'public, max-age=300, must-revalidate' } },
+    "/en": { prerender: true, headers: { 'Cache-Control': 'public, max-age=300, must-revalidate' } },
+    "/oferty": { headers: { 'Cache-Control': 'public, max-age=60, must-revalidate' } },
+    "/uzytkownicy": { headers: { 'Cache-Control': 'public, max-age=60, must-revalidate' } },
+    "/en/users": { headers: { 'Cache-Control': 'public, max-age=60, must-revalidate' } },
+    "/en/properties": { headers: { 'Cache-Control': 'public, max-age=60, must-revalidate' } },
   },
   fileStorage: {
     mount: process.cwd() + "/public/uploads",
