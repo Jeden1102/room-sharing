@@ -140,32 +140,6 @@ export const useTaxonomies = () => {
     { label: t("taxonomies.occupations.unemployed"), value: "unemployed" },
   ];
 
-  const lifestyleOptions = [
-    { label: t("taxonomies.lifestyle.partyFriendly"), value: "partyFriendly" },
-    { label: t("taxonomies.lifestyle.studyOriented"), value: "studyOriented" },
-    { label: t("taxonomies.lifestyle.earlyBird"), value: "earlyBird" },
-    { label: t("taxonomies.lifestyle.nightOwl"), value: "nightOwl" },
-    { label: t("taxonomies.lifestyle.veganFriendly"), value: "veganFriendly" },
-    { label: t("taxonomies.lifestyle.lgbtFriendly"), value: "lgbtFriendly" },
-  ];
-
-  const guestRulesOptions = [
-    { label: t("taxonomies.guestRules.noGuests"), value: "noGuests" },
-    { label: t("taxonomies.guestRules.occasional"), value: "occasional" },
-    {
-      label: t("taxonomies.guestRules.overnightAllowed"),
-      value: "overnightAllowed",
-    },
-  ];
-
-  const roomAvailabilityOptions = [
-    { label: t("taxonomies.roomAvailability.single"), value: "SINGLE" },
-    { label: t("taxonomies.roomAvailability.double"), value: "DOUBLE" },
-    {
-      label: t("taxonomies.roomAvailability.placeInDouble"),
-      value: "PLACE_IN_DOUBLE",
-    },
-  ];
 
   const searchPreferencesOptions = [
     { label: t("taxonomies.searchPreferences.quiet"), value: "quiet" },
@@ -221,8 +195,6 @@ export const useTaxonomies = () => {
     { label: t("taxonomies.status.draft"), value: "DRAFT" },
     { label: t("taxonomies.status.active"), value: "ACTIVE" },
     { label: t("taxonomies.status.reserved"), value: "RESERVED" },
-    { label: t("taxonomies.status.archived"), value: "ARCHIVED" },
-    { label: t("taxonomies.status.expired"), value: "EXPIRED" },
   ];
 
   const reportOptions = [
@@ -254,9 +226,6 @@ export const useTaxonomies = () => {
     usersSortOptions,
     interestsOptions,
     occupationsOptions,
-    lifestyleOptions,
-    guestRulesOptions,
-    roomAvailabilityOptions,
     searchPreferencesOptions,
     searchPropertyTypesOptions,
     noiseCompatibilityOptions,
@@ -293,9 +262,6 @@ export const useTaxonomies = () => {
     usersSortOptions,
     interestsOptions,
     occupationsOptions,
-    lifestyleOptions,
-    guestRulesOptions,
-    roomAvailabilityOptions,
     searchPreferencesOptions,
     searchPropertyTypesOptions,
     noiseCompatibilityOptions,

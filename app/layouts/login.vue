@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col lg:min-h-screen lg:pb-0">
+  <div
+    class="flex flex-col bg-gradient-to-tr from-blue-100 to-blue-50 lg:min-h-screen lg:pb-0"
+  >
     <AppHeaderSimple />
 
     <div

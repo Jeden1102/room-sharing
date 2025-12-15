@@ -46,6 +46,7 @@
           width="300"
           height="300"
           class="size-28 object-cover lg:size-40"
+          alt=""
         />
       </div>
     </div>

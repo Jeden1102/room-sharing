@@ -9,7 +9,7 @@
       <div
         v-for="service in services"
         :key="service.titleKey"
-        class="overflow-hidden rounded-2xl pt-6 shadow-md"
+        class="flex flex-col overflow-hidden rounded-2xl pt-6 shadow-md"
       >
         <NuxtImg
           :src="service.image"
@@ -19,11 +19,11 @@
           height="300"
         />
 
-        <div class="space-y-4 p-6">
+        <div class="flex flex-1 flex-col space-y-4 p-6">
           <h3 class="text-xl font-semibold">{{ $t(service.titleKey) }}</h3>
           <p class="text-gray-600">{{ $t(service.descriptionKey) }}</p>
 
-          <div class="flex flex-col gap-3 sm:flex-row">
+          <div class="mt-auto flex flex-col gap-3 sm:flex-row">
             <Button
               v-for="(action, idx) in service.actions"
               :key="action.labelKey"

@@ -34,8 +34,8 @@
       <AtomsDropdown
         :label="$t('usersFilters.gender.label')"
         :options="genderOptions"
-        optionLabel="name"
-        optionValue="id"
+        optionLabel="label"
+        optionValue="value"
         v-model="filters.gender"
         name="gender"
       />
