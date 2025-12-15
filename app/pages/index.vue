@@ -76,8 +76,6 @@ const { data: properties, pending } = await useFetch<{
     sortBy: "newest",
     page: 1,
   },
-  lazy: true,
-  key: "home-properties",
 });
 
 const faqQuestions = computed(() => [

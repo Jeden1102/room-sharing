@@ -13,14 +13,8 @@
         :class="city.class"
         class="flex h-56 w-full md:h-72 lg:h-90"
       >
-        <BitsFadeContent
-          :blur="true"
-          :duration="1000"
-          :delay="200"
-          :threshold="0.1"
-          :initial-opacity="0"
-          easing="ease-out"
-          class-name="group relative block size-full overflow-hidden rounded-xl shadow-md"
+        <div
+          class="group relative block size-full overflow-hidden rounded-xl shadow-md"
         >
           <NuxtImg
             :src="city.image"
@@ -36,7 +30,7 @@
           <h3 class="absolute bottom-4 left-4 text-lg text-white">
             {{ $t(city.nameKey) }}
           </h3>
-        </BitsFadeContent>
+        </div>
       </RouterLink>
     </div>
   </section>
