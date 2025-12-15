@@ -72,6 +72,7 @@ export default defineNuxtConfig({
     mount: process.cwd() + "/public/uploads",
   },
   security: {
+    sri: false,
     headers: {
       contentSecurityPolicy: {
         'img-src': [

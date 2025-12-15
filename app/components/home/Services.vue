@@ -9,15 +9,16 @@
       <div
         v-for="service in services"
         :key="service.titleKey"
-        class="flex flex-col overflow-hidden rounded-2xl pt-6 shadow-md"
+        class="flex flex-col overflow-hidden rounded-2xl bg-white pt-6 shadow-md"
       >
-        <NuxtImg
-          :src="service.image"
-          :alt="$t(service.imageAltKey)"
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          :src="service.video"
           class="mx-auto size-28 object-cover"
-          width="300"
-          height="300"
-        />
+        ></video>
 
         <div class="flex flex-1 flex-col space-y-4 p-6">
           <h3 class="text-xl font-semibold">{{ $t(service.titleKey) }}</h3>
@@ -56,7 +57,7 @@ const services = [
     titleKey: "services.buyAndSell.title",
     descriptionKey: "services.buyAndSell.description",
     imageAltKey: "services.buyAndSell.imageAlt",
-    image: "/gifs/buy-a-house.gif",
+    video: "/videos/buy-a-house.mp4",
     actions: [
       {
         labelKey: "services.buyAndSell.browse",
@@ -85,7 +86,7 @@ const services = [
     titleKey: "services.rentAndLease.title",
     descriptionKey: "services.rentAndLease.description",
     imageAltKey: "services.rentAndLease.imageAlt",
-    image: "/gifs/lease.gif",
+    video: "/videos/lease.mp4",
     actions: [
       {
         labelKey: "services.rentAndLease.find",
@@ -114,7 +115,7 @@ const services = [
     titleKey: "services.shareAndColiving.title",
     descriptionKey: "services.shareAndColiving.description",
     imageAltKey: "services.shareAndColiving.imageAlt",
-    image: "/gifs/living-together.gif",
+    video: "/videos/living-together.mp4",
     actions: [
       {
         labelKey: "services.shareAndColiving.join",

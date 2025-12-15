@@ -94,7 +94,7 @@
       :title="$t('faqPage.cta.title')"
       :subtitle="$t('faqPage.cta.subtitle')"
       variant="secondary"
-      gif="/gifs/faq.gif"
+      video="/gifs/faq.gif"
     >
       <Button asChild v-slot="slotProps" severity="primary">
         <RouterLink :to="$localePath('contact')" :class="slotProps.class">

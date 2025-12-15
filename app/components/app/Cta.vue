@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div v-if="icon || gif">
+      <div v-if="icon || gif || video">
         <Icon
           v-if="icon"
           :name="icon"
@@ -45,9 +45,19 @@
           :src="gif"
           width="300"
           height="300"
+          loading="lazy"
           class="size-28 object-cover lg:size-40"
           alt=""
         />
+        <video
+          v-if="video"
+          autoplay
+          loop
+          muted
+          playsinline
+          :src="video"
+          class="mx-auto size-28 object-cover"
+        ></video>
       </div>
     </div>
     <div v-if="image" class="relative ml-auto hidden md:block">
@@ -67,6 +77,7 @@ defineProps<{
   subtitle: string;
   image?: string;
   icon?: string;
+  video?: string;
   gif?: string;
   showLogo?: boolean;
   variant?: "primary" | "secondary";

@@ -20,6 +20,7 @@
             :src="city.image"
             :alt="`${$t(city.nameKey)} - ${$t('cities.imageAlt')}`"
             format="webp"
+            quality="70"
             class="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-110"
             loading="lazy"
             sizes="100vw md:875px"

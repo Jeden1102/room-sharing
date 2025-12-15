@@ -10,7 +10,7 @@ export default function usePageSeo({
   const { t } = useI18n();
   const config = useRuntimeConfig();
 
-  let imageUrl = config.public.APP_BASE_URI + "/images/hero.png";
+  let imageUrl = config.public.APP_BASE_URI + "/images/hero.webp";
 
   if (image) {
     if (image.includes('vercel-storage.com')) {
