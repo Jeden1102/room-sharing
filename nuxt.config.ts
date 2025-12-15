@@ -50,48 +50,49 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/i18n",
     "@sidebase/nuxt-auth",
-    ['nuxt-nodemailer', { client: false }],
-    ['nuxt-file-storage', { server: true, client: false }],
+    ["nuxt-nodemailer", { client: false }],
+    ["nuxt-file-storage", { server: true, client: false }],
     "@nuxt/icon",
     "@nuxtjs/seo",
     "nuxt-easy-lightbox",
-    ['@nuxtjs/leaflet', { ssr: false }],
+    ["@nuxtjs/leaflet", { ssr: false }],
     "@dargmuesli/nuxt-cookie-control",
-    '@vueuse/nuxt',
-    "nuxt-security"
+    "@vueuse/nuxt",
+    "nuxt-security",
   ],
   routeRules: {
-    '/': { prerender: true, isr: 3600 },
-    '/en': { prerender: true, isr: 3600 },
-    '/oferty': { isr: 60 },
-    '/uzytkownicy': { isr: 60 },
-    '/en/users': { isr: 60 },
-    '/en/properties': { isr: 60 },
+    "/": { prerender: true, isr: 3600 },
+    "/en": { prerender: true, isr: 3600 },
+    "/oferty": { isr: 60 },
+    "/uzytkownicy": { isr: 60 },
+    "/en/users": { isr: 60 },
+    "/en/properties": { isr: 60 },
   },
   fileStorage: {
     mount: process.cwd() + "/public/uploads",
   },
   security: {
     sri: false,
+    rateLimiter: false,
     headers: {
       contentSecurityPolicy: {
-        'img-src': [
+        "img-src": [
           "'self'",
-          'data:',
-          'blob:',
-          'https://*.vercel-storage.com',
-          'https://*.openstreetmap.org',
-          'https://*.basemaps.cartocdn.com',
-          'https://*.stadiamaps.com',
-          '*'
-        ]
-      }
-    }
+          "data:",
+          "blob:",
+          "https://*.vercel-storage.com",
+          "https://*.openstreetmap.org",
+          "https://*.basemaps.cartocdn.com",
+          "https://*.stadiamaps.com",
+          "*",
+        ],
+      },
+    },
   },
   fonts: {
     defaults: {
       weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-    styles: ["normal", "italic"],
+      styles: ["normal", "italic"],
     },
     families: [{ name: "Poppins", provider: "google" }],
   },
@@ -126,7 +127,7 @@ export default defineNuxtConfig({
         pl: "/kontakt",
       },
       "properties-filters": {
-        en: "/properties/[...filters]", 
+        en: "/properties/[...filters]",
         pl: "/oferty/[...filters]",
       },
       faq: {
@@ -251,77 +252,77 @@ export default defineNuxtConfig({
   },
   cookieControl: {
     colors: {
-      barBackground: '#fff',
-      barButtonBackground: '#fff',
-      barButtonColor: '#00509d',
-      barButtonHoverBackground: '#fff',
-      barButtonHoverColor: '#00478c',
-      barTextColor: '#000',
-      checkboxActiveBackground: '#000',
-      checkboxActiveCircleBackground: '#fff',
-      checkboxDisabledBackground: '#ddd',
-      checkboxDisabledCircleBackground: '#fff',
-      checkboxInactiveBackground: '#000',
-      checkboxInactiveCircleBackground: '#fff',
-      controlButtonBackground: '#fff',
-      controlButtonHoverBackground: '#000',
-      controlButtonIconColor: '#000',
-      controlButtonIconHoverColor: '#fff',
-      focusRingColor: '#808080',
-      modalBackground: '#fff',
-      modalButtonBackground: '#fff',
-      modalButtonColor: '#00509d',
-      modalButtonHoverBackground: '#fff',
-      modalButtonHoverColor: '#00478c',
-      modalOverlay: '#000',
+      barBackground: "#fff",
+      barButtonBackground: "#fff",
+      barButtonColor: "#00509d",
+      barButtonHoverBackground: "#fff",
+      barButtonHoverColor: "#00478c",
+      barTextColor: "#000",
+      checkboxActiveBackground: "#000",
+      checkboxActiveCircleBackground: "#fff",
+      checkboxDisabledBackground: "#ddd",
+      checkboxDisabledCircleBackground: "#fff",
+      checkboxInactiveBackground: "#000",
+      checkboxInactiveCircleBackground: "#fff",
+      controlButtonBackground: "#fff",
+      controlButtonHoverBackground: "#000",
+      controlButtonIconColor: "#000",
+      controlButtonIconHoverColor: "#fff",
+      focusRingColor: "#808080",
+      modalBackground: "#fff",
+      modalButtonBackground: "#fff",
+      modalButtonColor: "#00509d",
+      modalButtonHoverBackground: "#fff",
+      modalButtonHoverColor: "#00478c",
+      modalOverlay: "#000",
       modalOverlayOpacity: 0.8,
-      modalTextColor: '#000',
-      modalUnsavedColor: '#fff',
+      modalTextColor: "#000",
+      modalUnsavedColor: "#fff",
     },
     isControlButtonEnabled: false,
-    locales: ['en', 'pl', 'uk'],
+    locales: ["en", "pl", "uk"],
     cookies: {
       necessary: [
         {
           description: {
-            en: 'Essential cookies for the website to function properly.',
-            pl: 'Niezbędne pliki cookie do prawidłowego działania strony.'
+            en: "Essential cookies for the website to function properly.",
+            pl: "Niezbędne pliki cookie do prawidłowego działania strony.",
           },
-          id: 'necessary',
+          id: "necessary",
           name: {
-            en: 'Necessary Cookies',
-            pl: 'Niezbędne pliki cookie'
+            en: "Necessary Cookies",
+            pl: "Niezbędne pliki cookie",
           },
-          targetCookieIds: ['auth.session-token', 'auth.csrf-token'],
-        }
+          targetCookieIds: ["auth.session-token", "auth.csrf-token"],
+        },
       ],
       optional: [
         {
           description: {
-            en: 'Analytics cookies help us improve the website.',
-            pl: 'Pliki cookie analityczne pomagają nam ulepszać stronę.'
+            en: "Analytics cookies help us improve the website.",
+            pl: "Pliki cookie analityczne pomagają nam ulepszać stronę.",
           },
-          id: 'google-analytics',
+          id: "google-analytics",
           name: {
-            en: 'Google Analytics',
-            pl: 'Google Analytics'
+            en: "Google Analytics",
+            pl: "Google Analytics",
           },
-          targetCookieIds: ['_ga', '_gid', '_gat'],
+          targetCookieIds: ["_ga", "_gid", "_gat"],
         },
         {
           description: {
-            en: 'Preference cookies store your settings.',
-            pl: 'Pliki cookie preferencji przechowują Twoje ustawienia.'
+            en: "Preference cookies store your settings.",
+            pl: "Pliki cookie preferencji przechowują Twoje ustawienia.",
           },
-          id: 'preferences',
+          id: "preferences",
           name: {
-            en: 'Preferences',
-            pl: 'Preferencje'
+            en: "Preferences",
+            pl: "Preferencje",
           },
-          targetCookieIds: ['user-preferences', 'theme'],
-        }
-      ]
-    }
+          targetCookieIds: ["user-preferences", "theme"],
+        },
+      ],
+    },
   },
   nitro: {
     rollupConfig: {
@@ -330,7 +331,7 @@ export default defineNuxtConfig({
     compressPublicAssets: true,
     minify: true,
     experimental: {
-      websocket: true
-    }
-  }
+      websocket: true,
+    },
+  },
 });
