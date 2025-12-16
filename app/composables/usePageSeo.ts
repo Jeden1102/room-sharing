@@ -13,11 +13,7 @@ export default function usePageSeo({
   let imageUrl = config.public.APP_BASE_URI + "/images/hero.webp";
 
   if (image) {
-    if (image.includes('vercel-storage.com')) {
-      imageUrl = `https://wsrv.nl/?url=${encodeURIComponent(image)}&w=1200&h=630&fit=cover&q=90`;
-    } else {
-      imageUrl = image;
-    }
+    imageUrl = image;
   }
 
   return useSeoMeta({
