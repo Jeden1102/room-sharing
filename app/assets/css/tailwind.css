@@ -54,6 +54,7 @@
 @utility container {
   @apply mx-auto w-[calc(100%-2rem)] max-w-325;
 }
+
 @utility container-spacing {
   @apply mb-16 lg:mb-24;
 }

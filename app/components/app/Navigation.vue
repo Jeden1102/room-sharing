@@ -76,7 +76,6 @@
               rounded
               icon="pi pi-user"
               @click="toggleUserMenu"
-              ref="userButton"
               :title="$t('nav.profile')"
             >
             </Button>
@@ -135,7 +134,6 @@ const { t } = useI18n();
 const isMenuOpened = ref(false);
 const localePath = useLocalePath();
 const userMenu = ref();
-const userButton = ref();
 const route = useRoute();
 const { unreadCount, fetchInitialCount } = useNotifications();
 

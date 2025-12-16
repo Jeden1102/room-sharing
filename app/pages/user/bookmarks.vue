@@ -35,13 +35,14 @@ usePageSeo({
   description: "seo.bookmarks.description",
 });
 
+const { t } = useI18n();
 const userMenuItems = ref([
   {
-    label: "Bookmarked properties",
+    label: t("userBookmarksPage.title"),
     command: localePath("user-bookmarks-properties"),
   },
   {
-    label: "Bookmarked users",
+    label: t("userBookmarksUsersPage.title"),
     command: localePath("user-bookmarks-users"),
   },
 ]);

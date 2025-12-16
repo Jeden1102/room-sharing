@@ -25,48 +25,24 @@
         </div>
 
         <div>
-          <FloatLabel variant="on">
-            <Dropdown
-              id="reason"
-              name="reason"
-              :options="contactReasonOptions"
-              optionLabel="label"
-              optionValue="value"
-              fluid
-            />
-            <label for="reason">{{ $t("contactForm.reason.label") }}</label>
-          </FloatLabel>
-          <Message
-            v-if="$form.reason?.invalid"
-            severity="error"
-            size="small"
-            variant="simple"
-          >
-            {{ $form.reason.error.message }}
-          </Message>
+          <AtomsDropdown
+            :label="$t('contactForm.reason.label')"
+            :options="contactReasonOptions"
+            optionLabel="label"
+            optionValue="value"
+            name="reason"
+            :form="$form"
+          />
         </div>
 
         <div>
-          <FloatLabel variant="on" class="w-full">
-            <Textarea
-              id="description"
-              name="description"
-              autoResize
-              rows="4"
-              fluid
-            />
-            <label for="description">{{
-              $t("contactForm.description.label")
-            }}</label>
-          </FloatLabel>
-          <Message
-            v-if="$form.description?.invalid"
-            severity="error"
-            size="small"
-            variant="simple"
-          >
-            {{ $form.description.error.message }}
-          </Message>
+          <AtomsBaseTextarea
+            name="description"
+            :label="$t('contactForm.description.label')"
+            :rows="4"
+            :form="$form"
+            fluid
+          />
         </div>
 
         <FormTerms />
@@ -106,7 +82,7 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
   formStatus.value.isLoading = true;
 
   try {
-    const { data, error } = await useFetch("/api/contact", {
+    const { error } = await useFetch("/api/contact", {
       method: "POST",
       body: values,
     });

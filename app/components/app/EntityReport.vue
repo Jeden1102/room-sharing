@@ -13,48 +13,24 @@
         class="flex w-full flex-col gap-6 py-2"
       >
         <div>
-          <FloatLabel variant="on">
-            <Dropdown
-              id="reason"
-              name="reason"
-              :options="reportOptions"
-              optionLabel="label"
-              optionValue="value"
-              fluid
-            />
-            <label for="reason">{{ $t("entityReport.reason") }}</label>
-          </FloatLabel>
-          <Message
-            v-if="$form.reason?.invalid"
-            severity="error"
-            size="small"
-            variant="simple"
-          >
-            {{ $form.reason.error.message }}
-          </Message>
+          <AtomsDropdown
+            :label="$t('entityReport.reason')"
+            :options="reportOptions"
+            optionLabel="label"
+            optionValue="value"
+            name="reason"
+            :form="$form"
+          />
         </div>
 
         <div>
-          <FloatLabel variant="on">
-            <Textarea
-              id="description"
-              name="description"
-              autoResize
-              rows="4"
-              fluid
-            />
-            <label for="description">{{
-              $t("entityReport.description")
-            }}</label>
-          </FloatLabel>
-          <Message
-            v-if="$form.description?.invalid"
-            severity="error"
-            size="small"
-            variant="simple"
-          >
-            {{ $form.description.error.message }}
-          </Message>
+          <AtomsBaseTextarea
+            name="description"
+            :label="$t('entityReport.description')"
+            :rows="4"
+            :form="$form"
+            fluid
+          />
         </div>
 
         <p class="text-sm text-gray-500">
@@ -131,6 +107,8 @@ const resolver = ref(zodResolver(reportSchema));
 const { reportOptions } = useTaxonomies();
 
 const { t } = useI18n();
+
+type ReportPayload = z.infer<typeof reportSchema>;
 
 const onSubmit = async ({ valid, values, reset }: any) => {
   if (!valid) return;

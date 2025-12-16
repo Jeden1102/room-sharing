@@ -2,7 +2,6 @@
   <div class="card flex flex-col items-center gap-5">
     <Form
       v-slot="$form"
-      :initialValues="initialValues"
       :resolver="resolver"
       @submit="onFormSubmit"
       class="flex w-full flex-col gap-4"
@@ -65,12 +64,6 @@ const { t } = useI18n();
 
 definePageMeta({
   unauthenticatedOnly: true,
-});
-
-const initialValues = ref({
-  email: "",
-  password: "",
-  passwordRepeat: "",
 });
 
 const formStatus = ref<{

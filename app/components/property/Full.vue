@@ -310,8 +310,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-
 const { $lightgallery, $lgThumbnail, $lgZoom, $lgFullscreen } = useNuxtApp();
 
 const { mapTaxonomyLabel } = useTaxonomies();

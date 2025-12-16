@@ -71,7 +71,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
 import imageCompression from "browser-image-compression";
 
 interface FileUploaderProps {

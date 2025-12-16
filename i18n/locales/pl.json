@@ -954,6 +954,7 @@
     "noResults": "Brak wyników"
   },
   "userBookmarksPage": {
+    "title": "Zapisane ogłoszenia",
     "empty": {
       "title": "Nie masz jeszcze żadnych zapisanych nieruchomości",
       "subtitle": "Przeglądaj nieruchomości, które dla Ciebie przygotowaliśmy. Zapisz nieruchomość, a pojawi się tutaj.",
@@ -962,6 +963,7 @@
     "error": "Błąd pobierania nieruchomości"
   },
   "userBookmarksUsersPage": {
+    "title": "Zapisani użytkownicy",
     "empty": {
       "title": "Nie masz jeszcze żadnych zapisanych użytkowników",
       "subtitle": "Przeglądaj użytkowników, których dla Ciebie przygotowaliśmy. Zapisz użytkownika, a pojawi się tutaj.",

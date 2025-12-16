@@ -945,6 +945,7 @@
     "noResults": "No results found"
   },
   "userBookmarksPage": {
+    "title": "Bookmarked properties",
     "empty": {
       "title": "You haven't saved any properties yet",
       "subtitle": "Browse properties we prepared for you. Save a property, and it will appear here.",
@@ -953,6 +954,7 @@
     "error": "Error fetching properties"
   },
   "userBookmarksUsersPage": {
+    "title": "Bookmarked users",
     "empty": {
       "title": "You haven't saved any users yet",
       "subtitle": "Browse users we prepared for you. Save a user, and they will appear here.",

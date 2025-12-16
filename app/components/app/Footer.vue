@@ -11,6 +11,7 @@
               :alt="$t('footer.logoAlt')"
               width="80"
               height="63"
+              loading="lazy"
             />
           </NuxtLink>
         </div>

@@ -32,8 +32,6 @@
 </template>
 
 <script setup lang="ts">
-import { UserTeaser } from "#components";
-
 const { showNavigation = true } = defineProps<{
   title: string;
   subtitle: string;

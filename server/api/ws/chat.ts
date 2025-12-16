@@ -91,6 +91,7 @@ export default defineWebSocketHandler({
 
       for (const participant of allParticipants) {
         if (participant.userId !== userId && !onlineInChat.has(participant.userId)) {
+          console.log('Sending notification to', participant.userId)
           peer.publish(`user_${participant.userId}`, JSON.stringify({
             type: 'notification',
             conversationId: conversationId

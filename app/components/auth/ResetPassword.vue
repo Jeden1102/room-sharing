@@ -2,7 +2,6 @@
   <div class="card flex flex-col items-center gap-5">
     <Form
       v-slot="$form"
-      :initialValues="initialValues"
       :resolver="resolver"
       @submit="onFormSubmit"
       class="flex w-full flex-col gap-4"
@@ -46,11 +45,6 @@ import { passwordResetSchema } from "~/schemas/auth";
 const { code } = defineProps<{ code: string }>();
 
 const { t } = useI18n();
-
-const initialValues = ref({
-  password: "",
-  passwordRepeat: "",
-});
 
 const formStatus = ref<{
   success: boolean | null;

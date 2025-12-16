@@ -99,6 +99,7 @@
 
 <script setup lang="ts">
 import type { PropertyWithOwner } from "@/components/property/types";
+
 const { data } = useAuth();
 const props = defineProps<{
   property: PropertyWithOwner;

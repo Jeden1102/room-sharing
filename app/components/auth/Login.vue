@@ -2,7 +2,6 @@
   <div class="card flex flex-col items-center gap-5">
     <Form
       v-slot="$form"
-      :initialValues="initialValues"
       :resolver="resolver"
       @submit="onFormSubmit"
       class="flex w-full flex-col gap-4"
@@ -73,11 +72,6 @@ const formStatus = ref<{
   success: null,
   message: "",
   isLoading: false,
-});
-
-const initialValues = ref({
-  email: "",
-  password: "",
 });
 
 const resolver = ref(zodResolver(loginSchema));
