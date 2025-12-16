@@ -88,6 +88,13 @@ export default defineNuxtConfig({
         ],
       },
     },
+    corsHandler: {
+      methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+      origin: [process.env.NUXT_PUBLIC_APP_PROD_URI || '', 'http://localhost:3000'],
+      preflight: {
+        statusCode: 204
+      }
+    },
   },
   fonts: {
     defaults: {

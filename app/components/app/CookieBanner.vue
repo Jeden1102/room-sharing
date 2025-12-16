@@ -48,5 +48,6 @@ watch(
 
 .cookieControl__BarContainer {
   gap: 0;
+  background-color: white;
 }
 </style>
