@@ -145,11 +145,12 @@
 </template>
 
 <script setup lang="ts">
+import type { Property } from "@prisma/client";
 const { statusOptions } = useTaxonomies();
 
 const editingRows = ref([]);
 const deleteModalVisible = ref(false);
-const selectedProperty = ref<any>(null);
+const selectedProperty = ref<Property | null>(null);
 const isDeleting = ref(false);
 
 const { status, data, refresh } = await useFetch("/api/properties/my", {
@@ -170,12 +171,12 @@ const onRowEditSave = async (event: any) => {
     if (res.success) {
       await refresh();
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Upate property error", error);
   }
 };
 
-const openDeleteModal = (property: any) => {
+const openDeleteModal = (property: Property) => {
   selectedProperty.value = property;
   deleteModalVisible.value = true;
 };

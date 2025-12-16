@@ -58,7 +58,9 @@ const onFormSubmit = async ({
   values,
 }: {
   valid: boolean;
-  values: any;
+  values: {
+    email?: string;
+  };
 }) => {
   if (!valid) {
     return;

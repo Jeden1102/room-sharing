@@ -105,7 +105,7 @@ const applyFilters = (newFilters: any) => {
   filters.value = { ...filters.value, ...newFilters, page: 1 };
 };
 
-const onPageChange = (event: any) => {
+const onPageChange = (event: { first: number; rows: number }) => {
   filters.value.page = Math.floor(event.first / event.rows) + 1;
 
   router.replace({

@@ -261,8 +261,8 @@ import imageCompression from "browser-image-compression";
 const formStatus = ref({ success: false, message: "", isLoading: false });
 const initialValues = ref<any>(null);
 const files = ref<File[]>([]);
-const filteredCities = ref<any[]>([]);
-const availableDistricts = ref<any[]>();
+const filteredCities = ref<string[]>([]);
+const availableDistricts = ref<string[]>();
 
 const taxonomies = useTaxonomies();
 const { genderOptions } = taxonomies;
@@ -292,7 +292,7 @@ watch(
   { immediate: true },
 );
 
-const searchCity = async (event: any) => {
+const searchCity = async (event: { query: string }) => {
   const query = event.query?.trim();
   if (!query) return (filteredCities.value = []);
 

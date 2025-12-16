@@ -55,7 +55,7 @@ export default session(defineCachedEventHandler(
         isBookmarked
       };
 
-      let similarProperties: any[] = [];
+      let similarProperties: PropertyWithOwner[] = [];
       if (getSimilar && property.city) {
         const similar = await prisma.property.findMany({
           where: {

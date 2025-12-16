@@ -81,7 +81,7 @@ const filteredConversations = computed(() => {
     return conversations;
   }
 
-  return conversations.filter((conv: any) => {
+  return conversations.filter((conv: { otherUser: { firstName: string } }) => {
     const otherUser = conv.otherUser;
 
     if (!otherUser || !otherUser.firstName) {

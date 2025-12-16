@@ -35,7 +35,7 @@
 const { showNavigation = true } = defineProps<{
   title: string;
   subtitle: string;
-  items: any[];
+  items: unknown[];
   showNavigation?: boolean;
   entity: "property" | "user";
 }>();

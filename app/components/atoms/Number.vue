@@ -19,7 +19,7 @@
 const props = defineProps<{
   name: string;
   label: string;
-  form?: any;
+  form?: Record<string, FieldState> | null;
 }>();
 const model = defineModel<number | null>();
 

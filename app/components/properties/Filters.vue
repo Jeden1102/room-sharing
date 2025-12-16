@@ -180,8 +180,8 @@ watch(
   { deep: true },
 );
 
-const filteredCities = ref<any[]>([]);
-const searchCity = async (event: any) => {
+const filteredCities = ref<string[]>([]);
+const searchCity = async (event: { query: string }) => {
   const query = event.query?.trim();
   if (!query) return (filteredCities.value = []);
 

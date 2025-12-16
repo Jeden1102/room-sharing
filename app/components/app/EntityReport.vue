@@ -130,7 +130,7 @@ const onSubmit = async ({ valid, values, reset }: any) => {
     formStatus.value.message = t("entityReport.success");
 
     reset();
-  } catch (e: any) {
+  } catch (e: unknown) {
     formStatus.value.success = false;
     formStatus.value.message = t("entityReport.error");
   } finally {

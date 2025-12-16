@@ -116,8 +116,8 @@
                   <span
                     v-if="userOccupations.length > 0"
                     v-for="occupation in userOccupations"
-                    :key="occupation?.id"
-                    >{{ occupation?.name }}</span
+                    :key="occupation?.value"
+                    >{{ occupation?.label }}</span
                   >
                   <span v-else>{{ $t("userProfile.noData") }}</span>
                 </div>
@@ -199,9 +199,9 @@
               <div class="flex flex-wrap gap-2">
                 <Tag
                   v-for="interest in userInterests"
-                  :key="interest?.id"
+                  :key="interest?.value"
                   class="capitalize"
-                  :value="interest?.name"
+                  :value="interest?.label"
                 />
               </div>
             </div>
@@ -219,8 +219,8 @@
             <PropertyAmenity
               v-if="userSearchPreferences.length > 0"
               v-for="pref in userSearchPreferences"
-              :label="pref?.name || ''"
-              :key="pref?.id || ''"
+              :label="pref?.label || ''"
+              :key="pref?.value || ''"
             />
             <span v-else class="pl-2">{{ $t("userProfile.noData") }}</span>
 
@@ -230,12 +230,11 @@
             <PropertyAmenity
               v-if="userSearchPropertyTypes.length > 0"
               v-for="type in userSearchPropertyTypes"
-              :label="type?.name || ''"
-              :key="type?.id"
+              :label="type?.label || ''"
+              :key="type?.value"
             />
             <span v-else class="pl-2">{{ $t("userProfile.noData") }}</span>
           </AppCard>
-
           <AppCard
             class="flex-1 space-y-3 text-sm text-gray-700"
             :title="$t('userProfile.compatibility.title')"
@@ -246,8 +245,8 @@
             <PropertyAmenity
               v-if="userNoiseCompatibility.length > 0"
               v-for="noise in userNoiseCompatibility"
-              :label="noise?.name || ''"
-              :key="noise?.id"
+              :label="noise?.label || ''"
+              :key="noise?.value"
             />
             <span v-else class="pl-2">{{ $t("userProfile.noData") }}</span>
 
@@ -257,8 +256,8 @@
             <PropertyAmenity
               v-if="userPetsCompatibility.length > 0"
               v-for="pet in userPetsCompatibility"
-              :label="pet?.name || ''"
-              :key="pet?.id || ''"
+              :label="pet?.label || ''"
+              :key="pet?.value || ''"
             />
             <span v-else class="pl-2">{{ $t("userProfile.noData") }}</span>
           </AppCard>
@@ -355,37 +354,45 @@ const taxonomies = useTaxonomies();
 
 const userInterests = computed(() => {
   return user.value.interests
-    .map((id) => taxonomies.interestsOptions.find((i) => i.id === id))
+    .map((id) => taxonomies.interestsOptions.find((i) => i.value === id))
     .filter(Boolean);
 });
 
 const userOccupations = computed(() => {
   return user.value.occupations
-    .map((id) => taxonomies.occupationsOptions.find((o) => o.id === id))
+    .map((id) => taxonomies.occupationsOptions.find((o) => o.value === id))
     .filter(Boolean);
 });
 
 const userSearchPreferences = computed(() => {
   return user.value.searchPreferences
-    .map((id) => taxonomies.searchPreferencesOptions.find((s) => s.id === id))
+    .map((id) =>
+      taxonomies.searchPreferencesOptions.find((s) => s.value === id),
+    )
     .filter(Boolean);
 });
 
 const userSearchPropertyTypes = computed(() => {
   return user.value.searchPropertyTypes
-    .map((id) => taxonomies.searchPropertyTypesOptions.find((t) => t.id === id))
+    .map((id) =>
+      taxonomies.searchPropertyTypesOptions.find((t) => t.value === id),
+    )
     .filter(Boolean);
 });
 
 const userNoiseCompatibility = computed(() => {
   return user.value.noiseCompatibility
-    .map((id) => taxonomies.noiseCompatibilityOptions.find((n) => n.id === id))
+    .map((id) =>
+      taxonomies.noiseCompatibilityOptions.find((n) => n.value === id),
+    )
     .filter(Boolean);
 });
 
 const userPetsCompatibility = computed(() => {
   return user.value.petsCompatibility
-    .map((id) => taxonomies.petsCompatibilityOptions.find((p) => p.id === id))
+    .map((id) =>
+      taxonomies.petsCompatibilityOptions.find((p) => p.value === id),
+    )
     .filter(Boolean);
 });
 

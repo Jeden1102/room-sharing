@@ -282,9 +282,10 @@
 <script setup lang="ts">
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { propertyCreateSchema } from "~/schemas/property";
+import type { Property } from "@prisma/client";
 
 const props = defineProps<{
-  property?: any;
+  property?: Property;
 }>();
 
 const initialValues = ref<any>(
@@ -298,7 +299,7 @@ const files = ref<File[]>([]);
 const imageUris = ref<string[]>(initialValues.value?.images || []);
 
 const filteredCities = ref<string[]>([]);
-const availableDistricts = ref<any[]>([]);
+const availableDistricts = ref<string[]>([]);
 
 const {
   propertyTypeOptions,
@@ -309,11 +310,15 @@ const {
 } = useTaxonomies();
 
 const typeOptions = computed(() => {
-  return propertyTypeOptions.filter((o: any) => o.value !== null);
+  return propertyTypeOptions.filter(
+    (o: { label: string; value: string | null }) => o.value !== null,
+  );
 });
 
 const listingOptions = computed(() => {
-  return listingTypeOptions.filter((o: any) => o.value !== null);
+  return listingTypeOptions.filter(
+    (o: { label: string; value: string | null }) => o.value !== null,
+  );
 });
 
 const isLoading = ref(false);
@@ -344,7 +349,7 @@ const onDeleteImage = async (uri: string) => {
   }
 };
 
-const searchCity = async (event: any) => {
+const searchCity = async (event: { query: string }) => {
   const q = event.query?.trim();
   if (!q) return (filteredCities.value = []);
   try {
@@ -358,9 +363,9 @@ const searchCity = async (event: any) => {
   }
 };
 
-const filteredStreets = ref<any>([]);
+const filteredStreets = ref<string[]>([]);
 
-const searchStreet = async (event: any) => {
+const searchStreet = async (event: { query: string }) => {
   const q = event.query?.trim();
   if (!q) return (filteredCities.value = []);
 
@@ -382,7 +387,7 @@ const fetchDistricts = async (city: string) => {
   }
 };
 
-const availableStreets = ref<any[]>([]);
+const availableStreets = ref<string[]>([]);
 
 const fetchStreets = async (city: string) => {
   if (!city) return;

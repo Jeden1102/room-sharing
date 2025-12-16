@@ -175,7 +175,7 @@ const applyFilters = (newFilters: any) => {
 
 const router = useRouter();
 
-const onPageChange = (event: any) => {
+const onPageChange = (event: { first: number; rows: number }) => {
   filters.value.page = Math.floor(event.first / event.rows) + 1;
 
   router.replace({

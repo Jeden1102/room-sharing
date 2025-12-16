@@ -24,7 +24,7 @@
 <script setup lang="ts">
 interface Message {
   id?: string;
-  senderId: string;
+  senderId?: string;
   content: string;
   createdAt: string;
 }

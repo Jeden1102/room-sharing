@@ -24,7 +24,7 @@ export default session(defineEventHandler(async (event) => {
     const take = Number(limit) || 12;
     const skip = (Number(page) - 1) * take;
 
-    const where: any = { status: { not: "DRAFT" } };
+    const where: Record<string, any> = { status: { not: "DRAFT" } };
 
     // Basic filters
     if (listingType) where.listingType = listingType;
@@ -73,7 +73,7 @@ export default session(defineEventHandler(async (event) => {
     });
 
     // Sorting
-    const orderBy: any = (() => {
+    const orderBy: Record<string, unknown> = (() => {
       switch (sortBy) {
         case "oldest": return { createdAt: "asc" };
         case "priceAsc": return { price: "asc" };

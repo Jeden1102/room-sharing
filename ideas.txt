@@ -1,9 +1,7 @@
 To fix:
-1. Anys
 2. Ogólnie walidacje
 
 
 --- TESTY ---
 
 1. Logiki usunięcie usera / propertiesa.
-2. Stress testy.

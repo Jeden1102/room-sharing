@@ -63,7 +63,10 @@ const onFormSubmit = async ({
   values,
 }: {
   valid: boolean;
-  values: any;
+  values: {
+    password?: string;
+    passwordRepeat?: string;
+  };
 }) => {
   if (!valid) {
     return;

@@ -33,7 +33,7 @@ const props = defineProps<{
   optionLabel?: string;
   optionValue?: string;
   placeholder?: string;
-  form?: any;
+  form?: Record<string, FieldState> | null;
 }>();
 const model = defineModel();
 

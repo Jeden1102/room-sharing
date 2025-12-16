@@ -1,5 +1,6 @@
 import prisma from "~~/lib/prisma";
 import { session } from "../middleware/session";
+import type { User } from "@prisma/client";
 
 export default session(
   defineCachedEventHandler(
@@ -66,7 +67,7 @@ export default session(
           isBookmarked,
         };
 
-        let similarUsers: any[] = [];
+        let similarUsers: User[] = [];
         if (getSimilar) {
           const whereConditions: any = {
             id: { not: id },

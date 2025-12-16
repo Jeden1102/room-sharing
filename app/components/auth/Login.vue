@@ -83,7 +83,10 @@ const onFormSubmit = async ({
   values,
 }: {
   valid: boolean;
-  values: any;
+  values: {
+    email?: string;
+    password?: string;
+  };
 }) => {
   if (!valid) return;
   formStatus.value.isLoading = true;

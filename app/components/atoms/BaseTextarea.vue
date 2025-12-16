@@ -21,12 +21,14 @@ const props = withDefaults(
     name: string;
     label: string;
     rows?: number;
-    form: any;
+    form: Record<string, FieldState>;
   }>(),
   {
     rows: 4,
   },
 );
 
-const fieldState = computed(() => props.form?.[props.name]);
+const fieldState: ComputedRef<FieldState | undefined> = computed(
+  () => props.form?.[props.name],
+);
 </script>

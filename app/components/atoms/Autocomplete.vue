@@ -33,7 +33,7 @@ const props = defineProps<{
   modelValue?: any;
   suggestions?: any[];
   placeholder?: string;
-  form?: any;
+  form?: Record<string, FieldState> | null;
 }>();
 
 const emit = defineEmits<{

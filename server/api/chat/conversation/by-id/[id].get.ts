@@ -13,7 +13,7 @@ export default requireAuth(
     
     const TAKE_COUNT = 11; 
 
-    const messagesConfig: any = {
+    const messagesConfig: Record<string, object | number> = {
         orderBy: { createdAt: 'desc' }, 
         take: TAKE_COUNT,
     };

@@ -1,9 +1,22 @@
+type HistoryItem = {
+  senderId?: string
+  content: string
+  createdAt: string
+  id?: string
+}
+
+type OtherUser = {
+  id: string
+  firstName: string
+  profileImage: string
+}
+
 export const useChat = (conversationId: string) => {
     const { data: userData } = useAuth()
     const userId = userData.value?.user?.id
-    
-    const history = ref<any[]>([])
-    const otherUser = ref<any>(null)
+
+    const history = ref<HistoryItem[]>([])
+    const otherUser = ref<OtherUser|null>(null)
     const isOtherUserTyping = ref(false)
     const cursorId = ref<string | null>(null)
     const hasMore = ref(true)
