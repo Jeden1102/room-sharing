@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full flex-col gap-10">
+  <div class="flex w-full flex-col gap-10" v-if="data">
     <Form
       v-slot="$form"
       :resolver="passwordResolver"
@@ -7,14 +7,20 @@
       class="flex w-full flex-col gap-6"
     >
       <Fieldset :legend="$t('userSecurityForm.passwordReset.legend')">
+        <Message v-if="!data.isPasswordSet" class="w-full" severity="info">
+          {{ $t("userSecurityForm.accountDeletion.noPassword") }}
+        </Message>
+
         <div class="flex flex-col gap-6">
           <div class="mt-4 grid w-full grid-cols-1 gap-4 md:grid-cols-3">
             <AtomsInput
+              v-if="data.isPasswordSet"
               name="oldPassword"
               :label="$t('userSecurityForm.passwordReset.oldPassword')"
               :form="$form"
               type="password"
             />
+
             <AtomsInput
               name="password"
               :label="$t('userSecurityForm.passwordReset.password')"
@@ -49,7 +55,7 @@
     </Form>
 
     <Fieldset :legend="$t('userSecurityForm.accountDeletion.legend')">
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4" v-if="data && data.isPasswordSet">
         <p>{{ $t("userSecurityForm.accountDeletion.warning") }}</p>
         <Button
           :label="$t('userSecurityForm.accountDeletion.openDialog')"
@@ -58,6 +64,10 @@
           class="w-fit"
         />
       </div>
+
+      <Message v-else class="w-full" severity="info">
+        {{ $t("userSecurityForm.accountDeletion.noPasswordDelete") }}
+      </Message>
     </Fieldset>
 
     <Dialog
@@ -114,27 +124,54 @@ import { newPasswordSchema } from "~/schemas/auth";
 import { z } from "zod";
 
 const { t } = useI18n();
+const { signOut } = useAuth();
 
 const passwordStatus = ref({ success: false, message: "", isLoading: false });
-const passwordResolver = ref(zodResolver(newPasswordSchema));
+const deleteDialogVisible = ref(false);
+const deleteStatus = ref({ success: false, message: "", isLoading: false });
+
+const { data, refresh } = await useFetch("/api/user/check-has-password", {
+  lazy: true,
+  cache: "no-cache",
+});
+
+const baseZodResolver = zodResolver(newPasswordSchema);
+
+const passwordResolver = (params: any) => {
+  const valuesToValidate = { ...params.values };
+
+  if (data.value && !data.value.isPasswordSet) {
+    valuesToValidate.oldPassword = "FIRST_PASSWORD_SET_DUMMY";
+  }
+
+  return baseZodResolver({
+    ...params,
+    values: valuesToValidate,
+  });
+};
 
 const onPasswordSubmit = async ({ valid, values, reset }: any) => {
   if (!valid) return;
   passwordStatus.value.isLoading = true;
 
+  const payload = { ...values };
+  if (data.value && !data.value.isPasswordSet) {
+    payload.oldPassword = "FIRST_PASSWORD_SET_DUMMY";
+  }
+
   try {
-    const data = await $fetch("/api/user/new-password", {
+    await $fetch("/api/user/new-password", {
       method: "POST",
-      body: values,
+      body: payload,
     });
 
     passwordStatus.value.success = true;
     passwordStatus.value.message = t("userSecurityForm.passwordReset.success");
+    await refresh();
     reset();
   } catch (e: any) {
     passwordStatus.value.success = false;
-
-    if (e.data.statusCode === 401) {
+    if (e.data?.statusCode === 401) {
       passwordStatus.value.message = t(
         "userSecurityForm.passwordReset.invalidOldPassword",
       );
@@ -146,9 +183,6 @@ const onPasswordSubmit = async ({ valid, values, reset }: any) => {
   }
 };
 
-const deleteDialogVisible = ref(false);
-const deleteStatus = ref({ success: false, message: "", isLoading: false });
-
 const deleteSchema = z.object({
   passwordConfirmation: z
     .string()
@@ -156,23 +190,20 @@ const deleteSchema = z.object({
 });
 const deleteResolver = ref(zodResolver(deleteSchema));
 
-const { signOut } = useAuth();
-
 const onDeleteSubmit = async ({ valid, values }: any) => {
   if (!valid) return;
   deleteStatus.value.isLoading = true;
 
   try {
-    const { data, error } = await $fetch("/api/user/delete-account", {
+    await $fetch("/api/user/delete-account", {
       method: "POST",
       body: values,
     });
-
     signOut();
     navigateTo("/");
   } catch (e: any) {
     deleteStatus.value.success = false;
-    if (e.data.statusCode === 401) {
+    if (e.data?.statusCode === 401) {
       deleteStatus.value.message = t(
         "userSecurityForm.passwordReset.invalidOldPassword",
       );

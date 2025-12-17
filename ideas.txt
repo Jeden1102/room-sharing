@@ -4,4 +4,6 @@ To fix:
 
 --- TESTY ---
 
-1. Logiki usunięcie usera / propertiesa.
+2. WCAG
+3. Lightouse/Lightspeed
+4. Manualne

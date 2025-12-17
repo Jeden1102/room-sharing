@@ -20,7 +20,7 @@ const props = defineProps<{
   name: string;
   label: string;
   form: Record<string, FieldState>;
-  type?: "text" | "email" | "password";
+  type?: "text" | "email" | "password" | "hidden";
 }>();
 
 const fieldState = computed(() => props.form?.[props.name]);

@@ -625,7 +625,9 @@
       "phone": "Numer telefonu",
       "email": "E-mail kontaktowy"
     },
-    "submit": "Zapisz zmiany"
+    "submit": "Zapisz zmiany",
+    "success": "Ustawienia zostały zaktualizowane",
+    "error": "Wystąpił błąd podczas zapisywania ustawien"
   },
   "userTeaser": {
     "bgImageAlt": "Tło użytkownika",
@@ -1045,7 +1047,9 @@
       "dialogHeader": "Usuwanie konta",
       "cancel": "Anuluj",
       "confirm": "Potwierdź usunęcie",
-      "password": "Hasło"
+      "password": "Hasło",
+      "noPassword": "Do Twojego konta nie zostało jeszcze ustawione hasło.",
+      "noPasswordDelete": "Do Twojego konta nie zostało jeszcze ustawione hasło. Nie mozna usunąć konta."
     }
   },
   "userChatPage": {

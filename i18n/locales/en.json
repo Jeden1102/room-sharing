@@ -625,7 +625,9 @@
       "phone": "Phone Number",
       "email": "Contact e-mail"
     },
-    "submit": "Save Changes"
+    "submit": "Save Changes",
+      "noPassword": "No password set yet",
+      "noPasswordDelete": "No password set yet. Cannot delete account."
   },
   "userTeaser": {
     "bgImageAlt": "User background",

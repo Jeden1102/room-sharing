@@ -115,7 +115,7 @@ model PropertyBookmark {
   propertyId String
 
   user     User     @relation("UserPropertyBookmarks", fields: [userId], references: [id], onDelete: Cascade)
-  property Property @relation("PropertyBookmarks", fields: [propertyId], references: [id])
+  property Property @relation("PropertyBookmarks", fields: [propertyId], references: [id], onDelete: Cascade)
 
   @@unique([userId, propertyId])
 }
@@ -157,7 +157,7 @@ model ConversationParticipant {
   lastReadMessageId String?
 
   conversation Conversation @relation(fields: [conversationId], references: [id])
-  user         User         @relation(fields: [userId], references: [id])
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([conversationId, userId])
 }
@@ -188,7 +188,7 @@ model Report {
   reportedUser   User?   @relation("ReportsAgainstUser", fields: [reportedUserId], references: [id])
 
   reportedPropertyId String?
-  reportedProperty   Property? @relation("ReportsAgainstProperty", fields: [reportedPropertyId], references: [id])
+  reportedProperty   Property? @relation("ReportsAgainstProperty", fields: [reportedPropertyId], references: [id], onDelete: Cascade)
 }
 
 enum ReportReason {

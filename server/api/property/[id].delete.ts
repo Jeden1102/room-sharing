@@ -17,11 +17,14 @@ export default requireAuth(
           statusCode: 404, 
           statusMessage: "api.property.notFound" 
         });
-      }
+    }
 
       await prisma.property.delete({
         where: { id },
       });
+
+      const cacheStorage = useStorage("cache:properties:property");
+      await cacheStorage.removeItem(`${id}.json`.replaceAll("-", ""));
 
       return { 
         success: true, 

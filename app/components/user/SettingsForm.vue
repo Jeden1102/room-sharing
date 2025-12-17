@@ -267,7 +267,11 @@ const availableDistricts = ref<string[]>();
 const taxonomies = useTaxonomies();
 const { genderOptions } = taxonomies;
 
-const { status: userStatus, data: userData } = await useFetch("/api/user/me", {
+const {
+  status: userStatus,
+  data: userData,
+  refresh,
+} = await useFetch("/api/user/me", {
   lazy: true,
   cache: "no-cache",
 });
@@ -338,6 +342,8 @@ watch(
 
 const resolver = ref(zodResolver(userProfileSchema));
 
+const { t } = useI18n();
+
 const onFormSubmit = async ({ valid, values }: any) => {
   if (!valid) return;
   formStatus.value.isLoading = true;
@@ -386,10 +392,11 @@ const onFormSubmit = async ({ valid, values }: any) => {
     if (error.value) throw new Error(error.value.message);
 
     formStatus.value.success = true;
-    formStatus.value.message = "Profile updated successfully!";
+    formStatus.value.message = t("userSettingsForm.success");
+    await refresh();
   } catch (e: any) {
     formStatus.value.success = false;
-    formStatus.value.message = e.message || "Update failed.";
+    formStatus.value.message = e.message || t("userSettingsForm.error");
   } finally {
     formStatus.value.isLoading = false;
   }
