@@ -9,6 +9,7 @@
             width="100"
             height="79"
             class="w-20 md:w-25"
+            format="webp"
           />
         </NuxtLink>
 
@@ -87,10 +88,9 @@
             <RouterLink
               :to="$localePath('user-chat')"
               class="relative flex items-center"
+              :aria-label="$t('nav.messages')"
             >
               <span class="pi pi-comments text-xl"></span>
-
-              <span class="hidden">{{ $t("nav.messages") }}</span>
 
               <span
                 v-if="unreadCount > 0"

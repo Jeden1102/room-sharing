@@ -4,6 +4,4 @@ To fix:
 
 --- TESTY ---
 
-2. WCAG
-3. Lightouse/Lightspeed
 4. Manualne

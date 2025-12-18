@@ -1,6 +1,7 @@
 <template>
   <Button asChild rounded severity="secondary">
     <RouterLink
+      :aria-label="$t('nav.bookmarks')"
       :to="
         $localePath(
           data?.user
@@ -15,7 +16,6 @@
     >
       <span class="pi pi-bookmark text-xl"></span>
 
-      <span class="hidden">{{ $t("nav.bookmarks") }}</span>
       <span
         v-if="store.count > 0"
         class="bg-primary-400 absolute -top-4 -right-3 grid size-5 place-items-center rounded-full text-xs text-white"
