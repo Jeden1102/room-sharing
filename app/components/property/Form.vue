@@ -177,7 +177,7 @@
 
     <Fieldset :legend="$t('propertyForm.amenities.legend')">
       <div class="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4">
-        <AtomsCheckbox
+        <AtomsBaseCheckbox
           :name="amenity.value"
           :label="amenity.label"
           :form="$form"
@@ -189,7 +189,7 @@
 
     <Fieldset :legend="$t('propertyForm.media.legend')">
       <div class="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4">
-        <AtomsCheckbox
+        <AtomsBaseCheckbox
           :name="media.value"
           :label="media.label"
           :form="$form"

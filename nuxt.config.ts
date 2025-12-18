@@ -86,6 +86,12 @@ export default defineNuxtConfig({
           "https://*.stadiamaps.com",
           "*",
         ],
+        "script-src": [
+        "'self'",
+        "'unsafe-inline'",
+        "'unsafe-eval'",
+        "https:",
+      ],
       },
     },
     corsHandler: {

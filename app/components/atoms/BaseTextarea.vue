@@ -1,8 +1,8 @@
 <template>
   <div>
     <FloatLabel variant="on" class="w-full">
-      <Textarea :id="name" :name :rows autoResize fluid :label />
-      <label :for="name">{{ label }}</label>
+      <Textarea :id :name :rows autoResize fluid :label />
+      <label :for="id">{{ label }}</label>
     </FloatLabel>
     <Message
       v-if="fieldState?.invalid"
@@ -27,6 +27,8 @@ const props = withDefaults(
     rows: 4,
   },
 );
+
+const id = useId();
 
 const fieldState: ComputedRef<FieldState | undefined> = computed(
   () => props.form?.[props.name],

@@ -1,6 +1,10 @@
 <template>
   <div>
-    <Button icon="pi pi-pencil" @click="visible = true" />
+    <Button
+      icon="pi pi-pencil"
+      @click="visible = true"
+      :title="$t('fileUploaderDialog.edit')"
+    />
     <Dialog
       v-model:visible="visible"
       modal

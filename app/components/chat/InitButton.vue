@@ -7,6 +7,7 @@
     :loading="isProcessing"
     @click.prevent="startChat"
     v-if="targetUserId !== authData?.user?.id"
+    :title="$t('userChatPage.init')"
   />
 </template>
 

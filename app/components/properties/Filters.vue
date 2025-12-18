@@ -3,6 +3,7 @@
     <button
       @click="filtersOpened = !filtersOpened"
       class="grid place-content-center md:hidden"
+      :title="$t('propertiesFilters.toggleFilters')"
     >
       <Icon name="mage:filter" class="text-2xl" />
     </button>
@@ -19,7 +20,10 @@
         <h2 class="mb-4 text-lg font-semibold">
           {{ $t("propertiesFilters.title") }}
         </h2>
-        <button @click="filtersOpened = !filtersOpened">
+        <button
+          @click="filtersOpened = !filtersOpened"
+          :title="$t('propertiesFilters.toggleFilters')"
+        >
           <Icon name="mage:filter" class="text-2xl" />
         </button>
       </div>

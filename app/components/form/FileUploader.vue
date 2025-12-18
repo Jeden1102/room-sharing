@@ -36,6 +36,7 @@
           @click="confirmDelete(img)"
           icon="pi pi-trash"
           size="small"
+          :title="$t('fileUploader.deleteButton')"
         ></Button>
         <Button
           v-if="canSetPrimary"
@@ -43,6 +44,7 @@
           @click="handleSetAsPrimary(idx)"
           icon="pi pi-star"
           size="small"
+          :title="$t('fileUploader.setAsPrimary')"
           :severity="idx === primaryImgIdx ? 'info' : 'secondary'"
         ></Button>
       </div>

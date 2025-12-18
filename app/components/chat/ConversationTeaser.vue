@@ -17,6 +17,7 @@
       shape="circle"
       class="mr-4"
       size="large"
+      :ariaLabel="conversation.otherUser?.firstName"
     />
     <div class="min-w-0 flex-1">
       <p class="truncate text-base font-semibold">

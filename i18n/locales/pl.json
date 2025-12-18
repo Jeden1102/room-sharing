@@ -78,7 +78,8 @@
     },
     "contact": {
       "title": "Kontakt",
-      "description": "Skontaktuj się z nami w sprawie współpracy, pomocy technicznej lub zgłoszeń dotyczących ogłoszeń."
+      "description": "Skontaktuj się z nami w sprawie współpracy, pomocy technicznej lub zgłoszeń dotyczących ogłoszeń.",
+      "image": "Zdjecie kontaktowe"
     },
     "faq": {
       "title": "FAQ – Najczęstsze pytania",
@@ -114,7 +115,9 @@
     "logout": "Wyloguj",
     "addProperty": "Dodaj ogłoszenie",
     "profile": "Profil",
-    "toggleMenu": "Przełącz menu"
+    "toggleMenu": "Przełącz menu",
+    "messages": "Wiadomości",
+    "bookmarks": "Zapisane ogłoszenia"
   },
   "hero": {
     "subtitle": "Ponad 10 000 ofert mieszkań i pokoi w całej Polsce",
@@ -286,7 +289,8 @@
       "placeholder": "Powtórz hasło"
     },
     "button": {
-      "submit": "Zarejestruj się"
+      "submit": "Zarejestruj się",
+      "google": "Zarejestruj przez Google"
     },
     "hasAccount": "Masz już konto?",
     "loginLink": "Zaloguj się"
@@ -329,7 +333,7 @@
       "label": "Opis"
     },
     "terms": {
-      "prefix": "Kontaktując się z nami, akceptujesz nasze",
+      "prefix": "Wysyłając formularz, akceptujesz nasze",
       "termsLink": "Warunki korzystania z usługi",
       "and": "oraz",
       "privacyLink": "Politykę prywatności"
@@ -343,6 +347,8 @@
     }
   },
   "fileUploader": {
+    "deleteButton": "Usuń",
+    "setAsPrimary": "Ustaw jako główny",
     "deleteDialog": {
       "header": "Potwierdź usunięcie",
       "message": "Czy na pewno chcesz usunąć to zdjęcie?",
@@ -352,10 +358,12 @@
   },
   "fileUploaderDialog": {
     "cancelButton": "Anuluj",
-    "saveButton": "Zapisz"
+    "saveButton": "Zapisz",
+    "edit": "Edytuj"
   },
   "propertiesFilters": {
     "title": "Filtry",
+    "toggleFilters": "Przełącz filtry",
     "city": {
       "label": "Wpisz miasto"
     },
@@ -559,7 +567,8 @@
       "status": "Status",
       "actions": "Akcje",
       "preview": "Podgląd",
-      "edit": "Edytuj"
+      "edit": "Edytuj",
+      "delete": "Usuń"
     },
     "empty": {
       "title": "Nie masz żadnych nieruchomości",
@@ -953,10 +962,14 @@
   },
   "propertiesPage": {
     "title": "Nieruchomości",
-    "noResults": "Brak wyników"
+    "noResults": "Brak wyników",
+    "showAsList": "Pokazuj jako listę",
+    "showAsMap": "Pokazuj jako mapę"
   },
   "userBookmarksPage": {
     "title": "Zapisane ogłoszenia",
+    "bookmark": "Dodaj do zapisanych",
+    "unbookmark": "Usuń z zapisanych",
     "empty": {
       "title": "Nie masz jeszcze żadnych zapisanych nieruchomości",
       "subtitle": "Przeglądaj nieruchomości, które dla Ciebie przygotowaliśmy. Zapisz nieruchomość, a pojawi się tutaj.",
@@ -1053,6 +1066,7 @@
     }
   },
   "userChatPage": {
+    "init": "Rozpocznij czat",
     "empty": {
       "title": "Nie rozpocząłeś jeszcze konwersacji",
       "subtitle": "Znajdź innych użytkowników, aby rozpocząć konwersacje.",

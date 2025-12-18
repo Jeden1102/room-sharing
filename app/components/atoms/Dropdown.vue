@@ -2,7 +2,7 @@
   <div>
     <FloatLabel variant="on">
       <Dropdown
-        :id="name"
+        :id
         :name
         :options
         :optionLabel
@@ -11,7 +11,7 @@
         fluid
         v-model="model"
       />
-      <label :for="name">{{ label }}</label>
+      <label :for="id">{{ label }}</label>
     </FloatLabel>
     <Message
       v-if="fieldState?.invalid"
@@ -35,6 +35,8 @@ const props = defineProps<{
 }>();
 
 const model = defineModel();
+
+const id = useId();
 
 const fieldState = computed(() => props.form?.[props.name]);
 </script>

@@ -4,11 +4,18 @@
       <Checkbox inputId="terms" name="terms" binary />
       <label for="terms">
         {{ $t("contactForm.terms.prefix") }}
-        <NuxtLink :to="$localePath('terms')" class="underline">{{
-          $t("contactForm.terms.termsLink")
-        }}</NuxtLink>
+        <NuxtLink
+          :to="$localePath('terms')"
+          class="underline"
+          target="_blank"
+          >{{ $t("contactForm.terms.termsLink") }}</NuxtLink
+        >
         {{ $t("contactForm.terms.and") }}
-        <NuxtLink :to="$localePath('privacy-policy')" class="underline">
+        <NuxtLink
+          :to="$localePath('privacy')"
+          class="underline"
+          target="_blank"
+        >
           {{ $t("contactForm.terms.privacyLink") }}
         </NuxtLink>
       </label>

@@ -1,8 +1,8 @@
 <template>
   <div>
     <FloatLabel variant="on">
-      <InputNumber :id="name" :name fluid v-model="model" />
-      <label :for="name">{{ label }}</label>
+      <InputNumber :id :name fluid v-model="model" />
+      <label :for="id">{{ label }}</label>
     </FloatLabel>
     <Message
       v-if="fieldState?.invalid"
@@ -22,6 +22,8 @@ const props = defineProps<{
   form?: Record<string, FieldState> | null;
 }>();
 const model = defineModel<number | null>();
+
+const id = useId();
 
 const fieldState = computed(() => props.form?.[props.name]);
 </script>

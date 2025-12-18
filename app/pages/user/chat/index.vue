@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="relative mb-4 w-full">
+    <div
+      class="relative mb-4 w-full"
+      v-if="conversationData && conversationData.conversations.length"
+    >
       <IconField iconPosition="left" class="w-full">
         <InputIcon class="pi pi-search" />
         <InputText

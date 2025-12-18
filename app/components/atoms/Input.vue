@@ -1,8 +1,8 @@
 <template>
   <div>
     <FloatLabel variant="on">
-      <InputText :id="name" :name fluid :type />
-      <label :for="name">{{ label }}</label>
+      <InputText :id="id" :name fluid :type />
+      <label :for="id">{{ label }}</label>
     </FloatLabel>
     <Message
       v-if="fieldState?.invalid"
@@ -22,6 +22,8 @@ const props = defineProps<{
   form: Record<string, FieldState>;
   type?: "text" | "email" | "password" | "hidden";
 }>();
+
+const id = useId();
 
 const fieldState = computed(() => props.form?.[props.name]);
 </script>

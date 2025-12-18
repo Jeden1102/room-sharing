@@ -30,6 +30,7 @@
           type="password"
         />
       </div>
+      <FormTerms />
       <Button
         type="submit"
         :label="$t('register.button.submit')"
@@ -41,6 +42,11 @@
         class="max-w-100"
         >{{ formStatus.message }}</Message
       >
+
+      <Divider />
+      <Button severity="secondary" @click="signIn('google')">
+        <i class="pi pi-google"></i> {{ $t("register.button.google") }}
+      </Button>
       <div class="mt-4 flex flex-col gap-4">
         <span>
           {{ $t("register.hasAccount") }}
@@ -61,6 +67,8 @@ import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { registerSchema } from "~/schemas/auth";
 
 const { t } = useI18n();
+
+const { signIn } = useAuth();
 
 definePageMeta({
   unauthenticatedOnly: true,

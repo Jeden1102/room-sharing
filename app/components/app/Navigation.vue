@@ -90,6 +90,8 @@
             >
               <span class="pi pi-comments text-xl"></span>
 
+              <span class="hidden">{{ $t("nav.messages") }}</span>
+
               <span
                 v-if="unreadCount > 0"
                 class="bg-primary-400 absolute -top-4 -right-3 grid size-5 place-items-center rounded-full text-xs text-white"

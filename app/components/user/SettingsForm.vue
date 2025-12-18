@@ -86,12 +86,12 @@
         </div>
 
         <div class="flex gap-6">
-          <AtomsCheckbox
+          <AtomsBaseCheckbox
             name="smoker"
             :label="$t('userSettingsForm.general.smoker')"
             :form="$form"
           />
-          <AtomsCheckbox
+          <AtomsBaseCheckbox
             name="pets"
             :label="$t('userSettingsForm.general.pets')"
             :form="$form"

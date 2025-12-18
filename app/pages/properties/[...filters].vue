@@ -13,12 +13,14 @@
           icon="pi pi-th-large"
           :severity="listingType === 'grid' ? 'primary' : 'secondary'"
           @click="listingType = 'grid'"
+          :title="$t('propertiesPage.showAsList')"
         >
         </Button>
         <Button
           icon="pi pi-map"
           :severity="listingType === 'grid' ? 'secondary' : 'primary'"
           @click="listingType = 'map'"
+          :title="$t('propertiesPage.showAsMap')"
         >
         </Button>
       </div>

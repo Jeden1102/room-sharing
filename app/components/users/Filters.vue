@@ -1,6 +1,10 @@
 <template>
   <aside>
-    <button @click="filtersOpened = !filtersOpened" class="md:hidden">
+    <button
+      @click="filtersOpened = !filtersOpened"
+      class="md:hidden"
+      :title="$t('propertiesFilters.toggleFilters')"
+    >
       <Icon name="mage:filter" class="text-2xl" />
     </button>
 
@@ -16,7 +20,10 @@
         <h2 class="mb-4 text-lg font-semibold">
           {{ $t("usersFilters.title") }}
         </h2>
-        <button @click="filtersOpened = !filtersOpened">
+        <button
+          @click="filtersOpened = !filtersOpened"
+          :title="$t('propertiesFilters.toggleFilters')"
+        >
           <Icon name="mage:filter" class="text-2xl" />
         </button>
       </div>
@@ -49,12 +56,12 @@
 
       <!-- Smoker / Pets -->
       <div class="flex flex-col gap-2 md:flex-row md:gap-4">
-        <AtomsCheckbox
+        <AtomsBaseCheckbox
           :label="$t('usersFilters.nonSmoker.label')"
           v-model="filters.nonSmoker"
           name="nonSmoker"
         />
-        <AtomsCheckbox
+        <AtomsBaseCheckbox
           :label="$t('usersFilters.noPets.label')"
           v-model="filters.noPets"
           name="noPets"

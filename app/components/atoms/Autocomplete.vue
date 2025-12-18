@@ -2,7 +2,7 @@
   <div>
     <FloatLabel variant="on">
       <AutoComplete
-        :id="name"
+        :id
         :name="name"
         :modelValue
         :suggestions
@@ -13,7 +13,7 @@
         @update:modelValue="$emit('update:modelValue', $event)"
         fluid
       />
-      <label v-if="label" :for="name">{{ label }}</label>
+      <label v-if="label" :for="id">{{ label }}</label>
     </FloatLabel>
     <Message
       v-if="fieldState?.invalid"
@@ -42,6 +42,8 @@ const emit = defineEmits<{
   clear: any;
   "update:modelValue": [value: any];
 }>();
+
+const id = useId();
 
 const fieldState = computed(() => props.form?.[props.name]);
 </script>

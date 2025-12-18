@@ -89,6 +89,7 @@
               severity="danger"
               icon="pi pi-trash"
               @click="openDeleteModal(slotProps.data)"
+              :title="$t('userProperties.table.delete')"
             />
           </div>
         </template>

@@ -6,6 +6,11 @@
     :severity="isBookmarked ? 'primary' : 'secondary'"
     :loading="isLoading"
     :icon="isBookmarked ? 'pi pi-bookmark-fill' : 'pi pi-bookmark'"
+    :title="
+      isBookmarked
+        ? $t('userBookmarksPage.unbookmark')
+        : $t('userBookmarksPage.bookmark')
+    "
   />
 </template>
 
