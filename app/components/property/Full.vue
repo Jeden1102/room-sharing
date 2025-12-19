@@ -6,7 +6,7 @@
           <Badge>
             {{ mapTaxonomyLabel("listingTypeOptions", property.listingType) }}
           </Badge>
-          <AppHeading class="my-2">
+          <AppHeading :showBreadcrumbs="true" class="my-2">
             {{ property.title }}
           </AppHeading>
           <p class="text-gray-600">

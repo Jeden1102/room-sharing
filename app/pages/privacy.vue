@@ -1,6 +1,8 @@
 <template>
   <main class="container flex flex-col gap-6 py-6">
-    <AppHeading> Privacy policty </AppHeading>
+    <AppHeading :showBreadcrumbs="true" class="container my-4">
+      {{ $t("seo.privacyPolicy.title") }}
+    </AppHeading>
   </main>
 </template>
 

@@ -76,9 +76,9 @@
       <div class="flex flex-col gap-6">
         <div class="space-y-6">
           <div class="card-base">
-            <p class="text-lg font-semibold text-gray-600">
+            <h1 class="text-lg font-semibold text-gray-600">
               {{ user.firstName }} {{ user.lastName }}
-            </p>
+            </h1>
             <p class="mt-2 text-sm text-gray-700">
               <template v-if="user.age || user.city">
                 {{ user.age }} {{ $t("userProfile.yearsOld") }} •

@@ -53,13 +53,28 @@ export default defineNuxtConfig({
     ["nuxt-nodemailer", { client: false }],
     ["nuxt-file-storage", { server: true, client: false }],
     "@nuxt/icon",
-    "@nuxtjs/seo",
     "nuxt-easy-lightbox",
     ["@nuxtjs/leaflet", { ssr: false }],
     "@dargmuesli/nuxt-cookie-control",
     "@vueuse/nuxt",
     "nuxt-security",
+    "@nuxtjs/robots",
+    "@nuxtjs/sitemap",
   ],
+  site: { 
+    url: process.env.NUXT_PUBLIC_APP_BASE_URI, 
+    name: 'Pokój z Wami' 
+  }, 
+  sitemap: {
+    sources: ['/api/_sitemap-urls'],
+    autoI18n: true 
+  },
+  robots: {
+    disallow: [
+      '/api/*',
+      '/*?*',
+    ],
+  },
   routeRules: {
     "/": { prerender: true, headers: { 'Cache-Control': 'public, max-age=300, must-revalidate' } },
     "/en": { prerender: true, headers: { 'Cache-Control': 'public, max-age=300, must-revalidate' } },

@@ -1,5 +1,8 @@
 <template>
   <main>
+    <AppHeading :showBreadcrumbs="true" class="container my-4">
+      {{ $t("faq.title") }}
+    </AppHeading>
     <AppCta
       :title="$t('faqPage.hero.title')"
       :subtitle="$t('faqPage.hero.subtitle')"

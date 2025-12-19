@@ -19,6 +19,7 @@ export default function usePageSeo({
   return useSeoMeta({
     title: t(title),
     ogTitle: t(title),
+    ogUrl: config.public.APP_BASE_URI,
     description: t(description),
     ogDescription: t(description),
     ogImage: imageUrl,

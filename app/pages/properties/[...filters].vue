@@ -1,9 +1,10 @@
 <template>
   <main class="container flex flex-col gap-4 py-6">
     <div class="flex items-center md:mb-4 md:grid md:grid-cols-2 md:gap-8">
-      <h1 class="text-xl font-medium md:text-2xl">
+      <AppHeading :showBreadcrumbs="true">
         {{ $t("propertiesPage.title") }}
-      </h1>
+      </AppHeading>
+
       <div class="ml-auto flex gap-2">
         <PropertiesSorting
           @update="applyFilters"
@@ -143,6 +144,7 @@ watch(listingType, () => {
 const uriFilters = {
   type: route.params.filters?.[0] || null,
   listingType: route.params.filters?.[1] || null,
+  cityFromPath: capitalize(route.params.filters?.[2]) || null,
 };
 
 const { getMappedKey } = useMapUriFilters();
@@ -150,7 +152,7 @@ const { getMappedKey } = useMapUriFilters();
 const filters = ref({
   listingType: getMappedKey("listingType", uriFilters.listingType || null),
   type: getMappedKey("propertyType", uriFilters.type || null),
-  city: route.query.city || "",
+  city: uriFilters.cityFromPath || route.query.city || "",
   priceMin: null,
   priceMax: null,
   roomsMin: null,

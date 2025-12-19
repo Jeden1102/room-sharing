@@ -3,9 +3,9 @@
     <div
       class="flex items-center justify-between md:mb-4 md:grid md:grid-cols-2 md:gap-8"
     >
-      <h1 class="text-xl font-medium md:text-2xl">
+      <AppHeading :showBreadcrumbs="true" class="my-2">
         {{ $t("usersPage.title") }}
-      </h1>
+      </AppHeading>
       <UsersSorting
         @update="applyFilters"
         class="ml-auto hidden w-50 md:block"
