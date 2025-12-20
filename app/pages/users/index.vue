@@ -3,7 +3,7 @@
     <div
       class="flex items-center justify-between md:mb-4 md:grid md:grid-cols-2 md:gap-8"
     >
-      <AppHeading :showBreadcrumbs="true" class="my-2">
+      <AppHeading :showBreadcrumbs="true">
         {{ $t("usersPage.title") }}
       </AppHeading>
       <UsersSorting

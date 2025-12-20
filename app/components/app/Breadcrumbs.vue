@@ -1,39 +1,26 @@
 <template>
-  <nav class="container mt-4">
-    <Breadcrumb :model="items" class="hidden !bg-transparent !p-0 md:block">
-      <template #item="{ item }">
-        <NuxtLink
-          v-if="item.url"
-          :to="item.url"
-          class="hover:text-primary text-xs font-medium text-gray-600 transition-colors"
-        >
-          {{ item.label }}
-        </NuxtLink>
-        <span v-else class="text-xs font-bold text-gray-900">
-          {{ item.label }}
-        </span>
-      </template>
-      <template #separator>
-        <span class="mx-1 grid place-content-center text-gray-400">
-          <Icon
-            name="material-symbols-light:chevron-right-rounded"
-            class="text-lg"
-          />
-        </span>
-      </template>
-    </Breadcrumb>
-
-    <div class="block md:hidden">
+  <Breadcrumb :model="items" class="hidden !bg-transparent !p-0 md:block">
+    <template #item="{ item }">
       <NuxtLink
-        v-if="backStep"
-        :to="backStep.url"
-        class="flex items-center gap-2 text-sm font-medium text-gray-700"
+        v-if="item.url"
+        :to="item.url"
+        class="hover:text-primary text-xs font-medium text-gray-600 transition-colors"
       >
-        <Icon name="lucide:arrow-left" class="w-5 min-w-5 text-lg" />
-        <span>{{ backStep.label }}</span>
+        {{ item.label }}
       </NuxtLink>
-    </div>
-  </nav>
+      <span v-else class="text-xs font-bold text-gray-900">
+        {{ item.label }}
+      </span>
+    </template>
+    <template #separator>
+      <span class="mx-1 grid place-content-center text-gray-400">
+        <Icon
+          name="material-symbols-light:chevron-right-rounded"
+          class="text-lg"
+        />
+      </span>
+    </template>
+  </Breadcrumb>
 </template>
 
 <script setup lang="ts">
@@ -49,8 +36,13 @@ const items = computed(() => {
     url: localePath("/"),
   });
 
+  const pathName = route.path.split("/").filter(Boolean).at(-1);
+
   if (route.name?.toString().includes("properties-filters")) {
-    crumbs.push({ label: t("nav.properties"), url: localePath("/oferty") });
+    crumbs.push({
+      label: t("nav.properties"),
+      url: localePath("properties-filters"),
+    });
 
     const filters = (route.params.filters as string[]) || [];
     let currentPath = "/oferty";
@@ -63,35 +55,18 @@ const items = computed(() => {
       });
     });
   } else if (route.name?.toString().includes("property-id")) {
-    crumbs.push({ label: t("nav.properties"), url: localePath("/oferty") });
+    crumbs.push({
+      label: t("nav.properties"),
+      url: localePath("properties-filters"),
+    });
     crumbs.push({ label: t("nav.propertyDetails") });
-  } else if (route.path.includes("/uzytkownicy")) {
-    crumbs.push({ label: t("nav.users"), url: localePath("/uzytkownicy") });
-    if (route.params.id || route.query.id) {
-      crumbs.push({ label: t("nav.userProfile") });
-    }
   } else {
-    const pathName = route.path.split("/").filter(Boolean).at(-1);
-    if (pathName) {
-      crumbs.push({ label: capitalize(pathName) });
+    if (route.name) {
+      const routeName = (route.name as string).split("___")[0];
+      crumbs.push({ label: t(`nav.${routeName}`) });
     }
   }
 
   return crumbs;
-});
-
-const backStep = computed(() => {
-  if (items.value.length < 2) return null;
-
-  const reversedItems = [...items.value].reverse();
-
-  const target = reversedItems.find((item) => {
-    if (!item.url) return false;
-    const cleanItemUrl = item.url.replace(/\/$/, "");
-    const cleanCurrentUrl = route.path.replace(/\/$/, "");
-    return cleanItemUrl !== cleanCurrentUrl;
-  });
-
-  return target || items.value[0];
 });
 </script>

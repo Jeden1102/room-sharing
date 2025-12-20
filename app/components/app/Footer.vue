@@ -106,7 +106,19 @@
         </h3>
         <ul class="space-y-2 text-sm lg:space-y-3 lg:text-base">
           <li>
-            <NuxtLink :to="$localePath('new-property')" class="footer-link">
+            <NuxtLink
+              :to="
+                $localePath(
+                  data?.user
+                    ? 'new-property'
+                    : {
+                        name: 'auth-login',
+                        query: { feat: 'properties' },
+                      },
+                )
+              "
+              class="footer-link"
+            >
               {{ $t("footer.forOwners.listProperty") }}
             </NuxtLink>
           </li>
@@ -157,4 +169,6 @@
 const currentYear = new Date().getFullYear();
 
 const { isModalActive } = useCookieControl();
+
+const { data } = useAuth();
 </script>
