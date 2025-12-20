@@ -39,14 +39,20 @@
 
 <script setup lang="ts">
 const localePath = useLocalePath();
-
+const { t } = useI18n();
 const cities = [
   {
     nameKey: "cities.list.warszawa",
     image: "/images/warszawa.jpg",
     link: localePath({
       name: "properties-filters",
-      query: { city: "Warszawa" },
+      params: {
+        filters: [
+          slugify(t("taxonomies.propertyType.any")),
+          slugify(t("taxonomies.listingType.any")),
+          "warszawa",
+        ],
+      },
     }),
     class: "md:w-[calc(30%-12px)]",
   },
@@ -55,7 +61,13 @@ const cities = [
     image: "/images/krakow.jpg",
     link: localePath({
       name: "properties-filters",
-      query: { city: "Kraków" },
+      params: {
+        filters: [
+          slugify(t("taxonomies.propertyType.any")),
+          slugify(t("taxonomies.listingType.any")),
+          "kraków",
+        ],
+      },
     }),
     class: "md:w-[calc(70%-12px)]",
   },
@@ -64,7 +76,13 @@ const cities = [
     image: "/images/gdansk.jpg",
     link: localePath({
       name: "properties-filters",
-      query: { city: "Gdańsk" },
+      params: {
+        filters: [
+          slugify(t("taxonomies.propertyType.any")),
+          slugify(t("taxonomies.listingType.any")),
+          "gdańsk",
+        ],
+      },
     }),
     class: "md:w-[calc(55%-12px)]",
   },
@@ -73,7 +91,13 @@ const cities = [
     image: "/images/wroclaw.jpg",
     link: localePath({
       name: "properties-filters",
-      query: { city: "Wrocław" },
+      params: {
+        filters: [
+          slugify(t("taxonomies.propertyType.any")),
+          slugify(t("taxonomies.listingType.any")),
+          "wrocław",
+        ],
+      },
     }),
     class: "md:w-[calc(45%-12px)]",
   },

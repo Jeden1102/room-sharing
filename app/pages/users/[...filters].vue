@@ -15,6 +15,7 @@
         :total="usersData?.total"
         :pending
         class="col-span-2"
+        :defaultFilters="filters"
       />
     </div>
     <!-- Users List -->
@@ -56,6 +57,8 @@
         @page="onPageChange"
       />
     </section>
+
+    <UsersSeoBlock v-if="filters.city" :city="filters.city" />
   </main>
 </template>
 
@@ -82,9 +85,13 @@ usePageSeo({
 const route = useRoute();
 const router = useRouter();
 
+const uriFilters = {
+  cityFromPath: capitalize(route.params.filters?.[0]) || null,
+};
+
 const filters = ref({
   gender: null,
-  city: route.query.city || "",
+  city: uriFilters.cityFromPath || "",
   nonSmoker: false,
   noPets: false,
   budgetMax: null,

@@ -116,6 +116,7 @@ import clsx from "clsx";
 const props = defineProps<{
   total?: number;
   pending: boolean;
+  defaultFilters: any;
 }>();
 
 const emit = defineEmits(["update"]);
@@ -125,14 +126,7 @@ const debounceTimeout = ref<NodeJS.Timeout>();
 
 const route = useRoute();
 
-const defaultFilters = {
-  gender: null,
-  city: route.query.city || "",
-  nonSmoker: false,
-  noPets: false,
-  budgetMax: null,
-  sortBy: "newest",
-};
+const defaultFilters = props.defaultFilters;
 
 const filters = reactive({ ...defaultFilters });
 

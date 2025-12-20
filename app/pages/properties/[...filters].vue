@@ -114,6 +114,13 @@
         />
       </div>
     </div>
+
+    <PropertiesSeoBlock
+      v-if="filters.city"
+      :city="filters.city"
+      :type="filters.type"
+      :listingType="filters.listingType"
+    />
   </main>
 </template>
 
@@ -152,7 +159,7 @@ const { getMappedKey } = useMapUriFilters();
 const filters = ref({
   listingType: getMappedKey("listingType", uriFilters.listingType || null),
   type: getMappedKey("propertyType", uriFilters.type || null),
-  city: uriFilters.cityFromPath || route.query.city || "",
+  city: uriFilters.cityFromPath || "",
   priceMin: null,
   priceMax: null,
   roomsMin: null,

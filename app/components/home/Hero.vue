@@ -26,7 +26,7 @@
 
         <Button asChild v-slot="slotProps" severity="secondary">
           <RouterLink
-            :to="$localePath('users')"
+            :to="$localePath('users-filters')"
             :class="slotProps.class"
             class="w-fit"
           >

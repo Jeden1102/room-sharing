@@ -43,7 +43,7 @@
           <NuxtLink class="nav-link" :to="$localePath('properties-filters')">
             {{ $t("nav.properties") }}
           </NuxtLink>
-          <NuxtLink class="nav-link" :to="$localePath('users')">
+          <NuxtLink class="nav-link" :to="$localePath('users-filters')">
             {{ $t("nav.users") }}
           </NuxtLink>
           <NuxtLink class="nav-link" :to="$localePath('contact')">

@@ -45,7 +45,7 @@
       "description": "Zapisane oferty wynajmu mieszkań i pokoi. Szybko wróć do ulubionych ogłoszeń i zarezerwuj najlepsze miejsce."
     },
     "bookmarkedUsers": {
-      "title": "Zapisani użytkownicy",
+      "title": "Zapisani współlokatorzy",
       "description": "Lista zapisanych użytkowników i potencjalnych współlokatorów. Sprawdź profile, preferencje i skontaktuj się."
     },
     "bookmarks": {
@@ -109,7 +109,8 @@
   "nav": {
     "home": "Strona główna",
     "properties": "Oferty",
-    "users": "Użytkownicy",
+    "users": "Współlokatorzy",
+    "users-filters": "Współlokatorzy",
     "contact": "Kontakt",
     "login": "Zaloguj się",
     "logout": "Wyloguj",
@@ -248,6 +249,11 @@
       "rentOut": "Wynajmij swoje mieszkanie",
       "findTenant": "Znajdź najemcę",
       "pricing": "Cennik"
+    },
+    "forRoommates": {
+      "title": "Dla współlokatorów",
+      "label": "Współlokator {city}",
+      "labelAll": "Znajdź współlokatora"
     },
     "legal": {
       "title": "Informacje prawne",
@@ -968,7 +974,13 @@
     "title": "Nieruchomości",
     "noResults": "Brak wyników",
     "showAsList": "Pokazuj jako listę",
-    "showAsMap": "Pokazuj jako mapę"
+    "showAsMap": "Pokazuj jako mapę",
+    "seo": {
+  "block": {
+    "description": "Szukasz idealnego miejsca? Nasza platforma oferuje świetne oferty w lokalizacji {city}. Każde ogłoszenie jest starannie weryfikowane, aby zapewnić Ci bezpieczeństwo i komfort wyboru współlokatorów lub całych nieruchomości.",
+    "footer": "Aktualnie przeglądasz najnowsze ogłoszenia z rynku nieruchomości w mieście {city}."
+  }
+}
   },
   "userBookmarksPage": {
     "title": "Zapisane ogłoszenia",
@@ -982,7 +994,7 @@
     "error": "Błąd pobierania nieruchomości"
   },
   "userBookmarksUsersPage": {
-    "title": "Zapisani użytkownicy",
+    "title": "Zapisani współlokatorzy",
     "empty": {
       "title": "Nie masz jeszcze żadnych zapisanych użytkowników",
       "subtitle": "Przeglądaj użytkowników, których dla Ciebie przygotowaliśmy. Zapisz użytkownika, a pojawi się tutaj.",
@@ -992,13 +1004,19 @@
   },
   "userPage": {
     "similar": {
-      "title": "Podobni użytkownicy",
-      "subtitle": "Odkryj innych użytkowników"
+      "title": "Podobni współlokatorzy",
+      "subtitle": "Odkryj innych współlokatorów"
     }
   },
   "usersPage": {
-    "title": "Lista użytkowników",
-    "noResults": "Brak wyników"
+    "title": "Lista współlokatorów",
+    "noResults": "Brak wyników",
+    "seo": {
+      "block": {
+        "title": "Współlokatorzy {city}",
+        "description": "Aktualnie przeglądasz współlokatorów w mieście {city}."
+      }
+    }
   },
   "validation": {
     "invalidEmail": "Nieprawidłowy adres e-mail",

@@ -79,7 +79,7 @@ export default defineNuxtConfig({
     "/": { prerender: true, headers: { 'Cache-Control': 'public, max-age=300, must-revalidate' } },
     "/en": { prerender: true, headers: { 'Cache-Control': 'public, max-age=300, must-revalidate' } },
     "/oferty": { headers: { 'Cache-Control': 'public, max-age=60, must-revalidate' } },
-    "/uzytkownicy": { headers: { 'Cache-Control': 'public, max-age=60, must-revalidate' } },
+    "/wspollokatorzy": { headers: { 'Cache-Control': 'public, max-age=60, must-revalidate' } },
     "/en/users": { headers: { 'Cache-Control': 'public, max-age=60, must-revalidate' } },
     "/en/properties": { headers: { 'Cache-Control': 'public, max-age=60, must-revalidate' } },
   },
@@ -198,13 +198,13 @@ export default defineNuxtConfig({
         en: "/property/[[id]]/edit",
         pl: "/oferta/[[id]]/edytuj",
       },
-      users: {
-        en: "/users",
-        pl: "/uzytkownicy",
+      "users-filters": {
+        en: "/roommates/[...filters]",
+        pl: "/wspollokatorzy/[...filters]",
       },
       "users-id": {
-        en: "/users/[id]",
-        pl: "/uzytkownicy/[id]",
+        en: "/roommate/[id]",
+        pl: "/wspollokator/[id]",
       },
       user: {
         en: "/user",
@@ -236,7 +236,7 @@ export default defineNuxtConfig({
       },
       "user-bookmarks-users": {
         en: "/user/bookmarks/users",
-        pl: "/profil/ulubione/uzytkownicy",
+        pl: "/profil/ulubione/wspollokatorzy",
       },
     },
     locales: [

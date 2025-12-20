@@ -20,7 +20,6 @@
             <a
               class="hover:text-primary-400 flex items-center space-x-2"
               :href="`tel:${$t('footer.contact.phone')}`"
-              :title="$t('footer.contact.phoneLinkTitle')"
             >
               <i class="pi pi-phone"></i>
               <span>{{ $t("footer.contact.phone") }}</span>
@@ -30,7 +29,6 @@
             <a
               class="hover:text-primary-400 flex items-center space-x-2"
               :href="`mailto:${$t('footer.contact.email')}`"
-              :title="$t('footer.contact.emailLinkTitle')"
             >
               <i class="pi pi-envelope"></i>
               <span>{{ $t("footer.contact.email") }}</span>
@@ -38,120 +36,25 @@
           </li>
         </ul>
         <div class="mt-4 flex space-x-4 text-gray-500">
-          <a
-            href="#"
-            class="hover:text-primary-400 transition-colors"
-            :title="$t('footer.social.tiktok')"
-            :aria-label="$t('footer.social.tiktok')"
-          >
+          <a href="#" class="hover:text-primary-400 transition-colors">
             <i class="pi pi-tiktok"></i>
           </a>
         </div>
       </div>
 
-      <div>
-        <h3 class="mb-3 font-semibold lg:text-lg">
-          {{ $t("footer.explore.title") }}
+      <div v-for="group in footerNavigation" :key="group.title">
+        <h3 class="mb-3 font-semibold text-gray-900 lg:text-lg">
+          {{ $t(group.title) }}
         </h3>
         <ul class="space-y-2 text-sm lg:space-y-3 lg:text-base">
-          <li>
-            <NuxtLink :to="$localePath('faq')" class="footer-link">
-              {{ $t("footer.explore.faq") }}
-            </NuxtLink>
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="mb-3 font-semibold lg:text-lg">
-          {{ $t("footer.forRenters.title") }}
-        </h3>
-        <ul class="space-y-2 text-sm lg:space-y-3 lg:text-base">
-          <li>
+          <li v-for="link in group.links">
             <NuxtLink
-              :to="
-                $localePath({
-                  name: 'properties-filters',
-                  params: {
-                    filters: [slugify($t('taxonomies.propertyType.apartment'))],
-                  },
-                })
-              "
-              class="footer-link"
+              v-if="link.to"
+              :to="typeof link.to === 'function' ? link.to() : link.to"
+              class="hover:text-primary-600 transition-colors"
             >
-              {{ $t("footer.forRenters.rentApartment") }}
+              {{ $t(link.label || "") }}
             </NuxtLink>
-          </li>
-          <li>
-            <NuxtLink
-              :to="
-                $localePath({
-                  name: 'properties-filters',
-                  params: {
-                    filters: [slugify($t('taxonomies.propertyType.room'))],
-                  },
-                })
-              "
-              class="footer-link"
-            >
-              {{ $t("footer.forRenters.findRoom") }}
-            </NuxtLink>
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="mb-3 font-semibold lg:text-lg">
-          {{ $t("footer.forOwners.title") }}
-        </h3>
-        <ul class="space-y-2 text-sm lg:space-y-3 lg:text-base">
-          <li>
-            <NuxtLink
-              :to="
-                $localePath(
-                  data?.user
-                    ? 'new-property'
-                    : {
-                        name: 'auth-login',
-                        query: { feat: 'properties' },
-                      },
-                )
-              "
-              class="footer-link"
-            >
-              {{ $t("footer.forOwners.listProperty") }}
-            </NuxtLink>
-          </li>
-          <li>
-            <NuxtLink :to="$localePath('users')" class="footer-link">
-              {{ $t("footer.forOwners.findTenant") }}
-            </NuxtLink>
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="mb-3 font-semibold lg:text-lg">
-          {{ $t("footer.legal.title") }}
-        </h3>
-        <ul class="space-y-2 text-sm lg:space-y-3 lg:text-base">
-          <li>
-            <NuxtLink :to="$localePath('terms')" class="footer-link">
-              {{ $t("footer.legal.terms") }}
-            </NuxtLink>
-          </li>
-          <li>
-            <NuxtLink :to="$localePath('privacy')" class="footer-link">
-              {{ $t("footer.legal.privacy") }}
-            </NuxtLink>
-          </li>
-          <li>
-            <button
-              @click="isModalActive = true"
-              class="footer-link cursor-pointer"
-            >
-              {{ $t("footer.legal.cookieSettings") }}
-            </button>
           </li>
         </ul>
       </div>
@@ -161,14 +64,116 @@
       class="container mx-auto mt-8 border-t border-gray-300 pt-6 text-center text-sm text-gray-600"
     >
       <p>{{ currentYear + " " + $t("footer.copyrightText") }}</p>
+
+      <ul
+        class="mt-4 flex flex-col gap-2 md:flex-row md:justify-center md:gap-6"
+      >
+        <li v-for="link in bottomNavigation[0]?.links" :key="link.label">
+          <NuxtLink v-if="link.to" :to="link.to" class="hover:underline">
+            {{ $t(link.label) }}
+          </NuxtLink>
+
+          <button
+            v-else
+            @click="isModalActive = true"
+            class="cursor-pointer hover:underline"
+          >
+            {{ $t(link.label) }}
+          </button>
+        </li>
+      </ul>
     </div>
   </footer>
 </template>
 
 <script lang="ts" setup>
 const currentYear = new Date().getFullYear();
-
 const { isModalActive } = useCookieControl();
+const { data: authData } = useAuth();
+const localePath = useLocalePath();
+const { t } = useI18n();
 
-const { data } = useAuth();
+const { data: popularCities } = await useFetch("/api/seo/roommates-cities");
+
+const roommatesLinks = computed(() => {
+  let links = (popularCities.value || []).map((city) => ({
+    label: t("footer.forRoommates.label", { city }),
+    to: localePath({
+      name: "users-filters",
+      params: { filters: city?.toLowerCase() },
+    }),
+  }));
+
+  links.unshift({
+    label: t("footer.forRoommates.labelAll"),
+    to: localePath({
+      name: "users-filters",
+    }),
+  });
+
+  return links;
+});
+
+const footerNavigation = computed(() => {
+  return [
+    {
+      title: "footer.explore.title",
+      links: [{ label: "footer.explore.faq", to: localePath("faq") }],
+    },
+    {
+      title: "footer.forRenters.title",
+      links: [
+        {
+          label: "footer.forRenters.rentApartment",
+          to: localePath({
+            name: "properties-filters",
+            params: {
+              filters: [slugify(t("taxonomies.propertyType.apartment"))],
+            },
+          }),
+        },
+        {
+          label: "footer.forRenters.findRoom",
+          to: localePath({
+            name: "properties-filters",
+            params: { filters: [slugify(t("taxonomies.propertyType.room"))] },
+          }),
+        },
+      ],
+    },
+    {
+      title: "footer.forRoommates.title",
+      links: roommatesLinks.value,
+    },
+    {
+      title: "footer.forOwners.title",
+      links: [
+        {
+          label: "footer.forOwners.listProperty",
+          to: () =>
+            authData.value?.user
+              ? localePath("new-property")
+              : localePath({
+                  name: "auth-login",
+                  query: { feat: "properties" },
+                }),
+        },
+        { label: "footer.forOwners.findTenant", to: localePath("users") },
+      ],
+    },
+  ];
+});
+
+const bottomNavigation = [
+  {
+    links: [
+      { label: "footer.legal.terms", to: localePath("terms") },
+      { label: "footer.legal.privacy", to: localePath("privacy") },
+      {
+        label: "footer.legal.cookieSettings",
+        to: null,
+      },
+    ],
+  },
+];
 </script>
