@@ -7,7 +7,6 @@ To fix:
 
 Feat:
 0. 
-1. Footer rozbudowa linkowania
 2. Bloki do self linkowania:
     - "Szukaj usrów w innych miastach"
     - "Szukaj nieruchomości w innym mieście"

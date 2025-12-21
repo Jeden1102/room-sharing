@@ -240,7 +240,9 @@
       "rentApartment": "Rent an Apartment",
       "findRoom": "Find a Room",
       "shareApartment": "Share an Apartment",
-      "studentHousing": "Student Housing"
+      "studentHousing": "Student Housing",
+      "buyApartment": "Buy an Apartment",
+      "buyHouse": "Buy a House"
     },
     "forOwners": {
       "title": "For Owners",

@@ -241,7 +241,9 @@
       "rentApartment": "Wynajmij mieszkanie",
       "findRoom": "Znajdź pokój",
       "shareApartment": "Współdziel mieszkanie",
-      "studentHousing": "Mieszkania dla studentów"
+      "studentHousing": "Mieszkania dla studentów",
+      "buyApartment": "Kup mieszkanie",
+      "buyHouse": "Kup dom"
     },
     "forOwners": {
       "title": "Dla właścicieli",

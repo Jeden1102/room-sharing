@@ -133,6 +133,30 @@ const footerNavigation = computed(() => {
           }),
         },
         {
+          label: "footer.forRenters.buyApartment",
+          to: localePath({
+            name: "properties-filters",
+            params: {
+              filters: [
+                slugify(t("taxonomies.propertyType.apartment")),
+                slugify(t("taxonomies.listingType.sale")),
+              ],
+            },
+          }),
+        },
+        {
+          label: "footer.forRenters.buyHouse",
+          to: localePath({
+            name: "properties-filters",
+            params: {
+              filters: [
+                slugify(t("taxonomies.propertyType.house")),
+                slugify(t("taxonomies.listingType.sale")),
+              ],
+            },
+          }),
+        },
+        {
           label: "footer.forRenters.findRoom",
           to: localePath({
             name: "properties-filters",
