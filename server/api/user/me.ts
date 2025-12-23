@@ -35,6 +35,11 @@ export default requireAuth(
           profileVisible: true,
           contactEmail: true,
           phone: true,
+          accountType: true,
+          companyName: true,
+          nip: true,
+          website: true,
+          address: true
         }
       });
 

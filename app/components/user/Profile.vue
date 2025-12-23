@@ -117,8 +117,8 @@
                     v-if="userOccupations.length > 0"
                     v-for="occupation in userOccupations"
                     :key="occupation?.value"
-                    >{{ occupation?.label }}</span
-                  >
+                    >{{ occupation?.label }} <br
+                  /></span>
                   <span v-else>{{ $t("userProfile.noData") }}</span>
                 </div>
               </div>
@@ -147,9 +147,12 @@
                 </div>
                 <div class="font-medium" v-if="user.city">
                   {{ user.city }}
-                  <template v-if="user.districts.length > 0">
+                  <span
+                    v-if="user.districts.length > 0"
+                    class="text-sm font-light"
+                  >
                     | {{ user.districts.join(", ") }}
-                  </template>
+                  </span>
                 </div>
                 <div class="font-medium" v-else>
                   {{ $t("userProfile.noData") }}

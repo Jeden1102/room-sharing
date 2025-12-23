@@ -607,7 +607,8 @@
       "occupationPlaceholder": "Select occupation",
       "smoker": "Smokes",
       "pets": "Has pets",
-      "description": "Description"
+      "description": "Description",
+      "businessDescription": "Business description"
     },
     "searchLocation": {
       "legend": "Search Location",
@@ -633,12 +634,27 @@
     },
     "media": {
       "legend": "Media",
-      "moodboardImages": "Moodboard Images"
+      "moodboardImages": "Moodboard Images",
+      "businessImages": "Images of your products/services"
     },
     "contact": {
       "legend": "Contact",
       "phone": "Phone Number",
       "email": "Contact e-mail"
+    },
+    "accountType": {
+      "legend": "Account type",
+      "private": "Private",
+      "business": "Business",
+      "privateHint": "You are looking for a roommate or a room for yourself. You are renting or selling a property.",
+      "businessHint": "You represent a company, a business or you manage multiple properties."
+    },
+    "business": {
+      "legend": "Business details",
+      "companyName": "Company name",
+      "nip": "NIP",
+      "website": "Website",
+      "address": "Adress"
     },
     "submit": "Save Changes",
       "noPassword": "No password set yet",

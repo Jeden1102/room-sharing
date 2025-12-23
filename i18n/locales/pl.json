@@ -613,7 +613,8 @@
       "occupationPlaceholder": "Wybierz zawód",
       "smoker": "Pali",
       "pets": "Ma zwierzęta",
-      "description": "Opis"
+      "description": "Opis",
+      "businessDescription": "Opis firmy"
     },
     "searchLocation": {
       "legend": "Lokalizacja poszukiwań",
@@ -639,13 +640,28 @@
     },
     "media": {
       "legend": "Media",
-      "moodboardImages": "Zdjęcia Moodboard"
+      "moodboardImages": "Zdjęcia Moodboard",
+      "businessImages": "Zdjęciach przykładowych nieruchomości/realizacji"
     },
     "contact": {
       "legend": "Kontakt",
       "phone": "Numer telefonu",
       "email": "E-mail kontaktowy"
     },
+    "accountType": {
+    "legend": "Typ konta",
+    "private": "Osoba prywatna",
+    "business": "Firma / Biuro nieruchomości",
+    "privateHint": "Szukasz współlokatora lub pokoju dla siebie. Wynajmujesz/sprzedajesz własną nieruchomość.",
+    "businessHint": "Reprezentujesz firmę, biuro lub zarządzasz wieloma nieruchomościami."
+  },
+  "business": {
+    "legend": "Dane firmowe",
+    "companyName": "Nazwa firmy",
+    "nip": "NIP",
+    "website": "Strona internetowa",
+    "address": "Adres biura"
+  },
     "submit": "Zapisz zmiany",
     "success": "Ustawienia zostały zaktualizowane",
     "error": "Wystąpił błąd podczas zapisywania ustawien"

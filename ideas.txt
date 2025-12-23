@@ -6,7 +6,12 @@ To fix:
 4. Manualne
 
 Feat:
-0. 
+1. osoby-firmy:
+- Full widok osoby-firmy
+- blok kontaktowy osoby-firmy na podstronie nieruchomości. 
+- dostosowanie widoków osób (ukrycie firm)
+- dostososowanie wiadomości
+
 2. Bloki do self linkowania:
     - "Szukaj usrów w innych miastach"
     - "Szukaj nieruchomości w innym mieście"

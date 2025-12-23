@@ -54,7 +54,7 @@
     <div class="mt-auto space-y-3 p-4 pt-0">
       <div>
         <h3 class="line-clamp-1 text-lg font-semibold">
-          <NuxtLink :to="uri">
+          <NuxtLink :to="uri" class="text-gray-800!">
             {{ property.title }}
           </NuxtLink>
         </h3>

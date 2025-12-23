@@ -23,6 +23,11 @@ export default requireAuth(defineEventHandler(async (event) => {
       "districts",
       "profileVisible",
       "contactEmail",
+      "accountType",
+      "companyName",
+      "nip",
+      "website",
+      "address",
     ];
 
     const arrayFields = [

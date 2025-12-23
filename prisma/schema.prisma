@@ -7,6 +7,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserType {
+  PRIVATE
+  BUSINESS
+}
+
+enum PropertyStatus {
+  DRAFT
+  ACTIVE
+  RESERVED
+}
+
+enum ListingType {
+  SALE
+  RENT
+}
+
+enum ReportReason {
+  SPAM
+  SCAM
+  INAPPROPRIATE_BEHAVIOR
+  FAKE_PROFILE
+  MISLEADING_INFORMATION
+  OTHER
+}
+
 model User {
   id                    String   @id @default(uuid())
   createdAt             DateTime @default(now())
@@ -37,6 +62,12 @@ model User {
   districts             String[]
   searchAmount          String?
 
+  accountType UserType @default(PRIVATE)
+  companyName String?
+  nip         String?
+  website     String?
+  address     String?
+
   interests           String[] @default([])
   occupations         String[] @default([])
   searchPreferences   String[] @default([])
@@ -44,29 +75,24 @@ model User {
   noiseCompatibility  String[] @default([])
   petsCompatibility   String[] @default([])
 
-  messagesSent Message[] @relation("MessagesSent")
-
-  conversations ConversationParticipant[]
-
-  properties Property[]
-
-  roommateInProperties Property[] @relation("PropertyRoommates")
-
-  bookmarkedProperties PropertyBookmark[] @relation("UserPropertyBookmarks")
-  bookmarkedByUsers    UserBookmark[]     @relation("BookmarkTargetUser")
-  bookmarkedUsers      UserBookmark[]     @relation("BookmarkOwnerUser")
-
-  reportsFiled   Report[] @relation("ReportsFiled")
-  reportsAgainst Report[] @relation("ReportsAgainstUser")
+  messagesSent         Message[]                 @relation("MessagesSent")
+  conversations        ConversationParticipant[]
+  properties           Property[]
+  roommateInProperties Property[]                @relation("PropertyRoommates")
+  bookmarkedProperties PropertyBookmark[]        @relation("UserPropertyBookmarks")
+  bookmarkedByUsers    UserBookmark[]            @relation("BookmarkTargetUser")
+  bookmarkedUsers      UserBookmark[]            @relation("BookmarkOwnerUser")
+  reportsFiled         Report[]                  @relation("ReportsFiled")
+  reportsAgainst       Report[]                  @relation("ReportsAgainstUser")
 }
 
 model Property {
-  id              String         @id @default(uuid())
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
+  id              String             @id @default(uuid())
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
   type            String?
   listingType     ListingType
-  status          PropertyStatus @default(DRAFT)
+  status          PropertyStatus     @default(DRAFT)
   title           String
   description     String?
   price           Int
@@ -92,30 +118,26 @@ model Property {
   washingMachine  Boolean?
   dishwasher      Boolean?
   airConditioning Boolean?
-  isShared        Boolean?       @default(false)
+  isShared        Boolean?           @default(false)
   roomType        String?
   images          String[]
   mainImageIdx    Int?
   ownerId         String
   email           String?
   phone           String?
-  owner           User           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  roommates       User[]         @relation("PropertyRoommates")
-
-  bookmarkedBy PropertyBookmark[] @relation("PropertyBookmarks")
-
-  reports Report[] @relation("ReportsAgainstProperty")
+  owner           User               @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  roommates       User[]             @relation("PropertyRoommates")
+  bookmarkedBy    PropertyBookmark[] @relation("PropertyBookmarks")
+  reports         Report[]           @relation("ReportsAgainstProperty")
 }
 
 model PropertyBookmark {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
   userId     String
   propertyId String
-
-  user     User     @relation("UserPropertyBookmarks", fields: [userId], references: [id], onDelete: Cascade)
-  property Property @relation("PropertyBookmarks", fields: [propertyId], references: [id], onDelete: Cascade)
+  user       User     @relation("UserPropertyBookmarks", fields: [userId], references: [id], onDelete: Cascade)
+  property   Property @relation("PropertyBookmarks", fields: [propertyId], references: [id], onDelete: Cascade)
 
   @@unique([userId, propertyId])
 }
@@ -123,24 +145,20 @@ model PropertyBookmark {
 model UserBookmark {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
-
-  userId   String
-  targetId String
-
-  user   User @relation("BookmarkOwnerUser", fields: [userId], references: [id], onDelete: Cascade)
-  target User @relation("BookmarkTargetUser", fields: [targetId], references: [id], onDelete: Cascade)
+  userId    String
+  targetId  String
+  user      User     @relation("BookmarkOwnerUser", fields: [userId], references: [id], onDelete: Cascade)
+  target    User     @relation("BookmarkTargetUser", fields: [targetId], references: [id], onDelete: Cascade)
 
   @@unique([userId, targetId])
 }
 
 model Conversation {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  userAId String
-  userBId String
-
+  id           String                    @id @default(uuid())
+  createdAt    DateTime                  @default(now())
+  updatedAt    DateTime                  @updatedAt
+  userAId      String
+  userBId      String
   messages     Message[]
   participants ConversationParticipant[]
 
@@ -148,65 +166,37 @@ model Conversation {
 }
 
 model ConversationParticipant {
-  id String @id @default(uuid())
-
-  conversationId String
-  userId         String
-
-  unreadCount       Int     @default(0)
+  id                String       @id @default(uuid())
+  conversationId    String
+  userId            String
+  unreadCount       Int          @default(0)
   lastReadMessageId String?
-
-  conversation Conversation @relation(fields: [conversationId], references: [id])
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conversation      Conversation @relation(fields: [conversationId], references: [id])
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([conversationId, userId])
 }
 
 model Message {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  content   String
-  isRead    Boolean  @default(false)
-
-  senderId String
-  sender   User   @relation("MessagesSent", fields: [senderId], references: [id], onDelete: Cascade)
-
+  id             String       @id @default(uuid())
+  createdAt      DateTime     @default(now())
+  content        String
+  isRead         Boolean      @default(false)
+  senderId       String
+  sender         User         @relation("MessagesSent", fields: [senderId], references: [id], onDelete: Cascade)
   conversationId String
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 }
 
 model Report {
-  id          String       @id @default(uuid())
-  createdAt   DateTime     @default(now())
-  reason      ReportReason
-  description String?
-
-  reporterId String
-  reporter   User   @relation("ReportsFiled", fields: [reporterId], references: [id], onDelete: Cascade)
-
-  reportedUserId String?
-  reportedUser   User?   @relation("ReportsAgainstUser", fields: [reportedUserId], references: [id])
-
+  id                 String       @id @default(uuid())
+  createdAt          DateTime     @default(now())
+  reason             ReportReason
+  description        String?
+  reporterId         String
+  reporter           User         @relation("ReportsFiled", fields: [reporterId], references: [id], onDelete: Cascade)
+  reportedUserId     String?
+  reportedUser       User?        @relation("ReportsAgainstUser", fields: [reportedUserId], references: [id])
   reportedPropertyId String?
-  reportedProperty   Property? @relation("ReportsAgainstProperty", fields: [reportedPropertyId], references: [id], onDelete: Cascade)
-}
-
-enum ReportReason {
-  SPAM
-  SCAM
-  INAPPROPRIATE_BEHAVIOR
-  FAKE_PROFILE
-  MISLEADING_INFORMATION
-  OTHER
-}
-
-enum PropertyStatus {
-  DRAFT
-  ACTIVE
-  RESERVED
-}
-
-enum ListingType {
-  SALE
-  RENT
+  reportedProperty   Property?    @relation("ReportsAgainstProperty", fields: [reportedPropertyId], references: [id], onDelete: Cascade)
 }
