@@ -21,6 +21,7 @@ export default session(defineEventHandler(async (event) => {
 
     const where: any = {
       profileVisible: true,
+      accountType: "PRIVATE",
     };
 
     if (gender) where.gender = gender;
