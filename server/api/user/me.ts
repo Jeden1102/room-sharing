@@ -39,8 +39,9 @@ export default requireAuth(
           companyName: true,
           nip: true,
           website: true,
-          address: true
-        }
+          address: true,
+          bgImage: true,
+        },
       });
 
       return { success: true, user };
