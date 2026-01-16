@@ -1,7 +1,10 @@
 import prisma from "~~/lib/prisma";
 import { requireAuth } from "../../middleware/auth";
 
-function getSortedUserIds(userId1: string, userId2: string): { userAId: string, userBId: string } {
+function getSortedUserIds(
+  userId1: string,
+  userId2: string,
+): { userAId: string; userBId: string } {
   return userId1 < userId2
     ? { userAId: userId1, userBId: userId2 }
     : { userAId: userId2, userBId: userId1 };
@@ -43,18 +46,24 @@ export default requireAuth(
           userAId: userAId,
           userBId: userBId,
           participants: {
-            create: [
-              { userId: currentUserId },
-              { userId: targetId },
-            ],
+            create: [{ userId: currentUserId }, { userId: targetId }],
           },
         },
         include: {
           messages: true,
           participants: {
-             include: { user: { select: { id: true, firstName: true, profileImage: true } } }
-          }
-        }
+            include: {
+              user: {
+                select: {
+                  id: true,
+                  firstName: true,
+                  profileImage: true,
+                  companyName: true,
+                },
+              },
+            },
+          },
+        },
       });
     }
 

@@ -237,7 +237,12 @@
               />
               <div>
                 <div class="font-semibold">
-                  {{ property.owner.firstName }} {{ property.owner.lastName }}
+                  <template v-if="property.owner.accountType === 'BUSINESS'">
+                    {{ property.owner.companyName }}
+                  </template>
+                  <template v-else>
+                    {{ property.owner.firstName }} {{ property.owner.lastName }}
+                  </template>
                 </div>
                 <div class="text-sm">{{ property.phone }}</div>
                 <div class="text-sm">{{ property.email }}</div>

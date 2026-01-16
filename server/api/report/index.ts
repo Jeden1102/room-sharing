@@ -45,5 +45,5 @@ export default requireAuth(
         statusMessage: "api.report.failed",
       });
     }
-  })
+  }),
 );

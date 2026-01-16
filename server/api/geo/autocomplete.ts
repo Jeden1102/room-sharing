@@ -1,11 +1,11 @@
 type Prediction = {
   place_id: string;
   description: string;
-}
+};
 
 type Response = {
-  predictions: Prediction[]
-}
+  predictions: Prediction[];
+};
 
 export default eventHandler(async (event) => {
   const { q }: { q: string } = getQuery(event);

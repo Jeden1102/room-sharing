@@ -2,23 +2,23 @@ import prisma from "~~/lib/prisma";
 
 export default defineEventHandler(async () => {
   const topCities = await prisma.user.groupBy({
-    by: ['city'],
+    by: ["city"],
     where: {
-      city: { 
+      city: {
         not: null,
       },
       profileVisible: true,
     },
     _count: {
-      id: true
+      id: true,
     },
     orderBy: {
       _count: {
-        id: 'desc'
-      }
+        id: "desc",
+      },
     },
-    take: 7
+    take: 7,
   });
 
-  return topCities.map(c => c.city);
+  return topCities.map((c) => c.city);
 });

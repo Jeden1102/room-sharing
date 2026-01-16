@@ -9,7 +9,10 @@ export default requireAuth(
     const { id } = body;
 
     if (!id) {
-      throw createError({ statusCode: 400, message: "Property ID is required" });
+      throw createError({
+        statusCode: 400,
+        message: "Property ID is required",
+      });
     }
 
     const validation = propertyCreateSchema.safeParse(body);
@@ -67,19 +70,24 @@ export default requireAuth(
       "roomType",
       "email",
       "phone",
-      "mainImageIdx"
+      "mainImageIdx",
     ];
 
     const updateData: Record<string, any> = Object.fromEntries(
       Object.entries(body).filter(
-        ([key, value]) => allowedFields.includes(key) && value !== undefined
-      )
+        ([key, value]) => allowedFields.includes(key) && value !== undefined,
+      ),
     );
 
     const { city, district, street, buildingNumber } = updateData;
 
     if (city || street || buildingNumber) {
-      const geo = await geocodeAddress({ city, district, street, buildingNumber });
+      const geo = await geocodeAddress({
+        city,
+        district,
+        street,
+        buildingNumber,
+      });
       if (geo) {
         updateData.latitude = geo.lat;
         updateData.longitude = geo.lon;
@@ -103,5 +111,5 @@ export default requireAuth(
         message: "Error updating property",
       });
     }
-  })
+  }),
 );

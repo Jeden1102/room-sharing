@@ -8,7 +8,7 @@ export default requireAuth(
     const body = await readBody(event);
 
     const validation = newPasswordSchema.safeParse(body);
-  
+
     if (!validation.success) {
       throw createError({
         statusCode: 400,
@@ -38,7 +38,9 @@ export default requireAuth(
       }
 
       // If user doesn't have a password yet, no need to check password.
-      const isPasswordValid = !user.password ? true : await bcrypt.compare(oldPassword, user.password);
+      const isPasswordValid = !user.password
+        ? true
+        : await bcrypt.compare(oldPassword, user.password);
 
       if (!isPasswordValid) {
         throw createError({
@@ -55,11 +57,9 @@ export default requireAuth(
       });
 
       const cacheStorage = useStorage("cache:users:user");
-      await cacheStorage.removeItem(
-        `${userId}.json`.replaceAll("-", ""),
-      );
+      await cacheStorage.removeItem(`${userId}.json`.replaceAll("-", ""));
 
-      return { success: true};
+      return { success: true };
     } catch (error: any) {
       if (error.statusCode) throw error;
       throw createError({

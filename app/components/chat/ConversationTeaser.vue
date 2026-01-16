@@ -15,7 +15,7 @@
         '/images/user/avatar-placeholder.webp'
       "
       shape="circle"
-      class="mr-4"
+      class="mr-4 [&>img]:object-cover"
       size="large"
       :ariaLabel="conversation.otherUser?.firstName"
     />

@@ -13,11 +13,11 @@ export default requireAuth(
       });
 
       if (!property) {
-        throw createError({ 
-          statusCode: 404, 
-          statusMessage: "api.property.notFound" 
+        throw createError({
+          statusCode: 404,
+          statusMessage: "api.property.notFound",
         });
-    }
+      }
 
       await prisma.property.delete({
         where: { id },
@@ -26,9 +26,9 @@ export default requireAuth(
       const cacheStorage = useStorage("cache:properties:property");
       await cacheStorage.removeItem(`${id}.json`.replaceAll("-", ""));
 
-      return { 
-        success: true, 
-        message: "api.property.deleteSuccess" 
+      return {
+        success: true,
+        message: "api.property.deleteSuccess",
       };
     } catch (error) {
       console.error("Property delete error:", error);
@@ -37,5 +37,5 @@ export default requireAuth(
         statusMessage: "api.property.deleteFailed",
       });
     }
-  })
+  }),
 );

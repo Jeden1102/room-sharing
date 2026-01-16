@@ -23,7 +23,7 @@
           "
           class="rounded-xl bg-white/70 px-3 py-2 text-lg font-medium shadow-md backdrop-blur-sm"
         >
-          {{ otherUser.firstName }}
+          {{ otherUser.firstName || otherUser.companyName }}
         </NuxtLink>
         <div class="w-6"></div>
       </div>

@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const uris = [];
-  
+
   for (const file of files) {
     const blob = await put(file.filename || "file", file.data, {
       access: "public",

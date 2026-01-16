@@ -2,75 +2,82 @@ import prisma from "~~/lib/prisma";
 import { propertyCreateSchema } from "~/schemas/property";
 import { requireAuth } from "../middleware/auth";
 
-export default requireAuth(defineEventHandler(async (event) => {
-  const body = await readBody(event);
-  const userId = event.context.user.id;
+export default requireAuth(
+  defineEventHandler(async (event) => {
+    const body = await readBody(event);
+    const userId = event.context.user.id;
 
-  const validation = propertyCreateSchema.safeParse(body);
+    const validation = propertyCreateSchema.safeParse(body);
 
-  if (!validation.success) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: "api.login.validationFailed",
-    });
-  }
-
-  try {
-    const { city, district, street, buildingNumber } = body;
-
-    if (city || street || buildingNumber) {
-      const geo = await geocodeAddress({ city, district, street, buildingNumber });
-      if (geo) {
-        body.latitude = geo.lat;
-        body.longitude = geo.lon;
-      }
+    if (!validation.success) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: "api.login.validationFailed",
+      });
     }
 
-    const property = await prisma.property.create({
-      data: {
-        title: body.title,
-        description: body.description ?? null,
-        type: body.type,
-        listingType: body.listingType,
-        status: "ACTIVE",
-        price: body.price ?? 0,
-        deposit: body.deposit ?? null,
-        city: body.city,
-        district: body.district ?? null,
-        buildingNumber: body.buildingNumber ?? null,
-        street: body.street ?? null,
-        latitude: body.latitude ?? null,
-        longitude: body.longitude ?? null,
-        sizeM2: body.sizeM2 ?? null,
-        rooms: body.rooms ?? null,
-        floor: body.floor ?? null,
-        phone: body.phone ?? null,
-        email: body.email ?? null,
-        yearBuilt: body.yearBuilt ?? null,
-        furnished: body.furnished ?? false,
-        balcony: body.balcony ?? false,
-        elevator: body.elevator ?? false,
-        parking: body.parking ?? false,
-        petsAllowed: body.petsAllowed ?? false,
-        smokingAllowed: body.smokingAllowed ?? false,
-        internet: body.internet ?? false,
-        tv: body.tv ?? false,
-        washingMachine: body.washingMachine ?? false,
-        dishwasher: body.dishwasher ?? false,
-        airConditioning: body.airConditioning ?? false,
-        isShared: body.isShared ?? false,
-        images: body.images ?? [],
-        owner: { connect: { id: userId } },
-        mainImageIdx: 0,
-      },
-    });
+    try {
+      const { city, district, street, buildingNumber } = body;
 
-    return { success: true, property };
-  } catch (error) {
-    console.error("Error creating property", error);
-    throw createError({
-      statusCode: 500,
-      statusMessage: "There was an error creating the property",
-    });
-  }
-}));
+      if (city || street || buildingNumber) {
+        const geo = await geocodeAddress({
+          city,
+          district,
+          street,
+          buildingNumber,
+        });
+        if (geo) {
+          body.latitude = geo.lat;
+          body.longitude = geo.lon;
+        }
+      }
+
+      const property = await prisma.property.create({
+        data: {
+          title: body.title,
+          description: body.description ?? null,
+          type: body.type,
+          listingType: body.listingType,
+          status: "ACTIVE",
+          price: body.price ?? 0,
+          deposit: body.deposit ?? null,
+          city: body.city,
+          district: body.district ?? null,
+          buildingNumber: body.buildingNumber ?? null,
+          street: body.street ?? null,
+          latitude: body.latitude ?? null,
+          longitude: body.longitude ?? null,
+          sizeM2: body.sizeM2 ?? null,
+          rooms: body.rooms ?? null,
+          floor: body.floor ?? null,
+          phone: body.phone ?? null,
+          email: body.email ?? null,
+          yearBuilt: body.yearBuilt ?? null,
+          furnished: body.furnished ?? false,
+          balcony: body.balcony ?? false,
+          elevator: body.elevator ?? false,
+          parking: body.parking ?? false,
+          petsAllowed: body.petsAllowed ?? false,
+          smokingAllowed: body.smokingAllowed ?? false,
+          internet: body.internet ?? false,
+          tv: body.tv ?? false,
+          washingMachine: body.washingMachine ?? false,
+          dishwasher: body.dishwasher ?? false,
+          airConditioning: body.airConditioning ?? false,
+          isShared: body.isShared ?? false,
+          images: body.images ?? [],
+          owner: { connect: { id: userId } },
+          mainImageIdx: 0,
+        },
+      });
+
+      return { success: true, property };
+    } catch (error) {
+      console.error("Error creating property", error);
+      throw createError({
+        statusCode: 500,
+        statusMessage: "There was an error creating the property",
+      });
+    }
+  }),
+);

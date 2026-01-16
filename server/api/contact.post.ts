@@ -30,12 +30,15 @@ export default defineEventHandler(async (event) => {
   }
 });
 
-const sendContactMail = async (body: {
-  email: string;
-  name: string;
-  description: string;
-  reason: string;
-}, event: any) => {
+const sendContactMail = async (
+  body: {
+    email: string;
+    name: string;
+    description: string;
+    reason: string;
+  },
+  event: any,
+) => {
   try {
     const { sendMail } = useNodeMailer();
     const lang = getCookie(event, "i18n_redirected");
@@ -43,14 +46,16 @@ const sendContactMail = async (body: {
       pl: {
         prefix: "Nowa wiadomość od",
         greeting: "Dzień dobry",
-        confirmation: "Dziękujemy za konktakt, w razie pytania skontaktujemy się z Tobą",
+        confirmation:
+          "Dziękujemy za konktakt, w razie pytania skontaktujemy się z Tobą",
       },
       en: {
         prefix: "New message from",
         greeting: "Hello",
-        confirmation: "Thank you for your contact, we will contact you as soon as possible",
-      }
-    }
+        confirmation:
+          "Thank you for your contact, we will contact you as soon as possible",
+      },
+    };
 
     const contactHtml = await render(
       Contact,

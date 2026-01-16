@@ -48,9 +48,7 @@ export default defineEventHandler(async (event) => {
       },
     );
 
-
-    const streetsRaw = response.elements
-      .map((el) => el.tags?.name?.trim())
+    const streetsRaw = response.elements.map((el) => el.tags?.name?.trim());
 
     const seen = new Set<string>();
     const streets = streetsRaw.filter((s) => {
@@ -60,8 +58,7 @@ export default defineEventHandler(async (event) => {
       return true;
     });
 
-    streets.sort((a,b) => a.localeCompare(b));
-
+    streets.sort((a, b) => a.localeCompare(b));
 
     const result = { streets };
 

@@ -17,12 +17,12 @@ export default requireAuth(
       select: {
         conversationId: true,
         unreadCount: true,
-        
+
         conversation: {
           select: {
             id: true,
             updatedAt: true,
-            
+
             participants: {
               where: {
                 userId: { not: userId },
@@ -33,13 +33,14 @@ export default requireAuth(
                     id: true,
                     firstName: true,
                     profileImage: true,
+                    companyName: true,
                   },
                 },
               },
             },
-            
+
             messages: {
-              orderBy: { createdAt: 'desc' },
+              orderBy: { createdAt: "desc" },
               take: 1,
               select: {
                 content: true,
@@ -51,25 +52,28 @@ export default requireAuth(
       },
     });
 
-    let conversations = userParticipants.map(p => {
-        const otherParticipant = p.conversation.participants[0]?.user;
-        const lastMessage = p.conversation.messages[0];
+    let conversations = userParticipants.map((p) => {
+      const otherParticipant = p.conversation.participants[0]?.user;
+      const lastMessage = p.conversation.messages[0];
 
-        return {
-            conversationId: p.conversation.id,
-            unreadCount: p.unreadCount,
-            updatedAt: p.conversation.updatedAt,
-            
-            otherUser: {
-                id: otherParticipant?.id,
-                firstName: otherParticipant?.firstName,
-                profileImage: otherParticipant?.profileImage,
-            },
-            lastMessage: lastMessage ? {
-                content: lastMessage.content,
-                createdAt: lastMessage.createdAt,
-            } : null,
-        };
+      return {
+        conversationId: p.conversation.id,
+        unreadCount: p.unreadCount,
+        updatedAt: p.conversation.updatedAt,
+
+        otherUser: {
+          id: otherParticipant?.id,
+          firstName:
+            otherParticipant?.firstName || otherParticipant?.companyName,
+          profileImage: otherParticipant?.profileImage,
+        },
+        lastMessage: lastMessage
+          ? {
+              content: lastMessage.content,
+              createdAt: lastMessage.createdAt,
+            }
+          : null,
+      };
     });
 
     conversations.sort((a, b) => {

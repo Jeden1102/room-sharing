@@ -5,10 +5,6 @@ To fix:
 --- TESTY ---
 4. Manualne
 
-Feat:
-1. osoby-firmy:
-- blok kontaktowy osoby-firmy na podstronie nieruchomości. 
-- dostososowanie wiadomości
 
 2. Bloki do self linkowania:
     - "Szukaj usrów w innych miastach"

@@ -60,7 +60,7 @@ export default defineEventHandler(async (event) => {
       return true;
     });
 
-    districts.sort((a,b ) => a.localeCompare(b));
+    districts.sort((a, b) => a.localeCompare(b));
 
     const result = { districts };
 
