@@ -524,6 +524,7 @@
     "profileImage": "Zdjęcie profilowe",
     "yearsOld": "lat",
     "noData": "Brak danych",
+    "company": "Konto firmowe",
     "yes": "Tak",
     "no": "Nie",
     "infoCards": {
@@ -544,7 +545,19 @@
       },
       "pets": {
         "label": "Posiada zwierzęta"
+      },
+      "website": {
+        "label": "Witryna internetowa"
+      },
+      "nip": {
+        "label": "NIP"
+      },
+      "address": {
+        "label": "Adres"
       }
+    },
+    "sampleImplementations": {
+      "title": "Przykładowe realizacje"
     },
     "description": {
       "title": "Opis"

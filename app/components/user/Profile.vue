@@ -77,9 +77,18 @@
         <div class="space-y-6">
           <div class="card-base">
             <h1 class="text-lg font-semibold text-gray-600">
-              {{ user.firstName }} {{ user.lastName }}
+              <template v-if="!isBussinessAcount">
+                {{ user.firstName }} {{ user.lastName }}
+              </template>
+              <template v-else>
+                {{ user.companyName }}
+
+                <Badge class="ml-4">
+                  {{ $t("userProfile.company") }}
+                </Badge>
+              </template>
             </h1>
-            <p class="mt-2 text-sm text-gray-700">
+            <p class="mt-2 text-sm text-gray-700" v-if="!isBussinessAcount">
               <template v-if="user.age || user.city">
                 {{ user.age }} {{ $t("userProfile.yearsOld") }} •
                 {{ user.city }}
@@ -91,103 +100,154 @@
           </div>
 
           <div class="mt-4 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            <div class="card-base flex items-center gap-3">
-              <i class="pi pi-user text-primary-500 text-xl"></i>
-              <div>
-                <div class="text-xs text-gray-500">
-                  {{ $t("userProfile.infoCards.name.label") }}
-                </div>
-                <div class="font-medium" v-if="user.firstName && user.lastName">
-                  {{ user.firstName }} {{ user.lastName }}
-                </div>
-                <div class="font-medium" v-else>
-                  {{ $t("userProfile.noData") }}
-                </div>
-              </div>
-            </div>
-
-            <div class="card card-base flex items-center gap-3">
-              <i class="pi pi-briefcase text-primary-500 text-xl"></i>
-              <div>
-                <div class="text-xs text-gray-500">
-                  {{ $t("userProfile.infoCards.occupation.label") }}
-                </div>
-                <div class="font-medium">
-                  <span
-                    v-if="userOccupations.length > 0"
-                    v-for="occupation in userOccupations"
-                    :key="occupation?.value"
-                    >{{ occupation?.label }} <br
-                  /></span>
-                  <span v-else>{{ $t("userProfile.noData") }}</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="card-base flex items-center gap-3">
-              <i class="pi pi-wallet text-primary-500 text-xl"></i>
-              <div>
-                <div class="text-xs text-gray-500">
-                  {{ $t("userProfile.infoCards.budget.label") }}
-                </div>
-                <div class="font-medium">
-                  <span v-if="user.budgetMax">
-                    {{ formatCurrency(user.budgetMax) }}
-                  </span>
-                  <span v-else>{{ $t("userProfile.noData") }}</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="card-base flex items-center gap-3">
-              <i class="pi pi-map-marker text-primary-500 text-xl"></i>
-              <div>
-                <div class="text-xs text-gray-500">
-                  {{ $t("userProfile.infoCards.location.label") }}
-                </div>
-                <div class="font-medium" v-if="user.city">
-                  {{ user.city }}
-                  <span
-                    v-if="user.districts.length > 0"
-                    class="text-sm font-light"
+            <template v-if="!isBussinessAcount">
+              <div class="card-base flex items-center gap-3">
+                <i class="pi pi-user text-primary-500 text-xl"></i>
+                <div>
+                  <div class="text-xs text-gray-500">
+                    {{ $t("userProfile.infoCards.name.label") }}
+                  </div>
+                  <div
+                    class="font-medium"
+                    v-if="user.firstName && user.lastName"
                   >
-                    | {{ user.districts.join(", ") }}
-                  </span>
-                </div>
-                <div class="font-medium" v-else>
-                  {{ $t("userProfile.noData") }}
+                    {{ user.firstName }} {{ user.lastName }}
+                  </div>
+                  <div class="font-medium" v-else>
+                    {{ $t("userProfile.noData") }}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="card-base flex items-center gap-3">
-              <Icon name="cil:smoke" class="text-primary-500 text-xl" />
-              <div>
-                <div class="text-xs text-gray-500">
-                  {{ $t("userProfile.infoCards.smoker.label") }}
-                </div>
-                <div class="font-medium">
-                  {{
-                    user.smoker ? $t("userProfile.yes") : $t("userProfile.no")
-                  }}
+              <div class="card card-base flex items-center gap-3">
+                <i class="pi pi-briefcase text-primary-500 text-xl"></i>
+                <div>
+                  <div class="text-xs text-gray-500">
+                    {{ $t("userProfile.infoCards.occupation.label") }}
+                  </div>
+                  <div class="font-medium">
+                    <span
+                      v-if="userOccupations.length > 0"
+                      v-for="occupation in userOccupations"
+                      :key="occupation?.value"
+                      >{{ occupation?.label }} <br
+                    /></span>
+                    <span v-else>{{ $t("userProfile.noData") }}</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="card-base flex items-center gap-3">
-              <Icon
-                name="material-symbols:pets"
-                class="text-primary-500 text-xl"
-              />
-              <div>
-                <div class="text-xs text-gray-500">
-                  {{ $t("userProfile.infoCards.pets.label") }}
-                </div>
-                <div class="font-medium">
-                  {{ user.pets ? $t("userProfile.yes") : $t("userProfile.no") }}
+              <div class="card-base flex items-center gap-3">
+                <i class="pi pi-wallet text-primary-500 text-xl"></i>
+                <div>
+                  <div class="text-xs text-gray-500">
+                    {{ $t("userProfile.infoCards.budget.label") }}
+                  </div>
+                  <div class="font-medium">
+                    <span v-if="user.budgetMax">
+                      {{ formatCurrency(user.budgetMax) }}
+                    </span>
+                    <span v-else>{{ $t("userProfile.noData") }}</span>
+                  </div>
                 </div>
               </div>
-            </div>
+
+              <div class="card-base flex items-center gap-3">
+                <i class="pi pi-map-marker text-primary-500 text-xl"></i>
+                <div>
+                  <div class="text-xs text-gray-500">
+                    {{ $t("userProfile.infoCards.location.label") }}
+                  </div>
+                  <div class="font-medium" v-if="user.city">
+                    {{ user.city }}
+                    <span
+                      v-if="user.districts.length > 0"
+                      class="text-sm font-light"
+                    >
+                      | {{ user.districts.join(", ") }}
+                    </span>
+                  </div>
+                  <div class="font-medium" v-else>
+                    {{ $t("userProfile.noData") }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-base flex items-center gap-3">
+                <Icon name="cil:smoke" class="text-primary-500 text-xl" />
+                <div>
+                  <div class="text-xs text-gray-500">
+                    {{ $t("userProfile.infoCards.smoker.label") }}
+                  </div>
+                  <div class="font-medium">
+                    {{
+                      user.smoker ? $t("userProfile.yes") : $t("userProfile.no")
+                    }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-base flex items-center gap-3">
+                <Icon
+                  name="material-symbols:pets"
+                  class="text-primary-500 text-xl"
+                />
+                <div>
+                  <div class="text-xs text-gray-500">
+                    {{ $t("userProfile.infoCards.pets.label") }}
+                  </div>
+                  <div class="font-medium">
+                    {{
+                      user.pets ? $t("userProfile.yes") : $t("userProfile.no")
+                    }}
+                  </div>
+                </div>
+              </div>
+            </template>
+
+            <template v-else>
+              <div
+                class="card-base flex items-center gap-3"
+                v-if="user.website"
+              >
+                <i class="pi pi-globe text-primary-500 text-xl"></i>
+                <div>
+                  <div class="text-xs text-gray-500">
+                    {{ $t("userProfile.infoCards.website.label") }}
+                  </div>
+                  <a class="font-medium" :href="user.website">
+                    {{ user.website }}
+                  </a>
+                </div>
+              </div>
+
+              <div class="card-base flex items-center gap-3" v-if="user.nip">
+                <i class="pi pi-id-card text-primary-500 text-xl"></i>
+                <div>
+                  <div class="text-xs text-gray-500">
+                    {{ $t("userProfile.infoCards.nip.label") }}
+                  </div>
+                  <div class="font-medium">
+                    {{ user.nip }}
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="card-base flex items-center gap-3"
+                v-if="user.address"
+              >
+                <i class="pi pi-warehouse text-primary-500 text-xl"></i>
+                <div>
+                  <div class="text-xs text-gray-500">
+                    {{ $t("userProfile.infoCards.address.label") }}
+                  </div>
+                  <div class="font-medium">
+                    {{ user.address }}
+                  </div>
+                </div>
+              </div>
+            </template>
           </div>
 
           <AppCard
@@ -211,7 +271,7 @@
           </AppCard>
         </div>
 
-        <div class="flex flex-col gap-4 md:flex-row">
+        <div class="flex flex-col gap-4 md:flex-row" v-if="!isBussinessAcount">
           <AppCard
             :title="$t('userProfile.searchPreferences.title')"
             class="flex-1 space-y-3 text-sm text-gray-700"
@@ -267,7 +327,11 @@
         </div>
 
         <AppCard
-          :title="$t('userProfile.moodboard.title')"
+          :title="
+            isBussinessAcount
+              ? $t('userProfile.sampleImplementations.title')
+              : $t('userProfile.moodboard.title')
+          "
           v-if="user.moodboardImages.length > 0"
         >
           <div class="grid grid-cols-2 gap-2 md:grid-cols-3">
@@ -354,6 +418,10 @@ const user = ref(userProp);
 const isProfileImageVisible = ref(false);
 
 const taxonomies = useTaxonomies();
+
+const isBussinessAcount = computed(() => {
+  return user.value.accountType === "BUSINESS";
+});
 
 const userInterests = computed(() => {
   return user.value.interests

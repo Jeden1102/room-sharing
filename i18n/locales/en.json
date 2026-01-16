@@ -518,6 +518,7 @@
     "profileImage": "Profile Image",
     "yearsOld": "years old",
     "noData": "No data",
+    "company": "Company account",
     "yes": "Yes",
     "no": "No",
     "infoCards": {
@@ -538,7 +539,19 @@
       },
       "pets": {
         "label": "Has Pets"
+      },
+      "website": {
+        "label": "Website"
+      },
+      "nip": {
+        "label": "NIP"
+      },
+      "address": {
+        "label": "Address"
       }
+    },
+    "sampleImplementations": {
+      "title": "Sample implementations"
     },
     "description": {
       "title": "Description"
