@@ -61,27 +61,38 @@ export default defineNuxtConfig({
     "@nuxtjs/robots",
     "@nuxtjs/sitemap",
   ],
-  site: { 
-    url: process.env.NUXT_PUBLIC_APP_BASE_URI, 
-    name: 'Pokój z Wami' 
-  }, 
+  site: {
+    url: process.env.NUXT_PUBLIC_APP_BASE_URI,
+    name: "Pokój z Wami",
+  },
   sitemap: {
-    sources: ['/api/_sitemap-urls'],
-    autoI18n: true 
+    sources: ["/api/_sitemap-urls"],
+    autoI18n: true,
   },
   robots: {
-    disallow: [
-      '/api/*',
-      '/*?*',
-    ],
+    disallow: ["/api/*", "/*?*"],
   },
   routeRules: {
-    "/": { prerender: true, headers: { 'Cache-Control': 'public, max-age=300, must-revalidate' } },
-    "/en": { prerender: true, headers: { 'Cache-Control': 'public, max-age=300, must-revalidate' } },
-    "/oferty": { headers: { 'Cache-Control': 'public, max-age=60, must-revalidate' } },
-    "/wspollokatorzy": { headers: { 'Cache-Control': 'public, max-age=60, must-revalidate' } },
-    "/en/users": { headers: { 'Cache-Control': 'public, max-age=60, must-revalidate' } },
-    "/en/properties": { headers: { 'Cache-Control': 'public, max-age=60, must-revalidate' } },
+    "/": {
+      prerender: true,
+      headers: { "Cache-Control": "public, max-age=300, must-revalidate" },
+    },
+    "/en": {
+      prerender: true,
+      headers: { "Cache-Control": "public, max-age=300, must-revalidate" },
+    },
+    "/oferty": {
+      headers: { "Cache-Control": "public, max-age=60, must-revalidate" },
+    },
+    "/wspollokatorzy": {
+      headers: { "Cache-Control": "public, max-age=60, must-revalidate" },
+    },
+    "/en/users": {
+      headers: { "Cache-Control": "public, max-age=60, must-revalidate" },
+    },
+    "/en/properties": {
+      headers: { "Cache-Control": "public, max-age=60, must-revalidate" },
+    },
   },
   fileStorage: {
     mount: process.cwd() + "/public/uploads",
@@ -101,20 +112,18 @@ export default defineNuxtConfig({
           "https://*.stadiamaps.com",
           "*",
         ],
-        "script-src": [
-        "'self'",
-        "'unsafe-inline'",
-        "'unsafe-eval'",
-        "https:",
-      ],
+        "script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https:"],
       },
     },
     corsHandler: {
-      methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-      origin: [process.env.NUXT_PUBLIC_APP_PROD_URI || '', 'http://localhost:3000'],
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      origin: [
+        process.env.NUXT_PUBLIC_APP_PROD_URI || "",
+        "http://localhost:3000",
+      ],
       preflight: {
-        statusCode: 204
-      }
+        statusCode: 204,
+      },
     },
   },
   fonts: {
@@ -149,99 +158,123 @@ export default defineNuxtConfig({
       index: {
         en: "/",
         pl: "/",
+        uk: "/",
       },
       contact: {
         en: "/contact",
         pl: "/kontakt",
+        uk: "/kontakt",
       },
       "properties-filters": {
         en: "/properties/[...filters]",
         pl: "/oferty/[...filters]",
+        uk: "/propozvtsiyi/[...filters]",
       },
       faq: {
         en: "/faq",
         pl: "/faq",
+        uk: "/faq",
       },
       "new-property": {
         en: "/new-property",
         pl: "/dodaj-oferte",
+        uk: "/dodaty-propozytsiyu",
       },
       privacy: {
         en: "/privacy-policy",
         pl: "/polityka-prywatnosci",
+        uk: "/polityka-konfidentsiynosti",
       },
       terms: {
         en: "/terms",
         pl: "/regulamin",
+        uk: "/pravyla",
       },
       "auth-forgot-password": {
         en: "/auth/forgot-password",
         pl: "/auth/zapomnialem-hasla",
+        uk: "/auth/zabuv-parol",
       },
       "auth-login": {
         en: "/auth/login",
         pl: "/auth/logowanie",
+        uk: "/auth/uvid",
       },
       "auth-register": {
         en: "/auth/register",
         pl: "/auth/rejestracja",
+        uk: "/auth/reyestratsiya",
       },
       "auth-reset-password": {
         en: "/auth/reset-password",
         pl: "/auth/resetuj-haslo",
+        uk: "/auth/skynuty-parol",
       },
       "property-id": {
         en: "/property/[[id]]",
         pl: "/oferta/[[id]]",
+        uk: "/propozytsiya/[[id]]",
       },
       "property-id-edit": {
         en: "/property/[[id]]/edit",
         pl: "/oferta/[[id]]/edytuj",
+        uk: "/propozytsiya/[[id]]/redahuvaty",
       },
       "users-filters": {
         en: "/roommates/[...filters]",
         pl: "/wspollokatorzy/[...filters]",
+        uk: "/spivmeshkantsi/[...filters]",
       },
       "users-id": {
         en: "/roommate/[id]",
         pl: "/wspollokator/[id]",
+        uk: "/spivmeshkanets/[id]",
       },
       user: {
         en: "/user",
         pl: "/profil",
+        uk: "/profil",
       },
       "user-profile": {
         en: "/user/profile",
         pl: "/profil/dane",
+        uk: "/profil/dani",
       },
       "user-properties": {
         en: "/user/properties",
         pl: "/profil/moje-oferty",
+        uk: "/profil/moyi-propozytsiyi",
       },
       "user-settings": {
         en: "/user/settings",
         pl: "/profil/ustawienia",
+        uk: "/profil/nalashtuvannya",
       },
       "user-chat": {
         en: "/user/chat",
         pl: "/profil/czat",
+        uk: "/profil/chat",
       },
       "user-bookmarks": {
         en: "/user/bookmarks",
         pl: "/profil/ulubione",
+        uk: "/profil/obrano",
       },
       "user-bookmarks-properties": {
         en: "/user/bookmarks/properties",
         pl: "/profil/ulubione/oferty",
+        uk: "/profil/obrano/propozvtsiyi",
       },
       "user-bookmarks-users": {
         en: "/user/bookmarks/users",
         pl: "/profil/ulubione/wspollokatorzy",
+        uk: "/profil/obrano/spivmeshkantsi",
       },
     },
     locales: [
       { code: "en", name: "English", file: "en.json" },
       { code: "pl", name: "Polish", file: "pl.json" },
+      { code: "uk", name: "Українська", file: "uk.json" },
     ],
   },
   image: {
