@@ -5,20 +5,27 @@ A complex real estate marketplace platform, my most extensive private project. T
 Look at the [Live version](https://www.aipplied.app/) to see me in action.
 
 🛠️ Tech Stack & Tooling
-UI & UX:
-Styling: Tailwind CSS (Utility-first design)
+Frontend Ecosystem
 
-Components: Vue-shadcn (Radix Vue based, fully accessible)
+Core: Nuxt 4 (Vue.js) & TypeScript for robust, type-safe development.
 
-Globalization: Nuxt-i18n (Multi-language support)
+State & Logic: Pinia (Store management) & Nuxt-i18n (Internationalization).
 
-State & Data: > * Store: Pinia (Modular state management)
+Styling & UI: Tailwind CSS & PrimeVue (Highly customizable UI components).
 
-ORM: Prisma (Type-safe database operations)
+Backend & Database
 
-Deployment: > * Platform: Vercel (Edge Functions & CI/CD)
+ORM: Prisma (Type-safe database access).
 
-Workflow: Git / GitHub
+Infrastructure: VPS & Vercel for flexible hosting and deployment.
+
+DevOps & Workflow
+
+Build Tool: Vite (Ultra-fast HMR).
+
+Deployment: Cleavr (Server management) & CI/CD pipelines.
+
+Version Control: Git.
 
 ## Setup to work with the app:
 
