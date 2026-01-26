@@ -2,7 +2,7 @@
 
 A complex real estate marketplace platform, my most extensive private project. The system handles the full listing lifecycle: from advanced user panels and authentication to automated email notifications and Prisma database integration.
 
-Look at the [Live version](https://www.aipplied.app/) to see me in action.
+Look at the [Live version](https://eoecesuqvvttqp4l14844.cleavr.xyz/) to see me in action.
 
 🛠️ Tech Stack & Tooling
 Frontend Ecosystem
