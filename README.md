@@ -2,30 +2,23 @@
 
 A complex real estate marketplace platform, my most extensive private project. The system handles the full listing lifecycle: from advanced user panels and authentication to automated email notifications and Prisma database integration.
 
-Look at the [Live version](https://eoecesuqvvttqp4l14844.cleavr.xyz/) to see me in action.
+Look at the [Live version](https://www.aipplied.app/) to see me in action.
 
 🛠️ Tech Stack & Tooling
-Frontend Ecosystem
+UI & UX:
+Styling: Tailwind CSS (Utility-first design)
 
-Core: Nuxt 4 (Vue.js) & TypeScript for robust, type-safe development.
+Components: Vue-shadcn (Radix Vue based, fully accessible)
 
-State & Logic: Pinia (Store management) & Nuxt-i18n (Internationalization).
+Globalization: Nuxt-i18n (Multi-language support)
 
-Styling & UI: Tailwind CSS & PrimeVue (Highly customizable UI components).
+State & Data: > * Store: Pinia (Modular state management)
 
-Backend & Database
+ORM: Prisma (Type-safe database operations)
 
-ORM: Prisma (Type-safe database access).
+Deployment: > * Platform: Vercel (Edge Functions & CI/CD)
 
-Infrastructure: VPS & Vercel for flexible hosting and deployment.
-
-DevOps & Workflow
-
-Build Tool: Vite (Ultra-fast HMR).
-
-Deployment: Cleavr (Server management) & CI/CD pipelines.
-
-Version Control: Git.
+Workflow: Git / GitHub
 
 ## Setup to work with the app:
 
