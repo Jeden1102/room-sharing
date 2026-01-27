@@ -1,7 +1,16 @@
 <template>
   <div>
     <FloatLabel variant="on">
-      <InputText :id="id" :name fluid :type />
+      <Password
+        :id="id"
+        :name
+        fluid
+        :type
+        v-if="type === 'password'"
+        :feedback="false"
+        toggleMask
+      />
+      <InputText :id="id" :name fluid :type v-else />
       <label :for="id">{{ label }}</label>
     </FloatLabel>
     <Message

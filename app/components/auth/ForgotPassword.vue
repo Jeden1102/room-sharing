@@ -56,11 +56,13 @@ const resolver = ref(zodResolver(forgotPasswordSchema));
 const onFormSubmit = async ({
   valid,
   values,
+  reset,
 }: {
   valid: boolean;
   values: {
     email?: string;
   };
+  reset: () => void;
 }) => {
   if (!valid) {
     return;
@@ -73,6 +75,7 @@ const onFormSubmit = async ({
         email: values.email,
       },
     });
+    reset();
     formStatus.value.success = true;
     formStatus.value.message = t(res.message);
   } catch (error: any) {

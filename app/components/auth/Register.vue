@@ -89,6 +89,7 @@ const resolver = ref(zodResolver(registerSchema));
 const onFormSubmit = async ({
   valid,
   values,
+  reset,
 }: {
   valid: boolean;
   values: {
@@ -96,6 +97,7 @@ const onFormSubmit = async ({
     password?: string;
     passwordRepeat?: string;
   };
+  reset: () => void;
 }) => {
   if (!valid) {
     return;
@@ -112,6 +114,7 @@ const onFormSubmit = async ({
     });
     formStatus.value.success = true;
     formStatus.value.message = t(res.statusMessage);
+    reset();
   } catch (error: any) {
     formStatus.value.success = false;
     formStatus.value.message = t(error.data.statusMessage);

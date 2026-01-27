@@ -61,19 +61,21 @@ const resolver = ref(zodResolver(passwordResetSchema));
 const onFormSubmit = async ({
   valid,
   values,
+  reset,
 }: {
   valid: boolean;
   values: {
     password?: string;
     passwordRepeat?: string;
   };
+  reset: () => void;
 }) => {
   if (!valid) {
     return;
   }
   try {
     formStatus.value.isLoading = true;
-    const res: { message: string } = await $fetch("/api/auth/reset-password", {
+    const res: { message: string } = await $fetch("/api/reset-password", {
       method: "POST",
       body: {
         password: values.password,
@@ -81,6 +83,7 @@ const onFormSubmit = async ({
         code,
       },
     });
+    reset();
     formStatus.value.success = true;
     formStatus.value.message = t(res.message);
   } catch (error: any) {
