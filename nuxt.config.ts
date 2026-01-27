@@ -205,11 +205,6 @@ export default defineNuxtConfig({
         pl: "/auth/rejestracja",
         uk: "/auth/reyestratsiya",
       },
-      "auth-reset-password": {
-        en: "/auth/reset-password",
-        pl: "/auth/resetuj-haslo",
-        uk: "/auth/skynuty-parol",
-      },
       "property-id": {
         en: "/property/[[id]]",
         pl: "/oferta/[[id]]",
