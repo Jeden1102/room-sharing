@@ -200,6 +200,7 @@
     "title": "Which city will you live in?",
     "subtitle": "Discover our cities",
     "imageAlt": "City panorama",
+    "all": "All",
     "list": {
       "warszawa": "Warsaw",
       "krakow": "Krakow",
@@ -214,6 +215,11 @@
       "email": "kontakt{'@'}pokojzwami.pl",
       "phoneLinkTitle": "Call us",
       "emailLinkTitle": "Email us"
+    },
+    "forRoommates": {
+      "title": "For Roommates",
+      "label": "Roommate {city}",
+      "labelAll": "Find a roommate"
     },
     "social": {
       "tiktok": "Pokój Z Wami on TikTok",
@@ -716,8 +722,11 @@
     "propertyType": {
       "any": "Any",
       "apartment": "Apartment",
+      "apartmentPlurar": "Apartments",
       "house": "House",
+      "housePlurar": "Houses",
       "room": "Room",
+      "roomPlurar": "Rooms",
       "studio": "Studio",
       "loft": "Loft"
     },

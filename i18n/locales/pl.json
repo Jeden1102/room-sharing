@@ -201,6 +201,7 @@
     "title": "W jakim mieście będziesz mieszkać?",
     "subtitle": "Odkryj nasze miasta",
     "imageAlt": "Panorama miasta",
+    "all": "Wszystkie",
     "list": {
       "warszawa": "Warszawa",
       "krakow": "Kraków",
@@ -722,8 +723,11 @@
     "propertyType": {
       "any": "Dowolny",
       "apartment": "Mieszkanie",
+      "apartmentPlurar": "Mieszkania",
       "house": "Dom",
+      "housePlurar": "Domy",
       "room": "Pokój",
+      "roomPlurar": "Pokoje",
       "studio": "Studio",
       "loft": "Loft"
     },
