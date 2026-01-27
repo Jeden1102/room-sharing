@@ -1,8 +1,33 @@
-# Nuxt Minimal Starter
+# Room sharing app
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A complex real estate marketplace platform, my most extensive private project. The system handles the full listing lifecycle: from advanced user panels and authentication to automated email notifications and Prisma database integration.
 
-## Setup
+Look at the [Live version](https://eoecesuqvvttqp4l14844.cleavr.xyz/) to see me in action.
+
+🛠️ Tech Stack & Tooling
+Frontend Ecosystem
+
+Core: Nuxt 4 (Vue.js) & TypeScript for robust, type-safe development.
+
+State & Logic: Pinia (Store management) & Nuxt-i18n (Internationalization).
+
+Styling & UI: Tailwind CSS & PrimeVue (Highly customizable UI components).
+
+Backend & Database
+
+ORM: Prisma (Type-safe database access).
+
+Infrastructure: VPS & Vercel for flexible hosting and deployment.
+
+DevOps & Workflow
+
+Build Tool: Vite (Ultra-fast HMR).
+
+Deployment: Cleavr (Server management) & CI/CD pipelines.
+
+Version Control: Git.
+
+## Setup to work with the app:
 
 Make sure to install dependencies:
 
@@ -71,5 +96,3 @@ yarn preview
 # bun
 bun run preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
