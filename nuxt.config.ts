@@ -43,6 +43,7 @@ export default defineNuxtConfig({
       APP_PROD_URI: process.env.NUXT_PUBLIC_APP_PROD_URI,
     },
   },
+  sourcemap: false,
   modules: [
     "@nuxt/fonts",
     "@nuxt/image",
