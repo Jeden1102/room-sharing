@@ -1,46 +1,49 @@
 <template>
-  <LMap
-    style="height: 80vh"
-    :zoom="7"
-    :center="[51.91, 19.09]"
-    :use-global-leaflet="false"
-  >
-    <LTileLayer
-      url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
-      attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-      layer-type="base"
-      name="OpenStreetMap"
-    />
+  <ClientOnly>
+    <div
+      id="map"
+      ref="mapContainer"
+      style="height: 80vh"
+      class="overflow-hidden rounded-xl border border-gray-200"
+    ></div>
 
-    <LMarker
-      v-for="marker in items"
-      :key="marker.id"
-      :lat-lng="[marker.latitude, marker.longitude]"
-      @click="loadProperty(marker.id)"
-    >
-      <LIcon icon-url="/icons/marker.svg" :icon-size="[32, 32]" />
-      <LPopup>
-        <div v-if="propertyData && propertyData.id === marker.id">
-          <PropertyTeaser :property="propertyData" class="w-72" />
+    <div style="display: none">
+      <div ref="popupContainer">
+        <div v-if="activePropertyId">
+          <PropertyTeaser
+            v-if="propertyData"
+            :property="propertyData"
+            class="w-72"
+          />
+          <PropertyTeaserLoader v-else class="w-72" />
         </div>
-        <PropertyTeaserLoader v-else />
-      </LPopup>
-    </LMarker>
-  </LMap>
+      </div>
+    </div>
+  </ClientOnly>
 </template>
 
 <script lang="ts" setup>
 import type { PropertyWithOwner } from "@/components/property/types";
 
-defineProps<{
+import "leaflet/dist/leaflet.css";
+import "leaflet.markercluster/dist/MarkerCluster.css";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+
+const props = defineProps<{
   items: { latitude: number; longitude: number; id: string }[];
 }>();
 
+const { $L } = useNuxtApp();
+
+const mapContainer = ref<HTMLElement | null>(null);
+const mapInstance = ref<any>(null);
+const popupContainer = ref<HTMLElement | null>(null);
 const propertyData = ref<PropertyWithOwner | null>(null);
+const activePropertyId = ref<string | null>(null);
 
 async function loadProperty(id: string) {
+  activePropertyId.value = id;
   propertyData.value = null;
-
   try {
     const { data, error } = await useFetch<{
       success: boolean;
@@ -55,6 +58,53 @@ async function loadProperty(id: string) {
     console.error(err);
   }
 }
+
+onMounted(async () => {
+  await nextTick();
+
+  const L = $L as any;
+
+  if (!mapContainer.value || !L || typeof L.markerClusterGroup !== "function") {
+    return;
+  }
+
+  mapInstance.value = L.map(mapContainer.value, {
+    zoomAnimation: false,
+    fadeAnimation: false,
+  }).setView([51.91, 19.09], 6);
+
+  L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
+    { attribution: "&copy; OpenStreetMap contributors" },
+  ).addTo(mapInstance.value);
+
+  const customIcon = L.icon({
+    iconUrl: "/icons/marker.svg",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  });
+
+  const markerClusterGroup = L.markerClusterGroup({
+    showCoverageOnHover: false,
+    zoomToBoundsOnClick: true,
+    maxClusterRadius: 50,
+  });
+
+  props.items.forEach((item) => {
+    const marker = L.marker([item.latitude, item.longitude], {
+      icon: customIcon,
+    });
+    marker.on("click", () => loadProperty(item.id));
+    marker.bindPopup(() => popupContainer.value!, {
+      maxWidth: 300,
+      className: "custom-property-popup",
+    });
+    markerClusterGroup.addLayer(marker);
+  });
+
+  mapInstance.value.addLayer(markerClusterGroup);
+});
 </script>
 
 <style>
@@ -66,10 +116,11 @@ async function loadProperty(id: string) {
     border: 1px solid rgb(231, 231, 231);
     top: 8px;
     right: 8px;
+    display: grid;
+    place-content: center;
 
     span {
       display: block;
-      transform: translateY(-2px);
     }
   }
 }

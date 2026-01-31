@@ -67,7 +67,7 @@ const links = [
   },
   {
     icon: "pi pi-comments",
-    to: localePath("user-chat"),
+    to: localePath(data.value?.user ? "user-chat" : "auth-login"),
     title: "Chat",
     badgeValue: unreadCount,
   },

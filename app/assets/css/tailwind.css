@@ -99,4 +99,12 @@
       }
     }
   }
+
+  .marker-cluster {
+    @apply !bg-primary-500/30;
+
+    div {
+      @apply !bg-primary-500 text-white;
+    }
+  }
 }
