@@ -11,26 +11,23 @@
 
 <script setup lang="ts">
 const { locale } = useI18n();
-const {
-  cookiesEnabled,
-  cookiesEnabledIds,
-  isConsentGiven,
-  isModalActive,
-  moduleOptions,
-} = useCookieControl();
+const { cookiesEnabledIds } = useCookieControl();
+const { gtag } = useGtag();
 
 watch(
   () => cookiesEnabledIds.value,
-  (current, previous) => {
-    if (
-      !previous?.includes("google-analytics") &&
-      current?.includes("google-analytics")
-    ) {
-      // cookie with id `google-analytics` got added
-      //   window.location.reload();
+  (current) => {
+    console.log(current, "here");
+    if (current?.includes("google-analytics")) {
+      gtag("consent", "update", {
+        ad_user_data: "granted",
+        ad_personalization: "granted",
+        ad_storage: "granted",
+        analytics_storage: "granted",
+      });
     }
   },
-  { deep: true },
+  { deep: true, immediate: true },
 );
 </script>
 

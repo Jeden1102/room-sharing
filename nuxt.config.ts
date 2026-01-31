@@ -61,7 +61,24 @@ export default defineNuxtConfig({
     "nuxt-security",
     "@nuxtjs/robots",
     "@nuxtjs/sitemap",
+    "nuxt-gtag",
   ],
+  gtag: {
+    id: process.env.NUXT_PUBLIC_GTAG_ID,
+    initCommands: [
+      [
+        "consent",
+        "default",
+        {
+          ad_user_data: "denied",
+          ad_personalization: "denied",
+          ad_storage: "denied",
+          analytics_storage: "denied",
+          wait_for_update: 500,
+        },
+      ],
+    ],
+  },
   site: {
     url: process.env.NUXT_PUBLIC_APP_BASE_URI,
     name: "Pokój z Wami",
@@ -113,7 +130,21 @@ export default defineNuxtConfig({
           "https://*.stadiamaps.com",
           "*",
         ],
-        "script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https:"],
+        "script-src": [
+          "'self'",
+          "'unsafe-inline'",
+          "'unsafe-eval'",
+          "https:",
+          "'self'",
+          "'unsafe-inline'",
+          "https://www.googletagmanager.com",
+          "https://www.google-analytics.com",
+        ],
+        "connect-src": [
+          "'self'",
+          "https://www.google-analytics.com",
+          "https://region1.google-analytics.com",
+        ],
       },
     },
     corsHandler: {
