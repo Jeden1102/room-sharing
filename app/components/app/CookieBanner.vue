@@ -17,7 +17,6 @@ const { gtag } = useGtag();
 watch(
   () => cookiesEnabledIds.value,
   (current) => {
-    console.log(current, "here");
     if (current?.includes("google-analytics")) {
       gtag("consent", "update", {
         ad_user_data: "granted",

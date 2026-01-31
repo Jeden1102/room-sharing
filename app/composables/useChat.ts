@@ -35,8 +35,6 @@ export const useChat = (conversationId: string) => {
     try {
       const payload = JSON.parse(newValue);
 
-      console.log(payload);
-
       if (payload.type === "typing") {
         if (payload.userId !== userId) {
           isOtherUserTyping.value = payload.isTyping;
