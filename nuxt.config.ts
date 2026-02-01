@@ -99,7 +99,7 @@ export default defineNuxtConfig({
       prerender: true,
       headers: { "Cache-Control": "public, max-age=300, must-revalidate" },
     },
-    "/oferty": {
+    "/nieruchomosci": {
       headers: { "Cache-Control": "public, max-age=60, must-revalidate" },
     },
     "/wspollokatorzy": {
@@ -153,7 +153,7 @@ export default defineNuxtConfig({
       methods: ["GET", "POST", "PUT", "DELETE"],
       origin: [
         process.env.NUXT_PUBLIC_APP_PROD_URI || "",
-        "http://localhost:3000",
+        "http://localhost:8080",
       ],
       preflight: {
         statusCode: 204,
@@ -201,7 +201,7 @@ export default defineNuxtConfig({
       },
       "properties-filters": {
         en: "/properties/[...filters]",
-        pl: "/oferty/[...filters]",
+        pl: "/nieruchomosci/[...filters]",
         uk: "/propozvtsiyi/[...filters]",
       },
       faq: {
@@ -271,7 +271,7 @@ export default defineNuxtConfig({
       },
       "user-properties": {
         en: "/user/properties",
-        pl: "/profil/moje-oferty",
+        pl: "/profil/moje-nieruchomosci",
         uk: "/profil/moyi-propozytsiyi",
       },
       "user-settings": {
@@ -291,7 +291,7 @@ export default defineNuxtConfig({
       },
       "user-bookmarks-properties": {
         en: "/user/bookmarks/properties",
-        pl: "/profil/ulubione/oferty",
+        pl: "/profil/ulubione/nieruchomosci",
         uk: "/profil/obrano/propozvtsiyi",
       },
       "user-bookmarks-users": {

@@ -37,12 +37,14 @@ export default defineEventHandler(async () => {
     const listing = LISTING_TYPE_MAP[c.listingType] || slugify(c.listingType);
     const city = c.city;
 
-    if (type) dynamicCategories.add(`/oferty/${type}`);
-    if (type && listing) dynamicCategories.add(`/oferty/${type}/${listing}`);
+    if (type) dynamicCategories.add(`/nieruchomosci/${type}`);
+    if (type && listing)
+      dynamicCategories.add(`/nieruchomosci/${type}/${listing}`);
     if (type && listing && city)
-      dynamicCategories.add(`/oferty/${type}/${listing}/${city}`);
+      dynamicCategories.add(`/nieruchomosci/${type}/${listing}/${city}`);
 
-    if (city) dynamicCategories.add(`/oferty/wszystkie/wszystkie/${city}`);
+    if (city)
+      dynamicCategories.add(`/nieruchomosci/wszystkie/wszystkie/${city}`);
   });
 
   const categoryLinks = Array.from(dynamicCategories).map((loc) => ({

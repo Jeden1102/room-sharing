@@ -109,7 +109,7 @@
   },
   "nav": {
     "home": "Strona główna",
-    "properties": "Oferty",
+    "properties": "Nieruchomości",
     "users": "Współlokatorzy",
     "users-filters": "Współlokatorzy",
     "contact": "Kontakt",
@@ -919,7 +919,7 @@
     "sharing": {
       "q1": {
         "question": "Jak mogę znaleźć współlokatora?",
-        "answer": "W wyszukiwarce wybierz opcję \"Szukam współlokatora\" lub \"Chcę dołączyć do mieszkania\". Możesz filtrować oferty po wieku, płci, stylu życia i lokalizacji."
+        "answer": "W wyszukiwarce wybierz opcję \"Szukam współlokatora\" lub \"Chcę dołączyć do mieszkania\". Możesz filtrować nieruchomości po wieku, płci, stylu życia i lokalizacji."
       },
       "q2": {
         "question": "Czy mogę zobaczyć, ile wolnych miejsc jest w mieszkaniu?",
@@ -1013,7 +1013,7 @@
     "showAsMap": "Pokazuj jako mapę",
     "seo": {
   "block": {
-    "description": "Szukasz idealnego miejsca? Nasza platforma oferuje świetne oferty w lokalizacji {city}. Każde ogłoszenie jest starannie weryfikowane, aby zapewnić Ci bezpieczeństwo i komfort wyboru współlokatorów lub całych nieruchomości.",
+    "description": "Szukasz idealnego miejsca? Nasza platforma oferuje świetne nieruchomości w lokalizacji {city}. Każde ogłoszenie jest starannie weryfikowane, aby zapewnić Ci bezpieczeństwo i komfort wyboru współlokatorów lub całych nieruchomości.",
     "footer": "Aktualnie przeglądasz najnowsze ogłoszenia z rynku nieruchomości w mieście {city}."
   }
 }

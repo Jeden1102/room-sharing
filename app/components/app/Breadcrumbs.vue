@@ -45,7 +45,7 @@ const items = computed(() => {
     });
 
     const filters = (route.params.filters as string[]) || [];
-    let currentPath = "/oferty";
+    let currentPath = "/nieruchomosci";
 
     filters.forEach((filter) => {
       currentPath += `/${filter}`;
