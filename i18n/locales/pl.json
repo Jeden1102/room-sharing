@@ -415,6 +415,11 @@
     "editingProperty": "Edytujesz nieruchomość",
     "addingProperty": "Dodajesz nieruchomość",
     "addBasicInfo": "Dodaj podstawowe informacje o ofercie — możesz je edytować później.",
+    "subProperties": {
+      "legend": "Pokoje wewnątrz tej nieruchomości",
+      "selectPlaceholder": "Wybierz pokoje",
+      "hint": "Możesz połączyć swoje inne ogłoszenia z tą nieruchomością."
+    },
     "basicData": {
       "legend": "Dane podstawowe",
       "title": "Tytuł*",
@@ -490,6 +495,9 @@
       "parking": "Parking",
       "floor": "Piętro",
       "yearBuilt": "Rok budowy"
+    },
+    "medias": {
+      "title": "Media"
     },
     "amenities": {
       "title": "Udogodnienia",

@@ -14,6 +14,12 @@ export default session(
           await prisma.property.findUnique({
             where: { id },
             include: {
+              subProperties: {
+                select: {
+                  id: true,
+                  title: true,
+                },
+              },
               owner: {
                 select: {
                   id: true,

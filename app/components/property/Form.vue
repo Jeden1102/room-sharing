@@ -27,9 +27,10 @@
           }}
         </p>
         <Badge
+          v-if="initialValues?.status"
           :severity="initialValues?.status === 'ACTIVE' ? 'success' : 'warning'"
         >
-          {{ initialValues?.status || "draft" }}
+          {{ $t(`taxonomies.status.${initialValues?.status?.toLowerCase()}`) }}
         </Badge>
       </div>
       <p class="mt-1.5 text-sm font-light" v-if="!property">
@@ -94,6 +95,29 @@
         :rows="4"
         :form="$form"
       />
+    </Fieldset>
+
+    <Fieldset
+      v-if="$form.type?.value !== 'ROOM'"
+      :legend="$t('propertyForm.subProperties.legend')"
+    >
+      <div class="mt-2 flex flex-col gap-4">
+        <FloatLabel variant="on">
+          <MultiSelect
+            v-model="initialValues.subPropertyIds"
+            :options="userProperties"
+            optionLabel="title"
+            optionValue="id"
+            filter
+            :placeholder="$t('propertyForm.subProperties.selectPlaceholder')"
+            class="w-full"
+            display="chip"
+          />
+        </FloatLabel>
+        <p class="text-sm font-light">
+          {{ $t("propertyForm.subProperties.hint") }}
+        </p>
+      </div>
     </Fieldset>
 
     <Fieldset :legend="$t('propertyForm.location.legend')">
@@ -181,7 +205,7 @@
           :name="amenity.value"
           :label="amenity.label"
           :form="$form"
-          v-for="amenity in amenitiesOptions"
+          v-for="amenity in amenitiesOptions()"
           :key="amenity.value"
         />
       </div>
@@ -193,7 +217,7 @@
           :name="media.value"
           :label="media.label"
           :form="$form"
-          v-for="media in mediasOptions"
+          v-for="media in mediasOptions()"
           :key="media.value"
         />
       </div>
@@ -218,12 +242,6 @@
 
     <Fieldset :legend="$t('propertyForm.contact.legend')">
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <AtomsInput
-          name="ownerId"
-          :label="$t('propertyForm.contact.ownerId')"
-          :form="$form"
-          v-if="false"
-        />
         <AtomsInput
           name="phone"
           :label="$t('propertyForm.contact.phone')"
@@ -285,21 +303,30 @@ import { propertyCreateSchema } from "~/schemas/property";
 import type { Property } from "@prisma/client";
 
 const props = defineProps<{
-  property?: Property;
+  property?: Property & { subProperties?: Property[] };
 }>();
 
 const initialValues = ref<any>(
-  props.property || {
-    city: null,
-  },
+  props.property
+    ? {
+        ...props.property,
+        subPropertyIds: props.property.subProperties?.map((p) => p.id) || [],
+      }
+    : {
+        city: null,
+        subPropertyIds: [],
+      },
 );
 
 const formStatus = ref({ success: false, message: "", isLoading: false });
 const files = ref<File[]>([]);
 const imageUris = ref<string[]>(initialValues.value?.images || []);
+const userProperties = ref<{ id: string; title: string; type: string }[]>([]);
 
 const filteredCities = ref<string[]>([]);
 const availableDistricts = ref<string[]>([]);
+const filteredStreets = ref<string[]>([]);
+const availableStreets = ref<string[]>([]);
 
 const {
   propertyTypeOptions,
@@ -322,15 +349,27 @@ const listingOptions = computed(() => {
 });
 
 const isLoading = ref(false);
-
 const resolver = ref(zodResolver(propertyCreateSchema));
+
+const fetchUserProperties = async () => {
+  try {
+    const data = await $fetch<any>("/api/properties/my-childrens");
+    if (data?.properties) {
+      userProperties.value = data.properties.filter(
+        (p: any) => p.id !== props.property?.id,
+      );
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 const onFilesSelected = (newFiles: File[]) => {
   files.value = newFiles;
 };
 
 const onDeleteImage = async (uri: string) => {
   imageUris.value = imageUris.value.filter((i) => i !== uri);
-
   try {
     await $fetch("/api/files/delete", {
       method: "POST",
@@ -342,7 +381,6 @@ const onDeleteImage = async (uri: string) => {
         id: initialValues.value.id,
       },
     });
-
     initialValues.value.images = imageUris.value;
   } catch (e) {
     console.error(e);
@@ -353,22 +391,19 @@ const searchCity = async (event: { query: string }) => {
   const q = event.query?.trim();
   if (!q) return (filteredCities.value = []);
   try {
-    const res = await $fetch(
+    const res = await $fetch<any>(
       `/api/geo/autocomplete?q=${encodeURIComponent(q)}`,
     );
     filteredCities.value =
       res?.predictions?.map((p: any) => p.description.split(",")[0]) || [];
   } catch (e) {
-    console.error("autocomplete error", e);
+    console.error(e);
   }
 };
 
-const filteredStreets = ref<string[]>([]);
-
 const searchStreet = async (event: { query: string }) => {
   const q = event.query?.trim();
-  if (!q) return (filteredCities.value = []);
-
+  if (!q) return;
   filteredStreets.value = availableStreets.value.filter((s) =>
     s.toLowerCase().includes(q.toLowerCase()),
   );
@@ -377,8 +412,7 @@ const searchStreet = async (event: { query: string }) => {
 const fetchDistricts = async (city: string) => {
   if (!city) return;
   try {
-    availableDistricts.value = [];
-    const districtRes = await $fetch(
+    const districtRes = await $fetch<any>(
       `/api/geo/districts?city=${encodeURIComponent(city)}`,
     );
     availableDistricts.value = districtRes.districts || [];
@@ -387,39 +421,48 @@ const fetchDistricts = async (city: string) => {
   }
 };
 
-const availableStreets = ref<string[]>([]);
-
 const fetchStreets = async (city: string) => {
   if (!city) return;
   try {
-    availableStreets.value = [];
-    const streetsRes = await $fetch(
+    const streetsRes = await $fetch<any>(
       `/api/geo/streets?city=${encodeURIComponent(city)}`,
     );
     availableStreets.value = streetsRes.streets || [];
   } catch (e) {
-    console.error("fetch streets error", e);
+    console.error(e);
   }
 };
 
 watch(
   () => initialValues.value?.city,
-  async (newCity, oldCity) => {
-    if (!newCity) return;
-
+  async (newCity) => {
+    if (!newCity || newCity.length < 3) return;
     initialValues.value.district = null;
     initialValues.value.street = null;
-
-    if (newCity.length < 3) return;
-
     await Promise.all([fetchDistricts(newCity), fetchStreets(newCity)]);
   },
 );
 
+const route = useRoute();
+const router = useRouter();
+const localePath = useLocalePath();
+const { t } = useI18n();
+
 onMounted(async () => {
+  if (route.query.type) {
+    initialValues.value.type = route.query.type;
+  }
+
   if (props.property) {
-    await fetchDistricts(props.property.city);
-    await fetchStreets(props.property.city);
+    await Promise.all([
+      fetchDistricts(props.property.city),
+      fetchStreets(props.property.city),
+    ]);
+    if (props.property.type !== "ROOM") {
+      await fetchUserProperties();
+    }
+  } else {
+    await fetchUserProperties();
   }
 });
 
@@ -428,7 +471,7 @@ const apiUri = computed(() => {
 });
 
 const onSetAsPrimary = async (idx: number) => {
-  await useFetch(apiUri.value, {
+  await $fetch(apiUri.value, {
     method: "POST",
     body: {
       ...initialValues.value,
@@ -436,10 +479,6 @@ const onSetAsPrimary = async (idx: number) => {
     },
   });
 };
-
-const router = useRouter();
-const localePath = useLocalePath();
-const { t } = useI18n();
 
 const onFormSubmit = async ({ valid, values, reset }: any) => {
   if (!valid) return;
@@ -449,12 +488,8 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
   try {
     if (files.value?.length) {
       const fd = new FormData();
-
-      files.value.forEach((file) => {
-        fd.append("files", file);
-      });
-
-      const uploadRes = await $fetch("/api/files", {
+      files.value.forEach((file) => fd.append("files", file));
+      const uploadRes = await $fetch<string[]>("/api/files", {
         method: "POST",
         body: fd,
       });
@@ -462,7 +497,6 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
         ...(initialValues.value.images || []),
         ...(uploadRes || []),
       ];
-
       values.images = allImages;
       imageUris.value = allImages;
       files.value = [];
@@ -471,21 +505,18 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
     }
 
     values.id = props.property?.id;
+    values.subPropertyIds = initialValues.value.subPropertyIds;
 
     if (availableDistricts.value?.length === 0) {
       values.district = null;
     }
 
-    const { data, error }: { data: any; error: any } = await useFetch(
-      apiUri.value,
-      {
-        method: "POST",
-        body: values,
-      },
-    );
+    console.log("VALUES", values);
 
-    if (error.value)
-      throw new Error(error.value.message || t("propertyForm.response.error"));
+    const res = await $fetch<any>(apiUri.value, {
+      method: "POST",
+      body: values,
+    });
 
     formStatus.value.success = true;
     formStatus.value.message = props.property
@@ -494,16 +525,11 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
 
     if (!props.property) {
       reset();
-
-      const newProperty = data.value.property;
-
       router.push(
         localePath({
           name: "property-id",
-          params: {
-            id: slugify(newProperty.title),
-          },
-          query: { id: newProperty.id },
+          params: { id: slugify(res.property.title) },
+          query: { id: res.property.id },
         }),
       );
     }

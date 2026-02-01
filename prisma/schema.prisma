@@ -23,6 +23,14 @@ enum ListingType {
   RENT
 }
 
+enum PropertyType {
+  APARTMENT
+  HOUSE
+  ROOM
+  STUDIO
+  LOFT
+}
+
 enum ReportReason {
   SPAM
   SCAM
@@ -87,12 +95,12 @@ model User {
 }
 
 model Property {
-  id              String             @id @default(uuid())
-  createdAt       DateTime           @default(now())
-  updatedAt       DateTime           @updatedAt
-  type            String?
+  id              String         @id @default(uuid())
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  type            PropertyType?
   listingType     ListingType
-  status          PropertyStatus     @default(DRAFT)
+  status          PropertyStatus @default(DRAFT)
   title           String
   description     String?
   price           Int
@@ -111,24 +119,39 @@ model Property {
   balcony         Boolean?
   elevator        Boolean?
   parking         Boolean?
+  desk            Boolean?
   petsAllowed     Boolean?
+  separateKitchen Boolean?
+  garden          Boolean?
+  gymInBuilding   Boolean?
+  separateToilet  Boolean?
   smokingAllowed  Boolean?
   internet        Boolean?
   tv              Boolean?
+  gas             Boolean?
+  electricity     Boolean?
+  water           Boolean?
+  dryer           Boolean?
+  heatingCity     Boolean?
   washingMachine  Boolean?
   dishwasher      Boolean?
   airConditioning Boolean?
-  isShared        Boolean?           @default(false)
+  isShared        Boolean?       @default(false)
   roomType        String?
   images          String[]
   mainImageIdx    Int?
   ownerId         String
   email           String?
   phone           String?
-  owner           User               @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  roommates       User[]             @relation("PropertyRoommates")
-  bookmarkedBy    PropertyBookmark[] @relation("PropertyBookmarks")
-  reports         Report[]           @relation("ReportsAgainstProperty")
+
+  parentId      String?
+  parent        Property?  @relation("PropertyHierarchy", fields: [parentId], references: [id])
+  subProperties Property[] @relation("PropertyHierarchy")
+
+  owner        User               @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  roommates    User[]             @relation("PropertyRoommates")
+  bookmarkedBy PropertyBookmark[] @relation("PropertyBookmarks")
+  reports      Report[]           @relation("ReportsAgainstProperty")
 }
 
 model PropertyBookmark {

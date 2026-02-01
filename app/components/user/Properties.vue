@@ -36,6 +36,9 @@
         sortable
         style="width: 25%"
       >
+        <template #body="slotProps">
+          {{ $t(`taxonomies.status.${slotProps.data.status.toLowerCase()}`) }}
+        </template>
         <template #editor="{ data, field }">
           <AtomsDropdown
             name="listingType"

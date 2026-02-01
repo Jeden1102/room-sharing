@@ -1,4 +1,5 @@
 import { useI18n } from "vue-i18n";
+import { medias, amenityValues } from "~/constants/taxonomies";
 
 export const useTaxonomies = () => {
   const { t } = useI18n();
@@ -18,47 +19,23 @@ export const useTaxonomies = () => {
     { label: t("taxonomies.propertyType.loft"), value: "LOFT" },
   ];
 
-  const amenitiesOptions = [
-    { label: t("taxonomies.amenities.furnished"), value: "furnished" },
-    { label: t("taxonomies.amenities.balcony"), value: "balcony" },
-    { label: t("taxonomies.amenities.elevator"), value: "elevator" },
-    { label: t("taxonomies.amenities.parking"), value: "parking" },
-    {
-      label: t("taxonomies.amenities.washingMachine"),
-      value: "washingMachine",
-    },
-    { label: t("taxonomies.amenities.dryer"), value: "dryer" },
-    { label: t("taxonomies.amenities.dishwasher"), value: "dishwasher" },
-    {
-      label: t("taxonomies.amenities.airConditioning"),
-      value: "airConditioning",
-    },
-    { label: t("taxonomies.amenities.petsAllowed"), value: "petsAllowed" },
-    {
-      label: t("taxonomies.amenities.smokingAllowed"),
-      value: "smokingAllowed",
-    },
-    { label: t("taxonomies.amenities.desk"), value: "desk" },
-    {
-      label: t("taxonomies.amenities.separateKitchen"),
-      value: "separateKitchen",
-    },
-    {
-      label: t("taxonomies.amenities.separateToilet"),
-      value: "separateToilet",
-    },
-    { label: t("taxonomies.amenities.garden"), value: "garden" },
-    { label: t("taxonomies.amenities.gymInBuilding"), value: "gymInBuilding" },
-  ];
+  const amenitiesOptions = () => {
+    return amenityValues.map((amenity) => {
+      return {
+        label: t(`taxonomies.amenities.${amenity}`),
+        value: amenity,
+      };
+    });
+  };
 
-  const mediasOptions = [
-    { label: t("taxonomies.media.internet"), value: "internet" },
-    { label: t("taxonomies.media.tv"), value: "tv" },
-    { label: t("taxonomies.media.gas"), value: "gas" },
-    { label: t("taxonomies.media.electricity"), value: "electricity" },
-    { label: t("taxonomies.media.water"), value: "water" },
-    { label: t("taxonomies.media.heatingCity"), value: "heatingCity" },
-  ];
+  const mediasOptions = () => {
+    return medias.map((media) => {
+      return {
+        label: t(`taxonomies.media.${media}`),
+        value: media,
+      };
+    });
+  };
 
   const contactReasonOptions = [
     { label: t("taxonomies.contactReason.bug"), value: "bug" },
@@ -139,7 +116,6 @@ export const useTaxonomies = () => {
     { label: t("taxonomies.occupations.worker"), value: "worker" },
     { label: t("taxonomies.occupations.unemployed"), value: "unemployed" },
   ];
-
 
   const searchPreferencesOptions = [
     { label: t("taxonomies.searchPreferences.quiet"), value: "quiet" },

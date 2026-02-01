@@ -103,7 +103,10 @@ const services = [
       {
         labelKey: "services.rentAndLease.rent",
         link: data.value?.user
-          ? "new-property"
+          ? {
+              name: "new-property",
+              query: { type: "APARTMENT" },
+            }
           : {
               name: "auth-login",
               query: { feat: "properties" },
@@ -132,7 +135,10 @@ const services = [
       {
         labelKey: "services.shareAndColiving.offer",
         link: data.value?.user
-          ? "new-property"
+          ? {
+              name: "new-property",
+              query: { type: "ROOM" },
+            }
           : {
               name: "auth-login",
               query: { feat: "properties" },

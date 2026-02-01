@@ -165,34 +165,23 @@
           v-if="hasAnyAmenities"
         >
           <div class="mt-8 grid gap-4 md:grid-cols-2">
-            <PropertyAmenity
-              v-if="property.furnished"
-              :label="$t('propertyFull.amenities.furnished')"
-            />
-            <PropertyAmenity
-              v-if="property.balcony"
-              :label="$t('propertyFull.amenities.balcony')"
-            />
-            <PropertyAmenity
-              v-if="property.internet"
-              :label="$t('propertyFull.amenities.internet')"
-            />
-            <PropertyAmenity
-              v-if="property.tv"
-              :label="$t('propertyFull.amenities.tv')"
-            />
-            <PropertyAmenity
-              v-if="property.washingMachine"
-              :label="$t('propertyFull.amenities.washingMachine')"
-            />
-            <PropertyAmenity
-              v-if="property.dishwasher"
-              :label="$t('propertyFull.amenities.dishwasher')"
-            />
-            <PropertyAmenity
-              v-if="property.airConditioning"
-              :label="$t('propertyFull.amenities.airConditioning')"
-            />
+            <template v-for="amenity in amenityValues">
+              <PropertyAmenity
+                v-if="property[amenity]"
+                :label="$t(`taxonomies.amenities.${amenity}`)"
+              />
+            </template>
+          </div>
+        </AppCard>
+
+        <AppCard :title="$t('propertyFull.medias.title')" v-if="hasAnyMedias">
+          <div class="mt-8 grid gap-4 md:grid-cols-2">
+            <template v-for="media in medias">
+              <PropertyAmenity
+                v-if="property[media]"
+                :label="$t(`taxonomies.media.${media}`)"
+              />
+            </template>
           </div>
         </AppCard>
 
@@ -315,6 +304,8 @@
 </template>
 
 <script setup lang="ts">
+import { medias, amenityValues } from "~/constants/taxonomies";
+
 const { $lightgallery, $lgThumbnail, $lgZoom, $lgFullscreen } = useNuxtApp();
 
 const { mapTaxonomyLabel } = useTaxonomies();
@@ -348,15 +339,12 @@ const openGallery = (index: number) => {
   galleryInstance.openGallery(index);
 };
 
+const hasAnyMedias = computed(() => {
+  return medias.some((media) => props.property[media]);
+});
+
 const hasAnyAmenities = computed(() => {
-  return (
-    props.property.balcony ||
-    props.property.internet ||
-    props.property.tv ||
-    props.property.washingMachine ||
-    props.property.dishwasher ||
-    props.property.airConditioning
-  );
+  return amenityValues.some((amenity) => props.property[amenity]);
 });
 </script>
 

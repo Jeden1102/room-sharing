@@ -415,6 +415,11 @@
     "editingProperty": "Editing Property",
     "addingProperty": "Adding Property",
     "addBasicInfo": "Add basic info about the listing — you can edit it later.",
+    "subProperties": {
+      "legend": "Sub-properties",
+      "selectPlaceholder": "Select property",
+      "hint": "You can combine your own properties with others to create a complex listing."
+    },
     "basicData": {
       "legend": "Basic Details",
       "title": "Title*",
@@ -490,6 +495,9 @@
       "parking": "Parking",
       "floor": "Floor",
       "yearBuilt": "Year Built"
+    },
+    "medias": {
+      "title": "Medias"
     },
     "amenities": {
       "title": "Amenities",

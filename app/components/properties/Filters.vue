@@ -88,7 +88,7 @@
           id="amenities"
           name="amenities"
           v-model="filters.amenities"
-          :options="[...amenitiesOptions, ...mediasOptions]"
+          :options="[...amenitiesOptions(), ...mediasOptions()]"
           optionLabel="label"
           optionValue="value"
           :label="$t('propertiesFilters.amenities.label')"

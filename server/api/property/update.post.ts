@@ -1,12 +1,13 @@
 import prisma from "~~/lib/prisma";
 import { requireAuth } from "../middleware/auth";
 import { propertyCreateSchema } from "~/schemas/property";
+import { medias, amenityValues } from "~/constants/taxonomies";
 
 export default requireAuth(
   defineEventHandler(async (event) => {
     const userId = event.context.user.id;
     const body = await readBody(event);
-    const { id } = body;
+    const { id, subPropertyIds } = body;
 
     if (!id) {
       throw createError({
@@ -54,23 +55,15 @@ export default requireAuth(
       "rooms",
       "floor",
       "yearBuilt",
-      "furnished",
-      "balcony",
-      "elevator",
-      "parking",
-      "petsAllowed",
-      "smokingAllowed",
-      "internet",
-      "tv",
-      "washingMachine",
-      "dishwasher",
-      "airConditioning",
       "isShared",
       "images",
       "roomType",
       "email",
       "phone",
       "mainImageIdx",
+      "parentId",
+      ...amenityValues,
+      ...medias,
     ];
 
     const updateData: Record<string, any> = Object.fromEntries(
@@ -81,7 +74,7 @@ export default requireAuth(
 
     const { city, district, street, buildingNumber } = updateData;
 
-    if (city || street || buildingNumber) {
+    if (!updateData.parentId && (city || street || buildingNumber)) {
       const geo = await geocodeAddress({
         city,
         district,
@@ -95,6 +88,22 @@ export default requireAuth(
     }
 
     try {
+      if (updateData.parentId) {
+        const pId = updateData.parentId;
+        delete updateData.parentId;
+        updateData.parent = { connect: { id: pId } };
+      } else if (updateData.parentId === null) {
+        delete updateData.parentId;
+        updateData.parent = { disconnect: true };
+      }
+
+      if (subPropertyIds && Array.isArray(subPropertyIds)) {
+        updateData.subProperties = {
+          set: subPropertyIds.map((sid: string) => ({ id: sid })),
+        };
+      }
+
+      console.log("UPDATE DATA", updateData);
       const updatedProperty = await prisma.property.update({
         where: { id },
         data: updateData,
