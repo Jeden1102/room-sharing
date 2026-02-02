@@ -103,7 +103,6 @@ export default requireAuth(
         };
       }
 
-      console.log("UPDATE DATA", updateData);
       const updatedProperty = await prisma.property.update({
         where: { id },
         data: updateData,

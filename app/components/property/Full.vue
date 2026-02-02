@@ -185,6 +185,22 @@
           </div>
         </AppCard>
 
+        <AppCard
+          :title="$t('propertyFull.details.rooms')"
+          v-if="property.subProperties?.length > 0"
+        >
+          <div class="flex flex-col gap-4">
+            <PropertyTeaser
+              v-for="sub in property.subProperties"
+              :property="sub"
+              layout="horizontal"
+              variant="small"
+              :no-carousel="true"
+              :key="sub.id"
+            />
+          </div>
+        </AppCard>
+
         <Divider />
 
         <p class="text-sm text-gray-600">

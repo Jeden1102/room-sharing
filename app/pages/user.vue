@@ -53,7 +53,7 @@ const userMenuItems = ref([
   },
   {
     label: "My properties",
-    icon: "pi pi-list",
+    icon: "pi pi-building",
     command: localePath("user-properties"),
   },
   {

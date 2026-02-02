@@ -348,7 +348,6 @@
 <script setup lang="ts">
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { userProfileSchema } from "~/schemas/userProfileSchema";
-import imageCompression from "browser-image-compression";
 
 const formStatus = ref({ success: false, message: "", isLoading: false });
 const initialValues = ref<any>(null);
@@ -446,16 +445,7 @@ const onFormSubmit = async (event: any) => {
     if (files.value && files.value.length) {
       const formDataObj = new FormData();
       for (const file of files.value) {
-        try {
-          const compressedFile = await imageCompression(file, {
-            maxSizeMB: 1,
-            maxWidthOrHeight: 1920,
-            useWebWorker: true,
-          });
-          formDataObj.append("moodboardImages", compressedFile);
-        } catch (e) {
-          formDataObj.append("moodboardImages", file);
-        }
+        formDataObj.append("moodboardImages", file);
       }
       const response = await $fetch("/api/files", {
         method: "POST",

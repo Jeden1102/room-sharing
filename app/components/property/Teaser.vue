@@ -1,9 +1,12 @@
 <template>
   <div
     class="flex h-full flex-col gap-2 overflow-hidden rounded-2xl bg-white shadow-md"
+    :class="{
+      'md:flex-row': layout === 'horizontal',
+    }"
     v-if="property"
   >
-    <div class="relative">
+    <div class="relative" :class="{ 'md:w-80': layout === 'horizontal' }">
       <img
         v-if="noCarousel"
         :src="carouselImages[0]"
@@ -51,7 +54,10 @@
     </div>
 
     <!-- Content -->
-    <div class="mt-auto space-y-3 p-4 pt-0">
+    <div
+      class="mt-auto w-full space-y-3 p-4 pt-0"
+      :class="{ 'md:my-auto': layout === 'horizontal' }"
+    >
       <div>
         <h3 class="line-clamp-1 text-lg font-semibold">
           <NuxtLink :to="uri" class="text-gray-800!">
@@ -105,6 +111,7 @@ const props = defineProps<{
   property: PropertyWithOwner;
   noCarousel?: boolean;
   variant?: "small" | "large";
+  layout?: "vertical" | "horizontal";
 }>();
 
 const { mapTaxonomyLabel } = useTaxonomies();

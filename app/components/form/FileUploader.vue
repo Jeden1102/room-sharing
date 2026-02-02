@@ -108,10 +108,11 @@ watch(
 );
 
 const compressOptions = {
-  maxSizeMB: 1,
-  maxWidthOrHeight: 1920,
+  maxSizeMB: 0.8,
+  maxWidthOrHeight: 1440,
   useWebWorker: true,
-  fileType: "image/webp",
+  initialQuality: 0.7,
+  alwaysKeepAspectRatio: true,
 };
 
 const onFileSelect = async (event: any) => {

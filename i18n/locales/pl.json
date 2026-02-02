@@ -418,7 +418,7 @@
     "subProperties": {
       "legend": "Pokoje wewnątrz tej nieruchomości",
       "selectPlaceholder": "Wybierz pokoje",
-      "hint": "Możesz połączyć swoje inne ogłoszenia z tą nieruchomością."
+      "hint": "Możesz połączyć swoje inne pokoje z tą nieruchomością."
     },
     "basicData": {
       "legend": "Dane podstawowe",
@@ -426,7 +426,7 @@
       "propertyType": "Typ nieruchomości*",
       "listingType": "Na wynajem/Na sprzedaż*",
       "price": "Cena (PLN)*",
-      "priceHint": "Jeśli mieszkanie jest dzielone, podaj cenę najtańszego pokoju.",
+      "priceHint": "Jeśli nieruchomość jest dzielona, podaj cenę najtańszego pokoju.",
       "deposit": "Kaucja (PLN)",
       "description": "Opis*"
     },
@@ -1148,5 +1148,8 @@
       "placeholder": "Wiadomość",
       "typing": "pisze..."
     }
+  },
+  "ui": {
+    "noResultsFound": "Brak wyników"
   }
 }

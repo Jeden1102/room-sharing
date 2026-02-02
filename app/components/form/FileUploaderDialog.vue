@@ -20,6 +20,7 @@
         @delete="onDelete"
         :maxFiles="1"
         :canSetPrimary="false"
+        :maxFileSize="5500000"
       />
 
       <template #footer>
@@ -43,8 +44,6 @@
 </template>
 
 <script setup lang="ts">
-import imageCompression from "browser-image-compression";
-
 const props = defineProps<{
   modelValue: string | null;
   id: string;
@@ -75,20 +74,6 @@ const onFilesSelected = (newFiles: File[]) => {
   files.value = newFiles;
 };
 
-const compressImage = async (file: File) => {
-  try {
-    const options = {
-      maxSizeMB: 1,
-      maxWidthOrHeight: 1920,
-      useWebWorker: true,
-    };
-    return await imageCompression(file, options);
-  } catch (e) {
-    console.warn("Image compression failed, sending original file", e);
-    return file;
-  }
-};
-
 const onCancel = () => {
   files.value = [];
   internalValue.value = props.modelValue ? [props.modelValue] : [];
@@ -104,10 +89,8 @@ const onSave = async () => {
   try {
     isLoading.value = true;
 
-    const compressedFile = await compressImage(files.value[0] as File);
-
     const formData = new FormData();
-    formData.append(props.field, compressedFile);
+    formData.append(props.field, files.value[0] as File);
 
     const response = await $fetch<string[]>("/api/files", {
       method: "POST",

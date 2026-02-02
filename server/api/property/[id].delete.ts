@@ -1,5 +1,6 @@
 import prisma from "~~/lib/prisma";
 import { requireAuth } from "../middleware/auth";
+import { del } from "@vercel/blob";
 
 export default requireAuth(
   defineEventHandler(async (event) => {
@@ -9,7 +10,7 @@ export default requireAuth(
     try {
       const property = await prisma.property.findUnique({
         where: { id, ownerId: userId },
-        select: { id: true, ownerId: true },
+        select: { id: true, ownerId: true, images: true },
       });
 
       if (!property) {
@@ -18,6 +19,12 @@ export default requireAuth(
           statusMessage: "api.property.notFound",
         });
       }
+
+      property.images.forEach((uri) => {
+        if (uri) {
+          del(uri);
+        }
+      });
 
       await prisma.property.delete({
         where: { id },

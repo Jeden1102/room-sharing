@@ -81,6 +81,9 @@
             :label="$t('propertyForm.basicData.price')"
             :form="$form"
           />
+          <span class="text-xs text-gray-500">
+            {{ $t("propertyForm.basicData.priceHint") }}
+          </span>
         </div>
         <AtomsNumber
           name="deposit"
@@ -101,22 +104,25 @@
       v-if="$form.type?.value !== 'ROOM'"
       :legend="$t('propertyForm.subProperties.legend')"
     >
-      <div class="mt-2 flex flex-col gap-4">
-        <FloatLabel variant="on">
-          <MultiSelect
-            v-model="initialValues.subPropertyIds"
-            :options="userProperties"
-            optionLabel="title"
-            optionValue="id"
-            filter
-            :placeholder="$t('propertyForm.subProperties.selectPlaceholder')"
-            class="w-full"
-            display="chip"
-          />
-        </FloatLabel>
-        <p class="text-sm font-light">
-          {{ $t("propertyForm.subProperties.hint") }}
-        </p>
+      <div class="grid md:grid-cols-2">
+        <div class="mt-2 flex flex-col gap-4">
+          <FloatLabel variant="on">
+            <MultiSelect
+              v-model="initialValues.subPropertyIds"
+              :options="userProperties"
+              optionLabel="title"
+              optionValue="id"
+              filter
+              :placeholder="$t('propertyForm.subProperties.selectPlaceholder')"
+              class="w-full"
+              display="chip"
+              :emptyFilterMessage="$t('ui.noResultsFound')"
+            />
+          </FloatLabel>
+          <p class="text-sm font-light">
+            {{ $t("propertyForm.subProperties.hint") }}
+          </p>
+        </div>
       </div>
     </Fieldset>
 
@@ -511,7 +517,9 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
       values.district = null;
     }
 
-    console.log("VALUES", values);
+    if (!values.mainImageIdx) {
+      values.mainImageIdx = 0;
+    }
 
     const res = await $fetch<any>(apiUri.value, {
       method: "POST",

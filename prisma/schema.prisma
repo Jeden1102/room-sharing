@@ -29,6 +29,7 @@ enum PropertyType {
   ROOM
   STUDIO
   LOFT
+  DORM
 }
 
 enum ReportReason {

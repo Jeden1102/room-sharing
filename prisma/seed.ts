@@ -1,4 +1,9 @@
-import { PrismaClient, ListingType, PropertyStatus } from "@prisma/client";
+import {
+  PrismaClient,
+  ListingType,
+  PropertyStatus,
+  PropertyType,
+} from "@prisma/client";
 import { faker } from "@faker-js/faker";
 
 const prisma = new PrismaClient();
@@ -106,10 +111,12 @@ const generateProperty = (ownerId: string) => {
     ]),
 
     type: faker.helpers.arrayElement([
-      "APARTMENT",
-      "HOUSE",
-      "ROOM",
-      "STUDIO",
+      PropertyType.APARTMENT,
+      PropertyType.HOUSE,
+      PropertyType.ROOM,
+      PropertyType.STUDIO,
+      PropertyType.LOFT,
+      PropertyType.DORM,
     ]),
 
     status: faker.helpers.arrayElement([
@@ -139,8 +146,8 @@ const generateProperty = (ownerId: string) => {
     isShared: faker.datatype.boolean(),
     roomType: faker.helpers.arrayElement(["single", "double", "shared"]),
 
-    images: Array.from({ length: faker.number.int({ min: 2, max: 6 }) }).map(() =>
-      faker.image.urlLoremFlickr({ category: "apartment" })
+    images: Array.from({ length: faker.number.int({ min: 2, max: 6 }) }).map(
+      () => faker.image.urlLoremFlickr({ category: "apartment" }),
     ),
     mainImageIdx: 0,
 
