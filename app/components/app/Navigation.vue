@@ -161,14 +161,39 @@ const toggleUserMenu = (event: Event) => {
   userMenu.value.toggle(event);
 };
 
-const userMenuItems = computed(() => [
+const userMenuItems = ref([
   {
-    label: t("nav.profile"),
+    label: () => t("nav.profile"),
     icon: "pi pi-user",
     command: () => navigateTo(localePath("user-profile")),
   },
   {
-    label: t("nav.logout"),
+    label: () => t("nav.myProperties"),
+    icon: "pi pi-building",
+    command: () => navigateTo(localePath("user-properties")),
+  },
+  {
+    label: () => t("nav.bookmarks"),
+    icon: "pi pi-bookmark",
+    command: () => navigateTo(localePath("user-bookmarks-properties")),
+  },
+  {
+    label: () => t("nav.chat"),
+    icon: "pi pi-comment",
+    command: () => navigateTo(localePath("user-chat")),
+  },
+  {
+    label: () => t("nav.userSettings"),
+    icon: "pi pi-user-edit",
+    command: () => navigateTo(localePath("user-settings")),
+  },
+  {
+    label: () => t("nav.userSecurity"),
+    icon: "pi pi-cog",
+    command: () => navigateTo(localePath("user-security")),
+  },
+  {
+    label: () => t("nav.logout"),
     icon: "pi pi-sign-out",
     command: () => signOut(),
   },

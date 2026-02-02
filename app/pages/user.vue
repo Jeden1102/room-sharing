@@ -34,7 +34,9 @@
 const route = useRoute();
 const localePath = useLocalePath();
 
-const isChatPage = computed(() => route.name?.includes("user-chat-id"));
+const isChatPage = computed(() =>
+  (route.name as string)?.includes("user-chat-id"),
+);
 
 definePageMeta({
   auth: true,
