@@ -36,7 +36,10 @@
               }}</span>
             </NuxtLink>
           </h3>
-          <p class="mt-2 flex items-center gap-1 text-xs text-gray-500">
+          <p
+            class="mt-2 flex items-center gap-1 text-xs text-gray-500"
+            v-if="user.city"
+          >
             <i class="pi pi-map-marker text-gray-600"></i>
             {{ user.city
             }}<span v-if="user.districts?.length">

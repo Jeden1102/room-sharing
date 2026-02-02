@@ -68,7 +68,6 @@ export const useTaxonomies = () => {
   ];
 
   const genderOptions = [
-    { label: t("taxonomies.gender.any"), value: null },
     { label: t("taxonomies.gender.male"), value: "male" },
     { label: t("taxonomies.gender.female"), value: "female" },
     { label: t("taxonomies.gender.others"), value: "others" },

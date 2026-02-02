@@ -624,14 +624,14 @@
       "label": "Widoczność profilu",
       "visible": "Widoczny",
       "hidden": "Ukryty",
-      "hint": "Twój profil jest widoczny na liście użytkowników tylko wtedy, gdy wypełnione są pola: Imię, Nazwisko, Wiek, Płeć i Miasto."
+      "hint": "Twój profil jest widoczny na liście użytkowników tylko wtedy, gdy wypełnione są pola: Imię, Nazwisko, Wiek oraz Płeć."
     },
     "general": {
       "legend": "Ogólne",
-      "firstName": "Imię",
-      "lastName": "Nazwisko",
-      "age": "Wiek",
-      "gender": "Płeć",
+      "firstName": "Imię*",
+      "lastName": "Nazwisko*",
+      "age": "Wiek*",
+      "gender": "Płeć*",
       "interests": "Zainteresowania",
       "interestsPlaceholder": "Wybierz zainteresowania",
       "occupation": "Zawód",
@@ -787,10 +787,9 @@
       "other": "Inne"
     },
     "gender": {
-      "any": "Dowolna",
       "male": "Mężczyzna",
       "female": "Kobieta",
-      "others": "Inne"
+      "others": "Inna"
     },
     "propertiesSort": {
       "newest": "Najnowsze",

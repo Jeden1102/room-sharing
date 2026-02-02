@@ -90,8 +90,11 @@
             </h1>
             <p class="mt-2 text-sm text-gray-700" v-if="!isBussinessAcount">
               <template v-if="user.age || user.city">
-                {{ user.age }} {{ $t("userProfile.yearsOld") }} •
-                {{ user.city }}
+                {{ user.age }} {{ $t("userProfile.yearsOld") }}
+                <template v-if="user.city">
+                  •
+                  {{ user.city }}
+                </template>
               </template>
               <template v-if="user.districts.length > 0">
                 | {{ user.districts.join(", ") }}

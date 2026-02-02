@@ -2,6 +2,11 @@
 5. back-upy bazy
 - listing + mapa akademików
 
+- blokowanie usera do wysyłania wiadomości gdy nie ma danych - po przejsciu w chat po prostu kafelek z info
+- na liście współlokatorów info, ze nie ma nas tam -> CTA do uzupełnienia danych
+- pod listingiem - CTA dodaj ogloszenie
+- listingi - min/max pokoj, min/max powierzchnia
+
 ____ NICE TO HAVE ____
 - Sticky + powrót link na nieruchomości / userze
 - Maile o nowych wiadomościach

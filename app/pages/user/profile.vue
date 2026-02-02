@@ -15,7 +15,6 @@ usePageSeo({
 
 const { data: userData, pending } = await useFetch("/api/user/me", {
   lazy: true,
-  cache: "no-cache",
 });
 const user = computed(() => userData.value?.user || null);
 </script>

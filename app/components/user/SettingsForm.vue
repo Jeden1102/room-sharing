@@ -465,7 +465,7 @@ const onFormSubmit = async (event: any) => {
 
     const obligatoryFields = isBusiness
       ? []
-      : ["firstName", "lastName", "age", "gender", "city"];
+      : ["firstName", "lastName", "age", "gender"];
 
     values.profileVisible = obligatoryFields.every((field) => values[field]);
 

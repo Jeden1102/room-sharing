@@ -626,14 +626,14 @@
       "label": "Profile Visibility",
       "visible": "Visible",
       "hidden": "Hidden",
-      "hint": "Your profile is visible in the user list only if Name, Last Name, Age, Gender, and City are filled."
+      "hint": "Your profile is visible in the user list only if Name, Last Name, Age, and Gender are filled."
     },
     "general": {
       "legend": "General",
-      "firstName": "First Name",
-      "lastName": "Last Name",
-      "age": "Age",
-      "gender": "Gender",
+      "firstName": "First Name*",
+      "lastName": "Last Name*",
+      "age": "Age*",
+      "gender": "Gender*",
       "interests": "Interests",
       "interestsPlaceholder": "Select interests",
       "occupation": "Occupation",
