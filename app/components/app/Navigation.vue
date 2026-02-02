@@ -49,13 +49,13 @@
           <NuxtLink class="nav-link" :to="$localePath('contact')">
             {{ $t("nav.contact") }}
           </NuxtLink>
-          <NuxtLink
-            class="nav-link lg:hidden"
+          <button
+            class="nav-link text-left lg:hidden"
             v-if="data?.user"
             @click="() => signOut()"
           >
             {{ $t("nav.logout") }}
-          </NuxtLink>
+          </button>
           <AppLanguageSwitcher class="mt-auto lg:hidden" />
         </div>
 

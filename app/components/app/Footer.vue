@@ -36,7 +36,11 @@
           </li>
         </ul>
         <div class="mt-4 flex space-x-4 text-gray-500">
-          <a href="#" class="hover:text-primary-400 transition-colors">
+          <a
+            href="#"
+            class="hover:text-primary-400 transition-colors"
+            :title="$t('footer.social.tiktok')"
+          >
             <i class="pi pi-tiktok"></i>
           </a>
         </div>

@@ -5,6 +5,7 @@ export const PROPERTY_TYPE_MAP: Record<string, string> = {
   ROOM: "pokoj",
   STUDIO: "kawalerka",
   LOFT: "loft",
+  DORM: "akademik",
 };
 
 export const LISTING_TYPE_MAP: Record<string, string> = {
@@ -13,7 +14,7 @@ export const LISTING_TYPE_MAP: Record<string, string> = {
 };
 
 export default defineEventHandler(async () => {
-  const [properties, users, activeCombos] = await Promise.all([
+  const [properties, users, activeCombos, topCities] = await Promise.all([
     prisma.property.findMany({
       where: { status: "ACTIVE" },
       select: { id: true, updatedAt: true, title: true },
@@ -26,6 +27,24 @@ export default defineEventHandler(async () => {
       where: { status: "ACTIVE" },
       distinct: ["type", "listingType", "city"],
       select: { type: true, listingType: true, city: true },
+    }),
+    await prisma.user.groupBy({
+      by: ["city"],
+      where: {
+        city: {
+          not: null,
+        },
+        profileVisible: true,
+      },
+      _count: {
+        id: true,
+      },
+      orderBy: {
+        _count: {
+          id: "desc",
+        },
+      },
+      take: 50,
     }),
   ]);
 
@@ -65,5 +84,15 @@ export default defineEventHandler(async () => {
     priority: 0.4,
   }));
 
-  return [...categoryLinks, ...propertyLinks, ...userLinks];
+  const topUserLocations = topCities.map((c) => ({
+    loc: `/wspollokatorzy/${c.city}`,
+    priority: 1.0,
+  }));
+
+  return [
+    ...categoryLinks,
+    ...propertyLinks,
+    ...userLinks,
+    ...topUserLocations,
+  ];
 });

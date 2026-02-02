@@ -88,7 +88,8 @@ export default defineNuxtConfig({
     autoI18n: true,
   },
   robots: {
-    disallow: ["/api/*", "/*?*"],
+    disallow: ["/api/*"],
+    mergeWithRobotsTxtPath: false,
   },
   routeRules: {
     "/": {
