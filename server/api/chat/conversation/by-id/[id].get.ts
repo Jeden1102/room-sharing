@@ -34,6 +34,7 @@ export default requireAuth(async (event) => {
               firstName: true,
               profileImage: true,
               companyName: true,
+              profileVisible: true,
             },
           },
         },
@@ -45,9 +46,10 @@ export default requireAuth(async (event) => {
     throw createError({ statusCode: 404, message: "Conversation not found." });
   }
 
-  const isParticipant = conversation.participants.some(
+  const isParticipant = conversation.participants.find(
     (p) => p.userId === currentUserId,
   );
+
   if (!isParticipant) {
     throw createError({ statusCode: 403, message: "Access denied." });
   }
@@ -80,5 +82,6 @@ export default requireAuth(async (event) => {
     conversationId: conversation.id,
     conversation: responseConversation,
     hasMore,
+    profileVisible: isParticipant.user.profileVisible,
   };
 });

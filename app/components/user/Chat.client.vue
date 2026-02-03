@@ -38,6 +38,28 @@
           :key="i"
         />
       </div>
+
+      <div
+        v-else-if="!conversationData?.profileVisible"
+        class="flex flex-col items-center gap-4 py-10 text-center text-gray-500"
+      >
+        {{ $t("userChatPage.conversation.profileInactive") }}
+
+        <Button asChild v-slot="buttonProps">
+          <RouterLink
+            :class="buttonProps.class"
+            class="w-fit"
+            :to="
+              $localePath({
+                name: 'user-settings',
+              })
+            "
+          >
+            {{ $t("userChatPage.conversation.profileInactiveCta") }}
+          </RouterLink>
+        </Button>
+      </div>
+
       <div
         v-else-if="history.length === 0"
         class="py-10 text-center text-gray-500"
@@ -46,6 +68,7 @@
       </div>
 
       <ChatMessage
+        v-if="conversationData?.profileVisible"
         v-for="(entry, index) in history"
         :key="entry.id || index"
         :message="entry"
@@ -61,7 +84,11 @@
         {{ otherUser?.firstName }}
         {{ $t("userChatPage.conversation.typing") }}...
       </div>
-      <form @submit.prevent="handleSendMessage" class="flex gap-2">
+      <form
+        @submit.prevent="handleSendMessage"
+        class="flex gap-2"
+        v-if="conversationData?.profileVisible"
+      >
         <TextArea
           v-model="message"
           :placeholder="$t('userChatPage.conversation.placeholder')"

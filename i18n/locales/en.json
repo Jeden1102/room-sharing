@@ -626,7 +626,7 @@
       "label": "Profile Visibility",
       "visible": "Visible",
       "hidden": "Hidden",
-      "hint": "Your profile is visible in the user list only if Name, Last Name, Age, and Gender are filled."
+      "hint": "Complete your name, age, and gender to appear in the user list and enable chat access."
     },
     "general": {
       "legend": "General",
@@ -984,7 +984,8 @@
     "subtitle": "Good to see you again. Enter your details.",
     "feature": {
       "bookmarks": "Log in or create an account to save listings or users that interest you.",
-      "newProperty": "Log in or create an account to add a new property."
+      "newProperty": "Log in or create an account to add a new property.",
+      "chat": "Log in or create an account to chat with other users."
     }
   },
   "registerPage": {
@@ -1124,7 +1125,9 @@
     "conversation": {
       "start": "Start a conversation",
       "placeholder": "Message",
-      "typing": "typing..."
+      "typing": "typing...",
+      "profileInactive": "Complete your profile to start a conversation.",
+      "profileInactiveCta": "Complete profile"
     }
   }
 }

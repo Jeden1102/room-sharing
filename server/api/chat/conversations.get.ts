@@ -77,8 +77,8 @@ export default requireAuth(
     });
 
     conversations.sort((a, b) => {
-      const dateA = new Date(a.lastMessage.createdAt).getTime();
-      const dateB = new Date(b.lastMessage.createdAt).getTime();
+      const dateA = new Date(a.lastMessage?.createdAt || "").getTime();
+      const dateB = new Date(b.lastMessage?.createdAt || "").getTime();
 
       return dateB - dateA;
     });

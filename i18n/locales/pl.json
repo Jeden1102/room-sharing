@@ -624,7 +624,7 @@
       "label": "Widoczność profilu",
       "visible": "Widoczny",
       "hidden": "Ukryty",
-      "hint": "Twój profil jest widoczny na liście użytkowników tylko wtedy, gdy wypełnione są pola: Imię, Nazwisko, Wiek oraz Płeć."
+      "hint": "Uzupełnij imię, nazwisko, wiek oraz płeć, aby pojawić się na liście użytkowników i odblokować możliwość czatowania."
     },
     "general": {
       "legend": "Ogólne",
@@ -990,7 +990,8 @@
     "subtitle": "Miło Cię ponownie widzieć. Wprowadź swoje dane",
     "feature": {
       "bookmarks": "Zaloguj się, lub utwórz konto, aby zapisawać ogłoszenia lub interesujących Cię użytkowników.",
-      "newProperty": "Zaloguj się, aby korzystać z funkcji dodawania ogłoszeń."
+      "newProperty": "Zaloguj się, aby korzystać z funkcji dodawania ogłoszeń.",
+      "chat": "Zaloguj się, aby korzystać z funkcji czatu."
     }
   },
   "registerPage": {
@@ -1147,7 +1148,9 @@
     "conversation": {
       "start": "Rozpocznij konwersację, wysyłając pierwszą wiadomość!",
       "placeholder": "Wiadomość",
-      "typing": "pisze..."
+      "typing": "pisze...",
+      "profileInactive": "Uzupełnij swój profil, aby rozpocząć konwersacje.",
+      "profileInactiveCta": "Uzupełnij profil"
     }
   },
   "ui": {

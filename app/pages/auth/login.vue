@@ -30,6 +30,7 @@ const mapFeatureInfo = computed(() => {
   const featuresMessage = {
     bookmarks: t("loginPage.feature.bookmarks"),
     properties: t("loginPage.feature.newProperty"),
+    chat: t("loginPage.feature.chat"),
   };
 
   return featuresMessage[route.query.feat as keyof typeof featuresMessage];

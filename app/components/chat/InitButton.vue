@@ -31,7 +31,12 @@ async function startChat() {
   const targetId = props.targetUserId;
 
   if (!currentUserId || currentUserId === targetId) {
-    return;
+    await router.push(
+      localePath({
+        name: "auth-login",
+        query: { feat: "chat" },
+      }),
+    );
   }
 
   isProcessing.value = true;
