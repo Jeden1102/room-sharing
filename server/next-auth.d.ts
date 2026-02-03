@@ -6,6 +6,7 @@ declare module "next-auth" {
       provider: string;
       email: string;
       id: string;
+      profileVisible: boolean;
     };
   }
 }

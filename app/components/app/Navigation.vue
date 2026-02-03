@@ -52,7 +52,7 @@
           <button
             class="nav-link text-left lg:hidden"
             v-if="data?.user"
-            @click="() => signOut()"
+            @click="() => logout()"
           >
             {{ $t("nav.logout") }}
           </button>
@@ -161,6 +161,10 @@ const toggleUserMenu = (event: Event) => {
   userMenu.value.toggle(event);
 };
 
+const logout = async () => {
+  await signOut({ callbackUrl: localePath("index") });
+};
+
 const userMenuItems = ref([
   {
     label: () => t("nav.profile"),
@@ -195,7 +199,7 @@ const userMenuItems = ref([
   {
     label: () => t("nav.logout"),
     icon: "pi pi-sign-out",
-    command: () => signOut(),
+    command: () => logout(),
   },
 ]);
 </script>

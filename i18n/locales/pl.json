@@ -624,7 +624,8 @@
       "label": "Widoczność profilu",
       "visible": "Widoczny",
       "hidden": "Ukryty",
-      "hint": "Uzupełnij imię, nazwisko, wiek oraz płeć, aby pojawić się na liście użytkowników i odblokować możliwość czatowania."
+      "hint": "Uzupełnij imię, nazwisko, wiek oraz płeć, aby pojawić się na liście użytkowników i odblokować możliwość czatowania.",
+      "hintVisible": "Inni użytkownicy zobaczą Twój profil na liście wyszukiwania, możesz też czatować z innymi."
     },
     "general": {
       "legend": "Ogólne",

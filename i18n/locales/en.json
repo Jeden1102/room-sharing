@@ -626,7 +626,8 @@
       "label": "Profile Visibility",
       "visible": "Visible",
       "hidden": "Hidden",
-      "hint": "Complete your name, age, and gender to appear in the user list and enable chat access."
+      "hint": "Complete your name, age, and gender to appear in the user list and enable chat access.",
+      "hintVisible": "Other users will see your profile on the search list, you can also chat with others."
     },
     "general": {
       "legend": "General",

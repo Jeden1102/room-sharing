@@ -55,6 +55,11 @@
 
 <script setup lang="ts">
 import type { PropertyWithOwner } from "@/components/property/types";
+const { getSession } = useAuth();
+
+onMounted(async () => {
+  await getSession();
+});
 
 definePageMeta({
   auth: false,

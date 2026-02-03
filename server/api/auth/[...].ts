@@ -97,6 +97,7 @@ export default NuxtAuthHandler({
       if (dbUser && session.user) {
         session.user.provider = dbUser.provider || "";
         session.user.id = dbUser?.id || "";
+        session.user.profileVisible = dbUser.profileVisible;
       }
 
       return { ...session };

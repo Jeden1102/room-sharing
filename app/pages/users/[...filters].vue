@@ -1,5 +1,20 @@
 <template>
   <main class="container flex flex-col gap-4 py-6">
+    <Message
+      severity="secondary"
+      class="py-2"
+      v-if="data && !data?.user.profileVisible"
+    >
+      <div class="flex gap-2">
+        <p>{{ $t("userSettingsForm.profileVisibility.label") }}:</p>
+        <Badge severity="danger">{{
+          $t("userSettingsForm.profileVisibility.hidden")
+        }}</Badge>
+      </div>
+      <p class="mt-1.5 text-sm font-light">
+        {{ $t("userSettingsForm.profileVisibility.hint") }}
+      </p>
+    </Message>
     <div
       class="flex items-center justify-between md:mb-4 md:grid md:grid-cols-2 md:gap-8"
     >
@@ -76,6 +91,8 @@ type FullUser = Prisma.UserGetPayload<{
     petsCompatibility: true;
   };
 }>;
+
+const { data } = useAuth();
 
 usePageSeo({
   title: "seo.users.title",

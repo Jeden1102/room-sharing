@@ -32,7 +32,11 @@
         >
       </div>
       <p class="mt-1.5 text-sm font-light">
-        {{ $t("userSettingsForm.profileVisibility.hint") }}
+        {{
+          initialValues.profileVisible
+            ? $t("userSettingsForm.profileVisibility.hintVisible")
+            : $t("userSettingsForm.profileVisibility.hint")
+        }}
       </p>
     </Message>
 
@@ -434,6 +438,8 @@ watch(
 const resolver = ref(zodResolver(userProfileSchema));
 const { t } = useI18n();
 
+const { getSession } = useAuth();
+
 const onFormSubmit = async (event: any) => {
   const { valid, values } = event;
 
@@ -478,6 +484,7 @@ const onFormSubmit = async (event: any) => {
 
     formStatus.value.success = true;
     formStatus.value.message = t("userSettingsForm.success");
+    await getSession();
     await refresh();
   } catch (e: any) {
     formStatus.value.success = false;
