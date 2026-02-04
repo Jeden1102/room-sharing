@@ -14,7 +14,9 @@ export default session(
         priceMin,
         priceMax,
         roomsMin,
+        roomsMax,
         sizeMin,
+        sizeMax,
         amenities,
         preferences,
         sortBy = "newest",
@@ -27,21 +29,27 @@ export default session(
 
       const where: Record<string, any> = { status: { not: "DRAFT" } };
 
-      // Basic filters
       if (listingType) where.listingType = listingType;
       if (type) where.type = type;
       if (city) where.city = { contains: city as string, mode: "insensitive" };
 
-      // Price range
       if (priceMin || priceMax) {
         where.price = {};
         if (priceMin) where.price.gte = Number(priceMin);
         if (priceMax) where.price.lte = Number(priceMax);
       }
 
-      // Rooms and size
-      if (roomsMin) where.rooms = { gte: Number(roomsMin) };
-      if (sizeMin) where.sizeM2 = { gte: Number(sizeMin) };
+      if (roomsMin || roomsMax) {
+        where.rooms = {};
+        if (roomsMin) where.rooms.gte = Number(roomsMin);
+        if (roomsMax) where.rooms.lte = Number(roomsMax);
+      }
+
+      if (sizeMin || sizeMax) {
+        where.sizeM2 = {};
+        if (sizeMin) where.sizeM2.gte = Number(sizeMin);
+        if (sizeMax) where.sizeM2.lte = Number(sizeMax);
+      }
 
       // Amenities
       const amenitiesList = Array.isArray(amenities)
@@ -52,12 +60,17 @@ export default session(
 
       amenitiesList.forEach((amenity: string) => {
         const trimmed = amenity.trim();
-        if (trimmed === "furnished") where.furnished = true;
-        if (trimmed === "balcony") where.balcony = true;
-        if (trimmed === "elevator") where.elevator = true;
-        if (trimmed === "parking") where.parking = true;
-        if (trimmed === "internet") where.internet = true;
-        if (trimmed === "washingMachine") where.washingMachine = true;
+        const fields = [
+          "furnished",
+          "balcony",
+          "elevator",
+          "parking",
+          "internet",
+          "washingMachine",
+        ];
+        if (fields.includes(trimmed)) {
+          where[trimmed] = true;
+        }
       });
 
       // Preferences
@@ -91,7 +104,6 @@ export default session(
         }
       })();
 
-      // Fetch properties with pagination
       const [properties, total] = await Promise.all([
         prisma.property.findMany({
           where,
@@ -117,7 +129,6 @@ export default session(
         prisma.property.count({ where }),
       ]);
 
-      // Fetch user bookmarks for visible properties
       let bookmarkedPropertyIds: string[] = [];
       if (userId) {
         const bookmarks = await prisma.propertyBookmark.findMany({
@@ -130,18 +141,16 @@ export default session(
         bookmarkedPropertyIds = bookmarks.map((b) => b.propertyId);
       }
 
-      // Add isBookmarked flag
       const propertiesWithBookmark = properties.map((property) => ({
         ...property,
         isBookmarked: bookmarkedPropertyIds.includes(property.id),
       }));
 
-      // Fetch coordinates for map display
       const coords = await prisma.property.findMany({
         where: {
+          ...where,
           latitude: { not: null },
           longitude: { not: null },
-          status: "ACTIVE",
         },
         select: { id: true, latitude: true, longitude: true },
       });

@@ -400,8 +400,14 @@
     "roomsMin": {
       "label": "Min rooms"
     },
+    "roomsMax": {
+      "label": "Max rooms"
+    },
     "sizeMin": {
       "label": "Min size (m²)"
+    },
+    "sizeMax": {
+      "label": "Max size (m²)"
     },
     "amenities": {
       "label": "Select amenities"
@@ -1015,7 +1021,11 @@
     "title": "Properties",
     "noResults": "No results found",
     "showAsList": "Show as list",
-    "showAsMap": "Show as map"
+    "showAsMap": "Show as map",
+    "cta": {
+      "title": "Add new property",
+      "subtitle": "Create your own property and find tenants for it."
+    }
   },
   "userBookmarksPage": {
     "title": "Bookmarked properties",

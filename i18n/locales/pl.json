@@ -396,10 +396,16 @@
       "label": "Cena max"
     },
     "roomsMin": {
-      "label": "Min. liczba pokoi"
+      "label": "Min. ilość pokoi"
+    },
+    "roomsMax": {
+      "label": "Max. ilość pokoi"
     },
     "sizeMin": {
-      "label": "Min. powierzchnia (m²)"
+      "label": "Min. m²"
+    },
+    "sizeMax": {
+      "label": "Max. m²"
     },
     "amenities": {
       "label": "Wybierz udogodnienia"
@@ -675,19 +681,19 @@
       "email": "E-mail kontaktowy"
     },
     "accountType": {
-    "legend": "Typ konta",
-    "private": "Osoba prywatna",
-    "business": "Firma / Biuro nieruchomości",
-    "privateHint": "Szukasz współlokatora lub pokoju dla siebie. Wynajmujesz/sprzedajesz własną nieruchomość.",
-    "businessHint": "Reprezentujesz firmę, biuro lub zarządzasz wieloma nieruchomościami."
-  },
-  "business": {
-    "legend": "Dane firmowe",
-    "companyName": "Nazwa firmy",
-    "nip": "NIP",
-    "website": "Strona internetowa",
-    "address": "Adres biura"
-  },
+      "legend": "Typ konta",
+      "private": "Osoba prywatna",
+      "business": "Firma / Biuro nieruchomości",
+      "privateHint": "Szukasz współlokatora lub pokoju dla siebie. Wynajmujesz/sprzedajesz własną nieruchomość.",
+      "businessHint": "Reprezentujesz firmę, biuro lub zarządzasz wieloma nieruchomościami."
+    },
+    "business": {
+      "legend": "Dane firmowe",
+      "companyName": "Nazwa firmy",
+      "nip": "NIP",
+      "website": "Strona internetowa",
+      "address": "Adres biura"
+    },
     "submit": "Zapisz zmiany",
     "success": "Ustawienia zostały zaktualizowane",
     "error": "Wystąpił błąd podczas zapisywania ustawien"
@@ -1022,12 +1028,16 @@
     "noResults": "Brak wyników",
     "showAsList": "Pokazuj jako listę",
     "showAsMap": "Pokazuj jako mapę",
+    "cta": {
+      "title": "Dodaj ogłoszenie",
+      "subtitle": "Dodaj własne nieruchomość lub mieszkanie do oferty"
+    },
     "seo": {
-  "block": {
-    "description": "Szukasz idealnego miejsca? Nasza platforma oferuje świetne nieruchomości w lokalizacji {city}. Każde ogłoszenie jest starannie weryfikowane, aby zapewnić Ci bezpieczeństwo i komfort wyboru współlokatorów lub całych nieruchomości.",
-    "footer": "Aktualnie przeglądasz najnowsze ogłoszenia z rynku nieruchomości w mieście {city}."
-  }
-}
+      "block": {
+        "description": "Szukasz idealnego miejsca? Nasza platforma oferuje świetne nieruchomości w lokalizacji {city}. Każde ogłoszenie jest starannie weryfikowane, aby zapewnić Ci bezpieczeństwo i komfort wyboru współlokatorów lub całych nieruchomości.",
+        "footer": "Aktualnie przeglądasz najnowsze ogłoszenia z rynku nieruchomości w mieście {city}."
+      }
+    }
   },
   "userBookmarksPage": {
     "title": "Zapisane ogłoszenia",

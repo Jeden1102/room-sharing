@@ -122,6 +122,26 @@
       :listingType="filters.listingType"
     />
   </main>
+  <AppCta
+    :title="$t('propertiesPage.cta.title')"
+    :subtitle="$t('propertiesPage.cta.subtitle')"
+    class="mt-16"
+  >
+    <Button asChild v-slot="slotProps">
+      <RouterLink
+        :to="
+          $localePath(
+            data
+              ? 'new-property'
+              : { name: 'auth-login', query: { feat: 'properties' } },
+          )
+        "
+        :class="slotProps.class"
+      >
+        {{ $t("userProperties.empty.createButton") }}
+      </RouterLink>
+    </Button>
+  </AppCta>
 </template>
 
 <script setup lang="ts">
@@ -129,6 +149,8 @@ import type { PropertyWithOwner } from "@/components/property/types";
 import clsx from "clsx";
 
 const route = useRoute();
+
+const { data } = useAuth();
 
 type Coord = {
   latitude: number;
@@ -163,7 +185,9 @@ const filters = ref({
   priceMin: null,
   priceMax: null,
   roomsMin: null,
+  roomsMax: null,
   sizeMin: null,
+  sizeMax: null,
   amenities: [],
   preferences: [],
   sortBy: "newest",

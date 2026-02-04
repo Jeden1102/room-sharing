@@ -2,9 +2,6 @@
 5. back-upy bazy
 - listing + mapa akademików
 
-- pod listingiem - CTA dodaj ogloszenie
-- listingi - min/max pokoj, min/max powierzchnia
-
 ____ NICE TO HAVE ____
 - Sticky + powrót link na nieruchomości / userze
 - Maile o nowych wiadomościach

@@ -28,7 +28,6 @@
         </button>
       </div>
 
-      <!-- City -->
       <AtomsAutocomplete
         :suggestions="filteredCities"
         @complete="searchCity"
@@ -37,7 +36,6 @@
         name="city"
       />
 
-      <!-- Listing Type -->
       <AtomsDropdown
         :label="$t('propertiesFilters.listingType.label')"
         :options="listingTypeOptions"
@@ -47,7 +45,6 @@
         name="listingType"
       />
 
-      <!-- Property Type -->
       <AtomsDropdown
         :label="$t('propertiesFilters.propertyType.label')"
         :options="propertyTypeOptions"
@@ -57,7 +54,6 @@
         name="type"
       />
 
-      <!-- Price Range -->
       <div class="flex gap-2 md:gap-4">
         <AtomsNumber
           :label="$t('propertiesFilters.priceMin.label')"
@@ -71,18 +67,32 @@
         />
       </div>
 
-      <AtomsNumber
-        :label="$t('propertiesFilters.roomsMin.label')"
-        v-model="filters.roomsMin"
-        name="roomsMin"
-      />
-      <AtomsNumber
-        :label="$t('propertiesFilters.sizeMin.label')"
-        v-model="filters.sizeMin"
-        name="sizeMin"
-      />
+      <div class="flex gap-2 md:gap-4">
+        <AtomsNumber
+          :label="$t('propertiesFilters.roomsMin.label')"
+          v-model="filters.roomsMin"
+          name="roomsMin"
+        />
+        <AtomsNumber
+          :label="$t('propertiesFilters.roomsMax.label')"
+          v-model="filters.roomsMax"
+          name="roomsMax"
+        />
+      </div>
 
-      <!-- Amenities MultiSelect -->
+      <div class="flex gap-2 md:gap-4">
+        <AtomsNumber
+          :label="$t('propertiesFilters.sizeMin.label')"
+          v-model="filters.sizeMin"
+          name="sizeMin"
+        />
+        <AtomsNumber
+          :label="$t('propertiesFilters.sizeMax.label')"
+          v-model="filters.sizeMax"
+          name="sizeMax"
+        />
+      </div>
+
       <div>
         <AtomsMultiselect
           id="amenities"
@@ -99,7 +109,6 @@
 
       <Divider class="md:!hidden" />
 
-      <!-- Sorting (mobile only) -->
       <AtomsDropdown
         :label="$t('propertiesFilters.sortBy.label')"
         :options="propertiesSortOptions"
@@ -110,7 +119,6 @@
         class="md:hidden"
       />
 
-      <!-- Apply (mobile only) -->
       <Button
         class="mt-4 min-h-10 md:!hidden"
         :label="$t('propertiesFilters.showResults', { count: total })"
@@ -127,6 +135,7 @@
         {{ $t("propertiesFilters.clearFilters") }}
       </Button>
     </div>
+
     <button
       class="mt-2 hidden cursor-pointer items-center gap-2 pl-2 text-xs text-gray-600 md:flex"
       @click="clearFilters"
@@ -151,14 +160,16 @@ const emit = defineEmits(["update"]);
 const filtersOpened = ref(false);
 const debounceTimeout = ref<NodeJS.Timeout>();
 
-const defaultFilters = {
+const initialFilters = {
   listingType: null,
   type: null,
   city: "",
   priceMin: null,
   priceMax: null,
   roomsMin: null,
+  roomsMax: null,
   sizeMin: null,
+  sizeMax: null,
   amenities: [],
   preferences: [],
   sortBy: "newest",
@@ -209,7 +220,7 @@ const {
 } = useTaxonomies();
 
 const clearFilters = () => {
-  Object.assign(filters, defaultFilters);
+  Object.assign(filters, initialFilters);
   filters.city = "";
 };
 </script>

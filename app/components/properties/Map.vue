@@ -37,6 +37,7 @@ const { $L } = useNuxtApp();
 
 const mapContainer = ref<HTMLElement | null>(null);
 const mapInstance = ref<any>(null);
+const markerClusterGroup = ref<any>(null);
 const popupContainer = ref<HTMLElement | null>(null);
 const propertyData = ref<PropertyWithOwner | null>(null);
 const activePropertyId = ref<string | null>(null);
@@ -59,6 +60,44 @@ async function loadProperty(id: string) {
   }
 }
 
+const renderMarkers = () => {
+  const L = $L as any;
+  if (!mapInstance.value || !markerClusterGroup.value || !L) return;
+
+  markerClusterGroup.value.clearLayers();
+
+  const customIcon = L.icon({
+    iconUrl: "/icons/marker.svg",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  });
+
+  props.items.forEach((item) => {
+    if (!item.latitude || !item.longitude) return;
+
+    const marker = L.marker([item.latitude, item.longitude], {
+      icon: customIcon,
+    });
+
+    marker.on("click", () => loadProperty(item.id));
+    marker.bindPopup(() => popupContainer.value!, {
+      maxWidth: 300,
+      className: "custom-property-popup",
+    });
+
+    markerClusterGroup.value.addLayer(marker);
+  });
+};
+
+watch(
+  () => props.items,
+  () => {
+    renderMarkers();
+  },
+  { deep: true },
+);
+
 onMounted(async () => {
   await nextTick();
 
@@ -78,32 +117,15 @@ onMounted(async () => {
     { attribution: "&copy; OpenStreetMap contributors" },
   ).addTo(mapInstance.value);
 
-  const customIcon = L.icon({
-    iconUrl: "/icons/marker.svg",
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -32],
-  });
-
-  const markerClusterGroup = L.markerClusterGroup({
+  markerClusterGroup.value = L.markerClusterGroup({
     showCoverageOnHover: false,
     zoomToBoundsOnClick: true,
     maxClusterRadius: 50,
   });
 
-  props.items.forEach((item) => {
-    const marker = L.marker([item.latitude, item.longitude], {
-      icon: customIcon,
-    });
-    marker.on("click", () => loadProperty(item.id));
-    marker.bindPopup(() => popupContainer.value!, {
-      maxWidth: 300,
-      className: "custom-property-popup",
-    });
-    markerClusterGroup.addLayer(marker);
-  });
+  mapInstance.value.addLayer(markerClusterGroup.value);
 
-  mapInstance.value.addLayer(markerClusterGroup);
+  renderMarkers();
 });
 </script>
 
