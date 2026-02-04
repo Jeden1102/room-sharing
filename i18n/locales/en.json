@@ -525,7 +525,10 @@
       "sendEmail": "Send Email"
     },
     "editButton": "Edit Listing",
-    "publicationDate": "Publication date:"
+    "publicationDate": "Publication date:",
+    "share": "Share property",
+    "saveLink": "Save link",
+    "shareOnSocials": "Share on social media"
   },
   "propertyTeaser": {
     "imageAlt": "Property image",

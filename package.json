@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "dev:host": "nuxt --hostname '192.168.0.199' --port 8000"
+    "dev:host": "nuxt dev --port 8080 --host 0.0.0.0"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -27,6 +27,7 @@
     "@primevue/forms": "^4.3.9",
     "@prisma/client": "^5.22.0",
     "@sidebase/nuxt-auth": "^1.0.2",
+    "@stefanobartoletti/nuxt-social-share": "^2.3.1",
     "@tailwindcss/vite": "^4.1.12",
     "@types/three": "^0.180.0",
     "@vercel/blob": "^2.0.0",

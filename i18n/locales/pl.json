@@ -523,7 +523,10 @@
       "sendEmail": "Wyślij e-mail"
     },
     "editButton": "Edytuj ogłoszenie",
-    "publicationDate": "Data publikacji:"
+    "publicationDate": "Data publikacji:",
+    "share": "Udostępnij ogłoszenie",
+    "saveLink": "Skopiuj link do schowka",
+    "shareOnSocials": "Udostępnij na social media"
   },
   "propertyTeaser": {
     "imageAlt": "Zdjęcie nieruchomości",

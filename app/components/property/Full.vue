@@ -29,12 +29,19 @@
           </p>
         </div>
         <div class="flex flex-col items-end gap-8">
-          <AppEntityBookmark
-            entity-type="property"
-            :entity-id="property.id"
-            :initial-bookmarked="property.isBookmarked"
-            v-if="data?.user?.id !== property.ownerId"
-          />
+          <div class="flex gap-4">
+            <AppEntityBookmark
+              entity-type="property"
+              :entity-id="property.id"
+              :initial-bookmarked="property.isBookmarked"
+              v-if="data?.user?.id !== property.ownerId"
+            />
+            <AppEntityShare
+              :title="$t('propertyFull.share')"
+              variant="popover"
+            />
+          </div>
+
           <div class="text-3xl font-bold whitespace-nowrap md:text-4xl">
             {{ formatPrice(property.price) }} {{ $t("propertyFull.currency") }}
           </div>
@@ -282,6 +289,8 @@
               </Button>
             </div>
           </div>
+
+          <AppEntityShare :title="$t('propertyFull.share')" variant="full" />
         </div>
       </div>
     </div>

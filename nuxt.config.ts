@@ -62,6 +62,7 @@ export default defineNuxtConfig({
     "@nuxtjs/robots",
     "@nuxtjs/sitemap",
     "nuxt-gtag",
+    "@stefanobartoletti/nuxt-social-share",
   ],
   gtag: {
     id: process.env.NUXT_PUBLIC_GTAG_ID,
@@ -78,6 +79,9 @@ export default defineNuxtConfig({
         },
       ],
     ],
+  },
+  socialShare: {
+    baseUrl: process.env.NUXT_PUBLIC_APP_BASE_URI,
   },
   site: {
     url: process.env.NUXT_PUBLIC_APP_BASE_URI,
