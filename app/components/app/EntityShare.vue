@@ -47,7 +47,7 @@
   </div>
 
   <div v-else-if="variant === 'full'" class="card-base bg-gray-100">
-    <h3 class="mb-6 text-xl font-bold">{{ title }}</h3>
+    <h3 class="mb-6 text-xl font-bold" v-if="title">{{ title }}</h3>
     <div class="grid grid-cols-2 gap-2">
       <Button
         v-for="network in ['facebook', 'twitter', 'whatsapp', 'telegram']"
@@ -63,7 +63,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  title: string;
+  title?: string;
   variant: "popover" | "full";
 }>();
 

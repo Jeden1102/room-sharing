@@ -1143,5 +1143,9 @@
       "profileInactive": "Complete your profile to start a conversation.",
       "profileInactiveCta": "Complete profile"
     }
+  },
+  "textarea": {
+    "header": "Header",
+    "default": "Default"
   }
 }

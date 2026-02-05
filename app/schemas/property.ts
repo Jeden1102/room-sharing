@@ -11,7 +11,7 @@ const amenityFields = Object.fromEntries(
 
 export const propertyBaseSchema = z.object({
   title: z.string("Pole wymagane").min(5, "Tytuł za krótki").max(200),
-  description: z.string().max(2000),
+  description: z.string().max(20000),
   type: z.enum(["APARTMENT", "HOUSE", "ROOM", "STUDIO"]).or(z.string()),
   listingType: z.enum(["RENT", "SALE"]).or(z.string()),
   status: z.enum(["ACTIVE", "DRAFT", "RESERVED"]).optional(),

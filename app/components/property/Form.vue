@@ -95,7 +95,6 @@
       <AtomsBaseTextarea
         name="description"
         :label="$t('propertyForm.basicData.description')"
-        :rows="4"
         :form="$form"
       />
     </Fieldset>
@@ -520,6 +519,8 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
     if (!values.mainImageIdx) {
       values.mainImageIdx = 0;
     }
+
+    values.description = values.description.replaceAll("&nbsp;", " ");
 
     const res = await $fetch<any>(apiUri.value, {
       method: "POST",

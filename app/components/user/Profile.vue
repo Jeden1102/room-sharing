@@ -58,6 +58,7 @@
               :initial-bookmarked="user.isBookmarked"
               v-if="user.id !== data?.user?.id"
             />
+            <AppEntityShare variant="popover" />
           </div>
         </div>
       </div>
@@ -257,10 +258,7 @@
             :title="$t('userProfile.description.title')"
             v-if="user.description"
           >
-            <div
-              class="leading-relaxed whitespace-pre-line text-gray-700"
-              v-html="user.description?.replaceAll('\n', '<br />')"
-            ></div>
+            <div class="prose prose-sm" v-html="user.description"></div>
             <div class="mt-4" v-if="userInterests.length > 0">
               <div class="flex flex-wrap gap-2">
                 <Tag

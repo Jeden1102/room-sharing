@@ -474,6 +474,7 @@ const onFormSubmit = async (event: any) => {
       : ["firstName", "lastName", "age", "gender"];
 
     values.profileVisible = obligatoryFields.every((field) => values[field]);
+    values.description = values.description.replaceAll("&nbsp;", " ");
 
     const { data, error } = await useFetch("/api/user/update", {
       method: "POST",

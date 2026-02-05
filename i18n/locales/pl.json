@@ -436,7 +436,7 @@
       "price": "Cena (PLN)*",
       "priceHint": "Jeśli nieruchomość jest dzielona, podaj cenę najtańszego pokoju.",
       "deposit": "Kaucja (PLN)",
-      "description": "Opis*"
+      "description": "Opis"
     },
     "location": {
       "legend": "Lokalizacja",
@@ -1169,5 +1169,9 @@
   },
   "ui": {
     "noResultsFound": "Brak wyników"
+  },
+  "textarea": {
+    "header": "Nagłówek",
+    "default": "Normalny"
   }
 }

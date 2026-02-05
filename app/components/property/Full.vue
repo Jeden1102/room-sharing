@@ -114,9 +114,7 @@
           :title="$t('propertyFull.description.title')"
           v-if="property.description"
         >
-          <div class="leading-relaxed whitespace-pre-line text-gray-700">
-            {{ property.description }}
-          </div>
+          <div class="prose prose-sm" v-html="property.description"></div>
         </AppCard>
 
         <AppCard :title="$t('propertyFull.details.title')">

@@ -11,7 +11,7 @@ export const userProfileSchema = z.object({
   age: z.number().min(1).max(130),
   gender: z.string(),
   phone: z.string().max(20).optional().nullable(),
-  description: z.string().max(2048).optional().nullable(),
+  description: z.string().max(20000).optional().nullable(),
   interests: z.array(z.string()).optional(),
   occupations: z.array(z.string()).optional(),
   searchPreferences: z.array(z.string()).optional(),

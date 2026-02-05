@@ -13,7 +13,7 @@
       ></div>
 
       <Tag
-        :value="user.gender"
+        :value="$t(`taxonomies.gender.${user.gender}`)"
         severity="info"
         class="absolute right-2 bottom-2 text-xs font-medium"
       />

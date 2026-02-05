@@ -1,7 +1,0 @@
-4. regulaminy
-5. back-upy bazy
-- listing + mapa akademików
-
-____ NICE TO HAVE ____
-- Sticky + powrót link na nieruchomości / userze
-- Maile o nowych wiadomościach
