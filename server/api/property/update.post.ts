@@ -26,7 +26,7 @@ export default requireAuth(
 
     const property = await prisma.property.findUnique({
       where: { id },
-      select: { id: true, ownerId: true },
+      select: { id: true, ownerId: true, parentId: true },
     });
 
     if (!property) {
@@ -88,13 +88,8 @@ export default requireAuth(
     }
 
     try {
-      if (updateData.parentId) {
-        const pId = updateData.parentId;
-        delete updateData.parentId;
-        updateData.parent = { connect: { id: pId } };
-      } else if (updateData.parentId === null) {
-        delete updateData.parentId;
-        updateData.parent = { disconnect: true };
+      if (updateData.type && updateData.type !== "ROOM") {
+        updateData.parentId = null;
       }
 
       if (subPropertyIds && Array.isArray(subPropertyIds)) {
@@ -109,7 +104,22 @@ export default requireAuth(
       });
 
       const cacheStorage = useStorage("cache:properties:property");
-      await cacheStorage.removeItem(`${id}.json`.replaceAll("-", ""));
+
+      const childCacheKey = `${id}.json`.replaceAll("-", "");
+      await cacheStorage.removeItem(childCacheKey);
+
+      const oldParentId = property.parentId;
+      const newParentId = updateData.parentId;
+
+      if (oldParentId) {
+        const oldParentKey = `${oldParentId}.json`.replaceAll("-", "");
+        await cacheStorage.removeItem(oldParentKey);
+      }
+
+      if (newParentId && newParentId !== oldParentId) {
+        const newParentKey = `${newParentId}.json`.replaceAll("-", "");
+        await cacheStorage.removeItem(newParentKey);
+      }
 
       return { success: true, property: updatedProperty };
     } catch (e: any) {

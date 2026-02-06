@@ -92,7 +92,7 @@
         />
       </div>
 
-      <AtomsBaseTextarea
+      <AtomsBaseCkeditor
         name="description"
         :label="$t('propertyForm.basicData.description')"
         :form="$form"
@@ -105,6 +105,9 @@
     >
       <div class="grid md:grid-cols-2">
         <div class="mt-2 flex flex-col gap-4">
+          <p class="text-sm font-light">
+            {{ $t("propertyForm.subProperties.extraHint") }}
+          </p>
           <FloatLabel variant="on">
             <MultiSelect
               v-model="initialValues.subPropertyIds"
@@ -116,6 +119,7 @@
               class="w-full"
               display="chip"
               :emptyFilterMessage="$t('ui.noResultsFound')"
+              :emptyMessage="$t('ui.noResultsFound')"
             />
           </FloatLabel>
           <p class="text-sm font-light">
@@ -187,6 +191,7 @@
           :form="$form"
         />
         <AtomsNumber
+          v-if="$form.type?.value !== 'ROOM'"
           name="rooms"
           :label="$t('propertyForm.sizeAndLocation.rooms')"
           :form="$form"

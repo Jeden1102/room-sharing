@@ -424,10 +424,11 @@
     "addingProperty": "Dodajesz nieruchomość",
     "addBasicInfo": "Dodaj podstawowe informacje o ofercie — możesz je edytować później.",
     "subProperties": {
-      "legend": "Pokoje wewnątrz tej nieruchomości",
-      "selectPlaceholder": "Wybierz pokoje",
-      "hint": "Możesz połączyć swoje inne pokoje z tą nieruchomością."
-    },
+  "legend": "Struktura wynajmu",
+  "selectPlaceholder": "Wybierz oferty pokojów",
+  "extraHint": "Wystawiasz tę nieruchomość w całości? Pomiń tę sekcję. Dzielisz je na pokoje? Dodaj je poniżej.",
+  "hint": "Dodaj pokoje tylko jeśli wynajmujesz je jako oddzielne oferty. Dzięki temu użytkownicy będą mogli znaleźć konkretny pokój na mapie, widząc jednocześnie, że znajduje się on w tym mieszkaniu/akademiku."
+},
     "basicData": {
       "legend": "Dane podstawowe",
       "title": "Tytuł*",
@@ -436,7 +437,7 @@
       "price": "Cena (PLN)*",
       "priceHint": "Jeśli nieruchomość jest dzielona, podaj cenę najtańszego pokoju.",
       "deposit": "Kaucja (PLN)",
-      "description": "Opis"
+      "description": "Opis*"
     },
     "location": {
       "legend": "Lokalizacja",
@@ -748,7 +749,7 @@
       "housePlurar": "Domy",
       "room": "Pokój",
       "roomPlurar": "Pokoje",
-      "studio": "Studio",
+      "studio": "Kawalerka",
       "loft": "Loft"
     },
     "amenities": {

@@ -177,7 +177,7 @@
           />
         </div>
 
-        <AtomsBaseTextarea
+        <AtomsBaseCkeditor
           name="description"
           :label="
             initialValues.accountType === 'BUSINESS'
