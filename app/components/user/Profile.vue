@@ -263,7 +263,10 @@
             v-if="user.description"
           >
             <div class="prose prose-sm" v-html="user.description"></div>
-            <div class="mt-4" v-if="userInterests.length > 0">
+            <div
+              class="mt-4"
+              v-if="userInterests.length > 0 && !isBussinessAcount"
+            >
               <div class="flex flex-wrap gap-2">
                 <Tag
                   v-for="interest in userInterests"

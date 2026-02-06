@@ -108,7 +108,7 @@
     "description": "Używamy cookies dla wygody i rozwoju strony. Ty decydujesz, które zaakceptujesz!"
   },
   "nav": {
-    "home": "Strona główna",
+    "home": "Start",
     "properties": "Nieruchomości",
     "users": "Współlokatorzy",
     "users-filters": "Współlokatorzy",
@@ -226,11 +226,8 @@
     },
     "explore": {
       "title": "Odkryj",
-      "aboutUs": "O nas",
       "faq": "Najczęściej zadawane pytania",
-      "blog": "Blog",
-      "howItWorks": "Jak to działa",
-      "forStudents": "Dla studentów"
+      "pricing": "Cennik"
     },
     "quickLinks": {
       "title": "Szybkie linki",

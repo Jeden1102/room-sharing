@@ -122,7 +122,10 @@ const footerNavigation = computed(() => {
   return [
     {
       title: "footer.explore.title",
-      links: [{ label: "footer.explore.faq", to: localePath("faq") }],
+      links: [
+        { label: "footer.explore.faq", to: localePath("faq") },
+        { label: "footer.explore.pricing", to: localePath("pricing") },
+      ],
     },
     {
       title: "footer.forRenters.title",

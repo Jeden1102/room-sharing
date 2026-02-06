@@ -2,8 +2,11 @@
   <ClientOnly v-if="data">
     <DataTable
       v-if="data.properties?.length > 0 && status === 'success'"
+      v-model:filters="filters"
+      filterDisplay="row"
       :value="data.properties"
-      tableStyle="min-width: 50rem"
+      tableStyle="min-width: 60rem"
+      class="p-datatable-sm w-full table-fixed"
       paginator
       stripedRows
       :rows="10"
@@ -16,32 +19,73 @@
         field="title"
         :header="$t('userProperties.table.title')"
         sortable
-        style="width: 25%"
-      />
+        filter
+        :showFilterMenu="false"
+        style="width: 20%"
+      >
+        <template #filter="{ filterModel, filterCallback }">
+          <InputText
+            v-model="filterModel.value"
+            type="text"
+            @input="filterCallback()"
+            class="w-full"
+          />
+        </template>
+      </Column>
+
       <Column
         field="city"
         :header="$t('userProperties.table.city')"
         sortable
-        style="width: 25%"
-      />
+        filter
+        :showFilterMenu="false"
+        style="width: 15%"
+      >
+        <template #filter="{ filterModel, filterCallback }">
+          <InputText
+            v-model="filterModel.value"
+            type="text"
+            @input="filterCallback()"
+            class="w-full"
+          />
+        </template>
+      </Column>
+
       <Column
         field="price"
         :header="$t('userProperties.table.price')"
         sortable
-        style="width: 25%"
-      />
+        style="width: 15%"
+      >
+      </Column>
+
       <Column
         field="status"
         :header="$t('userProperties.table.status')"
         sortable
-        style="width: 25%"
+        filter
+        :showFilterMenu="false"
+        style="width: 15%"
       >
         <template #body="slotProps">
-          {{ $t(`taxonomies.status.${slotProps.data.status.toLowerCase()}`) }}
+          <span class="block truncate">
+            {{ $t(`taxonomies.status.${slotProps.data.status.toLowerCase()}`) }}
+          </span>
+        </template>
+        <template #filter="{ filterModel, filterCallback }">
+          <Select
+            v-model="filterModel.value"
+            @change="filterCallback()"
+            :options="statusOptions"
+            optionLabel="label"
+            optionValue="value"
+            class="w-full"
+            :showClear="true"
+          />
         </template>
         <template #editor="{ data, field }">
           <AtomsDropdown
-            name="listingType"
+            name="status"
             label=""
             :options="statusOptions"
             optionLabel="label"
@@ -51,10 +95,11 @@
           />
         </template>
       </Column>
-      <Column :header="$t('userProperties.table.actions')">
+
+      <Column :header="$t('userProperties.table.actions')" style="width: 25%">
         <template #body="slotProps">
           <div class="flex gap-2">
-            <Button asChild v-slot="buttonProps">
+            <Button asChild v-slot="buttonProps" size="small">
               <RouterLink
                 :class="buttonProps.class"
                 :to="
@@ -71,7 +116,12 @@
               </RouterLink>
             </Button>
 
-            <Button asChild v-slot="buttonProps" severity="secondary">
+            <Button
+              asChild
+              v-slot="buttonProps"
+              severity="secondary"
+              size="small"
+            >
               <RouterLink
                 :class="buttonProps.class"
                 :to="
@@ -91,15 +141,17 @@
             <Button
               severity="danger"
               icon="pi pi-trash"
+              size="small"
               @click="openDeleteModal(slotProps.data)"
               :title="$t('userProperties.table.delete')"
             />
           </div>
         </template>
       </Column>
+
       <Column
         :rowEditor="true"
-        style="width: 10%; min-width: 8rem"
+        style="width: 10%"
         bodyStyle="text-align:center"
       />
     </DataTable>
@@ -150,12 +202,20 @@
 
 <script setup lang="ts">
 import type { Property } from "@prisma/client";
+import { FilterMatchMode } from "@primevue/core/api";
+
 const { statusOptions } = useTaxonomies();
 
 const editingRows = ref([]);
 const deleteModalVisible = ref(false);
 const selectedProperty = ref<Property | null>(null);
 const isDeleting = ref(false);
+
+const filters = ref({
+  title: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  city: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  status: { value: null, matchMode: FilterMatchMode.EQUALS },
+});
 
 const { status, data, refresh } = await useFetch("/api/properties/my", {
   lazy: true,

@@ -233,11 +233,8 @@
     },
     "explore": {
       "title": "Explore",
-      "aboutUs": "About Us",
-      "faq": "FAQ",
-      "blog": "Blog",
-      "howItWorks": "How it Works",
-      "forStudents": "For Students"
+      "pricing": "Pricing",
+      "faq": "FAQ"
     },
     "quickLinks": {
       "title": "Quick Links",
