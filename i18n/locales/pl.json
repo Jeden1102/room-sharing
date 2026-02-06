@@ -1171,5 +1171,70 @@
   "textarea": {
     "header": "Nagłówek",
     "default": "Normalny"
+  },
+  "pricing": {
+    "badge": "Cennik",
+    "title": "Wybierz plan idealny dla Ciebie",
+    "subtitle": "Przejrzyste zasady, bez ukrytych kosztów. Wybierz rozwiązanie dopasowane do Twoich potrzeb.",
+    "period": "miesiąc",
+    "cta": "Zacznij teraz",
+    "tabs": {
+      "private": "Prywatnie",
+      "business": "Firma",
+      "dorm": "Akademik"
+    },
+    "private": {
+      "free": {
+        "name": "Hobby",
+        "desc": "Idealny start dla osób szukających współlokatora lub wynajmujących jeden pokój."
+      },
+      "addons": {
+        "name": "Dodatki",
+        "desc": "Zwiększ zasięgi swojego ogłoszenia i sprzedaj/wynajmij szybciej dzięki ulepszeniom."
+      }
+    },
+    "business": {
+      "basic": {
+        "name": "Standard",
+        "desc": "Dla biur nieruchomości zarządzających mniejszą liczbą ofert."
+      },
+      "premium": {
+        "name": "Pro",
+        "desc": "Pełna analityka i maksymalna widoczność dla profesjonalistów."
+      }
+    },
+    "dorm": {
+      "basic": {
+        "name": "Podstawowy",
+        "desc": "Zacznij promować swój akademik w naszej wyszukiwarce."
+      },
+      "premium": {
+        "name": "Premium",
+        "desc": "Pełna prezentacja obiektu i priorytetowe miejsce w wynikach wyszukiwania."
+      }
+    },
+    "features": {
+      "one_room_free": "1 ogłoszenie pokoju za darmo",
+      "standard_listing": "Standardowy czas publikacji",
+      "mobile_app": "Dostęp w aplikacji mobilnej",
+      "verified_badge": "Odznaka Zweryfikowanego Profilu",
+      "featured_listing": "Wyróżnienie ogłoszenia na górze listy",
+      "listing_bump": "Podbicie ogłoszenia (odświeżenie)",
+      "additional_property": "Dodanie kolejnej nieruchomości",
+      "three_properties": "Do 3 aktywnych ogłoszeń",
+      "five_properties": "Do 5 aktywnych ogłoszeń",
+      "standard_profile": "Podstawowy profil firmy",
+      "advanced_profile": "Rozbudowany profil z opiniami",
+      "basic_analytics": "Podstawowe statystyki wyświetleń",
+      "client_reviews": "Zarządzanie opiniami klientów",
+      "custom_tiles": "Niestandardowe kafelki promocyjne",
+      "one_dorm_type": "Prezentacja jednego typu pokoju",
+      "unlimited_dorm_rooms": "Nieograniczona liczba typów pokoi",
+      "map_pin": "Standardowy pinezka na mapie",
+      "custom_map_pin": "Wyróżniona, brandowana pinezka",
+      "photo_gallery": "Galeria zdjęć obiektu",
+      "full_object_view": "Pełny widok 360° lub wirtualny spacer",
+      "priority_placement": "Pierwszeństwo w wynikach wyszukiwania"
+    }
   }
 }
