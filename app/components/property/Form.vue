@@ -525,7 +525,7 @@ const onFormSubmit = async ({ valid, values, reset }: any) => {
       values.mainImageIdx = 0;
     }
 
-    values.description = values.description.replaceAll("&nbsp;", " ");
+    values.description = values.description?.replaceAll("&nbsp;", " ");
 
     const res = await $fetch<any>(apiUri.value, {
       method: "POST",

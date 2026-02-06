@@ -693,7 +693,7 @@
     },
     "business": {
       "legend": "Dane firmowe",
-      "companyName": "Nazwa firmy",
+      "companyName": "Nazwa firmy*",
       "nip": "NIP",
       "website": "Strona internetowa",
       "address": "Adres biura"

@@ -219,8 +219,12 @@
                   <div class="text-xs text-gray-500">
                     {{ $t("userProfile.infoCards.website.label") }}
                   </div>
-                  <a class="font-medium" :href="user.website">
-                    {{ user.website }}
+                  <a
+                    class="font-medium break-all"
+                    :href="user.website"
+                    target="_blank"
+                  >
+                    {{ getCleanDomain(user.website) }}
                   </a>
                 </div>
               </div>
