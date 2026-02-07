@@ -75,8 +75,6 @@ const sendVerificationEmail = async (email: string) => {
       html,
     });
 
-    console.log(res, "here");
-
     return emailVerificationCode;
   } catch (error) {
     throw createError({
