@@ -69,11 +69,13 @@ const sendVerificationEmail = async (email: string) => {
       },
     );
 
-    await sendMail({
+    const res = await sendMail({
       subject: "Password reset",
       to: email,
       html,
     });
+
+    console.log(res, "here");
 
     return emailVerificationCode;
   } catch (error) {

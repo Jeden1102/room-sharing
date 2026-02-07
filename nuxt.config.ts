@@ -336,7 +336,7 @@ export default defineNuxtConfig({
     },
   },
   nodemailer: {
-    from: '"Rooms" <dev@dominikraducki.pl>',
+    from: '"Pokój z Wami" <kontakt@pokojzwami.com>',
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
     secure: true,
