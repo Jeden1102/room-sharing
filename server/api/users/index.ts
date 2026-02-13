@@ -26,7 +26,7 @@ export default session(
       };
 
       if (gender) where.gender = gender;
-      if (city) where.city = { contains: city as string, mode: "insensitive" };
+      if (city) where.city = { contains: city as string };
       if (nonSmoker === "true") where.smoker = false;
       if (noPets === "true") where.pets = false;
       if (budgetMax) where.budgetMax = { gte: Number(budgetMax) };

@@ -31,7 +31,7 @@ export default session(
 
       if (listingType) where.listingType = listingType;
       if (type) where.type = type;
-      if (city) where.city = { contains: city as string, mode: "insensitive" };
+      if (city) where.city = { contains: city as string };
 
       if (priceMin || priceMax) {
         where.price = {};

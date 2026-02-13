@@ -8,8 +8,8 @@ import { faker } from "@faker-js/faker";
 
 const prisma = new PrismaClient();
 
-const TOTAL_USERS = 200;
-const TOTAL_PROPERTIES = 500;
+const TOTAL_USERS = 2000;
+const TOTAL_PROPERTIES = 5000;
 
 const CITY_DISTRICTS: Record<string, string[]> = {
   Warszawa: ["Śródmieście", "Mokotów", "Ursynów", "Wola", "Praga", "Żoliborz"],
