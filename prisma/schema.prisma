@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -65,10 +65,10 @@ model User {
   bgImage               String?
   description           String?
   gender                String?
-  moodboardImages       String[]
+  moodboardImages       Json     @default("[]")
   phone                 String?
   city                  String?
-  districts             String[]
+  districts             Json     @default("[]")
   searchAmount          String?
 
   accountType UserType @default(PRIVATE)
@@ -77,12 +77,12 @@ model User {
   website     String?
   address     String?
 
-  interests           String[] @default([])
-  occupations         String[] @default([])
-  searchPreferences   String[] @default([])
-  searchPropertyTypes String[] @default([])
-  noiseCompatibility  String[] @default([])
-  petsCompatibility   String[] @default([])
+  interests           Json @default("[]")
+  occupations         Json @default("[]")
+  searchPreferences   Json @default("[]")
+  searchPropertyTypes Json @default("[]")
+  noiseCompatibility  Json @default("[]")
+  petsCompatibility   Json @default("[]")
 
   messagesSent         Message[]                 @relation("MessagesSent")
   conversations        ConversationParticipant[]
@@ -139,7 +139,7 @@ model Property {
   airConditioning Boolean?
   isShared        Boolean?       @default(false)
   roomType        String?
-  images          String[]
+  images          Json           @default("[]")
   mainImageIdx    Int?
   ownerId         String
   email           String?
